@@ -16,7 +16,7 @@ class Homer extends Component {
 	}
 
 	toTheRight = () => this.setState({ positionX: parseInt(this.state.positionX) + 35 });
-	toTheLeft = () => this.setState({ positionX: parseInt(this.state.positionX) - 20 });
+	toTheLeft = () => this.setState({ positionX: parseInt(this.state.positionX) - 35 });
 	toTheTop = () => this.setState({ positionY: parseInt(this.state.positionY) - 20 });
 	toTheBottom = () => this.setState({ positionY: parseInt(this.state.positionY) + 20 });
 	throwingDonut = () => {
@@ -25,8 +25,18 @@ class Homer extends Component {
 	};
 
 	render() {
-		const heightLimit = 50; //<<------------------------------------- HAUTEUR LIMITE HAUTE DEPLACEMENT HOMER <<--------------------------
-		if (this.state.positionY < heightLimit) this.setState({ positionY: heightLimit });
+		const topLimit = 110; //<<------------------------------------- HAUTEUR LIMITE HAUTE DEPLACEMENT HOMER <<--------------------------
+		if (this.state.positionY < topLimit) this.setState({ positionY: topLimit });
+
+		const bottomLimit = 200; //<<------------------------------------- HAUTEUR LIMITE BAsse DEPLACEMENT HOMER <<--------------------------
+		if (this.state.positionY > bottomLimit) this.setState({ positionY: bottomLimit });
+
+		const rigtLimit = 600; //<<------------------------------------- HAUTEUR LIMITE DROITE DEPLACEMENT HOMER <<--------------------------
+		if (this.state.positionX > rigtLimit) this.setState({ positionX: rigtLimit });
+
+		const leftLimit = 100; //<<------------------------------------- HAUTEUR LIMITE DROITE DEPLACEMENT HOMER <<--------------------------
+		if (this.state.positionX < leftLimit) this.setState({ positionX: leftLimit });
+
 		const scaledPosY = this.state.positionY * 0.008;
 
 		const positionDonutX = this.state.throwing
@@ -42,8 +52,8 @@ class Homer extends Component {
 			margin: "0px",
 			height: "150px",
 			position: "absolute",
-			left: this.state.positionX + "px",
-			top: this.state.positionY + "px",
+			left: `${this.state.positionX}px`,
+			top: `${this.state.positionY}px`,
 			transition: "0.5s",
 
 			transform: "scale(" + scaledPosY + ")"
@@ -60,15 +70,37 @@ class Homer extends Component {
 
 		return (
 			<div>
-				<button onClick={this.toTheLeft}> LEFT </button>
-				<button onClick={this.toTheTop}> UP </button>
-				<button onClick={this.toTheBottom}> DOWN </button>
-				<button onClick={this.toTheRight}> RIGHT </button>
+				<table>
+					<tr>
+						<td>&nbsp;</td>
+						<td>
+							<button onClick={this.toTheTop}> U </button>
+						</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>
+							<button onClick={this.toTheLeft}> L </button>
+						</td>
+						<td>&nbsp;</td>
+						<td>
+							<button onClick={this.toTheRight}> R</button>
+						</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>
+							<button onClick={this.toTheBottom}> D </button>
+						</td>
+						<td>&nbsp;</td>
+					</tr>
+				</table>
+
 				<button onClick={this.throwingDonut}>DONUT</button>
-				<div className="bandesNoirG" />
+				{/* <div className="bandesNoirG" /> */}
 				<img src={homer} style={homerStyle} alt="homer" />
 				<img src={donut} style={donutStyle} className="vibrate-1" alt="donut" />
-				<div className="bandesNoirD" />
+				{/* <div className="bandesNoirD" /> */}
 			</div>
 		);
 	}
