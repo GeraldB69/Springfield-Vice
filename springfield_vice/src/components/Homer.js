@@ -58,7 +58,6 @@ class Homer extends Component {
 			left: `${this.state.positionX}px`,
 			top: `${this.state.positionY}px`,
 			transition: "0.5s",
-
 			transform: "scale(" + scaledPosY + ")"
 		};
 
