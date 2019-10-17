@@ -1,22 +1,22 @@
 .App {
-  text-align: center;
+	background-image: url("components/img/background1.png");
+	background-position-y: -480px;
+	background-size: 280vw;
+	height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
+.bandesNoirG {
+	background-color: rgb(0, 0, 0, 0.9);
+	height: 100vh;
+	width: 150px;
+	position: absolute;
+	left: 0;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
+.bandesNoirD {
+	background-color: rgb(0, 0, 0, 0.9);
+	height: 100vh;
+	width: 150px;
+	position: absolute;
+	right: 0;
+	top: 0;
 }
