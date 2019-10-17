@@ -25,12 +25,15 @@ class Homer extends Component {
 	};
 
 	render() {
-		const displayDonut = this.state.donut ? "block" : "none";
+		const heightLimit = 50; //<<------------------------------------- HAUTEUR LIMITE HAUTE DEPLACEMENT HOMER <<--------------------------
+		if (this.state.positionY < heightLimit) this.setState({ positionY: heightLimit });
+		const scaledPosY = this.state.positionY * 0.008;
 
 		const positionDonutX = this.state.throwing
 			? parseInt(this.state.positionX) + 845
 			: parseInt(this.state.positionX) + 45;
 
+		const displayDonut = this.state.donut ? "block" : "none";
 		console.log("coordonnées : ", this.state.positionX, " - ", this.state.positionY);
 
 		const homerStyle = {
@@ -41,7 +44,9 @@ class Homer extends Component {
 			position: "absolute",
 			left: this.state.positionX + "px",
 			top: this.state.positionY + "px",
-			transition: "0.5s"
+			transition: "0.5s",
+
+			transform: "scale(" + scaledPosY + ")"
 		};
 
 		const donutStyle = {
@@ -54,7 +59,7 @@ class Homer extends Component {
 		};
 
 		return (
-			<div >
+			<div>
 				<button onClick={this.toTheLeft}> LEFT </button>
 				<button onClick={this.toTheTop}> UP </button>
 				<button onClick={this.toTheBottom}> DOWN </button>
@@ -64,7 +69,6 @@ class Homer extends Component {
 				<img src={homer} style={homerStyle} alt="homer" />
 				<img src={donut} style={donutStyle} className="vibrate-1" alt="donut" />
 				<div className="bandesNoirD" />
-
 			</div>
 		);
 	}
