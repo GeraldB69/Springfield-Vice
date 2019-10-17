@@ -95,8 +95,7 @@ class Homer extends Component {
 						<td>&nbsp;</td>
 					</tr>
 				</table>
-
-				<button onClick={this.throwingDonut}>DONUT</button>
+				;<button onClick={this.throwingDonut}>DONUT</button>
 				{/* <div className="bandesNoirG" /> */}
 				<img src={homer} style={homerStyle} alt="homer" />
 				<img src={donut} style={donutStyle} className="vibrate-1" alt="donut" />
