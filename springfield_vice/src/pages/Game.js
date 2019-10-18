@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Homer from "../components/Homer";
 import PadTouch from "../components/PadTouch";
+import JoyWrapper from "../components/Joystick"
 
 class Game extends Component {
 	constructor(props) {
@@ -10,8 +11,8 @@ class Game extends Component {
 			positionY: 200
 		};
 	}
-	toTheRight = () => this.setState({ positionX: parseInt(this.state.positionX) + 35 });
-	toTheLeft = () => this.setState({ positionX: parseInt(this.state.positionX) - 35 });
+	toTheRight = () => this.setState({ positionX: parseInt(this.state.positionX) + 5 });
+	toTheLeft = () => this.setState({ positionX: parseInt(this.state.positionX) - 5 });
 	toTheTop = () => this.setState({ positionY: parseInt(this.state.positionY) - 20 });
 	toTheBottom = () => this.setState({ positionY: parseInt(this.state.positionY) + 20 });
 
@@ -39,6 +40,12 @@ class Game extends Component {
 				/>
 				{this.testLimit}
 				<Homer positionX={this.state.positionX} positionY={this.state.positionY} testLimit={" "} />
+				<JoyWrapper 
+					toTheRight={this.toTheRight}
+					toTheLeft={this.toTheLeft}
+					toTheTop={this.toTheTop}
+					toTheBottom={this.toTheBottom}
+				/>
 			</div>
 		);
 	}
