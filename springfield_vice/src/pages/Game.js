@@ -1,29 +1,29 @@
 import React, { Component } from "react";
 import Homer from "../components/Homer";
 import PadTouch from "../components/PadTouch";
-
-const topLimit = 110; //<<------------------------------------- HAUTEUR LIMITE HAUTE DEPLACEMENT HOMER <<--------------------------
-const bottomLimit = 200; //<<------------------------------------- HAUTEUR LIMITE BAsse DEPLACEMENT HOMER <<--------------------------
-const rigtLimit = 600; //<<------------------------------------- HAUTEUR LIMITE DROITE DEPLACEMENT HOMER <<--------------------------
-const leftLimit = 100; //<<------------------------------------- HAUTEUR LIMITE DROITE DEPLACEMENT HOMER <<--------------------------
+import config from "../components/configSpringfieldVice.json";
 
 class Game extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			positionX: 300,
-			positionY: 200
+			positionX: config.initialPosition.x,
+			positionY: config.initialPosition.y
 		};
 	}
-	toTheRight = () => this.setState({ positionX: parseInt(this.state.positionX) + 35 });
-	toTheLeft = () => this.setState({ positionX: parseInt(this.state.positionX) - 35 });
-	toTheTop = () => this.setState({ positionY: parseInt(this.state.positionY) - 20 });
-	toTheBottom = () => this.setState({ positionY: parseInt(this.state.positionY) + 20 });
-	testLimit = () => {
-		if (this.state.positionY < topLimit) this.setState({ positionY: topLimit });
-		else if (this.state.positionY > bottomLimit) this.setState({ positionY: bottomLimit });
-		else if (this.state.positionX > rigtLimit) this.setState({ positionX: rigtLimit });
-		else if (this.state.positionX < leftLimit) this.setState({ positionX: leftLimit });
+	
+	toTheRight = () => this.setState({ positionX: parseInt(this.state.positionX) + config.homerSpeed.x });
+	toTheLeft = () => this.setState({ positionX: parseInt(this.state.positionX) - config.homerSpeed.x });
+	toTheTop = () => this.setState({ positionY: parseInt(this.state.positionY) - config.homerSpeed.y });
+	toTheBottom = () => this.setState({ positionY: parseInt(this.state.positionY) + config.homerSpeed.y });
+	testLimitsOfMap = () => {
+		if (this.state.positionY < config.limits.topLimit) this.setState({ positionY: config.limits.topLimit });
+		else if (this.state.positionY > config.limits.bottomLimit)
+			this.setState({ positionY: config.limits.bottomLimit });
+		else if (this.state.positionX > config.limits.rightLimit)
+			this.setState({ positionX: config.limits.rightLimit });
+		else if (this.state.positionX < config.limits.leftLimit)
+			this.setState({ positionX: config.limits.leftLimit });
 	};
 
 	render() {
@@ -35,7 +35,9 @@ class Game extends Component {
 					toTheTop={this.toTheTop}
 					toTheBottom={this.toTheBottom}
 				/>
-				{this.testLimit()}
+
+				{this.testLimitsOfMap()}
+
 				<Homer positionX={this.state.positionX} positionY={this.state.positionY} />
 			</div>
 		);
