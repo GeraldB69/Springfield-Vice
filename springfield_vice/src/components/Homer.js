@@ -3,6 +3,7 @@ import "./homer.css";
 
 import homer from "./img/3.gif";
 import donut from "./img/donut.png";
+import ripchain from "./img/ripchain.png";
 
 class Homer extends Component {
 	constructor(props) {
@@ -10,6 +11,7 @@ class Homer extends Component {
 		this.state = {
 			positionX: this.props.positionX,
 			positionY: this.props.positionY,
+			ripchain: false,
 			donut: true,
 			throwing: false
 		};
@@ -44,6 +46,7 @@ class Homer extends Component {
 			: parseInt(this.state.positionX) + 45;
 
 		const displayDonut = this.state.donut ? "block" : "none";
+		const displayRipchain = this.state.ripchain ? "block" : "none";
 		console.log("coordonnées : ", this.state.positionX, " - ", this.state.positionY);
 
 		const homerStyle = {
@@ -55,7 +58,6 @@ class Homer extends Component {
 			left: `${this.state.positionX}px`,
 			top: `${this.state.positionY}px`,
 			transition: "0.5s",
-
 			transform: "scale(" + scaledPosY + ")"
 		};
 
@@ -66,6 +68,16 @@ class Homer extends Component {
 			left: positionDonutX + "px",
 			top: 75 + parseInt(this.state.positionY) + "px",
 			transition: "0.5s"
+		};
+
+		const ripchainStyle = {
+			display: displayRipchain,
+			width: "60px",
+			position: "absolute",
+			left: positionDonutX + "px",
+			top: 75 + parseInt(this.state.positionY) + "px",
+			transition: "0.5s",
+			transform: "scale(" + scaledPosY + ")"
 		};
 
 		return (
@@ -100,6 +112,7 @@ class Homer extends Component {
 				{/* <div className="bandesNoirG" /> */}
 				<img src={homer} style={homerStyle} alt="homer" />
 				<img src={donut} style={donutStyle} className="vibrate-1" alt="donut" />
+				<img src={ripchain} style={ripchainStyle} alt="ripchain" />
 				{/* <div className="bandesNoirD" /> */}
 			</div>
 		);
