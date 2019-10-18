@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import Homer from "../components/Homer";
 import PadTouch from "../components/PadTouch";
 
+const topLimit = 110; //<<------------------------------------- HAUTEUR LIMITE HAUTE DEPLACEMENT HOMER <<--------------------------
+const bottomLimit = 200; //<<------------------------------------- HAUTEUR LIMITE BAsse DEPLACEMENT HOMER <<--------------------------
+const rigtLimit = 600; //<<------------------------------------- HAUTEUR LIMITE DROITE DEPLACEMENT HOMER <<--------------------------
+const leftLimit = 100; //<<------------------------------------- HAUTEUR LIMITE DROITE DEPLACEMENT HOMER <<--------------------------
+
 class Game extends Component {
 	constructor(props) {
 		super(props);
@@ -14,20 +19,13 @@ class Game extends Component {
 	toTheLeft = () => this.setState({ positionX: parseInt(this.state.positionX) - 35 });
 	toTheTop = () => this.setState({ positionY: parseInt(this.state.positionY) - 20 });
 	toTheBottom = () => this.setState({ positionY: parseInt(this.state.positionY) + 20 });
-
 	testLimit = () => {
-		const topLimit = 110; //<<------------------------------------- HAUTEUR LIMITE HAUTE DEPLACEMENT HOMER <<--------------------------
 		if (this.state.positionY < topLimit) this.setState({ positionY: topLimit });
-
-		const bottomLimit = 200; //<<------------------------------------- HAUTEUR LIMITE BAsse DEPLACEMENT HOMER <<--------------------------
-		if (this.state.positionY > bottomLimit) this.setState({ positionY: bottomLimit });
-
-		const rigtLimit = 600; //<<------------------------------------- HAUTEUR LIMITE DROITE DEPLACEMENT HOMER <<--------------------------
-		if (this.state.positionX > rigtLimit) this.setState({ positionX: rigtLimit });
-
-		const leftLimit = 100; //<<------------------------------------- HAUTEUR LIMITE DROITE DEPLACEMENT HOMER <<--------------------------
-		if (this.state.positionX < leftLimit) this.setState({ positionX: leftLimit });
+		else if (this.state.positionY > bottomLimit) this.setState({ positionY: bottomLimit });
+		else if (this.state.positionX > rigtLimit) this.setState({ positionX: rigtLimit });
+		else if (this.state.positionX < leftLimit) this.setState({ positionX: leftLimit });
 	};
+
 	render() {
 		return (
 			<div>
@@ -37,8 +35,8 @@ class Game extends Component {
 					toTheTop={this.toTheTop}
 					toTheBottom={this.toTheBottom}
 				/>
-				{this.testLimit}
-				<Homer positionX={this.state.positionX} positionY={this.state.positionY} testLimit={" "} />
+				{this.testLimit()}
+				<Homer positionX={this.state.positionX} positionY={this.state.positionY} />
 			</div>
 		);
 	}
