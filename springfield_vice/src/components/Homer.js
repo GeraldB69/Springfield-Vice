@@ -55,10 +55,26 @@ class Homer extends Component {
 			margin: "0px",
 			height: "150px",
 			position: "absolute",
+			bottom: "0",
+			transition: "0.5s",
+			overflow:"visible"
+		};
+
+		const styleDivPourCollision = {
+			display:"flex",
+			justifyContent:"center",
+			padding: "0px",
+			margin: "0px",
+			height: "auto",
+			position: "absolute",
 			left: `${this.state.positionX}px`,
 			top: `${this.state.positionY}px`,
-			transition: "0.5s",
+			width: "40px",
+			height:"40px",
+			borderRadius:"50%",
+			backgroundColor:"green",
 			transform: "scale(" + scaledPosY + ")"
+
 		};
 
 		const donutStyle = {
@@ -110,7 +126,9 @@ class Homer extends Component {
 
 				<button onClick={this.throwingDonut}>DONUT</button>
 				{/* <div className="bandesNoirG" /> */}
-				<img src={homer} style={homerStyle} alt="homer" />
+				<div style={styleDivPourCollision}>
+					<img src={homer} style={homerStyle} alt="homer" />
+				</div>
 				<img src={donut} style={donutStyle} className="vibrate-1" alt="donut" />
 				<img src={ripchain} style={ripchainStyle} alt="ripchain" />
 				{/* <div className="bandesNoirD" /> */}
