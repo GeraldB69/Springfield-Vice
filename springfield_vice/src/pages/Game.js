@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Homer from "../components/Homer";
+import ObstacleFixe from "../components/ObstacleFixe"
 
 class Game extends Component {
 	constructor(props) {
@@ -8,7 +9,8 @@ class Game extends Component {
 	render() {
 		return (
 			<div>
-				<Homer positionX="160" positionY="120" />
+				<Homer positionX="500" positionY="600" />
+				<ObstacleFixe />
 			</div>
 		);
 	}
