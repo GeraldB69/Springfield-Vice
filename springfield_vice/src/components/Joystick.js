@@ -12,7 +12,7 @@ zone: document.getElementById('test'),    // Où mettre l'élément
 //  multitouch: true,                     // Pas en mode 'static' ou 'semi' : a voir
 //  maxNumberOfNipples: 2,                // En MT, le nombre maxi d'instances
   dataOnly: false,                        // Que les données en sortie (et plus de joystick !)
-  position: {left: '80px', top: '50%'},  // Position en mode 'static' : {left: '10%', bottom: '10%'}
+  position: {left: '80px', bottom: '80px'},// Position en mode 'static' : {left: '10%', bottom: '10%'}
   mode: 'static',                         // 'dynamic', 'static' ou 'semi'
   restJoystick: true,                     // Retour au centre du js quand repos
   restOpacity: 0.7,                       // Opacité - hors mode 'dynamic' (défaut à 0.5) 
@@ -61,7 +61,6 @@ class JoyWrapper extends React.Component {
             containerStyle={joystickContainer}
             managerListener={this.managerListener} 
           />
-          <div id="test">TEST</div>
       </div>
 
     );
