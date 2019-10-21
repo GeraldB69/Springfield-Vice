@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Homer from "../components/Homer";
 import config from "../components/configSpringfieldVice.json";
+import JoyWrapper from "../components/Joystick";
 import Timer from "../components/Timer";
-import MoveHomer from "../components/MoveHomer";
 
 class Game extends Component {
 	constructor(props) {
@@ -24,12 +24,14 @@ class Game extends Component {
 			this.setState({ positionX: config.limits.leftLimit });
 	};
 
+
 	move = (stepX,stepY) => {
         const { positionX, positionY} = this.state;
         this.setState({ 
-            positionX: positionX+stepX, 
-            positionY: positionY+stepY,
-        });
+            positionX: positionX + stepX, 
+            positionY: positionY + stepY,
+				});
+				this.stopMove();
         this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
 	}
 	
@@ -41,8 +43,17 @@ class Game extends Component {
 		return (
 			<div>
 				{this.testLimitsOfMap()}
-				<MoveHomer move={this.move} stopMove={this.stopMove}/>
 				<Homer positionX={this.state.positionX} positionY={this.state.positionY} />
+
+				<JoyWrapper 
+					move={this.move} 
+					stopMove={this.stopMove} 
+					toTheRight={this.toTheRight}
+					toTheLeft={this.toTheLeft}
+					toTheTop={this.toTheTop}
+					toTheBottom={this.toTheBottom}
+				/>
+
 				<Timer />
 			</div>
 		);
