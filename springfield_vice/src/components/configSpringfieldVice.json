@@ -16,5 +16,8 @@
     "initialPosition": {
         "x": 80,
         "y": 150
+    },
+    "timer": {
+        "seconds": 120
     }
 }

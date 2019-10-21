@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Homer from "../components/Homer";
 import PadTouch from "../components/PadTouch";
 import config from "../components/configSpringfieldVice.json";
+import Timer from "../components/Timer";
 import MoveHomer from "../components/MoveHomer";
 
 class Game extends Component {
@@ -43,6 +44,7 @@ class Game extends Component {
 				{this.testLimitsOfMap()}
 				<MoveHomer move={this.move} stopMove={this.stopMove}/>
 				<Homer positionX={this.state.positionX} positionY={this.state.positionY} />
+				<Timer />
 			</div>
 		);
 	}
