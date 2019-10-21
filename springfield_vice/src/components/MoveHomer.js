@@ -20,7 +20,7 @@ class MoveHomer extends React.Component {
         return (
             <div>
                 
-                <button onPointerDown={() => this.props.move(config.homerSpeed.x,-config.homerSpeed.y)} onPointerUp={this.props.stopMove} style={
+                <button onPointerDown={() => this.props.move(0,-config.homerSpeed.y)} onPointerUp={this.props.stopMove} style={
                         {
                             ...buttonStyleMain,
                             top: "70vh",
