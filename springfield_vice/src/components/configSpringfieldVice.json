@@ -1,4 +1,8 @@
 {
+    "background": {
+        "position": "-300px",
+        "height": "100vh"
+    },
     "limits": {
         "topLimit": 110,
         "rightLimit": 600,
@@ -13,11 +17,14 @@
         "scale": 0.008,
         "height": "150px"
     },
+    "donutSize": {
+        "width": "40px"
+    },
     "initialPosition": {
         "x": 80,
         "y": 150
     },
     "timer": {
-        "seconds": 120
+        "seconds": 200
     }
 }
