@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./homer.css";
+import config from "./configSpringfieldVice.json";
 
 import homer from "./img/3.gif";
 import donut from "./img/donut.png";
@@ -21,7 +22,7 @@ class Homer extends Component {
 	};
 
 	render() {
-		const scaledPosY = this.props.positionY * 0.008;
+		const scaledPosY = this.props.positionY * config.homerSize.scale;
 
 		const positionDonutX = this.state.throwing
 			? parseInt(this.props.positionX) + 845
@@ -35,11 +36,10 @@ class Homer extends Component {
 			backgroundColor: "transparent",
 			padding: "0px",
 			margin: "0px",
-			height: "150px",
+			height: config.homerSize.height,
 			position: "absolute",
 			left: `${this.props.positionX}px`,
 			top: `${this.props.positionY}px`,
-			transition: "0.5s",
 			transform: "scale(" + scaledPosY + ")"
 
 		};
@@ -50,7 +50,6 @@ class Homer extends Component {
 			position: "absolute",
 			left: positionDonutX + "px",
 			top: 75 + parseInt(this.props.positionY) + "px",
-			transition: "0.5s"
 		};
 
 		const ripchainStyle = {
@@ -59,18 +58,15 @@ class Homer extends Component {
 			position: "absolute",
 			left: positionDonutX + "px",
 			top: 75 + parseInt(this.props.positionY) + "px",
-			transition: "0.5s",
 			transform: "scale(" + scaledPosY + ")"
 		};
 
 		return (
 			<div>
 				<button onClick={this.throwingDonut}>DONUT</button>
-				{/* <div className="bandesNoirG" /> */}
-					<img src={homer} style={homerStyle} alt="homer" />
+				<img src={homer} style={homerStyle} alt="homer" />
 				<img src={donut} style={donutStyle} className="vibrate-1" alt="donut" />
 				<img src={ripchain} style={ripchainStyle} alt="ripchain" />
-				{/* <div className="bandesNoirD" /> */}
 			</div>
 		);
 	}
