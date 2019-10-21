@@ -24,9 +24,9 @@ class Homer extends Component {
 	render() {
 		const scaledPosY = this.props.positionY * config.homerSize.scale;
 
-		const positionDonutX = this.state.throwing
+		/* 		const positionDonutX = this.state.throwing
 			? parseInt(this.props.positionX) + 845
-			: parseInt(this.props.positionX) + 45;
+			: parseInt(this.props.positionX) + 45; */
 
 		const displayDonut = this.state.donut ? "block" : "none";
 		const displayRipchain = this.state.ripchain ? "block" : "none";
@@ -40,7 +40,6 @@ class Homer extends Component {
 			left: "50%",
 			margin: "0 -30px 0",
 			bottom: "0"
-
 		};
 
 		const donutStyle = {
@@ -61,13 +60,13 @@ class Homer extends Component {
 
 		const occupation = {
 			width: "100px",
-			height :"100px",
+			height: "100px",
 			backgroundColor: "transparent",
 			left: `${this.props.positionX}px`,
 			top: `${this.props.positionY}px`,
 			transform: "scale(" + scaledPosY + ")",
 			position: "relative"
-		}
+		};
 
 		const defineTheOccupationZone = {
 			width: "30px",
@@ -78,7 +77,7 @@ class Homer extends Component {
 			left: "50%",
 			margin: "0 -20px 0",
 			bottom: "0"
-		}
+		};
 
 		return (
 			<div>
