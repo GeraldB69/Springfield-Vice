@@ -1,5 +1,5 @@
 .App {
-	background-image: url("components/img/background1.png");
+	background-image: url("components/img/background1_pixelized.png");
 	background-position-y: -300px;
 	background-attachment: scroll;
 	background-size: inherit;

@@ -6,8 +6,8 @@
         "leftLimit": 80
     },
     "homerSpeed": {
-        "x": 35,
-        "y": 20
+        "x": 5,
+        "y": 2
     },
     "homerSize": {
         "scale": 0.008,
@@ -16,5 +16,8 @@
     "initialPosition": {
         "x": 80,
         "y": 150
+    },
+    "timer": {
+        "seconds": 120
     }
 }
