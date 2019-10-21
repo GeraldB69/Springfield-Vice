@@ -15,8 +15,6 @@ class Timer extends Component {
     tick = () => {
         let {seconds} = this.state;
         this.setState({seconds: (seconds) -1})
-
-
     if (seconds === 0) {
         this.setState({seconds: 0});
         alert('GAME OVER');
