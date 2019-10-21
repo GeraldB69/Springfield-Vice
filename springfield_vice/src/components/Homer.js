@@ -45,7 +45,7 @@ class Homer extends Component {
 
 		const donutStyle = {
 			display: displayDonut,
-			width: "30px",
+			width: config.donutSize.width,
 			position: "absolute",
 			left: "70%",
 			bottom: "25px"
