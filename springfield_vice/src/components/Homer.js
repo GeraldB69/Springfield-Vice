@@ -64,9 +64,11 @@ class Homer extends Component {
 		return (
 			<div>
 				<button onClick={this.throwingDonut}>DONUT</button>
-				<img src={homer} style={homerStyle} alt="homer" />
-				<img src={donut} style={donutStyle} className="vibrate-1" alt="donut" />
-				<img src={ripchain} style={ripchainStyle} alt="ripchain" />
+				<div className="defineTheOccupationZone">
+					<img src={homer} style={homerStyle} alt="homer" />
+					<img src={donut} style={donutStyle} className="vibrate-1" alt="donut" />
+					<img src={ripchain} style={ripchainStyle} alt="ripchain" />
+				</div>
 			</div>
 		);
 	}
