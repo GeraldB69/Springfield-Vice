@@ -45,10 +45,10 @@ class Homer extends Component {
 
 		const donutStyle = {
 			display: displayDonut,
-			width: "30px",
+			width: config.donutSize.width,
 			position: "absolute",
 			left: positionDonutX + "px",
-			top: 75 + parseInt(this.props.positionY) + "px",
+			top: 75 + parseInt(this.props.positionY) + "px"
 		};
 
 		const ripchainStyle = {
@@ -64,7 +64,7 @@ class Homer extends Component {
 			<div>
 				<button onClick={this.throwingDonut}>DONUT</button>
 				<img src={homer} style={homerStyle} alt="homer" />
-				<img src={donut} style={donutStyle} className="vibrate-1" alt="donut" />
+				<img src={donut} style={donutStyle} alt="donut" />
 				<img src={ripchain} style={ripchainStyle} alt="ripchain" />
 			</div>
 		);
