@@ -6,8 +6,8 @@
         "leftLimit": 80
     },
     "homerSpeed": {
-        "x": 35,
-        "y": 20
+        "x": 5,
+        "y": 2
     },
     "homerSize": {
         "scale": 0.008,
