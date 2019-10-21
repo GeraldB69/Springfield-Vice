@@ -12,10 +12,10 @@ class Game extends Component {
 		};
 	}
 	
-	toTheRight = () => this.setState({ positionX: parseInt(this.state.positionX) + config.homerSpeed.x });
-	toTheLeft = () => this.setState({ positionX: parseInt(this.state.positionX) - config.homerSpeed.x });
-	toTheTop = () => this.setState({ positionY: parseInt(this.state.positionY) - config.homerSpeed.y });
-	toTheBottom = () => this.setState({ positionY: parseInt(this.state.positionY) + config.homerSpeed.y });
+	// toTheRight = () => this.setState({ positionX: parseInt(this.state.positionX) + config.homerSpeed.x });
+	// toTheLeft = () => this.setState({ positionX: parseInt(this.state.positionX) - config.homerSpeed.x });
+	// toTheTop = () => this.setState({ positionY: parseInt(this.state.positionY) - config.homerSpeed.y });
+	// toTheBottom = () => this.setState({ positionY: parseInt(this.state.positionY) + config.homerSpeed.y });
 	testLimitsOfMap = () => {
 		if (this.state.positionY < config.limits.topLimit) this.setState({ positionY: config.limits.topLimit });
 		else if (this.state.positionY > config.limits.bottomLimit)
