@@ -1,23 +1,31 @@
 {
-    "limits": {
-        "topLimit": 110,
-        "rightLimit": 600,
-        "bottomLimit": 200,
-        "leftLimit": 80
+    "background": {
+        "position": "-360px",
+        "height": "100vh",
+        "defilement": 0.05
     },
-    "homerSpeed": {
-        "x": 5,
-        "y": 2
+    "limits": {
+        "topLimit": 70,
+        "rightLimit": 480,
+        "bottomLimit": 200,
+        "leftLimit": 200
+    },
+    "joystick": {
+        "vitesseX": 220,
+        "vitesseY": 28
     },
     "homerSize": {
         "scale": 0.008,
         "height": "150px"
+    },
+    "donutSize": {
+        "width": "40px"
     },
     "initialPosition": {
         "x": 80,
         "y": 150
     },
     "timer": {
-        "seconds": 120
+        "seconds": 200
     }
 }

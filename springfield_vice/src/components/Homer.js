@@ -11,7 +11,7 @@ class Homer extends Component {
 		super(props);
 		this.state = {
 			ripchain: false,
-			donut: true,
+			donut: false,
 			throwing: false
 		};
 	}
@@ -24,9 +24,9 @@ class Homer extends Component {
 	render() {
 		const scaledPosY = this.props.positionY * config.homerSize.scale;
 
-		const positionDonutX = this.state.throwing
+		/* 		const positionDonutX = this.state.throwing
 			? parseInt(this.props.positionX) + 845
-			: parseInt(this.props.positionX) + 45;
+			: parseInt(this.props.positionX) + 45; */
 
 		const displayDonut = this.state.donut ? "block" : "none";
 		const displayRipchain = this.state.ripchain ? "block" : "none";
@@ -35,37 +35,59 @@ class Homer extends Component {
 		const homerStyle = {
 			backgroundColor: "transparent",
 			padding: "0px",
-			margin: "0px",
 			height: config.homerSize.height,
 			position: "absolute",
-			left: `${this.props.positionX}px`,
-			top: `${this.props.positionY}px`,
-			transform: "scale(" + scaledPosY + ")"
+			left: "50%",
+			margin: "0 -30px 0",
+			bottom: "0"
 		};
 
 		const donutStyle = {
 			display: displayDonut,
-			width: "30px",
+			width: config.donutSize.width,
 			position: "absolute",
-			left: positionDonutX + "px",
-			top: 75 + parseInt(this.props.positionY) + "px",
+			left: "70%",
+			bottom: "25px"
 		};
 
 		const ripchainStyle = {
 			display: displayRipchain,
 			width: "60px",
 			position: "absolute",
-			left: positionDonutX + "px",
-			top: 75 + parseInt(this.props.positionY) + "px",
-			transform: "scale(" + scaledPosY + ")"
+			left: "50%",
+			bottom: "0"
+		};
+
+		const occupation = {
+			width: "100px",
+			height: "100px",
+			backgroundColor: "transparent",
+			left: `${this.props.positionX}px`,
+			top: `${this.props.positionY}px`,
+			transform: "scale(" + scaledPosY + ")",
+			position: "relative"
+		};
+
+		const defineTheOccupationZone = {
+			width: "30px",
+			height: "30px",
+			backgroundColor: "transparent",
+			borderRadius: "50%",
+			position: "absolute",
+			left: "50%",
+			margin: "0 -20px 0",
+			bottom: "0"
 		};
 
 		return (
 			<div>
 				<button onClick={this.throwingDonut}>DONUT</button>
-				<img src={homer} style={homerStyle} alt="homer" />
-				<img src={donut} style={donutStyle} className="vibrate-1" alt="donut" />
-				<img src={ripchain} style={ripchainStyle} alt="ripchain" />
+				<div style={occupation}>
+					<div style={defineTheOccupationZone}></div>
+					<img src={homer} style={homerStyle} alt="homer" />
+					<img src={donut} style={donutStyle} className="vibrate-1" alt="donut" />
+					<img src={ripchain} style={ripchainStyle} alt="ripchain" />
+				</div>
 			</div>
 		);
 	}

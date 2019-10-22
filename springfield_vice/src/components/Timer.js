@@ -6,7 +6,8 @@ class Timer extends Component {
         super(props)
         this.state = {
                 seconds: config.timer.seconds,
-                paused: false,
+				paused: false,
+				show:false
         }
         this.tick = this.tick.bind(this);
         this.interval = undefined;
@@ -23,55 +24,59 @@ class Timer extends Component {
         console.log(seconds)
     }
 
-    componentDidMount = () => {
-        this.interval = setInterval(() => this.tick(),
-            1000);
+	componentDidMount = () => {
+		this.interval = setInterval(() => this.tick(), 1000);
+	};
+
+	pauseTimer = () => {
+		if (this.state.paused === false) {
+			clearInterval(this.interval);
+		} else {
+			this.componentDidMount();
+		}
+	};
+
+	pauseGame = () => {
+		this.setState({ paused: !this.state.paused });
+		this.pauseTimer();
+	};
+
+	showModal = () => {
+        this.setState({ show: true });
     }
 
-    pauseTimer = () => {
-        if (this.state.paused === false) {
-            clearInterval(this.interval);
-        }
-        else {
-            this.componentDidMount();
-            // insérer modal pause
-        }
+    hideModal = () => {
+        this.setState({ show: false });
     }
 
-    pauseGame = () => {
-        this.setState({ paused: !this.state.paused });
-        this.pauseTimer();
-    }
+	render() {
+		const timerStyle = {
+			position: "absolute",
+			right: "20px",
+			top: "0px",
+			color: "white",
+			backgroundColor: "black",
+			borderRadius: "15px",
+			border: "solid 2px white",
+			padding: "10px",
+			fontSize: "10pt"
+		};
 
-    render() {
+		const pauseStyle = {
+			position: "absolute",
+			right: "20px",
+			top: "70px"
+		};
 
-        const timerStyle= {
-            position: "absolute",
-            right: "20px",
-            top: "0px",
-            color: "white",
-            backgroundColor: "black",
-            borderRadius: "15px",
-            border: "solid 2px white",
-            padding: "10px",
-            fontSize: "10pt"
-        }
-
-        const pauseStyle= {
-            position: "absolute",
-            right: "20px",
-            top: "70px"
-        }
-        
-        return (
-            <div>
-                <h3 style={timerStyle} >Timer: {this.state.seconds} seconds</h3>
-                <button style={pauseStyle} onClick={this.pauseGame}>PAUSE</button>
-            </div>
-        )
-    }
+		return (
+			<div>
+				<h3 style={timerStyle}>Timer: {this.state.seconds} seconds</h3>
+				<button style={pauseStyle} onClick={this.pauseGame} onClick={this.showModal}>
+					PAUSE
+				</button>
+			</div>
+		);
+	}
 }
-
-
 
 export default Timer;
