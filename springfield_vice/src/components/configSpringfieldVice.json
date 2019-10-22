@@ -1,17 +1,18 @@
 {
     "background": {
-        "position": "-300px",
-        "height": "100vh"
+        "position": "-360px",
+        "height": "100vh",
+        "defilement": 0.05
     },
     "limits": {
-        "topLimit": 110,
-        "rightLimit": 600,
+        "topLimit": 70,
+        "rightLimit": 480,
         "bottomLimit": 200,
-        "leftLimit": 80
+        "leftLimit": 200
     },
-    "homerSpeed": {
-        "x": 5,
-        "y": 2
+    "joystick": {
+        "vitesseX": 220,
+        "vitesseY": 28
     },
     "homerSize": {
         "scale": 0.008,
