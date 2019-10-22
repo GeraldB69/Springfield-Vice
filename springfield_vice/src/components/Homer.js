@@ -11,7 +11,7 @@ class Homer extends Component {
 		super(props);
 		this.state = {
 			ripchain: false,
-			donut: true,
+			donut: false,
 			throwing: false
 		};
 	}
@@ -71,7 +71,7 @@ class Homer extends Component {
 		const defineTheOccupationZone = {
 			width: "30px",
 			height: "30px",
-			backgroundColor: "white",
+			backgroundColor: "transparent",
 			borderRadius: "50%",
 			position: "absolute",
 			left: "50%",

@@ -1,0 +1,8 @@
+.game {
+	background-image: url("../components/img/background_repeat.png");
+	background-attachment: scroll;
+	background-size: inherit;
+	background-repeat: no-repeat;
+	height: 100vh;
+	width: 10680px;
+}
