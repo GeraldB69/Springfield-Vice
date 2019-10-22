@@ -1,0 +1,13 @@
+.App {
+	background-image: url("components/img/background1_pixelized.png");
+	background-position-y: -300px;
+	background-attachment: scroll;
+	background-size: inherit;
+	background-repeat: no-repeat;
+	height: 100vh;
+}
+@media screen and (orientation: portrait) {
+	.App {
+		display: none;
+	}
+}
