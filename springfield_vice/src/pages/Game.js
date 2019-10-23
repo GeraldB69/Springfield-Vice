@@ -3,7 +3,9 @@ import Homer from "../components/Homer";
 import config from "../components/configSpringfieldVice.json";
 import JoyWrapper from "../components/Joystick";
 import Timer from "../components/Timer";
+import Donut from "../components/Item";
 import "./game.css";
+import { getRandomArbitrary } from "../components/helpers";
 
 class Game extends Component {
 	constructor(props) {
@@ -11,7 +13,8 @@ class Game extends Component {
 		this.state = {
 			positionX: config.initialPosition.x,
 			positionY: config.initialPosition.y,
-			isRunning: false
+			isRunning: false,
+			positionDonutY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
 		};
 	}
 
@@ -58,10 +61,13 @@ class Game extends Component {
 			backgroundPositionX: -this.state.positionX / config.background.defilement,
 			height: config.background.height
 		};
+
 		return (
 			<div className="game" style={bgStyle}>
 				{this.testLimitsOfMap()}
 				<Homer positionX={this.state.positionX} positionY={this.state.positionY} isRunning={this.state.isRunning}/>
+				<Donut positionX={this.state.positionX} positionDonutY={this.state.positionDonutY} />
+
 
 				<JoyWrapper
 					move={this.move}

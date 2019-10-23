@@ -38,15 +38,6 @@ class Homer extends Component {
 
 		const homerRunning = this.props.isRunning ? 'homerRun' : 'homerStand';
 
-		const homerStyle = {
-			// backgroundColor: "yellow",
-			paddingBottom: "75px",
-			height: config.homerSize.height,
-			position: "absolute",
-			left: "50%",
-			bottom: "-90px"
-		};
-
 		const donutStyle = {
 			display: displayDonut,
 			width: config.donutSize.width,
@@ -63,36 +54,35 @@ class Homer extends Component {
 			bottom: "0"
 		};
 
-		const occupation = {
-			width: "100px",
-			height: "100px",
-			backgroundColor: "transparent",
+		const homerZone = {
+			width: "50px",
+			height: "50px",
+			backgroundColor: "yellow",
 			left: `${this.props.positionX}px`,
 			top: `${this.props.positionY}px`,
 			transform: "scale(" + scaledPosY + ")",
-			position: "relative"
+			position: "absolute",
+			borderRadius: "50%"
 		};
-
-		const defineTheOccupationZone = {
-			width: "30px",
-			height: "30px",
+		const homerStyle = {
 			backgroundColor: "transparent",
-			borderRadius: "50%",
+			paddingBottom: "-75px",
+			height: config.homerSize.height,
 			position: "absolute",
 			left: "50%",
-			margin: "0 -20px 0",
+			margin: "0 -30px 0",
 			bottom: "0"
 		};
 
 		return (
 			<div>
 				<button onClick={this.throwingDonut}>DONUT</button>
-				<div style={occupation}>
-					<div style={defineTheOccupationZone}></div>
+				<div style={homerZone}>
 					<div style={homerStyle} className={homerRunning} />
-					<img src={donut} style={donutStyle} className="vibrate-1" alt="donut" />
+					<img src={donut} style={donutStyle} alt="donut" />
 					<img src={ripchain} style={ripchainStyle} alt="ripchain" />
-				</div>
+{/* 					{parseInt(this.props.positionY)}
+ */}				</div>
 			</div>
 		);
 	}

@@ -5,14 +5,20 @@
         "defilement": 0.05
     },
     "limits": {
-        "topLimit": 70,
+        "topLimit": 150,
         "rightLimit": 480,
-        "bottomLimit": 200,
+        "bottomLimit": 300,
         "leftLimit": 200
     },
     "joystick": {
         "vitesseX": 220,
-        "vitesseY": 28
+        "vitesseY": 28,
+        "positionX": "80px",
+        "positionY": "80px"
+    },
+    "initialPosition": {
+        "x": 80,
+        "y": 150
     },
     "homerSize": {
         "scale": 0.006,
@@ -21,11 +27,10 @@
     "donutSize": {
         "width": "40px"
     },
-    "initialPosition": {
-        "x": 80,
-        "y": 150
-    },
     "timer": {
         "seconds": 200
+    },
+    "item": {
+        "scale": 0.005
     }
 }
