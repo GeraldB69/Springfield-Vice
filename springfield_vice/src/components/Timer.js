@@ -1,45 +1,10 @@
 import React, { Component } from "react";
-import config from "./configSpringfieldVice.json";
 
 class Timer extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			seconds: config.timer.seconds,
-			paused: false
-		};
-		this.tick = this.tick.bind(this);
-		this.interval = undefined;
+		this.state = {};
 	}
-
-	tick = () => {
-		let { seconds } = this.state;
-		this.setState({ seconds: seconds - 1 });
-
-		if (seconds === 0) {
-			this.setState({ seconds: 0 });
-			alert("GAME OVER");
-			clearInterval(this.interval);
-		}
-	};
-
-	componentDidMount = () => {
-		this.interval = setInterval(() => this.tick(), 1000);
-	};
-
-	pauseTimer = () => {
-		if (this.state.paused === false) {
-			clearInterval(this.interval);
-		} else {
-			this.componentDidMount();
-			// insérer modal pause
-		}
-	};
-
-	pauseGame = () => {
-		this.setState({ paused: !this.state.paused });
-		this.pauseTimer();
-	};
 
 	render() {
 		const timerStyle = {
@@ -59,11 +24,11 @@ class Timer extends Component {
 			right: "20px",
 			top: "70px"
 		};
-
+		
 		return (
 			<div>
-				<h3 style={timerStyle}>Timer: {this.state.seconds} seconds</h3>
-				<button style={pauseStyle} onClick={this.pauseGame}>
+				<h3 style={timerStyle}>Timer: {this.props.seconds} seconds</h3>
+				<button style={pauseStyle} onClick={() => {this.props.pauseGame(); this.props.showModal()}}>
 					PAUSE
 				</button>
 			</div>
