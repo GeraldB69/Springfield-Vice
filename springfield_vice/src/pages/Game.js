@@ -4,14 +4,20 @@ import config from "../components/configSpringfieldVice.json";
 import JoyWrapper from "../components/Joystick";
 import Timer from "../components/Timer";
 import "./game.css";
+import Modal from "../components/Modal";
 
 class Game extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			positionX: config.initialPosition.x,
-			positionY: config.initialPosition.y
+			positionY: config.initialPosition.y,
+			showModal: false,
+			seconds: config.timer.seconds,
+			paused: false
 		};
+		this.tick = this.tick.bind(this);
+		this.interval = undefined;
 	}
 
 	testLimitsOfMap = () => {
@@ -38,17 +44,59 @@ class Game extends Component {
 		clearTimeout(this.timeOut);
 	};
 
+//---------------------- Timer + Modal Pause
+
+	tick = () => {
+		let { seconds } = this.state;
+		this.setState({ seconds: seconds - 1 });
+
+		if (seconds === 0) {
+			this.setState({ seconds: 0 });
+			alert("GAME OVER");
+			clearInterval(this.interval);
+		}
+	};
+
+	componentDidMount = () => {
+		this.interval = setInterval(() => this.tick(), 1000);
+	};
+
+	pauseTimer = () => {
+		if (this.state.paused === false) {
+			clearInterval(this.interval);
+		} else {
+			this.componentDidMount();
+		}
+	};
+
+	pauseGame = () => {
+		this.setState({ paused: !this.state.paused });
+		this.pauseTimer();
+	};
+
+	showModal = () => {
+		this.setState({showModal: true});
+	};
+	
+
+	hideModal = () => {
+		this.setState({showModal: false});
+	};
+
 	render() {
 		const bgStyle = {
 			backgroundPositionY: config.background.position,
 			backgroundPositionX: -this.state.positionX / config.background.defilement,
 			height: config.background.height
 		};
+
+
+		
 		return (
 			<div className="game" style={bgStyle}>
 				{this.testLimitsOfMap()}
 				<Homer positionX={this.state.positionX} positionY={this.state.positionY} />
-
+				
 				<JoyWrapper
 					move={this.move}
 					stopMove={this.stopMove}
@@ -57,8 +105,10 @@ class Game extends Component {
 					toTheTop={this.toTheTop}
 					toTheBottom={this.toTheBottom}
 				/>
-
-				<Timer />
+				
+				<Timer pauseGame={this.pauseGame} showModal={this.showModal} seconds={this.state.seconds}/>
+				<Modal className="modal" pauseGame={this.pauseGame} show={this.state.showModal} hideModal={this.hideModal} showModal={this.showModal} />
+				
 			</div>
 		);
 	}
