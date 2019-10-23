@@ -28,32 +28,23 @@ class Game extends Component {
 			this.setState({ positionX: config.limits.leftLimit });
 	};
 
-
-
-
-
 	move = (stepX, stepY) => {
 		const { positionX, positionY } = this.state;
 		this.setState({
 			positionX: positionX + stepX,
-			positionY: positionY + stepY,
+			positionY: positionY + stepY
 		});
-		if(this.state.isRunning)
-			this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
+		if (this.state.isRunning) this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
 	};
-	
-	startRunning =()=> this.setState({isRunning:true})
-	stopRunning = () => this.setState({isRunning: false});
+
+	startRunning = () => this.setState({ isRunning: true });
+	stopRunning = () => this.setState({ isRunning: false });
 
 	stopMove = () => {
-		console.log("stopmove")
+		console.log("stopmove");
 		clearTimeout(this.timeOut);
-		this.stopRunning()
+		this.stopRunning();
 	};
-
-	
-
-
 
 	render() {
 		const bgStyle = {
@@ -65,9 +56,12 @@ class Game extends Component {
 		return (
 			<div className="game" style={bgStyle}>
 				{this.testLimitsOfMap()}
-				<Homer positionX={this.state.positionX} positionY={this.state.positionY} isRunning={this.state.isRunning}/>
+				<Homer
+					positionX={this.state.positionX}
+					positionY={this.state.positionY}
+					isRunning={this.state.isRunning}
+				/>
 				<Donut positionX={this.state.positionX} positionDonutY={this.state.positionDonutY} />
-
 
 				<JoyWrapper
 					move={this.move}

@@ -12,12 +12,9 @@ class Homer extends Component {
 		this.state = {
 			ripchain: false,
 			donut: false,
-			throwing: false,
-			isRunning: this.props.isRunning
+			throwing: false
 		};
 	}
-
-	
 
 	throwingDonut = () => {
 		this.setState({ throwing: !this.state.throwing });
@@ -36,7 +33,7 @@ class Homer extends Component {
 		const displayRipchain = this.state.ripchain ? "block" : "none";
 		// console.log("coordonnées : ", this.props.positionX, " - ", this.props.positionY);
 
-		const homerRunning = this.props.isRunning ? 'homerRun' : 'homerStand';
+		const homerRunning = this.props.isRunning ? "homerRun" : "homerStand";
 
 		const donutStyle = {
 			display: displayDonut,
