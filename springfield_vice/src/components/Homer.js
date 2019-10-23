@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./homer.css";
 import config from "./configSpringfieldVice.json";
 
-import homer from "./img/3.gif";
+// import homer from "./img/homersprite.png";
 import donut from "./img/donut.png";
 import ripchain from "./img/ripchain.png";
 
@@ -12,9 +12,12 @@ class Homer extends Component {
 		this.state = {
 			ripchain: false,
 			donut: false,
-			throwing: false
+			throwing: false,
+			isRunning: this.props.isRunning
 		};
 	}
+
+	
 
 	throwingDonut = () => {
 		this.setState({ throwing: !this.state.throwing });
@@ -32,14 +35,15 @@ class Homer extends Component {
 		const displayRipchain = this.state.ripchain ? "block" : "none";
 		console.log("coordonnées : ", this.props.positionX, " - ", this.props.positionY);
 
+		const homerRunning = this.props.isRunning ? 'homerRun' : 'homerStand';
+
 		const homerStyle = {
-			backgroundColor: "transparent",
-			padding: "0px",
+			// backgroundColor: "yellow",
+			paddingBottom: "75px",
 			height: config.homerSize.height,
 			position: "absolute",
 			left: "50%",
-			margin: "0 -30px 0",
-			bottom: "0"
+			bottom: "-90px"
 		};
 
 		const donutStyle = {
@@ -84,7 +88,7 @@ class Homer extends Component {
 				<button onClick={this.throwingDonut}>DONUT</button>
 				<div style={occupation}>
 					<div style={defineTheOccupationZone}></div>
-					<img src={homer} style={homerStyle} alt="homer" />
+					<div style={homerStyle} className={homerRunning} />
 					<img src={donut} style={donutStyle} className="vibrate-1" alt="donut" />
 					<img src={ripchain} style={ripchainStyle} alt="ripchain" />
 				</div>
