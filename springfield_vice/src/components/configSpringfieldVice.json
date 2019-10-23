@@ -29,5 +29,9 @@
     },
     "timer": {
         "seconds": 200
+    },
+    "start": {
+        "firstScreen": true
     }
+
 }
