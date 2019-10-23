@@ -25,6 +25,7 @@ class Homer extends Component {
 	};
 
 	render() {
+		console.log(this.props.isRunning)
 		const scaledPosY = this.props.positionY * config.homerSize.scale;
 
 		/* 		const positionDonutX = this.state.throwing
@@ -33,7 +34,7 @@ class Homer extends Component {
 
 		const displayDonut = this.state.donut ? "block" : "none";
 		const displayRipchain = this.state.ripchain ? "block" : "none";
-		console.log("coordonnées : ", this.props.positionX, " - ", this.props.positionY);
+		// console.log("coordonnées : ", this.props.positionX, " - ", this.props.positionY);
 
 		const homerRunning = this.props.isRunning ? 'homerRun' : 'homerStand';
 

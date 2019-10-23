@@ -34,18 +34,23 @@ class Game extends Component {
 		this.setState({
 			positionX: positionX + stepX,
 			positionY: positionY + stepY,
-			isRunning: true
 		});
-		this.stopMove();
-		this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
-			
+		if(this.state.isRunning)
+			this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
 	};
 	
+	startRunning =()=> this.setState({isRunning:true})
+	stopRunning = () => this.setState({isRunning: false});
+
 	stopMove = () => {
+		console.log("stopmove")
 		clearTimeout(this.timeOut);
+		this.stopRunning()
 	};
 
-	reset = () => this.setState({isRunning: false});
+	
+
+
 
 	render() {
 		const bgStyle = {
@@ -60,6 +65,7 @@ class Game extends Component {
 
 				<JoyWrapper
 					move={this.move}
+					startRunning={this.startRunning}
 					stopMove={this.stopMove}
 					toTheRight={this.toTheRight}
 					toTheLeft={this.toTheLeft}
