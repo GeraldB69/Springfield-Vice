@@ -5,9 +5,9 @@
         "defilement": 0.05
     },
     "limits": {
-        "topLimit": 70,
+        "topLimit": 150,
         "rightLimit": 480,
-        "bottomLimit": 200,
+        "bottomLimit": 300,
         "leftLimit": 200
     },
     "joystick": {
@@ -21,7 +21,7 @@
         "y": 150
     },
     "homerSize": {
-        "scale": 0.008,
+        "scale": 0.005,
         "height": "150px"
     },
     "donutSize": {
@@ -29,5 +29,8 @@
     },
     "timer": {
         "seconds": 200
+    },
+    "item": {
+        "scale": 0.005
     }
 }
