@@ -47,7 +47,7 @@ class Game extends Component {
 		clearTimeout(this.timeOut);
 	};
 
-//---------------------- Timer + Modal Pause
+	//---------------------- Timer + Modal Pause
 
 	tick = () => {
 		let { seconds } = this.state;
@@ -78,12 +78,11 @@ class Game extends Component {
 	};
 
 	showModal = () => {
-		this.setState({showModal: true});
+		this.setState({ showModal: true });
 	};
-	
 
 	hideModal = () => {
-		this.setState({showModal: false});
+		this.setState({ showModal: false });
 	};
 
 	render() {
@@ -98,7 +97,7 @@ class Game extends Component {
 				{this.testLimitsOfMap()}
 				<Donut positionX={this.state.positionX} positionDonutY={this.state.positionDonutY} />
 				<Homer positionX={this.state.positionX} positionY={this.state.positionY} />
-				
+
 				<JoyWrapper
 					move={this.move}
 					stopMove={this.stopMove}
@@ -106,9 +105,16 @@ class Game extends Component {
 					toTheLeft={this.toTheLeft}
 					toTheTop={this.toTheTop}
 					toTheBottom={this.toTheBottom}
-				/>					
-				<Timer pauseGame={this.pauseGame} showModal={this.showModal} seconds={this.state.seconds}/>
-				<Modal className="modal" pauseGame={this.pauseGame} show={this.state.showModal} hideModal={this.hideModal} showModal={this.showModal} />
+				/>
+
+				<Timer pauseGame={this.pauseGame} showModal={this.showModal} seconds={this.state.seconds} />
+				<Modal
+					className="modal"
+					pauseGame={this.pauseGame}
+					show={this.state.showModal}
+					hideModal={this.hideModal}
+					showModal={this.showModal}
+				/>
 			</div>
 		);
 	}
