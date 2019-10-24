@@ -5,6 +5,7 @@ import config from "../components/configSpringfieldVice.json";
 import JoyWrapper from "../components/Joystick";
 import Timer from "../components/Timer";
 import Donut from "../components/Item";
+import DonutCounter from "../components/DonutCounter";
 import "./game.css";
 import Modal from "../components/Modal";
 import { getRandomArbitrary } from "../components/helpers";
@@ -15,14 +16,15 @@ class Game extends Component {
 		this.state = {
 			positionX: config.initialPosition.x,
 			positionY: config.initialPosition.y,
-			positionObstacleY : getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
-			positionObstacleX : getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit),
+			positionObstacleY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
+			positionObstacleX: getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit),
 			showModal: false,
 			seconds: config.timer.seconds,
 			paused: false,
 			positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit)),
 			positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
-			collisionHomer: false
+			catchDonut: false,
+			donutCount: 0
 		};
 		this.tick = this.tick.bind(this);
 		this.interval = undefined;
@@ -44,28 +46,17 @@ class Game extends Component {
 			positionX: positionX + stepX,
 			positionY: positionY + stepY,
 			positionDonutX: positionDonutX - stepX / config.background.defilement,
-			positionObstacleX : positionObstacleX - stepX / config.background.defilement
+			positionObstacleX: positionObstacleX - stepX / config.background.defilement
 		});
 		this.stopMove();
 		this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
 		this.collisionDetection();
+		this.toCountDonuts();
 	};
 
 	stopMove = () => {
 		clearTimeout(this.timeOut);
 	};
-
-	// collisionObstacle = () => {
-	// 	console.log("positionX de Homer :" + this.state.positionX);
-	// 	console.log("positionY de Homer :" + this.state.positionY);
-	// 	console.log("positionX de ObstacleF :" + this.state.positionXObstacleF);
-	// 	console.log("positionY de ObstacleF :" + this.state.positionYObstacleF);
-		
-
-
-	// }
-
-	//---------------------- Timer + Modal Pause
 
 	tick = () => {
 		let { seconds } = this.state;
@@ -110,8 +101,10 @@ class Game extends Component {
 			this.state.positionY < this.state.positionDonutY + 30 &&
 			this.state.positionY > this.state.positionDonutY - 30
 		)
-			//onsole.log("collision");
-			this.setState({ collisionHomer: true });
+			this.setState({ catchDonut: true });
+	};
+	toCountDonuts = () => {
+		if (this.state.catchDonut) this.setState({ donutCount: 1 });
 	};
 
 	render() {
@@ -121,7 +114,7 @@ class Game extends Component {
 			height: config.background.height
 		};
 
-		const donutStyle = this.state.collisionHomer ? "none" : "block";
+		const donutStyle = this.state.catchDonut ? "none" : "block";
 
 		return (
 			<div className="game" style={bgStyle}>
@@ -132,9 +125,17 @@ class Game extends Component {
 					positionDonutY={this.state.positionDonutY}
 					donutStyle={donutStyle}
 				/>
-				<Homer positionX={this.state.positionX} positionY={this.state.positionY} />
-			
-				<ObstacleF positionObstacleX={this.state.positionObstacleX } positionObstacleY={this.state.positionObstacleY}/>
+
+				<ObstacleF
+					positionObstacleX={this.state.positionObstacleX}
+					positionObstacleY={this.state.positionObstacleY}
+				/>
+				<Homer
+					positionX={this.state.positionX}
+					positionY={this.state.positionY}
+					donut={this.state.catchDonut}
+				/>
+				<DonutCounter donutCount={this.state.donutCount} />
 				<JoyWrapper
 					move={this.move}
 					stopMove={this.stopMove}
