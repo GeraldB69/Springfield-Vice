@@ -6,6 +6,7 @@ import JoyWrapper from "../components/Joystick";
 import Timer from "../components/Timer";
 import Donut from "../components/Item";
 import "./game.css";
+import Modal from "../components/Modal";
 import { getRandomArbitrary } from "../components/helpers";
 
 class Game extends Component {
@@ -14,11 +15,14 @@ class Game extends Component {
 		this.state = {
 			positionX: config.initialPosition.x,
 			positionY: config.initialPosition.y,
-			positionDonutY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
-			positionYObstacleF : getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
-			positionXObstacleF : "",
-			
+			positionObstacleY : getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
+			positionObstacleX : getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit),
+			showModal: false,
+			seconds: config.timer.seconds,
+			paused: false
 		};
+		this.tick = this.tick.bind(this);
+		this.interval = undefined;
 	}
 
 	testLimitsOfMap = () => {
@@ -32,10 +36,11 @@ class Game extends Component {
 	};
 
 	move = (stepX, stepY) => {
-		const { positionX, positionY } = this.state;
+		const { positionX, positionY, positionObstacleX } = this.state;
 		this.setState({
 			positionX: positionX + stepX,
-			positionY: positionY + stepY
+			positionY: positionY + stepY,
+			positionObstacleX : positionObstacleX - stepX / config.background.defilement
 		});
 		this.stopMove();
 		this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
@@ -45,16 +50,53 @@ class Game extends Component {
 		clearTimeout(this.timeOut);
 	};
 
-	collisionObstacle = () => {
-		console.log("positionX de Homer :" + this.state.positionX);
-		console.log("positionY de Homer :" + this.state.positionY);
-		console.log("positionX de ObstacleF :" + this.state.positionXObstacleF);
-		console.log("positionY de ObstacleF :" + this.state.positionYObstacleF);
+	// collisionObstacle = () => {
+	// 	console.log("positionX de Homer :" + this.state.positionX);
+	// 	console.log("positionY de Homer :" + this.state.positionY);
+	// 	console.log("positionX de ObstacleF :" + this.state.positionXObstacleF);
+	// 	console.log("positionY de ObstacleF :" + this.state.positionYObstacleF);
 		
 
 
-	}
+	// }
 
+	//---------------------- Timer + Modal Pause
+
+	tick = () => {
+		let { seconds } = this.state;
+		this.setState({ seconds: seconds - 1 });
+
+		if (seconds === 0) {
+			this.setState({ seconds: 0 });
+			alert("GAME OVER");
+			clearInterval(this.interval);
+		}
+	};
+
+	componentDidMount = () => {
+		this.interval = setInterval(() => this.tick(), 1000);
+	};
+
+	pauseTimer = () => {
+		if (this.state.paused === false) {
+			clearInterval(this.interval);
+		} else {
+			this.componentDidMount();
+		}
+	};
+
+	pauseGame = () => {
+		this.setState({ paused: !this.state.paused });
+		this.pauseTimer();
+	};
+
+	showModal = () => {
+		this.setState({ showModal: true });
+	};
+
+	hideModal = () => {
+		this.setState({ showModal: false });
+	};
 
 	render() {
 		const bgStyle = {
@@ -66,10 +108,10 @@ class Game extends Component {
 		return (
 			<div className="game" style={bgStyle}>
 				{this.testLimitsOfMap()}
-				<Donut positionX={this.state.positionX} positionDonutY={this.state.positionDonutY} />
+			
 				<Homer positionX={this.state.positionX} positionY={this.state.positionY} />
-				{this.collisionObstacle()}
-				<ObstacleF positionX={this.state.positionX} positionYObstacleF={this.state.positionYObstacleF}/>
+			
+				<ObstacleF positionObstacleX={this.state.positionObstacleX } positionObstacleY={this.state.positionObstacleY}/>
 				<JoyWrapper
 					move={this.move}
 					stopMove={this.stopMove}
@@ -79,7 +121,14 @@ class Game extends Component {
 					toTheBottom={this.toTheBottom}
 				/>
 
-				<Timer />
+				<Timer pauseGame={this.pauseGame} showModal={this.showModal} seconds={this.state.seconds} />
+				<Modal
+					className="modal"
+					pauseGame={this.pauseGame}
+					show={this.state.showModal}
+					hideModal={this.hideModal}
+					showModal={this.showModal}
+				/>
 			</div>
 		);
 	}

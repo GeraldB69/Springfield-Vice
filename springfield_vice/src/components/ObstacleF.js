@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import poubelles from "./img/poubelles.png";
 import config from "./configSpringfieldVice.json";
-import { getRandomArbitrary } from "./helpers";
+//import { getRandomArbitrary } from "./helpers";
 
 
 
@@ -20,8 +20,8 @@ class ObstacleF extends Component {
 			backgroundColor: "white",
 			borderRadius: "50%",
 			position: "absolute",
-            left: (-this.props.positionX + 235)/ config.background.defilement,
-            top: this.props.positionYObstacleF,
+            left: this.props.positionObstacleX,
+            top: this.props.positionObstacleY,
             transform: "scale(" + this.props.positionYObstacleF * config.obstacleF.scale + ")"
         };
 
@@ -30,7 +30,9 @@ class ObstacleF extends Component {
             height : "auto",
             position : "absolute",
             left : "-20px",
-            top : "-20px"
+            top : "-20px",
+            margin :0,
+            padding: 0
 
         }
 		
