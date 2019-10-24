@@ -44,6 +44,7 @@ class Game extends Component {
 		});
 		this.stopMove();
 		this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
+		this.collisionDetection();
 	};
 
 	stopMove = () => {
@@ -89,7 +90,14 @@ class Game extends Component {
 	};
 
 	collisionDetection = () => {
-		if (this.state.positionX >= this.state.positionDonutX) console.log("depassement");
+		if (
+			this.state.positionX > this.state.positionDonutX - 30 &&
+			this.state.positionX < this.state.positionDonutX + 30 &&
+			this.state.positionY < this.state.positionDonutY + 30 &&
+			this.state.positionY > this.state.positionDonutY - 30
+		)
+			//onsole.log("collision");
+			this.setState({ collisionHomer: true });
 	};
 
 	render() {
@@ -99,12 +107,17 @@ class Game extends Component {
 			height: config.background.height
 		};
 
+		const donutStyle = this.state.collisionHomer ? "none" : "block";
+
 		return (
 			<div className="game" style={bgStyle}>
 				{this.testLimitsOfMap()}
-				{this.collisionDetection()}
 
-				<Donut positionDonutX={this.state.positionDonutX} positionDonutY={this.state.positionDonutY} />
+				<Donut
+					positionDonutX={this.state.positionDonutX}
+					positionDonutY={this.state.positionDonutY}
+					donutStyle={donutStyle}
+				/>
 				<Homer positionX={this.state.positionX} positionY={this.state.positionY} />
 
 				<JoyWrapper

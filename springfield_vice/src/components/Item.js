@@ -10,7 +10,8 @@ class Donut extends Component {
 
 	render() {
 		const donutZone = {
-			backgroundColor: "deeppink",
+			display: this.props.donutStyle,
+			backgroundColor: "transparent",
 			borderRadius: "50%",
 			width: "50px",
 			height: "50px",
