@@ -19,7 +19,10 @@ class Game extends Component {
 			positionObstacleX : getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit),
 			showModal: false,
 			seconds: config.timer.seconds,
-			paused: false
+			paused: false,
+			positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit)),
+			positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
+			collisionHomer: false
 		};
 		this.tick = this.tick.bind(this);
 		this.interval = undefined;
@@ -36,14 +39,16 @@ class Game extends Component {
 	};
 
 	move = (stepX, stepY) => {
-		const { positionX, positionY, positionObstacleX } = this.state;
+		const { positionX, positionY, positionDonutX, positionObstacleX } = this.state;
 		this.setState({
 			positionX: positionX + stepX,
 			positionY: positionY + stepY,
+			positionDonutX: positionDonutX - stepX / config.background.defilement,
 			positionObstacleX : positionObstacleX - stepX / config.background.defilement
 		});
 		this.stopMove();
 		this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
+		this.collisionDetection();
 	};
 
 	stopMove = () => {
@@ -98,6 +103,17 @@ class Game extends Component {
 		this.setState({ showModal: false });
 	};
 
+	collisionDetection = () => {
+		if (
+			this.state.positionX > this.state.positionDonutX - 30 &&
+			this.state.positionX < this.state.positionDonutX + 30 &&
+			this.state.positionY < this.state.positionDonutY + 30 &&
+			this.state.positionY > this.state.positionDonutY - 30
+		)
+			//onsole.log("collision");
+			this.setState({ collisionHomer: true });
+	};
+
 	render() {
 		const bgStyle = {
 			backgroundPositionY: config.background.position,
@@ -105,10 +121,17 @@ class Game extends Component {
 			height: config.background.height
 		};
 
+		const donutStyle = this.state.collisionHomer ? "none" : "block";
+
 		return (
 			<div className="game" style={bgStyle}>
 				{this.testLimitsOfMap()}
-			
+
+				<Donut
+					positionDonutX={this.state.positionDonutX}
+					positionDonutY={this.state.positionDonutY}
+					donutStyle={donutStyle}
+				/>
 				<Homer positionX={this.state.positionX} positionY={this.state.positionY} />
 			
 				<ObstacleF positionObstacleX={this.state.positionObstacleX } positionObstacleY={this.state.positionObstacleY}/>

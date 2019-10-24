@@ -30,7 +30,7 @@ class Homer extends Component {
 
 		const displayDonut = this.state.donut ? "block" : "none";
 		const displayRipchain = this.state.ripchain ? "block" : "none";
-		console.log("coordonnées : ", this.props.positionX, " - ", this.props.positionY);
+		//console.log("coordonnées : ", this.props.positionX, " - ", this.props.positionY);
 
 		const donutStyle = {
 			display: displayDonut,
@@ -51,7 +51,7 @@ class Homer extends Component {
 		const homerZone = {
 			width: "50px",
 			height: "50px",
-			backgroundColor: "yellow",
+			backgroundColor: "transparent",
 			left: `${this.props.positionX}px`,
 			top: `${this.props.positionY}px`,
 			transform: "scale(" + scaledPosY + ")",
@@ -75,8 +75,7 @@ class Homer extends Component {
 					<img src={homer} style={homerStyle} alt="homer" />
 					<img src={donut} style={donutStyle} alt="donut" />
 					<img src={ripchain} style={ripchainStyle} alt="ripchain" />
-{/* 					{parseInt(this.props.positionY)}
- */}				</div>
+				</div>
 			</div>
 		);
 	}

@@ -9,16 +9,15 @@ class Donut extends Component {
 	}
 
 	render() {
-		console.log("position du donnut", this.props.positionDonutY);
-
 		const donutZone = {
-			backgroundColor: "deeppink",
+			display: this.props.donutStyle,
+			backgroundColor: "transparent",
 			borderRadius: "50%",
 			width: "50px",
 			height: "50px",
 			position: "absolute",
 			top: this.props.positionDonutY,
-			left: (-this.props.positionX + 230) / config.background.defilement,
+			left: this.props.positionDonutX,
 			transform: "scale(" + this.props.positionDonutY * config.item.scale + ")"
 		};
 		const donutStyle = {
@@ -31,8 +30,6 @@ class Donut extends Component {
 				<div>
 					<div style={donutZone}>
 						<img src={donut} style={donutStyle} />
-						{/* 						{parseInt(this.props.positionDonutY)}
-						 */}{" "}
 					</div>
 				</div>
 			</div>
