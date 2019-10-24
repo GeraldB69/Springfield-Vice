@@ -14,15 +14,18 @@ class Timer extends Component {
 			color: "white",
 			backgroundColor: "black",
 			borderRadius: "15px",
-			border: "solid 2px white",
+			border: "solid 2px #ebdb34",
 			padding: "10px",
-			fontSize: "10pt"
+			fontSize: "12pt",
+			fontFamily: 'Mansalva',
+
 		};
 
 		const pauseStyle = {
 			position: "absolute",
 			right: "20px",
-			top: "70px"
+			top: "70px",
+			fontFamily: 'Mansalva',
 		};
 		
 		return (
