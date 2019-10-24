@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Homer from "../components/Homer";
+import ObstacleF from "../components/ObstacleF";
 import config from "../components/configSpringfieldVice.json";
 import JoyWrapper from "../components/Joystick";
 import Timer from "../components/Timer";
@@ -14,10 +15,11 @@ class Game extends Component {
 		this.state = {
 			positionX: config.initialPosition.x,
 			positionY: config.initialPosition.y,
+			positionObstacleY : getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
+			positionObstacleX : getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit),
 			showModal: false,
 			seconds: config.timer.seconds,
-			paused: false,
-			positionDonutY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+			paused: false
 		};
 		this.tick = this.tick.bind(this);
 		this.interval = undefined;
@@ -34,10 +36,11 @@ class Game extends Component {
 	};
 
 	move = (stepX, stepY) => {
-		const { positionX, positionY } = this.state;
+		const { positionX, positionY, positionObstacleX } = this.state;
 		this.setState({
 			positionX: positionX + stepX,
-			positionY: positionY + stepY
+			positionY: positionY + stepY,
+			positionObstacleX : positionObstacleX - stepX / config.background.defilement
 		});
 		this.stopMove();
 		this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
@@ -46,6 +49,16 @@ class Game extends Component {
 	stopMove = () => {
 		clearTimeout(this.timeOut);
 	};
+
+	// collisionObstacle = () => {
+	// 	console.log("positionX de Homer :" + this.state.positionX);
+	// 	console.log("positionY de Homer :" + this.state.positionY);
+	// 	console.log("positionX de ObstacleF :" + this.state.positionXObstacleF);
+	// 	console.log("positionY de ObstacleF :" + this.state.positionYObstacleF);
+		
+
+
+	// }
 
 	//---------------------- Timer + Modal Pause
 
@@ -95,9 +108,10 @@ class Game extends Component {
 		return (
 			<div className="game" style={bgStyle}>
 				{this.testLimitsOfMap()}
-				<Donut positionX={this.state.positionX} positionDonutY={this.state.positionDonutY} />
+			
 				<Homer positionX={this.state.positionX} positionY={this.state.positionY} />
-
+			
+				<ObstacleF positionObstacleX={this.state.positionObstacleX } positionObstacleY={this.state.positionObstacleY}/>
 				<JoyWrapper
 					move={this.move}
 					stopMove={this.stopMove}
