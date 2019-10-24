@@ -22,7 +22,11 @@ class Start extends Component {
       <div id="init_div">
         <div className="start_div show" style={this.state.firstScreen === true ? {display: 'block'} :  {display: 'none'}} >
           <img className="left_img" src="logo512.png" alt="Springfield Vice" />
-          <img className="home_screen" src='bart-ass.png' alt='The Simpsons' />
+          <img className="home_screen" src='bart-ass.png' alt='Bart Simpsons' />
+          <button className="right_doh" onClick={() => this.startingGame()}>
+            <img src='homer-doh.png' alt='Homer d`oh' />
+            <span className="text">Options</span>
+          </button>
           <button id="start" className="right_button" onClick={() => this.startingGame()}>
             <span className="text">Catch me...<br />if you can !</span>
             <span className="logo">&#9654;</span>
