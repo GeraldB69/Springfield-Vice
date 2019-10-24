@@ -12,18 +12,9 @@ class Homer extends Component {
 		this.state = {
 			ripchain: false,
 			donut: false,
-			throwing: false,
-			
+			throwing: false
 		};
 	}
-
-	// isRunning = () => {
-	// 	return this.props.isRunning ? 'homerRun' : 'homerStand';
-	// }
-
-	// isHomerRunningLeft = () => {
-	// 	return this.props.isHomerRunningLeft ? 'homerRun2' : 'homerRun';
-	// }
 
 	throwingDonut = () => {
 		this.setState({ throwing: !this.state.throwing });
@@ -51,6 +42,7 @@ class Homer extends Component {
 		const displayRipchain = this.state.ripchain ? "block" : "none";
 		// console.log("coordonnées : ", this.props.positionX, " - ", this.props.positionY);
 
+		const homerRunning = this.props.isRunning ? "homerRun" : "homerStand";
 
 		const isHomerRunningLeft = this.props.isHomerRunningLeft ? 'homerRun2' : 'homerRun';
 		const isRunning = this.props.isRunning ? isHomerRunningLeft : 'homerStand';

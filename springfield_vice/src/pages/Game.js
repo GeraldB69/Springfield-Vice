@@ -29,16 +29,12 @@ class Game extends Component {
 			this.setState({ positionX: config.limits.leftLimit });
 	};
 
-
-
-
-
 	move = (stepX, stepY) => {
 		console.log("stepx=", stepX)
 		const { positionX, positionY } = this.state;
 		this.setState({
 			positionX: positionX + stepX,
-			positionY: positionY + stepY,
+			positionY: positionY + stepY
 		});
 		// if(stepX < 0){}
 		// this.stopMove();
@@ -75,7 +71,6 @@ class Game extends Component {
 				
 				<Homer positionX={this.state.positionX} positionY={this.state.positionY} isRunning={this.state.isRunning} isHomerRunningLeft={this.state.isHomerRunningLeft}/>
 				<Donut positionX={this.state.positionX} positionDonutY={this.state.positionDonutY} />
-
 
 				<JoyWrapper
 					move={this.move}
