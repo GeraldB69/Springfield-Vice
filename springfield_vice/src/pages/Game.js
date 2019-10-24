@@ -16,7 +16,7 @@ class Game extends Component {
 			positionY: config.initialPosition.y,
 			showModal: false,
 			seconds: config.timer.seconds,
-			paused: false
+			paused: false,
 			positionDonutY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
 		};
 		this.tick = this.tick.bind(this);
@@ -106,11 +106,9 @@ class Game extends Component {
 					toTheLeft={this.toTheLeft}
 					toTheTop={this.toTheTop}
 					toTheBottom={this.toTheBottom}
-				/>
-				
+				/>					
 				<Timer pauseGame={this.pauseGame} showModal={this.showModal} seconds={this.state.seconds}/>
 				<Modal className="modal" pauseGame={this.pauseGame} show={this.state.showModal} hideModal={this.hideModal} showModal={this.showModal} />
-				
 			</div>
 		);
 	}
