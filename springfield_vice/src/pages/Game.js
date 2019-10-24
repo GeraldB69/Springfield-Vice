@@ -17,7 +17,9 @@ class Game extends Component {
 			showModal: false,
 			seconds: config.timer.seconds,
 			paused: false,
-			positionDonutY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+			positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit)),
+			positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
+			collisionHomer: false
 		};
 		this.tick = this.tick.bind(this);
 		this.interval = undefined;
@@ -34,10 +36,11 @@ class Game extends Component {
 	};
 
 	move = (stepX, stepY) => {
-		const { positionX, positionY } = this.state;
+		const { positionX, positionY, positionDonutX } = this.state;
 		this.setState({
 			positionX: positionX + stepX,
-			positionY: positionY + stepY
+			positionY: positionY + stepY,
+			positionDonutX: positionDonutX - stepX / config.background.defilement
 		});
 		this.stopMove();
 		this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
@@ -85,6 +88,10 @@ class Game extends Component {
 		this.setState({ showModal: false });
 	};
 
+	collisionDetection = () => {
+		if (this.state.positionX >= this.state.positionDonutX) console.log("depassement");
+	};
+
 	render() {
 		const bgStyle = {
 			backgroundPositionY: config.background.position,
@@ -95,7 +102,9 @@ class Game extends Component {
 		return (
 			<div className="game" style={bgStyle}>
 				{this.testLimitsOfMap()}
-				<Donut positionX={this.state.positionX} positionDonutY={this.state.positionDonutY} />
+				{this.collisionDetection()}
+
+				<Donut positionDonutX={this.state.positionDonutX} positionDonutY={this.state.positionDonutY} />
 				<Homer positionX={this.state.positionX} positionY={this.state.positionY} />
 
 				<JoyWrapper
