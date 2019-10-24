@@ -32,5 +32,8 @@
     },
     "item": {
         "scale": 0.005
+    },
+    "obstacleF" : {
+        "scale" : 0.005
     }
 }

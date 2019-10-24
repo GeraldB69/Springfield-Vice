@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Homer from "../components/Homer";
+import ObstacleF from "../components/ObstacleF";
 import config from "../components/configSpringfieldVice.json";
 import JoyWrapper from "../components/Joystick";
 import Timer from "../components/Timer";
@@ -13,7 +14,9 @@ class Game extends Component {
 		this.state = {
 			positionX: config.initialPosition.x,
 			positionY: config.initialPosition.y,
-			positionDonutY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+			positionDonutY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
+			positionYObstacleF : getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
+			positionYObstacleF2 : getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
 		};
 	}
 
@@ -41,6 +44,17 @@ class Game extends Component {
 		clearTimeout(this.timeOut);
 	};
 
+	collisionObstacle = () => {
+		console.log("positionX de Homer :" + this.state.positionX);
+		console.log("positionY de Homer :" + this.state.positionY);
+		console.log("positionX de ObstacleF :" + this.state.positionXObstacleF);
+		console.log("positionY de ObstacleF :" + this.state.positionYObstacleF);
+
+
+
+	}
+
+
 	render() {
 		const bgStyle = {
 			backgroundPositionY: config.background.position,
@@ -53,7 +67,8 @@ class Game extends Component {
 				{this.testLimitsOfMap()}
 				<Donut positionX={this.state.positionX} positionDonutY={this.state.positionDonutY} />
 				<Homer positionX={this.state.positionX} positionY={this.state.positionY} />
-
+				{this.collisionObstacle()}
+				<ObstacleF positionX={this.state.positionX} positionYObstacleF={this.state.positionYObstacleF}/>
 				<JoyWrapper
 					move={this.move}
 					stopMove={this.stopMove}
