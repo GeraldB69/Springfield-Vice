@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Homer from "../components/Homer";
+import ObstacleF from "../components/ObstacleF";
 import config from "../components/configSpringfieldVice.json";
 import JoyWrapper from "../components/Joystick";
 import Timer from "../components/Timer";
@@ -14,6 +15,8 @@ class Game extends Component {
 		this.state = {
 			positionX: config.initialPosition.x,
 			positionY: config.initialPosition.y,
+			positionObstacleY : getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
+			positionObstacleX : getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit),
 			showModal: false,
 			seconds: config.timer.seconds,
 			paused: false,
@@ -36,11 +39,12 @@ class Game extends Component {
 	};
 
 	move = (stepX, stepY) => {
-		const { positionX, positionY, positionDonutX } = this.state;
+		const { positionX, positionY, positionDonutX, positionObstacleX } = this.state;
 		this.setState({
 			positionX: positionX + stepX,
 			positionY: positionY + stepY,
 			positionDonutX: positionDonutX - stepX / config.background.defilement
+			positionObstacleX : positionObstacleX - stepX / config.background.defilement
 		});
 		this.stopMove();
 		this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
@@ -50,6 +54,16 @@ class Game extends Component {
 	stopMove = () => {
 		clearTimeout(this.timeOut);
 	};
+
+	// collisionObstacle = () => {
+	// 	console.log("positionX de Homer :" + this.state.positionX);
+	// 	console.log("positionY de Homer :" + this.state.positionY);
+	// 	console.log("positionX de ObstacleF :" + this.state.positionXObstacleF);
+	// 	console.log("positionY de ObstacleF :" + this.state.positionYObstacleF);
+		
+
+
+	// }
 
 	//---------------------- Timer + Modal Pause
 
@@ -119,7 +133,8 @@ class Game extends Component {
 					donutStyle={donutStyle}
 				/>
 				<Homer positionX={this.state.positionX} positionY={this.state.positionY} />
-
+			
+				<ObstacleF positionObstacleX={this.state.positionObstacleX } positionObstacleY={this.state.positionObstacleY}/>
 				<JoyWrapper
 					move={this.move}
 					stopMove={this.stopMove}
