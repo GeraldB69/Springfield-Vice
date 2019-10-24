@@ -43,7 +43,7 @@ class Game extends Component {
 		this.setState({
 			positionX: positionX + stepX,
 			positionY: positionY + stepY,
-			positionDonutX: positionDonutX - stepX / config.background.defilement
+			positionDonutX: positionDonutX - stepX / config.background.defilement,
 			positionObstacleX : positionObstacleX - stepX / config.background.defilement
 		});
 		this.stopMove();
