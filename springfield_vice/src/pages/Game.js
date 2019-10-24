@@ -14,7 +14,8 @@ class Game extends Component {
 			positionX: config.initialPosition.x,
 			positionY: config.initialPosition.y,
 			isRunning: false,
-			positionDonutY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+			positionDonutY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit), 
+			isHomerRunningLeft: false,
 		};
 	}
 
@@ -33,26 +34,31 @@ class Game extends Component {
 
 
 	move = (stepX, stepY) => {
+		console.log("stepx=", stepX)
 		const { positionX, positionY } = this.state;
 		this.setState({
 			positionX: positionX + stepX,
 			positionY: positionY + stepY,
 		});
+		// if(stepX < 0){}
+		// this.stopMove();
+		if (stepX < 0) {
+			this.setState({isHomerRunningLeft: true})
+		} else if (stepX > 0) {
+			this.setState({isHomerRunningLeft: false})
+		}
 		if(this.state.isRunning)
 			this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
 	};
 	
-	startRunning =()=> this.setState({isRunning:true})
+	startRunning = () => this.setState({isRunning: true})
 	stopRunning = () => this.setState({isRunning: false});
 
 	stopMove = () => {
-		console.log("stopmove")
-		clearTimeout(this.timeOut);
+		// console.log("stopmove")
+		// clearTimeout(this.timeOut);
 		this.stopRunning()
 	};
-
-	
-
 
 
 	render() {
@@ -63,9 +69,11 @@ class Game extends Component {
 		};
 
 		return (
+
 			<div className="game" style={bgStyle}>
 				{this.testLimitsOfMap()}
-				<Homer positionX={this.state.positionX} positionY={this.state.positionY} isRunning={this.state.isRunning}/>
+				
+				<Homer positionX={this.state.positionX} positionY={this.state.positionY} isRunning={this.state.isRunning} isHomerRunningLeft={this.state.isHomerRunningLeft}/>
 				<Donut positionX={this.state.positionX} positionDonutY={this.state.positionDonutY} />
 
 

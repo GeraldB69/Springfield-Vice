@@ -12,12 +12,32 @@ button {
 }
 
 .homerStand {
-	width: 90%;
+	position: absolute;
+	top: -115px;
+	left: -18px;
+	width: 190%;
 	background: url(img/homerspritestand.png);
 }
 
 .homerRun {
+	position: absolute;
+	top: -115px;
+	left: -18px;
+	width: 190%;
 	transform: translate(-50%,-50%);
+	transform: scale(1,1);
+	width: calc(925px / 9);
+	background: url(img/homersprite.png);
+	animation: animate 1s steps(9) infinite;
+}
+
+.homerRun2 {
+	position: absolute;
+	top: -115px;
+	left: -18px;
+	width: 190%;
+	transform: translate(-50%,-50%);
+	transform: scale(-1,1);
 	width: calc(925px / 9);
 	background: url(img/homersprite.png);
 	animation: animate 1s steps(9) infinite;

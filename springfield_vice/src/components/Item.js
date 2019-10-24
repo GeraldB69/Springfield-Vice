@@ -9,7 +9,7 @@ class Donut extends Component {
 	}
 
 	render() {
-		console.log("position du donnut", this.props.positionDonutY);
+		// console.log("position du donnut", this.props.positionDonutY);
 
 		const donutZone = {
 			backgroundColor: "deeppink",

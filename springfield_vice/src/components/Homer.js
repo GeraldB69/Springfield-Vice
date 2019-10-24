@@ -13,19 +13,34 @@ class Homer extends Component {
 			ripchain: false,
 			donut: false,
 			throwing: false,
-			isRunning: this.props.isRunning
+			
 		};
 	}
 
-	
+	// isRunning = () => {
+	// 	return this.props.isRunning ? 'homerRun' : 'homerStand';
+	// }
+
+	// isHomerRunningLeft = () => {
+	// 	return this.props.isHomerRunningLeft ? 'homerRun2' : 'homerRun';
+	// }
 
 	throwingDonut = () => {
 		this.setState({ throwing: !this.state.throwing });
 		//this.setState({ donut: false }); // A decommenter por faire disparaitre le donut lancé
 	};
 
+	// run = () => {
+	// 	if (this.props.isRunning === false) 
+	// 		return 'homerStand';
+	// 	else if (this.props.isRunning === true) 
+	// 		return 'homerRun';
+	// 	if (this.props.isHomerRunningLeft === true)
+	// 		return 'homerRun2';
+	// }
+
 	render() {
-		console.log(this.props.isRunning)
+		// console.log(this.props.isRunning)
 		const scaledPosY = this.props.positionY * config.homerSize.scale;
 
 		/* 		const positionDonutX = this.state.throwing
@@ -36,8 +51,11 @@ class Homer extends Component {
 		const displayRipchain = this.state.ripchain ? "block" : "none";
 		// console.log("coordonnées : ", this.props.positionX, " - ", this.props.positionY);
 
-		const homerRunning = this.props.isRunning ? 'homerRun' : 'homerStand';
 
+		const isHomerRunningLeft = this.props.isHomerRunningLeft ? 'homerRun2' : 'homerRun';
+		const isRunning = this.props.isRunning ? isHomerRunningLeft : 'homerStand';
+		
+	
 		const donutStyle = {
 			display: displayDonut,
 			width: config.donutSize.width,
@@ -64,28 +82,64 @@ class Homer extends Component {
 			position: "absolute",
 			borderRadius: "50%"
 		};
+
 		const homerStyle = {
 			backgroundColor: "transparent",
-			paddingBottom: "-75px",
-			height: config.homerSize.height,
-			position: "absolute",
-			left: "50%",
-			margin: "0 -30px 0",
-			bottom: "0"
+			paddingBottom: "30px",
+			height: config.homerSize.height,	
 		};
-
+// console.log("render",`${isRunning} ${isHomerRunningLeft}`)
 		return (
 			<div>
 				<button onClick={this.throwingDonut}>DONUT</button>
 				<div style={homerZone}>
-					<div style={homerStyle} className={homerRunning} />
+					<div style={homerStyle} className={isRunning}></div>
 					<img src={donut} style={donutStyle} alt="donut" />
 					<img src={ripchain} style={ripchainStyle} alt="ripchain" />
-{/* 					{parseInt(this.props.positionY)}
- */}				</div>
+				</div>
 			</div>
 		);
 	}
 }
 
 export default Homer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let toto = "toto"
+let tata = "tata"
+
+const concatTotoTata = `${toto} ${tata}`;
+
+console.log(concatTotoTata)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

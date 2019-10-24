@@ -2,7 +2,7 @@
     "background": {
         "position": "-360px",
         "height": "100vh",
-        "defilement": 0.05
+        "defilement": 0.1
     },
     "limits": {
         "topLimit": 150,
@@ -11,8 +11,8 @@
         "leftLimit": 200
     },
     "joystick": {
-        "vitesseX": 220,
-        "vitesseY": 28,
+        "vitesseX": 1000,
+        "vitesseY": 150,
         "positionX": "80px",
         "positionY": "80px"
     },
@@ -21,8 +21,8 @@
         "y": 150
     },
     "homerSize": {
-        "scale": 0.006,
-        "height": "100px"
+        "scale": 0.004,
+        "height": "150px"
     },
     "donutSize": {
         "width": "40px"
