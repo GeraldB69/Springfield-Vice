@@ -16,7 +16,8 @@ class Game extends Component {
 			positionY: config.initialPosition.y,
 			positionDonutY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
 			positionYObstacleF : getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
-			positionYObstacleF2 : getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+			positionXObstacleF : "",
+			
 		};
 	}
 
@@ -49,7 +50,7 @@ class Game extends Component {
 		console.log("positionY de Homer :" + this.state.positionY);
 		console.log("positionX de ObstacleF :" + this.state.positionXObstacleF);
 		console.log("positionY de ObstacleF :" + this.state.positionYObstacleF);
-
+		
 
 
 	}
