@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/lyon-0919-react-p2-springfield-vice/static/css/main.f7b03aaf.chunk.css",
+    "main.js": "/lyon-0919-react-p2-springfield-vice/static/js/main.61aefab6.chunk.js",
+    "main.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/main.61aefab6.chunk.js.map",
+    "runtime-main.js": "/lyon-0919-react-p2-springfield-vice/static/js/runtime-main.5bb2186b.js",
+    "runtime-main.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/runtime-main.5bb2186b.js.map",
+    "static/js/2.eeb44845.chunk.js": "/lyon-0919-react-p2-springfield-vice/static/js/2.eeb44845.chunk.js",
+    "static/js/2.eeb44845.chunk.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/2.eeb44845.chunk.js.map",
+    "index.html": "/lyon-0919-react-p2-springfield-vice/index.html",
+    "precache-manifest.19a40ccd606633ad7969faf6cda19c49.js": "/lyon-0919-react-p2-springfield-vice/precache-manifest.19a40ccd606633ad7969faf6cda19c49.js",
+    "service-worker.js": "/lyon-0919-react-p2-springfield-vice/service-worker.js",
+    "static/css/main.f7b03aaf.chunk.css.map": "/lyon-0919-react-p2-springfield-vice/static/css/main.f7b03aaf.chunk.css.map",
+    "static/media/homer.css": "/lyon-0919-react-p2-springfield-vice/static/media/3.e80ccc64.gif",
+    "static/media/game.css": "/lyon-0919-react-p2-springfield-vice/static/media/background_repeat.cc871a94.png",
+    "static/media/donut.png": "/lyon-0919-react-p2-springfield-vice/static/media/donut.f51f0b31.png",
+    "static/media/poubelles.png": "/lyon-0919-react-p2-springfield-vice/static/media/poubelles.4f3e05ba.png",
+    "static/media/ripchain.png": "/lyon-0919-react-p2-springfield-vice/static/media/ripchain.461f04be.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5bb2186b.js",
+    "static/js/2.eeb44845.chunk.js",
+    "static/css/main.f7b03aaf.chunk.css",
+    "static/js/main.61aefab6.chunk.js"
+  ]
+}
