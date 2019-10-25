@@ -65,7 +65,6 @@ class Homer extends Component {
 		};
 		return (
 			<div>
-				<button onClick={this.throwingDonut}>DONUT</button>
 				<div style={homerZone}>
 					<img src={homer} style={homerStyle} alt="homer" />
 					<img src={donut} style={donutStyle} alt="donut" />
