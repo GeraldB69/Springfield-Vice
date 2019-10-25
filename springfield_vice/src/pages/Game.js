@@ -6,6 +6,7 @@ import JoyWrapper from "../components/Joystick";
 import Timer from "../components/Timer";
 import Donut from "../components/Item";
 import DonutCounter from "../components/DonutCounter";
+import BoutonA from "../components/BoutonA";
 import "./game.css";
 import Modal from "../components/Modal";
 import { getRandomArbitrary } from "../components/helpers";
@@ -24,7 +25,8 @@ class Game extends Component {
 			positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit)),
 			positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
 			catchDonut: false,
-			donutCount: 0
+			donutCount: 0,
+			throwing: false
 		};
 		this.tick = this.tick.bind(this);
 		this.interval = undefined;
@@ -44,10 +46,14 @@ class Game extends Component {
 		const { positionX, positionY, positionDonutX, positionObstacleX } = this.state;
 		this.setState({
 			positionX: positionX + stepX,
-			positionY: positionY + stepY,
-			positionDonutX: positionDonutX - stepX / config.background.defilement,
-			positionObstacleX: positionObstacleX - stepX / config.background.defilement
+			positionY: positionY + stepY
 		});
+		if (positionX !== config.limits.leftLimit)
+			this.setState({
+				positionDonutX: positionDonutX - stepX / config.background.defilement,
+				positionObstacleX: positionObstacleX - stepX / config.background.defilement
+			});
+
 		this.stopMove();
 		this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
 		this.collisionDetection();
@@ -106,6 +112,11 @@ class Game extends Component {
 	toCountDonuts = () => {
 		if (this.state.catchDonut) this.setState({ donutCount: 1 });
 	};
+	throwingDonut = () => {
+		this.setState({ throwing: !this.state.throwing });
+		this.setState({ donutCount: 0 });
+		this.setState({ catchDonut: false });
+	};
 
 	render() {
 		const bgStyle = {
@@ -144,6 +155,7 @@ class Game extends Component {
 					toTheTop={this.toTheTop}
 					toTheBottom={this.toTheBottom}
 				/>
+				<BoutonA throwingDonut={this.throwingDonut} />
 
 				<Timer pauseGame={this.pauseGame} showModal={this.showModal} seconds={this.state.seconds} />
 				<Modal
