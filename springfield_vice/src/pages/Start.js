@@ -3,6 +3,7 @@ import Game from './Game';
 //import Modal from '../components/Modal';
 import config from "../components/configSpringfieldVice.json";
 import "./start.css";
+import music from "../components/sounds/simpsons.mp3";
 
 class Start extends Component {
   constructor(props) {
@@ -11,6 +12,8 @@ class Start extends Component {
       firstScreen: config.start.firstScreen,
       modal: false
     })
+    this.url = {music};
+    this.audio = new Audio(this.url);
   }
   result = "";
   startingGame = () => {
@@ -21,6 +24,10 @@ class Start extends Component {
     // this.setState({modal: true});
     // this.result = <Modal />;
   }
+
+  // componentDidMount = () => {
+	// 	this.audio.play();
+	// };
 
   render() {
 
@@ -34,18 +41,23 @@ class Start extends Component {
             <span className="text">Options</span>
           </button>
           <button id="start" className="right_button" onClick={() => this.startingGame()}>
-            <span className="text">Catch me...<br />if you can !</span>
+            <span className="text">Catch me...<br />if you can!</span>
             <span className="logo">&#9654;</span>
           </button>
         </div>
         <div className={this.state.firstScreen === false || this.state.modal === true ? 'game_div show' : 'game_div hide'} >
           {this.result}
         </div>
+        <div>
+          <audio ref="audio_tag" src="https://cf-media.sndcdn.com/3wlfMJhYArRz?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiKjovL2NmLW1lZGlhLnNuZGNkbi5jb20vM3dsZk1KaFlBclJ6IiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNTcxOTkyNjQ0fX19XX0_&Signature=adlnju7mS1VfDIQUTr0EWVks68FxgbW-za8PfeqDKJ3HDaA4FpxPbOaoldQz3YNlu5rbgr-wsb80fcIhc1XmiUJ4NiyBMp7zp-Y-Q0LbKxv1GG51mSEyhT3usaJf36ypUJc-WaW06hSh9DK7z2qbuphajzSptJ5DdGGXp3qRGleVRvB7w74NxDzziSQCLtTg2VMcgeNjR3eMpk4Iza3UVY8s6Oy~iVM2HKYOyRWk8A2BB7mT6SsdW~kCLNKIbqyRlafg5r5IeYxO~5b3Xgim2mNUrnTidQ173F4yJzguoXvIu2nmH3DkHZxfGwjZkYXSdSg~dfdvbXqTYo5cfww8Uw__&Key-Pair-Id=APKAI6TU7MMXM5DG6EPQ" controls autoPlay type="audio/mp3"/>  
+        </div>
       </div>
     )
   }
 
 }
+
+
 
 
 export default Start;
