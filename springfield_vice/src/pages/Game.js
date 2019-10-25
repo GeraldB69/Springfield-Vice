@@ -14,9 +14,11 @@ class Game extends Component {
 			positionX: config.initialPosition.x,
 			positionY: config.initialPosition.y,
 			isRunning: false,
-			positionDonutY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit), 
+			positionDonutY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
 			isHomerRunningLeft: false,
 		};
+		this.stepX = 0
+		this.stepY = 0
 	}
 
 	testLimitsOfMap = () => {
@@ -29,33 +31,35 @@ class Game extends Component {
 			this.setState({ positionX: config.limits.leftLimit });
 	};
 
-	move = (stepX, stepY) => {
-		console.log("stepx=", stepX)
+	setStep = (stepX, stepY) => {
+		this.stepX = stepX
+		this.stepY = stepY
+	}
+
+	move = () => {
 		const { positionX, positionY } = this.state;
+		console.log("stepX", this.stepX)
 		this.setState({
-			positionX: positionX + stepX,
-			positionY: positionY + stepY
+			positionX: positionX + this.stepX,
+			positionY: positionY + this.stepY
 		});
-		// if(stepX < 0){}
 		// this.stopMove();
-		if (stepX < 0) {
-			this.setState({isHomerRunningLeft: true})
-		} else if (stepX > 0) {
-			this.setState({isHomerRunningLeft: false})
+		if (this.stepX < 0) {
+			this.setState({ isHomerRunningLeft: true })
+		} else if (this.stepX > 0) {
+			this.setState({ isHomerRunningLeft: false })
 		}
-		if(this.state.isRunning)
-			this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
+		if (this.state.isRunning)
+			this.timeOut = setTimeout(() => this.move(), 100);
 	};
-	
-	startRunning = () => this.setState({isRunning: true})
-	stopRunning = () => this.setState({isRunning: false});
 
-	stopMove = () => {
-		// console.log("stopmove")
+	startRunning = () => {
+		this.setState({ isRunning: true }, () => this.move())
+	}
+	stopRunning = () => {
+		this.setState({ isRunning: false });
 		// clearTimeout(this.timeOut);
-		this.stopRunning()
-	};
-
+	}
 
 	render() {
 		const bgStyle = {
@@ -68,21 +72,21 @@ class Game extends Component {
 
 			<div className="game" style={bgStyle}>
 				{this.testLimitsOfMap()}
-				
-				<Homer positionX={this.state.positionX} positionY={this.state.positionY} isRunning={this.state.isRunning} isHomerRunningLeft={this.state.isHomerRunningLeft}/>
+
+				<Homer positionX={this.state.positionX} positionY={this.state.positionY} isRunning={this.state.isRunning} isHomerRunningLeft={this.state.isHomerRunningLeft} />
 				<Donut positionX={this.state.positionX} positionDonutY={this.state.positionDonutY} />
 
 				<JoyWrapper
-					move={this.move}
+					setStep={this.setStep}
 					startRunning={this.startRunning}
-					stopMove={this.stopMove}
+					stopRunning={this.stopRunning}
 					toTheRight={this.toTheRight}
 					toTheLeft={this.toTheLeft}
 					toTheTop={this.toTheTop}
 					toTheBottom={this.toTheBottom}
 				/>
 
-				<Timer />
+				{/* <Timer /> */}
 			</div>
 		);
 	}
