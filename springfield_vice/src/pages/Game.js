@@ -17,9 +17,6 @@ class Game extends Component {
 		this.state = {
 			positionX: config.initialPosition.x,
 			positionY: config.initialPosition.y,
-			isRunning: false,
-			positionDonutY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
-			isHomerRunningLeft: false,
 			positionObstacleY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
 			positionObstacleX: getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit),
 			showModal: false,
@@ -31,9 +28,6 @@ class Game extends Component {
 			donutCount: 0,
 			throwing: false
 		};
-		
-		this.stepX = 0
-		this.stepY = 0
 		this.tick = this.tick.bind(this);
 		this.interval = undefined;
 	}
@@ -48,44 +42,27 @@ class Game extends Component {
 			this.setState({ positionX: config.limits.leftLimit });
 	};
 
-	setStep = (stepX, stepY) => {
-		this.stepX = stepX
-		this.stepY = stepY
-	}
-
 	move = (stepX, stepY) => {
 		const { positionX, positionY, positionDonutX, positionObstacleX } = this.state;
 		this.setState({
-			positionX: positionX + this.stepX,
-			positionY: positionY + this.stepY
+			positionX: positionX + stepX,
+			positionY: positionY + stepY
 		});
-		// this.stopMove();
-		if (this.stepX < 0) {
-			this.setState({ isHomerRunningLeft: true })
-		} else if (this.stepX > 0) {
-			this.setState({ isHomerRunningLeft: false })
-		}
-		if (this.state.isRunning)
-			this.timeOut = setTimeout(() => this.move(), 100);
-			
 		if (positionX !== config.limits.leftLimit)
 			this.setState({
-				positionDonutX: positionDonutX - this.stepX / config.background.defilement,
-				positionObstacleX: positionObstacleX - this.stepX / config.background.defilement
+				positionDonutX: positionDonutX - stepX / config.background.defilement,
+				positionObstacleX: positionObstacleX - stepX / config.background.defilement
 			});
 
-		
+		this.stopMove();
+		this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
 		this.collisionDetection();
 		this.toCountDonuts();
 	};
 
-	startRunning = () => {
-		this.setState({ isRunning: true }, () => this.move())
-	}
-	stopRunning = () => {
-		this.setState({ isRunning: false });
-		// clearTimeout(this.timeOut);
-	}
+	stopMove = () => {
+		clearTimeout(this.timeOut);
+	};
 
 	tick = () => {
 		let { seconds } = this.state;
@@ -151,12 +128,8 @@ class Game extends Component {
 		const donutStyle = this.state.catchDonut ? "none" : "block";
 
 		return (
-
 			<div className="game" style={bgStyle}>
 				{this.testLimitsOfMap()}
-
-				<Homer positionX={this.state.positionX} positionY={this.state.positionY} isRunning={this.state.isRunning} isHomerRunningLeft={this.state.isHomerRunningLeft} donut={this.state.catchDonut}/>
-				
 
 				<Donut
 					positionDonutX={this.state.positionDonutX}
@@ -168,12 +141,15 @@ class Game extends Component {
 					positionObstacleX={this.state.positionObstacleX}
 					positionObstacleY={this.state.positionObstacleY}
 				/>
-				
+				<Homer
+					positionX={this.state.positionX}
+					positionY={this.state.positionY}
+					donut={this.state.catchDonut}
+				/>
 				<DonutCounter donutCount={this.state.donutCount} />
 				<JoyWrapper
-					setStep={this.setStep}
-					startRunning={this.startRunning}
-					stopRunning={this.stopRunning}
+					move={this.move}
+					stopMove={this.stopMove}
 					toTheRight={this.toTheRight}
 					toTheLeft={this.toTheLeft}
 					toTheTop={this.toTheTop}

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./homer.css";
 import config from "./configSpringfieldVice.json";
 
-// import homer from "./img/homersprite.png";
+import homer from "./img/3.gif";
 import donut from "./img/donut.png";
 import ripchain from "./img/ripchain.png";
 
@@ -21,27 +21,13 @@ class Homer extends Component {
 		//this.setState({ donut: false }); // A decommenter por faire disparaitre le donut lancé
 	};
 
-	// run = () => {
-	// 	if (this.props.isRunning === false) 
-	// 		return 'homerStand';
-	// 	else if (this.props.isRunning === true) 
-	// 		return 'homerRun';
-	// 	if (this.props.isHomerRunningLeft === true)
-	// 		return 'homerRun2';
-	// }
-
 	render() {
-		// console.log(this.props.isRunning)
 		const scaledPosY = this.props.positionY * config.homerSize.scale;
 
 		const displayDonut = this.props.donut ? "block" : "none";
 		const displayRipchain = this.state.ripchain ? "block" : "none";
 		//console.log("coordonnées : ", this.props.positionX, " - ", this.props.positionY);
 
-		const isHomerRunningLeft = this.props.isHomerRunningLeft ? 'homerRun2' : 'homerRun';
-		const isRunning = this.props.isRunning ? isHomerRunningLeft : 'homerStand';
-		
-	
 		const donutStyle = {
 			display: displayDonut,
 			width: config.donutSize.width,
@@ -68,16 +54,19 @@ class Homer extends Component {
 			position: "absolute",
 			borderRadius: "50%"
 		};
-
 		const homerStyle = {
 			backgroundColor: "transparent",
-			paddingBottom: "30px",
-			height: config.homerSize.height,	
+			padding: "0px",
+			height: config.homerSize.height,
+			position: "absolute",
+			left: "50%",
+			margin: "0 -30px 0",
+			bottom: "0"
 		};
 		return (
 			<div>
 				<div style={homerZone}>
-					<div style={homerStyle} className={isRunning}></div>
+					<img src={homer} style={homerStyle} alt="homer" />
 					<img src={donut} style={donutStyle} alt="donut" />
 					<img src={ripchain} style={ripchainStyle} alt="ripchain" />
 				</div>
