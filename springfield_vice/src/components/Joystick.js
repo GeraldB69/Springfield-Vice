@@ -38,21 +38,23 @@ class JoyWrapper extends React.Component {
 	managerListener = (manager) => {
 		manager.on("start", () => {
 			// Appui par pression
-			this.props.move(
-				Math.floor(manager[0].frontPosition.x) / config.joystick.vitesseX,
-				Math.floor(manager[0].frontPosition.y) / config.joystick.vitesseY
-			);
-		});
-		manager.on("move", () => {
-			// Action à l'appui long
-			this.props.move(
+			this.props.startRunning();
+			// this.props.move(
+			// 	Math.floor(manager[0].frontPosition.x) / config.joystick.vitesseX,
+			// 	Math.floor(manager[0].frontPosition.y) / config.joystick.vitesseY
+			// 	);
+			});
+			manager.on("move", () => {
+				// Action à l'appui long
+				this.props.startRunning();
+			this.props.setStep(
 				Math.floor(manager[0].frontPosition.x) / config.joystick.vitesseX,
 				Math.floor(manager[0].frontPosition.y) / config.joystick.vitesseY
 			);
 		});
 		manager.on("end", () => {
 			// Action au relacher
-			this.props.stopMove();
+			this.props.stopRunning();
 		});
 	};
 
