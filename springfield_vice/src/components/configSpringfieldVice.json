@@ -25,19 +25,18 @@
         "height": "150px"
     },
     "donutSize": {
-        "width": "40px"
+        "width": "25px"
     },
     "timer": {
         "seconds": 200
     },
-
     "start": {
         "firstScreen": true
     },
     "item": {
         "scale": 0.005
     },
-    "obstacleF" : {
-        "scale" : 0.005
+    "obstacleF": {
+        "scale": 0.005
     }
 }

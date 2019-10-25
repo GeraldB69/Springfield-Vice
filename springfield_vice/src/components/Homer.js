@@ -24,11 +24,7 @@ class Homer extends Component {
 	render() {
 		const scaledPosY = this.props.positionY * config.homerSize.scale;
 
-		/* 		const positionDonutX = this.state.throwing
-			? parseInt(this.props.positionX) + 845
-			: parseInt(this.props.positionX) + 45; */
-
-		const displayDonut = this.state.donut ? "block" : "none";
+		const displayDonut = this.props.donut ? "block" : "none";
 		const displayRipchain = this.state.ripchain ? "block" : "none";
 		//console.log("coordonnées : ", this.props.positionX, " - ", this.props.positionY);
 
@@ -37,7 +33,7 @@ class Homer extends Component {
 			width: config.donutSize.width,
 			position: "absolute",
 			left: "70%",
-			bottom: "25px"
+			bottom: "35px"
 		};
 
 		const ripchainStyle = {
@@ -67,7 +63,6 @@ class Homer extends Component {
 			margin: "0 -30px 0",
 			bottom: "0"
 		};
-
 		return (
 			<div>
 				<button onClick={this.throwingDonut}>DONUT</button>

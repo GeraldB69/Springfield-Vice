@@ -29,7 +29,7 @@ class Donut extends Component {
 			<div>
 				<div>
 					<div style={donutZone}>
-						<img src={donut} style={donutStyle} />
+						<img src={donut} style={donutStyle} alt="donut" />
 					</div>
 				</div>
 			</div>
