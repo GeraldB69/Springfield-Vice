@@ -34,15 +34,9 @@ class Homer extends Component {
 		// console.log(this.props.isRunning)
 		const scaledPosY = this.props.positionY * config.homerSize.scale;
 
-		/* 		const positionDonutX = this.state.throwing
-			? parseInt(this.props.positionX) + 845
-			: parseInt(this.props.positionX) + 45; */
-
-		const displayDonut = this.state.donut ? "block" : "none";
+		const displayDonut = this.props.donut ? "block" : "none";
 		const displayRipchain = this.state.ripchain ? "block" : "none";
-		// console.log("coordonnées : ", this.props.positionX, " - ", this.props.positionY);
-
-		const homerRunning = this.props.isRunning ? "homerRun" : "homerStand";
+		//console.log("coordonnées : ", this.props.positionX, " - ", this.props.positionY);
 
 		const isHomerRunningLeft = this.props.isHomerRunningLeft ? 'homerRun2' : 'homerRun';
 		const isRunning = this.props.isRunning ? isHomerRunningLeft : 'homerStand';
@@ -53,7 +47,7 @@ class Homer extends Component {
 			width: config.donutSize.width,
 			position: "absolute",
 			left: "70%",
-			bottom: "25px"
+			bottom: "35px"
 		};
 
 		const ripchainStyle = {
@@ -67,7 +61,7 @@ class Homer extends Component {
 		const homerZone = {
 			width: "50px",
 			height: "50px",
-			backgroundColor: "yellow",
+			backgroundColor: "transparent",
 			left: `${this.props.positionX}px`,
 			top: `${this.props.positionY}px`,
 			transform: "scale(" + scaledPosY + ")",
@@ -80,10 +74,8 @@ class Homer extends Component {
 			paddingBottom: "30px",
 			height: config.homerSize.height,	
 		};
-// console.log("render",`${isRunning} ${isHomerRunningLeft}`)
 		return (
 			<div>
-				<button onClick={this.throwingDonut}>DONUT</button>
 				<div style={homerZone}>
 					<div style={homerStyle} className={isRunning}></div>
 					<img src={donut} style={donutStyle} alt="donut" />
