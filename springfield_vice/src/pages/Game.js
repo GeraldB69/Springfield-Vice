@@ -45,11 +45,7 @@ class Game extends Component {
 
 	move = (stepX, stepY) => {
 		const { positionX, positionY, positionDonutX, positionObstacleX } = this.state;
-		console.log(`stepX = ${stepX} et stepY = ${stepY} `);
 
-		if (stepX === 0 && stepY === 0) this.setState({ moving: false });
-		stepX = stepX / config.joystick.vitesseX;
-		stepY = stepY / config.joystick.vitesseY;
 		this.setState({
 			positionX: positionX + stepX,
 			positionY: positionY + stepY,
