@@ -13,7 +13,7 @@ class ObstacleF extends Component {
 		const obstacleFzone = {
 			width: "60px",
 			height: "60px",
-			backgroundColor: "transparent",
+			backgroundColor: "white",
 			borderRadius: "50%",
 			position: "absolute",
 			left: this.props.positionObstacleX,
