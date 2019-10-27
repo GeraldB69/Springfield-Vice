@@ -8,7 +8,7 @@ import Donut from "../components/Item";
 import DonutCounter from "../components/DonutCounter";
 import BoutonA from "../components/BoutonA";
 import "./game.css";
-import Modal from "../components/Modal";
+// import Modal from "../components/Modal";
 import { getRandomArbitrary } from "../components/helpers";
 
 class Game extends Component {
@@ -19,7 +19,6 @@ class Game extends Component {
 			positionY: config.initialPosition.y,
 			positionObstacleY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
 			positionObstacleX: getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit),
-			showModal: false,
 			seconds: config.timer.seconds,
 			paused: false,
 			positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit)),
@@ -93,14 +92,7 @@ class Game extends Component {
 	pauseGame = () => {
 		this.setState({ paused: !this.state.paused });
 		this.pauseTimer();
-	};
-
-	showModal = () => {
-		this.setState({ showModal: true });
-	};
-
-	hideModal = () => {
-		this.setState({ showModal: false });
+		this.props.toggleModal();
 	};
 
 	collisionDetection = () => {
@@ -130,6 +122,7 @@ class Game extends Component {
 
 		const donutStyle = this.state.catchDonut ? "none" : "block";
 
+
 		return (
 			<div className="game" style={bgStyle}>
 				{this.testLimitsOfMap()}
@@ -144,12 +137,15 @@ class Game extends Component {
 					positionObstacleX={this.state.positionObstacleX}
 					positionObstacleY={this.state.positionObstacleY}
 				/>
+
 				<Homer
 					positionX={this.state.positionX}
 					positionY={this.state.positionY}
 					donut={this.state.catchDonut}
 				/>
+
 				<DonutCounter donutCount={this.state.donutCount} />
+
 				<JoyWrapper
 					move={this.move}
 					stopMove={this.stopMove}
@@ -158,15 +154,12 @@ class Game extends Component {
 					toTheTop={this.toTheTop}
 					toTheBottom={this.toTheBottom}
 				/>
+
 				<BoutonA throwingDonut={this.throwingDonut} />
 
-				<Timer pauseGame={this.pauseGame} showModal={this.showModal} seconds={this.state.seconds} />
-				<Modal
-					className="modal"
-					pauseGame={this.pauseGame}
-					show={this.state.showModal}
-					hideModal={this.hideModal}
-					showModal={this.showModal}
+				<Timer 
+					pauseGame = {this.pauseGame} 
+					seconds = {this.state.seconds} 
 				/>
 			</div>
 		);

@@ -12,7 +12,6 @@
 .hide {
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s, opacity 3s linear ;
 }
 
 .show {
@@ -86,4 +85,8 @@
 
 .right_button, .left_img, .home_screen, .right_doh {
   filter: drop-shadow(0px 0px 5px white);
+}
+
+audio {
+  display: none;
 }
