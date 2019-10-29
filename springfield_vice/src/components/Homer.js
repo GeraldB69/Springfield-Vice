@@ -78,7 +78,7 @@ class Homer extends Component {
 			<div>
 				<div style={homerZone}>
 					<div style={homerStyle} className={isRunning}></div>
-					<img src={donut} style={donutStyle} alt="donut" />
+					
 					<img src={ripchain} style={ripchainStyle} alt="ripchain" />
 				</div>
 			</div>

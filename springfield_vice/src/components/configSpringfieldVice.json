@@ -11,8 +11,8 @@
         "leftLimit": 200
     },
     "joystick": {
-        "vitesseX": 1000,
-        "vitesseY": 300,
+        "vitesseX": 60,
+        "vitesseY": 10,
         "positionX": "80px",
         "positionY": "80px"
     },

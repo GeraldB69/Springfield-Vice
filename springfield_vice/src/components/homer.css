@@ -27,9 +27,9 @@ button {
 	width: 190%;
 	transform: translate(-50%,-50%);
 	transform: scale(1,1);
-	width: calc(925px / 9);
-	background: url(img/homersprite.png);
-	animation: animate 1s steps(9) infinite;
+	width: calc(880px / 9);
+	background: url(img/homersprite3.png);
+	animation: animate 0.7s steps(9) infinite;
 }
 
 .homerRun2 {
@@ -39,9 +39,9 @@ button {
 	width: 190%;
 	transform: translate(-50%,-50%);
 	transform: scale(-1,1);
-	width: calc(925px / 9);
-	background: url(img/homersprite.png);
-	animation: animate 1s steps(9) infinite;
+	width: calc(880px / 9);
+	background: url(img/homersprite3.png);
+	animation: animate 0.7s steps(9) infinite;
 }
 
 @keyframes animate {

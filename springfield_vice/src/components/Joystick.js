@@ -10,8 +10,8 @@ const joystickOptions = {
 	//  size: 100,                            // Taille du js (100 par défaut)
 	threshold: 0.5, // Force nécessaire (entre 0 et 1)
 	//  fadeTime: 250,                        // Temps d'apparition (250 s. par défaut)
-	//  multitouch: true,                     // Pas en mode 'static' ou 'semi' : a voir
-	//  maxNumberOfNipples: 2,                // En MT, le nombre maxi d'instances
+	multitouch: true,                     // Pas en mode 'static' ou 'semi' : a voir
+	// maxNumberOfNipples: 2,                // En MT, le nombre maxi d'instances
 	dataOnly: false, // Que les données en sortie (et plus de joystick !)
 	position: { left: config.joystick.positionX, bottom: config.joystick.positionY }, // Position en mode 'static' : {left: '10%', bottom: '10%'}
 	mode: "static", // 'dynamic', 'static' ou 'semi'
@@ -23,50 +23,56 @@ const joystickOptions = {
 	dynamicPage: true // Mettre true si DOM dynamique (comme react)
 };
 
-const joystickContainer = {
-	// possibiité de limiter la place du joystick
-	height: "100%",
-	overflow: "hidden"
-};
-
 class JoyWrapper extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+		};
 	}
 
+	joystickContainer = {
+		// possibiité de limiter la place du joystick
+		height: "100%",
+		overflow: "hidden",
+	};
+
+	
 	managerListener = (manager) => {
 		manager.on("start", () => {
 			// Appui par pression
 			this.props.startRunning();
 			// this.props.move(
-			// 	Math.floor(manager[0].frontPosition.x) / config.joystick.vitesseX,
-			// 	Math.floor(manager[0].frontPosition.y) / config.joystick.vitesseY
-			// 	);
+				// 	Math.floor(manager[0].frontPosition.x) / config.joystick.vitesseX,
+				// 	Math.floor(manager[0].frontPosition.y) / config.joystick.vitesseY
+				// 	);
 			});
 			manager.on("move", () => {
 				// Action à l'appui long
-				this.props.startRunning();
-			this.props.setStep(
-				Math.floor(manager[0].frontPosition.x) / config.joystick.vitesseX,
-				Math.floor(manager[0].frontPosition.y) / config.joystick.vitesseY
-			);
-		});
-		manager.on("end", () => {
-			// Action au relacher
-			this.props.stopRunning();
-		});
-	};
+				this.props.setStep(
+					Math.floor(manager[0].frontPosition.x) / config.joystick.vitesseX,
+					Math.floor(manager[0].frontPosition.y) / config.joystick.vitesseY
+					);
+				});
+				manager.on("end", () => {
+					// Action au relacher
+					this.props.stopRunning();
+				});
+			};
+			
+			render() {
+				const displayJoystick = !this.props.displayJoystick ? "block" : "none";
+				const joystickStyle = {
+					display: displayJoystick,
+				}
 
-	render() {
-		return (
-			<div id="joystick">
-				<Joystick
-					options={joystickOptions}
-					containerStyle={joystickContainer}
-					managerListener={this.managerListener}
-				/>
-			</div>
+				return (
+					<div id="joystick" style={joystickStyle}>
+						<Joystick
+							options={joystickOptions}
+							containerStyle={this.joystickContainer}
+							managerListener={this.managerListener}
+						/>
+					</div>
 		);
 	}
 }

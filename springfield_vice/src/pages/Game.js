@@ -26,16 +26,18 @@ class Game extends Component {
 			seconds: config.timer.seconds,
 			paused: false,
 			positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit)),
+			// eslint-disable-next-line
 			positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
 			catchDonut: false,
 			donutCount: 0,
-			throwing: false
+			throwing: false,
 		};
 		
 		this.stepX = 0
 		this.stepY = 0
 		this.tick = this.tick.bind(this);
 		this.interval = undefined;
+		
 	}
 
 	testLimitsOfMap = () => {
@@ -53,39 +55,45 @@ class Game extends Component {
 		this.stepY = stepY
 	}
 
-	move = (stepX, stepY) => {
+	move = () => {
 		const { positionX, positionY, positionDonutX, positionObstacleX } = this.state;
 		this.setState({
 			positionX: positionX + this.stepX,
 			positionY: positionY + this.stepY
 		});
-		// this.stopMove();
+		console.log(this.stepX, this.stepY)
+		
 		if (this.stepX < 0) {
 			this.setState({ isHomerRunningLeft: true })
 		} else if (this.stepX > 0) {
 			this.setState({ isHomerRunningLeft: false })
 		}
-		if (this.state.isRunning)
-			this.timeOut = setTimeout(() => this.move(), 100);
-			
+		// if (this.state.isRunning)
+		// 	this.timeOut = setTimeout(() => this.move(), 10);
+	
+		if (this.state.isRunning === false)
+			this.stopRunning();
+		
 		if (positionX !== config.limits.leftLimit)
 			this.setState({
 				positionDonutX: positionDonutX - this.stepX / config.background.defilement,
 				positionObstacleX: positionObstacleX - this.stepX / config.background.defilement
 			});
 
-		
 		this.collisionDetection();
 		this.toCountDonuts();
+		
 	};
 
 	startRunning = () => {
-		this.setState({ isRunning: true }, () => this.move())
+		this.setState({ isRunning: true });
+		this.state.intervalHomer = setInterval(() => this.move(), 50);
 	}
 	stopRunning = () => {
 		this.setState({ isRunning: false });
-		// clearTimeout(this.timeOut);
+		clearInterval(this.state.intervalHomer);
 	}
+
 
 	tick = () => {
 		let { seconds } = this.state;
@@ -104,7 +112,7 @@ class Game extends Component {
 
 	pauseTimer = () => {
 		if (this.state.paused === false) {
-			clearInterval(this.interval);
+			clearInterval(this.interval); 
 		} else {
 			this.componentDidMount();
 		}
@@ -178,8 +186,13 @@ class Game extends Component {
 					toTheLeft={this.toTheLeft}
 					toTheTop={this.toTheTop}
 					toTheBottom={this.toTheBottom}
+					displayJoystick={this.state.paused}
 				/>
-				<BoutonA throwingDonut={this.throwingDonut} />
+				
+				<BoutonA
+					throwingDonut={this.throwingDonut}
+					displayButtonA={this.state.paused}
+				/>
 
 				<Timer pauseGame={this.pauseGame} showModal={this.showModal} seconds={this.state.seconds} />
 				<Modal
