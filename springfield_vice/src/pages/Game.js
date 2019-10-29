@@ -22,7 +22,7 @@ class Game extends Component {
 			showModal: false,
 			seconds: config.timer.seconds,
 			paused: false,
-			positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit)),
+			donutPosition: 0,
 			positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
 			catchDonut: false,
 			donutCount: 0,
@@ -31,6 +31,29 @@ class Game extends Component {
 		};
 		this.tick = this.tick.bind(this);
 		this.interval = undefined;
+
+		this.donutPoped = [
+			{
+				positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
+				positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
+				picked: false
+			},
+			{
+				positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
+				positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
+				picked: false
+			},
+			{
+				positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
+				positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
+				picked: false
+			},
+			{
+				positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
+				positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
+				picked: false
+			}
+		];
 	}
 
 	testLimitsOfMap = () => {
@@ -52,10 +75,7 @@ class Game extends Component {
 			moving: true
 		});
 		if (positionX !== config.limits.leftLimit)
-			this.setState({
-				positionDonutX: positionDonutX - stepX / config.background.defilement,
-				positionObstacleX: positionObstacleX - stepX / config.background.defilement
-			});
+			this.setState({ donutPosition: this.state.donutPosition - stepX / config.background.defilement });
 
 		this.stopMove();
 		this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
@@ -128,17 +148,11 @@ class Game extends Component {
 			height: config.background.height
 		};
 
-		const donutStyle = this.state.catchDonut ? "none" : "block";
-
 		return (
 			<div className="game" style={bgStyle}>
 				{this.testLimitsOfMap()}
 
-				<Donut
-					positionDonutX={this.state.positionDonutX}
-					positionDonutY={this.state.positionDonutY}
-					donutStyle={donutStyle}
-				/>
+				<Donut donutPoped={this.donutPoped} donutPosition={this.state.donutPosition} />
 
 				<ObstacleF
 					positionObstacleX={this.state.positionObstacleX}
