@@ -9,6 +9,7 @@ import DonutCounter from "../components/DonutCounter";
 import BoutonA from "../components/BoutonA";
 import "./game.css";
 import Modal from "../components/Modal";
+import MovingObs from "../components/MovingObs";
 import { getRandomArbitrary } from "../components/helpers";
 
 class Game extends Component {
@@ -27,7 +28,11 @@ class Game extends Component {
 			catchDonut: false,
 			donutCount: 0,
 			throwing: false,
-			moving: false
+			moving: false,
+			positionMovingObsX: 300,
+			positionMovingObsY: 200,
+			movX: [350, 400, 550],
+			movY: [250, 200, 300]
 		};
 		this.tick = this.tick.bind(this);
 		this.interval = undefined;
@@ -44,7 +49,7 @@ class Game extends Component {
 	};
 
 	move = (stepX, stepY) => {
-		const { positionX, positionY, positionDonutX, positionObstacleX } = this.state;
+		const { positionX, positionY, positionDonutX, positionObstacleX, positionMovingObsX } = this.state;
 
 		this.setState({
 			positionX: positionX + stepX,
@@ -54,7 +59,8 @@ class Game extends Component {
 		if (positionX !== config.limits.leftLimit)
 			this.setState({
 				positionDonutX: positionDonutX - stepX / config.background.defilement,
-				positionObstacleX: positionObstacleX - stepX / config.background.defilement
+				positionObstacleX: positionObstacleX - stepX / config.background.defilement,
+				positionMovingObsX: positionMovingObsX - stepX / config.background.defilement,
 			});
 
 		this.stopMove();
@@ -66,6 +72,22 @@ class Game extends Component {
 	stopMove = () => {
 		clearTimeout(this.timeOut);
 	};
+
+	moveObs = () => {
+		let i=0;
+		setInterval(() => {
+			let newPosX = this.state.movX[i];
+			let newPosY = this.state.movY[i];
+			this.setState({positionMovingObsX: newPosX});
+			this.setState({positionMovingObsY: newPosY});
+			i++;
+			if(i>=this.state.movX.length){
+				i = 0;
+			}
+		}, 1000);
+	};
+
+
 
 	tick = () => {
 		let { seconds } = this.state;
@@ -80,6 +102,7 @@ class Game extends Component {
 
 	componentDidMount = () => {
 		this.interval = setInterval(() => this.tick(), 1000);
+		this.moveObs();
 	};
 
 	pauseTimer = () => {
@@ -143,6 +166,10 @@ class Game extends Component {
 				<ObstacleF
 					positionObstacleX={this.state.positionObstacleX}
 					positionObstacleY={this.state.positionObstacleY}
+				/>
+				<MovingObs
+					positionMovingObsX={this.state.positionMovingObsX}
+					positionMovingObsY={this.state.positionMovingObsY}
 				/>
 				<Homer
 					positionX={this.state.positionX}
