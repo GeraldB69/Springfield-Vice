@@ -2,7 +2,7 @@
     "background": {
         "position": "-360px",
         "height": "100vh",
-        "defilement": 0.1
+        "defilement": 0.05
     },
     "limits": {
         "topLimit": 150,

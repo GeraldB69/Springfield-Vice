@@ -17,9 +17,6 @@ class Game extends Component {
 		this.state = {
 			positionX: config.initialPosition.x,
 			positionY: config.initialPosition.y,
-			isRunning: false,
-			positionDonutY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
-			isHomerRunningLeft: false,
 			positionObstacleY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
 			positionObstacleX: getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit),
 			showModal: false,
@@ -31,6 +28,9 @@ class Game extends Component {
 			catchDonut: false,
 			donutCount: 0,
 			throwing: false,
+			moving: false,
+			isRunning: false,
+			isHomerRunningLeft: false,
 		};
 		
 		this.stepX = 0
@@ -57,9 +57,11 @@ class Game extends Component {
 
 	move = () => {
 		const { positionX, positionY, positionDonutX, positionObstacleX } = this.state;
+
 		this.setState({
 			positionX: positionX + this.stepX,
-			positionY: positionY + this.stepY
+			positionY: positionY + this.stepY,
+			moving: true
 		});
 		console.log(this.stepX, this.stepY)
 		
@@ -159,12 +161,8 @@ class Game extends Component {
 		const donutStyle = this.state.catchDonut ? "none" : "block";
 
 		return (
-
 			<div className="game" style={bgStyle}>
 				{this.testLimitsOfMap()}
-
-				<Homer positionX={this.state.positionX} positionY={this.state.positionY} isRunning={this.state.isRunning} isHomerRunningLeft={this.state.isHomerRunningLeft} donut={this.state.catchDonut}/>
-				
 
 				<Donut
 					positionDonutX={this.state.positionDonutX}
@@ -176,7 +174,13 @@ class Game extends Component {
 					positionObstacleX={this.state.positionObstacleX}
 					positionObstacleY={this.state.positionObstacleY}
 				/>
-				
+				<Homer
+					positionX={this.state.positionX}
+					positionY={this.state.positionY}
+					isRunning={this.state.isRunning}
+					isHomerRunningLeft={this.state.isHomerRunningLeft}
+					donut={this.state.catchDonut}/>
+
 				<DonutCounter donutCount={this.state.donutCount} />
 				<JoyWrapper
 					setStep={this.setStep}

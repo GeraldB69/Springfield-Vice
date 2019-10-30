@@ -59,20 +59,20 @@ class JoyWrapper extends React.Component {
 				});
 			};
 			
-			render() {
-				const displayJoystick = !this.props.displayJoystick ? "block" : "none";
-				const joystickStyle = {
-					display: displayJoystick,
-				}
+	render() {
+		const displayJoystick = !this.props.displayJoystick ? "block" : "none";
+		const joystickStyle = {
+			display: displayJoystick,
+		}
 
-				return (
-					<div id="joystick" style={joystickStyle}>
-						<Joystick
-							options={joystickOptions}
-							containerStyle={this.joystickContainer}
-							managerListener={this.managerListener}
-						/>
-					</div>
+		return (
+			<div id="joystick" style={joystickStyle}>
+				<Joystick
+					options={joystickOptions}
+					containerStyle={this.joystickContainer}
+					managerListener={this.managerListener}
+				/>
+			</div>
 		);
 	}
 }
