@@ -6,7 +6,7 @@ function Donut(props) {
 	const items = props.donutPoped.map((obj) => {
 		const donutZone = {
 			display: props.donutStyle,
-			backgroundColor: "transparent",
+			backgroundColor: "deeppink",
 			borderRadius: "50%",
 			width: "50px",
 			height: "50px",

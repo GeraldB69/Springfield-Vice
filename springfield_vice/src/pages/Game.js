@@ -27,33 +27,42 @@ class Game extends Component {
 			catchDonut: false,
 			donutCount: 0,
 			throwing: false,
-			moving: false
+			moving: false,
+			donutPoped: [
+				{
+					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
+					positionDonutY: parseInt(
+						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+					),
+					picked: false
+				},
+				{
+					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
+					positionDonutY: parseInt(
+						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+					),
+					picked: false
+				},
+				{
+					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
+					positionDonutY: parseInt(
+						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+					),
+					picked: false
+				},
+				{
+					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
+					positionDonutY: parseInt(
+						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+					),
+					picked: false
+				}
+			],
+			relativePositionX: config.initialPosition.x,
+			relativePositionY: config.initialPosition.y
 		};
 		this.tick = this.tick.bind(this);
 		this.interval = undefined;
-
-		this.donutPoped = [
-			{
-				positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
-				positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
-				picked: false
-			},
-			{
-				positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
-				positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
-				picked: false
-			},
-			{
-				positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
-				positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
-				picked: false
-			},
-			{
-				positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
-				positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
-				picked: false
-			}
-		];
 	}
 
 	testLimitsOfMap = () => {
@@ -76,6 +85,7 @@ class Game extends Component {
 		});
 		if (positionX !== config.limits.leftLimit)
 			this.setState({ donutPosition: this.state.donutPosition - stepX / config.background.defilement });
+		this.setState({ relativePositionX: this.state.positionX - this.state.donutPosition });
 
 		this.stopMove();
 		this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
@@ -151,13 +161,8 @@ class Game extends Component {
 		return (
 			<div className="game" style={bgStyle}>
 				{this.testLimitsOfMap()}
+				<Donut donutPoped={this.state.donutPoped} donutPosition={this.state.donutPosition} />
 
-				<Donut donutPoped={this.donutPoped} donutPosition={this.state.donutPosition} />
-
-				<ObstacleF
-					positionObstacleX={this.state.positionObstacleX}
-					positionObstacleY={this.state.positionObstacleY}
-				/>
 				<Homer
 					positionX={this.state.positionX}
 					positionY={this.state.positionY}
@@ -173,7 +178,6 @@ class Game extends Component {
 					toTheBottom={this.toTheBottom}
 				/>
 				<BoutonA throwingDonut={this.throwingDonut} />
-
 				<Timer pauseGame={this.pauseGame} showModal={this.showModal} seconds={this.state.seconds} />
 				<Modal
 					className="modal"
