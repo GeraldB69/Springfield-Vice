@@ -112,6 +112,10 @@ class Game extends Component {
 		this.interval = setInterval(() => this.tick(), 1000);
 	};
 
+	componentDidUpdate = () => {
+		setTimeout(() => this.revertThrowingState(), 200);
+	}
+
 	pauseTimer = () => {
 		if (this.state.paused === false) {
 			clearInterval(this.interval); 
@@ -145,11 +149,21 @@ class Game extends Component {
 	toCountDonuts = () => {
 		if (this.state.catchDonut) this.setState({ donutCount: 1 });
 	};
-	throwingDonut = () => {
-		this.setState({ throwing: !this.state.throwing });
-		this.setState({ donutCount: 0 });
-		this.setState({ catchDonut: false });
+	throwingDonut = () => {		
+		this.setState({ 
+			throwing: !this.state.throwing,
+			donutCount: this.state.donutCount -1,
+			catchDonut: false
+		 });
 	};
+
+	revertThrowingState = () => {
+		if (this.state.throwing === true){
+			console.log("toto")
+			this.setState({ throwing: false})
+		}
+	}
+
 
 	render() {
 		const bgStyle = {
@@ -179,7 +193,11 @@ class Game extends Component {
 					positionY={this.state.positionY}
 					isRunning={this.state.isRunning}
 					isHomerRunningLeft={this.state.isHomerRunningLeft}
-					donut={this.state.catchDonut}/>
+					donut={this.state.catchDonut}
+					throwing={this.state.throwing}
+					donutCount={this.state.donutCount}
+				/>
+					
 
 				<DonutCounter donutCount={this.state.donutCount} />
 				<JoyWrapper

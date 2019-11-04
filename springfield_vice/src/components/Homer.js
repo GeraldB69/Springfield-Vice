@@ -21,33 +21,31 @@ class Homer extends Component {
 		//this.setState({ donut: false }); // A decommenter por faire disparaitre le donut lancé
 	};
 
-	// run = () => {
-	// 	if (this.props.isRunning === false) 
-	// 		return 'homerStand';
-	// 	else if (this.props.isRunning === true) 
-	// 		return 'homerRun';
-	// 	if (this.props.isHomerRunningLeft === true)
-	// 		return 'homerRun2';
-	// }
+	displayDonut = () => {
+		// console.log(this.props.donutCount)
+		if (this.props.donutCount > 0) {return "block"}
+		else {return "none"}
+	}
 
 	render() {
 		// console.log(this.props.isRunning)
 		const scaledPosY = this.props.positionY * config.homerSize.scale;
 
-		const displayDonut = this.props.donut ? "block" : "none";
+		// const displayDonut = this.props.donut ? "block" : "none";
 		const displayRipchain = this.state.ripchain ? "block" : "none";
 		//console.log("coordonnées : ", this.props.positionX, " - ", this.props.positionY);
 
-		const isHomerRunningLeft = this.props.isHomerRunningLeft ? 'homerRun2' : 'homerRun';
+		const isHomerRunningLeft = this.props.isHomerRunningLeft ? 'homerRunLeft' : 'homerRun';
 		const isRunning = this.props.isRunning ? isHomerRunningLeft : 'homerStand';
+		const isThrowing = this.props.throwing ? 'homerThrow' : isRunning;
 		
 	
 		const donutStyle = {
-			display: displayDonut,
+			display: this.displayDonut(),
 			width: config.donutSize.width,
 			position: "absolute",
-			left: "70%",
-			bottom: "35px"
+			left: "65%",
+			bottom: "60px"
 		};
 
 		const ripchainStyle = {
@@ -77,8 +75,8 @@ class Homer extends Component {
 		return (
 			<div>
 				<div style={homerZone}>
-					<div style={homerStyle} className={isRunning}></div>
-					
+					<div style={homerStyle} className={isThrowing} ></div>
+					<img src={donut} style={donutStyle} alt="ripchain" />
 					<img src={ripchain} style={ripchainStyle} alt="ripchain" />
 				</div>
 			</div>
