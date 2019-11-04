@@ -10,14 +10,15 @@ class Modal extends Component {
   render() {
 
   const showStyleMain = {
-    transform: 'translateY(0vh)'
+    transform: 'translateY(0vh)',
+    
   }
   const hideStyleMain = {
-    transform: 'translateY(-100vh)'
+    transform: 'translateY(-100vh)',
   }
 
     return (
-      <div className="modal" style={this.props.show ? showStyleMain: hideStyleMain}>
+      <div className="modal" style={this.props.startModal ? showStyleMain: hideStyleMain}>
         <div className="modal-wrapper">
           <div className="modal-header">
             {this.props.start ? <h3> </h3> : <h3>PAUSE</h3>}
