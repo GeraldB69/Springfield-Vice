@@ -11,8 +11,8 @@
         "leftLimit": 200
     },
     "joystick": {
-        "vitesseX": 220,
-        "vitesseY": 28,
+        "vitesseX": 60,
+        "vitesseY": 10,
         "positionX": "80px",
         "positionY": "80px"
     },
@@ -21,7 +21,7 @@
         "y": 150
     },
     "homerSize": {
-        "scale": 0.005,
+        "scale": 0.003,
         "height": "150px"
     },
     "donutSize": {

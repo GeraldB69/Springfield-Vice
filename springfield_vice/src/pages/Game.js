@@ -22,14 +22,21 @@ class Game extends Component {
 			seconds: config.timer.seconds,
 			paused: false,
 			positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit)),
+			// eslint-disable-next-line
 			positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
 			catchDonut: false,
 			donutCount: 0,
 			throwing: false,
-			moving: false
+			moving: false,
+			isRunning: false,
+			isHomerRunningLeft: false,
 		};
+		
+		this.stepX = 0
+		this.stepY = 0
 		this.tick = this.tick.bind(this);
 		this.interval = undefined;
+		
 	}
 
 	testLimitsOfMap = () => {
@@ -42,29 +49,52 @@ class Game extends Component {
 			this.setState({ positionX: config.limits.leftLimit });
 	};
 
-	move = (stepX, stepY) => {
+	setStep = (stepX, stepY) => {
+		this.stepX = stepX
+		this.stepY = stepY
+	}
+
+	move = () => {
 		const { positionX, positionY, positionDonutX, positionObstacleX } = this.state;
 
 		this.setState({
-			positionX: positionX + stepX,
-			positionY: positionY + stepY,
+			positionX: positionX + this.stepX,
+			positionY: positionY + this.stepY,
 			moving: true
 		});
+		console.log(this.stepX, this.stepY)
+		
+		if (this.stepX < 0) {
+			this.setState({ isHomerRunningLeft: true })
+		} else if (this.stepX > 0) {
+			this.setState({ isHomerRunningLeft: false })
+		}
+		// if (this.state.isRunning)
+		// 	this.timeOut = setTimeout(() => this.move(), 10);
+	
+		if (this.state.isRunning === false)
+			this.stopRunning();
+		
 		if (positionX !== config.limits.leftLimit)
 			this.setState({
-				positionDonutX: positionDonutX - stepX / config.background.defilement,
-				positionObstacleX: positionObstacleX - stepX / config.background.defilement
+				positionDonutX: positionDonutX - this.stepX / config.background.defilement,
+				positionObstacleX: positionObstacleX - this.stepX / config.background.defilement
 			});
 
-		this.stopMove();
-		this.timeOut = setTimeout(() => this.move(stepX, stepY), 20);
 		this.collisionDetection();
 		this.toCountDonuts();
+		
 	};
 
-	stopMove = () => {
-		clearTimeout(this.timeOut);
-	};
+	startRunning = () => {
+		this.setState({ isRunning: true });
+		this.state.intervalHomer = setInterval(() => this.move(), 50);
+	}
+	stopRunning = () => {
+		this.setState({ isRunning: false });
+		clearInterval(this.state.intervalHomer);
+	}
+
 
 	tick = () => {
 		let { seconds } = this.state;
@@ -83,7 +113,7 @@ class Game extends Component {
 
 	pauseTimer = () => {
 		if (this.state.paused === false) {
-			clearInterval(this.interval);
+			clearInterval(this.interval); 
 		} else {
 			this.componentDidMount();
 		}
@@ -141,21 +171,37 @@ class Game extends Component {
 				<Homer
 					positionX={this.state.positionX}
 					positionY={this.state.positionY}
+<<<<<<< HEAD
 					donut={this.state.catchDonut}
 				/>
+=======
+					isRunning={this.state.isRunning}
+					isHomerRunningLeft={this.state.isHomerRunningLeft}
+					donut={this.state.catchDonut}/>
+>>>>>>> 52a8f0e0c82c60770e0185ed11d81c7b9f319ee1
 
 				<DonutCounter donutCount={this.state.donutCount} />
 
 				<JoyWrapper
-					move={this.move}
-					stopMove={this.stopMove}
+					setStep={this.setStep}
+					startRunning={this.startRunning}
+					stopRunning={this.stopRunning}
 					toTheRight={this.toTheRight}
 					toTheLeft={this.toTheLeft}
 					toTheTop={this.toTheTop}
 					toTheBottom={this.toTheBottom}
+					displayJoystick={this.state.paused}
 				/>
+				
+				<BoutonA
+					throwingDonut={this.throwingDonut}
+					displayButtonA={this.state.paused}
+				/>
+<<<<<<< HEAD
 
 				<BoutonA throwingDonut={this.throwingDonut} />
+=======
+>>>>>>> 52a8f0e0c82c60770e0185ed11d81c7b9f319ee1
 
 				<Timer 
 					pauseGame = {this.pauseGame} 

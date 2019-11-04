@@ -31,7 +31,7 @@ class Timer extends Component {
 		return (
 			<div>
 				<h3 style={timerStyle}>Timer: {this.props.seconds} seconds</h3>
-				<button style={pauseStyle} onClick={() => this.props.pauseGame()}>
+				<button style={pauseStyle} onPointerDown={() => {this.props.pauseGame(); this.props.showModal()}}>
 					PAUSE
 				</button>
 			</div>
