@@ -3,7 +3,7 @@ import config from "./configSpringfieldVice.json";
 import donut from "./img/donut.png";
 
 function Donut(props) {
-	const items = props.donutPoped.map((obj) => {
+	const items = props.donutPopped.map((obj) => {
 		const donutZone = {
 			display: props.donutStyle,
 			backgroundColor: "deeppink",
@@ -13,7 +13,7 @@ function Donut(props) {
 			position: "absolute",
 			top: obj.positionDonutY,
 			left: obj.positionDonutX + props.donutPosition,
-			transform: "scale(" + props.positionDonutY * config.item.scale + ")"
+			transform: "scale(" + obj.positionDonutY * config.item.scale + ")"
 		};
 		const donutStyle = {
 			position: "absolute",
@@ -28,8 +28,6 @@ function Donut(props) {
 			</div>
 		);
 	});
-
-	console.log(items);
 
 	return <div>{items}</div>;
 }
