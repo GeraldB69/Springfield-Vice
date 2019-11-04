@@ -8,7 +8,7 @@ import Donut from "../components/Item";
 import DonutCounter from "../components/DonutCounter";
 import BoutonA from "../components/BoutonA";
 import "./game.css";
-// import Modal from "../components/Modal";
+import Modal from "../components/Modal";
 import { getRandomArbitrary } from "../components/helpers";
 
 class Game extends Component {
@@ -19,6 +19,7 @@ class Game extends Component {
 			positionY: config.initialPosition.y,
 			positionObstacleY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
 			positionObstacleX: getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit),
+			showModal: false,
 			seconds: config.timer.seconds,
 			paused: false,
 			positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit)),
@@ -122,7 +123,14 @@ class Game extends Component {
 	pauseGame = () => {
 		this.setState({ paused: !this.state.paused });
 		this.pauseTimer();
-		this.props.toggleModal();
+	};
+
+	showModal = () => {
+		this.setState({ showModal: true });
+	};
+
+	hideModal = () => {
+		this.setState({ showModal: false });
 	};
 
 	collisionDetection = () => {
@@ -152,7 +160,6 @@ class Game extends Component {
 
 		const donutStyle = this.state.catchDonut ? "none" : "block";
 
-
 		return (
 			<div className="game" style={bgStyle}>
 				{this.testLimitsOfMap()}
@@ -167,21 +174,14 @@ class Game extends Component {
 					positionObstacleX={this.state.positionObstacleX}
 					positionObstacleY={this.state.positionObstacleY}
 				/>
-
 				<Homer
 					positionX={this.state.positionX}
 					positionY={this.state.positionY}
-<<<<<<< HEAD
-					donut={this.state.catchDonut}
-				/>
-=======
 					isRunning={this.state.isRunning}
 					isHomerRunningLeft={this.state.isHomerRunningLeft}
 					donut={this.state.catchDonut}/>
->>>>>>> 52a8f0e0c82c60770e0185ed11d81c7b9f319ee1
 
 				<DonutCounter donutCount={this.state.donutCount} />
-
 				<JoyWrapper
 					setStep={this.setStep}
 					startRunning={this.startRunning}
@@ -197,15 +197,14 @@ class Game extends Component {
 					throwingDonut={this.throwingDonut}
 					displayButtonA={this.state.paused}
 				/>
-<<<<<<< HEAD
 
-				<BoutonA throwingDonut={this.throwingDonut} />
-=======
->>>>>>> 52a8f0e0c82c60770e0185ed11d81c7b9f319ee1
-
-				<Timer 
-					pauseGame = {this.pauseGame} 
-					seconds = {this.state.seconds} 
+				<Timer pauseGame={this.pauseGame} showModal={this.showModal} seconds={this.state.seconds} />
+				<Modal
+					className="modal"
+					pauseGame={this.pauseGame}
+					show={this.state.showModal}
+					hideModal={this.hideModal}
+					showModal={this.showModal}
 				/>
 			</div>
 		);
