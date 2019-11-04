@@ -9,6 +9,7 @@ import DonutCounter from "../components/DonutCounter";
 import BoutonA from "../components/BoutonA";
 import "./game.css";
 import Modal from "../components/Modal";
+import Health from "../components/Health";
 import { getRandomArbitrary } from "../components/helpers";
 
 class Game extends Component {
@@ -206,6 +207,7 @@ class Game extends Component {
 					hideModal={this.hideModal}
 					showModal={this.showModal}
 				/>
+				<Health />
 			</div>
 		);
 	}
