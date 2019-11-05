@@ -4,9 +4,10 @@ import donut from "./img/donut.png";
 
 function Donut(props) {
 	const items = props.donutPopped.map((obj) => {
+		const donutPickedStyle = obj.picked ? "none" : "block";
 		const donutZone = {
 			display: props.donutStyle,
-			backgroundColor: "deeppink",
+			backgroundColor: "transparent",
 			borderRadius: "50%",
 			width: "50px",
 			height: "50px",
@@ -16,6 +17,7 @@ function Donut(props) {
 			transform: "scale(" + obj.positionDonutY * config.item.scale + ")"
 		};
 		const donutStyle = {
+			display: donutPickedStyle,
 			position: "absolute",
 			width: "80%",
 			margin: "auto"

@@ -106,8 +106,6 @@ class Game extends Component {
 		if (positionX !== config.limits.leftLimit)
 			this.setState({ donutPosition: this.state.donutPosition - this.stepX / config.background.defilement });
 		this.setState({ relativePositionX: this.state.positionX - this.state.donutPosition });
-
-		this.state.donutPopped.map((item) => this.collisionDetection(item));
 	};
 
 	startRunning = () => {
@@ -161,31 +159,39 @@ class Game extends Component {
 			this.state.relativePositionX < item.positionDonutX + 30 &&
 			this.state.positionY < item.positionDonutY + 30 &&
 			this.state.positionY > item.positionDonutY - 30
-		) {
+		)
 			item.picked = true;
-		}
-		return item;
 	};
 
-	
+	donutCount = () => {
+		let donutCount = 0;
+		this.state.donutPopped.map((item) =>
+			item.picked ? (donutCount = donutCount + 1) : (donutCount = donutCount)
+		);
+		//console.log("donutCount = ", donutCount);
+		return donutCount;
+	};
 
 	throwingDonut = () => {
-		this.setState({ donutCount: this.state.donutCount - 1 });
-		this.setState({ catchDonut: false });
+		this.setState({ donutCount: this.state.donutCount - 1, catchDonut: false });
 	};
-
+	gameLoop = () => {
+		this.state.donutPopped.map((item) => this.collisionDetection(item));
+		this.testLimitsOfMap();
+	};
 	render() {
 		const bgStyle = {
 			backgroundPositionY: config.background.position,
 			backgroundPositionX: -this.state.positionX / config.background.defilement,
 			height: config.background.height
 		};
+		{
+			this.gameLoop();
+		}
 
 		return (
 			<div className="game" style={bgStyle}>
-				{this.testLimitsOfMap()}
 				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.donutPosition} />
-
 				<Homer
 					positionX={this.state.positionX}
 					positionY={this.state.positionY}
@@ -193,8 +199,7 @@ class Game extends Component {
 					isHomerRunningLeft={this.state.isHomerRunningLeft}
 					donut={this.state.catchDonut}
 				/>
-
-				<DonutCounter donutCount={this.state.donutCount} />
+				<DonutCounter donutCount={this.donutCount()} />
 				<JoyWrapper
 					setStep={this.setStep}
 					startRunning={this.startRunning}
@@ -205,7 +210,6 @@ class Game extends Component {
 					toTheBottom={this.toTheBottom}
 					displayJoystick={this.state.paused}
 				/>
-
 				<BoutonA throwingDonut={this.throwingDonut} displayButtonA={this.state.paused} />
 				<Timer pauseGame={this.pauseGame} showModal={this.showModal} seconds={this.state.seconds} />
 				<Modal
