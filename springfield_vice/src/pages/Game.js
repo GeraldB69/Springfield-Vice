@@ -207,7 +207,7 @@ class Game extends Component {
 					hideModal={this.hideModal}
 					showModal={this.showModal}
 				/>
-				<Health />
+				<Health collisionBiere={true}/>
 			</div>
 		);
 	}
