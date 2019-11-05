@@ -11,43 +11,43 @@ class Homer extends Component {
 		super(props);
 		this.state = {
 			ripchain: false,
-			donut: false,
-			throwing: false
+			hasThrownDonut: false,
 		};
 	}
 
-	throwingDonut = () => {
-		this.setState({ throwing: !this.state.throwing });
-		//this.setState({ donut: false }); // A decommenter por faire disparaitre le donut lancé
-	};
-
-	displayDonut = () => {
-		// console.log(this.props.donutCount)
-		if (this.props.donutCount > 0) {return "block"}
-		else {return "none"}
+	componentDidMount = () => {
+		this.throwingDonut()
 	}
+
+	throwingDonut = () => {
+		console.log("tata")
+		if (this.props.throwing === true) {
+			this.setState({
+				hasThrownDonut: true
+			})
+		}
+	};
 
 	render() {
 		// console.log(this.props.isRunning)
 		const scaledPosY = this.props.positionY * config.homerSize.scale;
-
-		// const displayDonut = this.props.donut ? "block" : "none";
+		
+		const displayDonut = this.props.donutCount > 0 ? "block" : "block";
 		const displayRipchain = this.state.ripchain ? "block" : "none";
 		//console.log("coordonnées : ", this.props.positionX, " - ", this.props.positionY);
-
+		
 		const isHomerRunningLeft = this.props.isHomerRunningLeft ? 'homerRunLeft' : 'homerRun';
 		const isRunning = this.props.isRunning ? isHomerRunningLeft : 'homerStand';
 		const isThrowing = this.props.throwing ? 'homerThrow' : isRunning;
+		const throwingDonut = this.props.throwing ? 'donutThrow': 'donutHide';
+		// const throwDonut = this.state.hasThrownDonut ? 'donutThrow': 'donutHide';
 		
-	
+		
 		const donutStyle = {
-			display: this.displayDonut(),
+			display: displayDonut,
 			width: config.donutSize.width,
-			position: "absolute",
-			left: "65%",
-			bottom: "60px"
 		};
-
+		
 		const ripchainStyle = {
 			display: displayRipchain,
 			width: "60px",
@@ -76,7 +76,7 @@ class Homer extends Component {
 			<div>
 				<div style={homerZone}>
 					<div style={homerStyle} className={isThrowing} ></div>
-					<img src={donut} style={donutStyle} alt="ripchain" />
+					<img src={donut} style={donutStyle} className={throwingDonut} alt="donut" />
 					<img src={ripchain} style={ripchainStyle} alt="ripchain" />
 				</div>
 			</div>

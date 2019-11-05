@@ -27,6 +27,25 @@ button {
 	background: url(img/homerspritestand.png);
 }
 
+.donutThrow {
+	/* display: block; */
+	width: 50px;
+	/* position: absolute;
+	left: 65%;
+	bottom: 60px; */
+	transform: translateX(1500px);
+	transition: 1.5s ease-out;
+	/* transition-delay: 0.2s; */
+}
+
+.donutHide {
+	/* display: none; */
+	width: 50px;
+	position: absolute;
+	left: 65%;
+	bottom: 60px
+}
+
 .homerThrow {
 	position: absolute;
 	top: -115px;

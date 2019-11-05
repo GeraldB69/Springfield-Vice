@@ -113,7 +113,8 @@ class Game extends Component {
 	};
 
 	componentDidUpdate = () => {
-		setTimeout(() => this.revertThrowingState(), 200);
+		// this.revertThrowingState()
+		setTimeout(() => this.revertThrowingState(), 11200);
 	}
 
 	pauseTimer = () => {
