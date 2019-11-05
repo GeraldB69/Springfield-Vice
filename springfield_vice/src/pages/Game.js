@@ -30,12 +30,22 @@ class Game extends Component {
 			donutCount: 0,
 			throwing: false,
 			moving: false,
-			positionMovingObsX: 300,
-			positionMovingObsY: 200,
-			movX: [350, 400, 550],
-			movY: [250, 200, 300],
+			opponentPos:
+				{
+				positionMovingObsX: 300,
+				positionMovingObsY: 200,
+				movX: [350, 350, 400, 400, 500, 500, 550, 550, 600, 600, 550, 550, 500, 500, 450, 450, 400, 400],
+				movY: [250, 250, 250, 250, 300, 300, 300, 300, 250, 250, 300, 300, 250, 250, 200, 200, 230, 230],
+				},
+				// {
+				// positionMovingObsX: 850,
+				// positionMovingObsY: 400,
+				// movX: [800, 800, 750, 750, 700, 700, 650, 650, 650, 650, 700, 700, 700, 700, 750, 750],
+				// movY: [350, 350, 400, 400, 350, 350, 350, 350, 300, 300, 250, 250, 200, 200, 300, 300],
+				// },
 			isRunning: false,
 			isHomerRunningLeft: false,
+			globalPosition: 0,
 		};
 		
 		this.stepX = 0
@@ -81,12 +91,15 @@ class Game extends Component {
 		if (this.state.isRunning === false)
 			this.stopRunning();
 		
+
+
 		if (positionX !== config.limits.leftLimit)
 			this.setState({
 				positionMovingObsX: positionMovingObsX - this.stepX / config.background.defilement,
 				positionDonutX: positionDonutX - this.stepX / config.background.defilement,
 				positionObstacleX: positionObstacleX - this.stepX / config.background.defilement
 			});
+
 
 		this.collisionDetection();
 		this.toCountDonuts();
@@ -102,26 +115,22 @@ class Game extends Component {
 		clearInterval(this.state.intervalHomer);
 	}
 
-
 	moveObs = () => {
 		let i=0;
 		setInterval(() => {
-			let newPosX = this.state.movX[i];
-			let newPosY = this.state.movY[i];
-			this.setState({positionMovingObsX: newPosX});
-			this.setState({positionMovingObsY: newPosY});
+			let newPosX = this.state.opponentPos.movX[i];
+			let newPosY = this.state.opponentPos.movY[i];
+			this.setState({ opponentPos: { ...this.state.opponentPos, positionMovingObsX: newPosX, positionMovingObsY: newPosY} });
 			i++;
-			if(i>=this.state.movX.length){
+			if(i>=this.state.opponentPos.movX.length){
 				i = 0;
 			}
 		}, 1000);
 	};
 
-
-
 	tick = () => {
 		let { seconds } = this.state;
-		this.setState({ seconds: seconds - 1 });
+		this.setState({ seconds: seconds - 1 }); 
 
 		if (seconds === 0) {
 			this.setState({ seconds: 0 });
@@ -198,8 +207,9 @@ class Game extends Component {
 					positionObstacleY={this.state.positionObstacleY}
 				/>
 				<MovingObs
-					positionMovingObsX={this.state.positionMovingObsX}
-					positionMovingObsY={this.state.positionMovingObsY}
+					positionMovingObsX={this.state.opponentPos.positionMovingObsX}
+					positionMovingObsY={this.state.opponentPos.positionMovingObsY}
+					opponentPos={this.state.opponentPos}
 				/>
 				<Homer
 					positionX={this.state.positionX}
