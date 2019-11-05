@@ -20,7 +20,7 @@ function BoutonA(props) {
 		//console.log(this.props.donutCount)
 		
 		<div style={buttonStyle}>
-			<button style={boutonA} onPointerDown={props.throwingDonut}>
+			<button style={boutonA} onPointerDown={props.throwingDonut} onPointerUp={props.stopThrowingDonut}>
 				A
 			</button>
 		</div>

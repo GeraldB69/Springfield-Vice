@@ -11,36 +11,26 @@ class Homer extends Component {
 		super(props);
 		this.state = {
 			ripchain: false,
-			hasThrownDonut: false,
+			animeClass: 'donutHide'
 		};
 	}
 
-	componentDidMount = () => {
-		this.throwingDonut()
-	}
-
-	throwingDonut = () => {
-		console.log("tata")
-		if (this.props.throwing === true) {
-			this.setState({
-				hasThrownDonut: true
-			})
-		}
-	};
-
 	render() {
-		// console.log(this.props.isRunning)
 		const scaledPosY = this.props.positionY * config.homerSize.scale;
 		
-		const displayDonut = this.props.donutCount > 0 ? "block" : "block";
+		const displayDonut = this.props.donutCount > 0 ? "block" : "none";
 		const displayRipchain = this.state.ripchain ? "block" : "none";
-		//console.log("coordonnées : ", this.props.positionX, " - ", this.props.positionY);
 		
 		const isHomerRunningLeft = this.props.isHomerRunningLeft ? 'homerRunLeft' : 'homerRun';
 		const isRunning = this.props.isRunning ? isHomerRunningLeft : 'homerStand';
-		const isThrowing = this.props.throwing ? 'homerThrow' : isRunning;
-		const throwingDonut = this.props.throwing ? 'donutThrow': 'donutHide';
-		// const throwDonut = this.state.hasThrownDonut ? 'donutThrow': 'donutHide';
+		const isThrowing = this.props.isThrowing ? 'homerThrow' : isRunning;
+		// const throwingDonut = this.props.isThrowing ? 'donutThrow' : 'donutHide';
+
+		if(this.props.isThrowing && this.state.animeClass === 'donutHide') {
+			this.setState({animeClass:'donutThrow'})
+			setTimeout(() => this.setState({animeClass:'donutHide'}), 1000)
+		}
+
 		
 		
 		const donutStyle = {
@@ -76,7 +66,7 @@ class Homer extends Component {
 			<div>
 				<div style={homerZone}>
 					<div style={homerStyle} className={isThrowing} ></div>
-					<img src={donut} style={donutStyle} className={throwingDonut} alt="donut" />
+					<img src={donut} style={donutStyle} className={this.state.animeClass} alt="donut" />
 					<img src={ripchain} style={ripchainStyle} alt="ripchain" />
 				</div>
 			</div>

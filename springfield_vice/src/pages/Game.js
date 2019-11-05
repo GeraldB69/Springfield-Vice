@@ -25,36 +25,41 @@ class Game extends Component {
 			donutPosition: 0,
 			positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
 			catchDonut: false,
-			donutCount: 0,
+			//donutCount: 0,
 			moving: false,
+			isThrowing: false,
 			donutPopped: [
 				{
 					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
 					positionDonutY: parseInt(
 						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
 					),
-					picked: false
+					picked: false, 
+					isAlreadyThrown: false,
 				},
 				{
 					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
 					positionDonutY: parseInt(
 						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
 					),
-					picked: false
+					picked: false,
+					isAlreadyThrown: false,
 				},
 				{
 					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
 					positionDonutY: parseInt(
 						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
 					),
-					picked: false
+					picked: false,
+					isAlreadyThrown: false,
 				},
 				{
 					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
 					positionDonutY: parseInt(
 						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
 					),
-					picked: false
+					picked: false,
+					isAlreadyThrown: false,
 				}
 			],
 			relativePositionX: config.initialPosition.x,
@@ -84,7 +89,7 @@ class Game extends Component {
 	};
 
 	move = () => {
-		const { positionX, positionY, positionDonutX, positionObstacleX } = this.state;
+		const { positionX, positionY } = this.state;
 
 		this.setState({
 			positionX: positionX + this.stepX,
@@ -132,11 +137,6 @@ class Game extends Component {
 		this.interval = setInterval(() => this.tick(), 1000);
 	};
 
-	componentDidUpdate = () => {
-		// this.revertThrowingState()
-		setTimeout(() => this.revertThrowingState(), 11200);
-	}
-
 	pauseTimer = () => {
 		if (this.state.paused === false) {
 			clearInterval(this.interval);
@@ -170,20 +170,40 @@ class Game extends Component {
 
 	donutCount = () => {
 		let donutCount = 0;
-		this.state.donutPopped.map((item) =>
-			item.picked ? (donutCount = donutCount + 1) : (donutCount = donutCount)
+		this.state.donutPopped.map((item) => {
+			if (item.picked && !item.isAlreadyThrown) {
+				return donutCount = donutCount + 1
+			}
+			else if (item.picked && item.isAlreadyThrown) {
+				return donutCount = donutCount -1
+			}
+			else {
+				return donutCount = donutCount
+			}
+		}
+			// item.picked && !item.isAlreadyThrown ? (donutCount = donutCount + 1) : (donutCount = donutCount)
 		);
 		//console.log("donutCount = ", donutCount);
 		return donutCount;
 	};
 
+
 	throwingDonut = () => {
-		this.setState({ donutCount: this.state.donutCount - 1, catchDonut: false });
+		this.setState({ isThrowing: true });
+		console.log("throw")
 	};
+
+	stopThrowingDonut = () => {
+		this.setState({ isThrowing: false });
+		console.log("stopthrow")
+	};
+
 	gameLoop = () => {
 		this.state.donutPopped.map((item) => this.collisionDetection(item));
 		this.testLimitsOfMap();
 	};
+
+
 	render() {
 		const bgStyle = {
 			backgroundPositionY: config.background.position,
@@ -197,14 +217,18 @@ class Game extends Component {
 		return (
 			<div className="game" style={bgStyle}>
 				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.donutPosition} />
+
 				<Homer
 					positionX={this.state.positionX}
 					positionY={this.state.positionY}
 					isRunning={this.state.isRunning}
 					isHomerRunningLeft={this.state.isHomerRunningLeft}
-					donut={this.state.catchDonut}
+					donutCount={this.donutCount()}
+					isThrowing={this.state.isThrowing}
 				/>
+
 				<DonutCounter donutCount={this.donutCount()} />
+
 				<JoyWrapper
 					setStep={this.setStep}
 					startRunning={this.startRunning}
@@ -215,8 +239,11 @@ class Game extends Component {
 					toTheBottom={this.toTheBottom}
 					displayJoystick={this.state.paused}
 				/>
-				<BoutonA throwingDonut={this.throwingDonut} displayButtonA={this.state.paused} />
+
+				<BoutonA throwingDonut={this.throwingDonut} stopThrowingDonut={this.stopThrowingDonut} displayButtonA={this.state.paused} />
+
 				<Timer pauseGame={this.pauseGame} showModal={this.showModal} seconds={this.state.seconds} />
+
 				<Modal
 					className="modal"
 					pauseGame={this.pauseGame}
