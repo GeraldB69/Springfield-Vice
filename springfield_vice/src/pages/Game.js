@@ -13,6 +13,15 @@ import MovingObs from "../components/MovingObs";
 import { getRandomArbitrary } from "../components/helpers";
 import Bart from "../components/Bart";
 
+const donutStatus = {
+	GROUND : "ground",
+	PICKED: "picked",
+	THROWN: "thrown",
+}
+
+const objDisplayBlock = "block";
+const objDisplayNone = "none";
+
 class Game extends Component {
 	constructor(props) {
 		super(props);
@@ -26,7 +35,6 @@ class Game extends Component {
 			donutPosition: 0,
 			positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
 			catchDonut: false,
-			//donutCount: 0,
 			moving: false,
 			isThrowing: false,
 			donutPopped: [
@@ -35,8 +43,9 @@ class Game extends Component {
 					positionDonutY: parseInt(
 						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
 					),
-					picked: false, 
-					isAlreadyThrown: false,
+					picked: false,
+					status: donutStatus.GROUND,
+					display: true,
 				},
 				{
 					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
@@ -44,7 +53,8 @@ class Game extends Component {
 						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
 					),
 					picked: false,
-					isAlreadyThrown: false,
+					status: donutStatus.GROUND,
+					display: true,
 				},
 				{
 					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
@@ -52,7 +62,8 @@ class Game extends Component {
 						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
 					),
 					picked: false,
-					isAlreadyThrown: false,
+					status: donutStatus.GROUND,
+					display: true,
 				},
 				{
 					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
@@ -60,7 +71,8 @@ class Game extends Component {
 						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
 					),
 					picked: false,
-					isAlreadyThrown: false,
+					status: donutStatus.GROUND,
+					display: true,
 				}
 			],
 			relativePositionX: config.initialPosition.x,
@@ -213,39 +225,47 @@ class Game extends Component {
 			this.state.relativePositionX > item.positionDonutX - 30 &&
 			this.state.relativePositionX < item.positionDonutX + 30 &&
 			this.state.positionY < item.positionDonutY + 30 &&
-			this.state.positionY > item.positionDonutY - 30
+			this.state.positionY > item.positionDonutY - 30 && item.status === "ground"
 		)
-			item.picked = true;
+			item.status = "picked";
+			
 	};
 
 	donutCount = () => {
 		let donutCount = 0;
-		this.state.donutPopped.map((item) => {
-			if (item.picked && !item.isAlreadyThrown) {
-				return donutCount = donutCount + 1
-			}
-			else if (item.picked && item.isAlreadyThrown) {
-				return donutCount = donutCount -1
-			}
-			else {
-				return donutCount = donutCount
-			}
-		}
-			// item.picked && !item.isAlreadyThrown ? (donutCount = donutCount + 1) : (donutCount = donutCount)
-		);
-		//console.log("donutCount = ", donutCount);
+		// this.state.donutPopped.map((item) => {
+		// 	if (item.status === "picked" && item.display === true) {
+		// 		return donutCount = donutCount + 1
+		// 		}
+		// 	if (item.status === "picked" && item.display === false) {
+		// 		return donutCount = donutCount
+		// 		}
+		// 	}
+		// );
+		this.state.donutPopped.map((item) => item.status === "picked" ? (donutCount = donutCount + 1) : (donutCount = donutCount));
+
 		return donutCount;
 	};
 
 
 	throwingDonut = () => {
-		this.setState({ isThrowing: true });
-		console.log("throw")
+		this.setState({
+			isThrowing: true,
+			// donutPopped: {...this.state.donutPopped, picked: false}
+		});
+		let donutIndex = this.state.donutPopped.findIndex((item) => item.status === "picked")
+		console.log(donutIndex)
+		if (donutIndex < 0) donutIndex = 0;
+		const { donutPopped } = this.state;
+		donutPopped[donutIndex].status = donutStatus.THROWN;
+		// donutPopped[donutIndex].display = false;
+		this.setState({ donutPopped })
+		// console.log("throw")
 	};
 
 	stopThrowingDonut = () => {
-		this.setState({ isThrowing: false });
-		console.log("stopthrow")
+		this.setState({ isThrowing: false, displayDonut: false });
+		// console.log("stopthrow")
 	};
 
 	gameLoop = () => {
@@ -270,8 +290,7 @@ class Game extends Component {
 
 		return (
 			<div className="game" style={bgStyle}>
-				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.donutPosition}
-				/> 
+				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.donutPosition} objDisplayBlock={objDisplayBlock} objDisplayNone={objDisplayNone}/>
 
 				<MovingObs
 					positionMovingObsX={this.state.opponentPos.positionMovingObsX}
