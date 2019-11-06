@@ -34,7 +34,7 @@
         "firstScreen": true
     },
     "item": {
-        "scale": 0.005
+        "scale": 0.003
     },
     "obstacleF": {
         "scale": 0.005

@@ -53,6 +53,16 @@ class Start extends Component {
     )
   }
 
+				{/* <audio
+						ref="audio_tag"
+						src="http://www.allard-jacquin.com/simpsons.mp3"
+						controls
+						autoPlay
+						type="audio/mp3"
+					/> */}
+			</div>
+		);
+	}
 }
 
 export default Start;
