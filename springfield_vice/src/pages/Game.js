@@ -456,8 +456,6 @@ class Game extends Component {
 				{params.get("modal") && (
 					<Modal modal={this.props.location.search} origin={null} resume={() => this.pauseGame()} />
 				)}
-
-				<Health compteurBiere={4} compteurObst={2} />
 			</div>
 		);
 	}
