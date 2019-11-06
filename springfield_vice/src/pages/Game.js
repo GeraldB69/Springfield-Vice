@@ -20,8 +20,6 @@ const donutStatus = {
 const objDisplayBlock = "block";
 const objDisplayNone = "none";
 
-console.log(donutStatus)
-
 class Game extends Component {
 	constructor(props) {
 		super(props);
@@ -168,7 +166,7 @@ class Game extends Component {
 			this.state.relativePositionX > item.positionDonutX - 30 &&
 			this.state.relativePositionX < item.positionDonutX + 30 &&
 			this.state.positionY < item.positionDonutY + 30 &&
-			this.state.positionY > item.positionDonutY - 30 && item.display === true
+			this.state.positionY > item.positionDonutY - 30 && item.status === "ground"
 		)
 			item.status = "picked";
 			
@@ -176,19 +174,16 @@ class Game extends Component {
 
 	donutCount = () => {
 		let donutCount = 0;
-		this.state.donutPopped.map((item) => {
-			if (item.status === "picked" && item.display === true) {
-				return donutCount = donutCount + 1
-			}
-			if (item.status === "picked" && item.display === false) {
-				return donutCount = donutCount
-			}
-			// else {
-			// 	return donutCount = donutCount
-			// }
-		}
-		// this.state.donutPopped.map((item) => item.status === "picked" ? (donutCount = donutCount + 1) : (donutCount = donutCount)
-		);
+		// this.state.donutPopped.map((item) => {
+		// 	if (item.status === "picked" && item.display === true) {
+		// 		return donutCount = donutCount + 1
+		// 		}
+		// 	if (item.status === "picked" && item.display === false) {
+		// 		return donutCount = donutCount
+		// 		}
+		// 	}
+		// );
+		this.state.donutPopped.map((item) => item.status === "picked" ? (donutCount = donutCount + 1) : (donutCount = donutCount));
 
 		return donutCount;
 	};
@@ -199,10 +194,12 @@ class Game extends Component {
 			isThrowing: true,
 			// donutPopped: {...this.state.donutPopped, picked: false}
 		});
-		const donutIndex = this.state.donutPopped.findIndex((item) => item.status === "picked")
+		let donutIndex = this.state.donutPopped.findIndex((item) => item.status === "picked")
+		console.log(donutIndex)
+		if (donutIndex < 0) donutIndex = 0;
 		const { donutPopped } = this.state;
 		donutPopped[donutIndex].status = donutStatus.THROWN;
-		donutPopped[donutIndex].display = false;
+		// donutPopped[donutIndex].display = false;
 		this.setState({ donutPopped })
 		// console.log("throw")
 	};
