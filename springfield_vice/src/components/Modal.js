@@ -91,7 +91,7 @@ export default class Modal extends Component {
   }
 
   render() {
-      return createPortal(
+    return createPortal(
       <div style={modalStyle} className="modal" onClick={this.props.onClick}>
         {this.props.children}
         <div className="modal-wrapper">

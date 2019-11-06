@@ -42,7 +42,7 @@ class Start extends Component {
       </div>
 
       {params.get("modal") && (
-        <Modal
+				<Modal 
           close={() => {this.props.history.push(this.props.location.pathname);}}
           modal={this.props.location.search}
           origin={"start"}
