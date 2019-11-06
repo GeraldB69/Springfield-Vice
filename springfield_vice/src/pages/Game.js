@@ -9,6 +9,7 @@ import DonutCounter from "../components/DonutCounter";
 import BoutonA from "../components/BoutonA";
 import "./game.css";
 import Modal from "../components/Modal";
+import Health from "../components/Health";
 import MovingObs from "../components/MovingObs";
 import { getRandomArbitrary } from "../components/helpers";
 import Bart from "../components/Bart";
@@ -328,12 +329,14 @@ class Game extends Component {
 				<Timer pauseGame={this.pauseGame} seconds={this.state.seconds} />
 
 				{params.get("modal") && (
-        <Modal
-          modal={this.props.location.search}
+					<Modal
+					modal={this.props.location.search}
 					origin={null}
 					resume={() => this.pauseGame()}
-        />
-      )}
+					/>
+				)}
+
+				<Health compteurBiere={4} compteurObst={2} />
 
 			</div>
 		);
