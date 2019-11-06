@@ -1,0 +1,19 @@
+.bartRun {
+	position: absolute;
+    transform: translate(50%,-50%);
+    transform: scale(-1,1);
+	width: calc(300px / 6);
+	background: url(img/bartwalking.png);
+    animation: animate 0.7s steps(6) infinite reverse;
+}
+
+@keyframes animate {
+	from
+	{
+		background-position: 0;	
+	}
+	to
+	{
+		background-position: 310px;	
+	}
+}

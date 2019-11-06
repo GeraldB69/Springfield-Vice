@@ -9,7 +9,9 @@ import DonutCounter from "../components/DonutCounter";
 import BoutonA from "../components/BoutonA";
 import "./game.css";
 import Modal from "../components/Modal";
+import MovingObs from "../components/MovingObs";
 import { getRandomArbitrary } from "../components/helpers";
+import Bart from "../components/Bart";
 
 class Game extends Component {
 	constructor(props) {
@@ -63,7 +65,28 @@ class Game extends Component {
 			],
 			relativePositionX: config.initialPosition.x,
 			isRunning: false,
-			isHomerRunningLeft: false
+			isHomerRunningLeft: false,
+			opponentPos:
+				{
+				positionMovingObsX: 300,
+				positionMovingObsY: 200,
+				movX: [350, 350, 400, 400, 500, 500, 550, 550, 600, 600, 550, 550, 500, 500, 450, 450, 400, 400],
+				movY: [250, 250, 250, 250, 300, 300, 300, 300, 250, 250, 300, 300, 250, 250, 200, 200, 230, 230],
+				},
+				// {
+				// positionMovingObsX: 850,
+				// positionMovingObsY: 400,
+				// movX: [800, 800, 750, 750, 700, 700, 650, 650, 650, 650, 700, 700, 700, 700, 750, 750],
+				// movY: [350, 350, 400, 400, 350, 350, 350, 350, 300, 300, 250, 250, 200, 200, 300, 300],
+				// },
+			bartPos:
+				{
+				positionBartX: 6000,
+				positionBartY: 200,
+				BartMovX: [6000, 6000, 6000, 6020, 6020, 6050, 6050, 6100, 6100, 6150, 6150, 6200, 6250, 6250, 6300, 6300, 6250, 6250, 6200, 6200, 6100, 6050],
+				BartMovY: [200, 250, 250, 250, 300, 300, 300, 300, 250, 250, 300, 300, 250, 250, 200, 200, 230, 230, 200, 200, 180, 180],
+				},
+			globalPosition: 0,
 		};
 
 		this.stepX = 0;
@@ -88,7 +111,7 @@ class Game extends Component {
 	};
 
 	move = () => {
-		const { positionX, positionY } = this.state;
+		const { positionX, positionY, positionMovingObsX } = this.state;
 
 		this.setState({
 			positionX: positionX + this.stepX,
@@ -104,12 +127,20 @@ class Game extends Component {
 		}
 		// if (this.state.isRunning)
 		// 	this.timeOut = setTimeout(() => this.move(), 10);
+	
+		if (this.state.isRunning === false)
+			this.stopRunning();
+		
 
-		if (this.state.isRunning === false) this.stopRunning();
 
 		if (positionX !== config.limits.leftLimit)
-			this.setState({ donutPosition: this.state.donutPosition - this.stepX / config.background.defilement });
-		this.setState({ relativePositionX: this.state.positionX - this.state.donutPosition });
+			this.setState({
+				donutPosition: this.state.donutPosition - this.stepX / config.background.defilement,
+				relativePositionX: this.state.positionX - this.state.donutPosition,
+				positionMovingObsX: positionMovingObsX - this.stepX / config.background.defilement
+			});
+
+		
 	};
 
 	startRunning = () => {
@@ -119,11 +150,37 @@ class Game extends Component {
 	stopRunning = () => {
 		this.setState({ isRunning: false });
 		clearInterval(this.state.intervalHomer);
+	}
+
+	moveObs = () => {
+		let i=0;
+		setInterval(() => {
+			let newPosX = this.state.opponentPos.movX[i];
+			let newPosY = this.state.opponentPos.movY[i];
+			this.setState({ opponentPos: { ...this.state.opponentPos, positionMovingObsX: newPosX, positionMovingObsY: newPosY} });
+			i++;
+			if(i>=this.state.opponentPos.movX.length){
+				i = 0;
+			}
+		}, 1000);
 	};
+
+	moveBart = () => {
+		let i=0;
+		setInterval(() => {
+			let newPosX = this.state.bartPos.BartMovX[i];
+			let newPosY = this.state.bartPos.BartMovY[i];
+			this.setState({ bartPos: { ...this.state.bartPos, positionBartX: newPosX, positionBartY: newPosY} });
+			i++;
+			if(i>=this.state.bartPos.BartMovX.length){
+				i = 0;
+			}
+		}, 1000);
+	}
 
 	tick = () => {
 		let { seconds } = this.state;
-		this.setState({ seconds: seconds - 1 });
+		this.setState({ seconds: seconds - 1 }); 
 
 		if (seconds === 0) {
 			this.setState({ seconds: 0 });
@@ -134,6 +191,8 @@ class Game extends Component {
 
 	componentDidMount = () => {
 		this.interval = setInterval(() => this.tick(), 1000);
+		this.moveObs();
+		this.moveBart();
 	};
 
 	pauseTimer = () => {
@@ -211,8 +270,18 @@ class Game extends Component {
 
 		return (
 			<div className="game" style={bgStyle}>
-				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.donutPosition} />
+				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.donutPosition}
+				/> 
 
+				<MovingObs
+					positionMovingObsX={this.state.opponentPos.positionMovingObsX}
+					positionMovingObsY={this.state.opponentPos.positionMovingObsY}
+					opponentPos={this.state.opponentPos}
+				/>
+				<Bart 
+					positionBartX={this.state.bartPos.positionBartX}
+					positionBartY={this.state.bartPos.positionBartY}
+				/>
 				<Homer
 					positionX={this.state.positionX}
 					positionY={this.state.positionY}
