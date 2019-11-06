@@ -1,18 +1,32 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom'
 import config from "../components/configSpringfieldVice.json";
-import './modal.css';
+import { createPortal } from "react-dom";
+import "./modal.css";
 
-class Modal extends Component {
+const modalStyle = {
+  display: "flex",
+  position: "fixed",
+  left: 0,
+  top: 0,
+  bottom: 0,
+  right: 0,
+  backgroundColor: "rgba(0,0,0,.5)",
+  color: "#FFF",
+  fontSize: "20px"
+};
+
+export default class Modal extends Component {
   constructor(props) {
     super(props)
     this.state = {
       music: config.modal.music,
-      sounds: config.modal.sounds
+      sounds: config.modal.sounds,
     };
-  }
+  };
 
   showHeader = () => {
-    if (this.props.firstScreen === true) {
+    if (this.props.origin === "start") {
       this.header =
         <div className="modal-header">
           <h3>Settings</h3>
@@ -26,23 +40,32 @@ class Modal extends Component {
     }
     return this.header;
   }
+
   showContent = () => {
-    if (this.props.firstScreen === true) {
+    if (this.props.origin === "start") {
       this.content = 
         <div className='center'>
+          <button id="close" onClick={() => this.props.close()}>X</button>
           <button>SCORES</button>
           <button onClick={() => this.toggleSounds()}>SOUNDS {!this.state.sounds ? 'ON' :  'OFF'}</button>
           <button onClick={() => this.toggleMusic()}>MUSIC {!this.state.music ? 'ON' :  'OFF'}</button>
-          <button onClick={() => this.props.toggleModal()}>PLAY</button>
+          <Link to="/game">
+          <button>PLAY</button>
+          </Link>
         </div>;
     } else {
+      console.log(this.props)
       this.content = 
         <div className='center'>
-          <button>END GAME</button> 
-          <button>SCORES</button>
+          <Link to="/">
+          <button>RESTART</button>
+          </Link>
+          <button>SCORES</button> 
           <button onClick={() => this.toggleSounds()}>SOUNDS {!this.state.sounds ? 'ON' :  'OFF'}</button>
           <button onClick={() => this.toggleMusic()}>MUSIC {!this.state.music ? 'ON' :  'OFF'}</button>
-          <button onClick={this.pauseGame}>RESUME</button>
+          <Link to={{ pathname: "/game", search: "" }}>
+          <button onClick={() => this.props.resume()}>RESUME</button>
+          </Link>
         </div>;
     }
     return this.content;
@@ -68,27 +91,12 @@ class Modal extends Component {
     }
   }
 
-  pauseGame = () => {
-		this.setState({ 
-      paused: !this.state.paused
-    });
-    this.props.toggleModal();
-	};
-
   render() {
-
-    const showStyleMain = {
-      transform: 'translateY(-500%)' 
-    }
-    const hideStyleMain = {
-      transform: 'translateY(-115%)'
-    }
-
-    return (
-  
-      <div className="modal" style={!this.props.isModal ? showStyleMain : hideStyleMain}>
+      return createPortal(
+      <div style={modalStyle} className="modal" onClick={this.props.onClick}>
+        {this.props.children}
         <div className="modal-wrapper">
-            {this.showHeader()}
+          {this.showHeader()}
           <div className="modal-body">
             <p>
               Do you need a break or are you giving up?
@@ -97,9 +105,8 @@ class Modal extends Component {
           </div>
               {this.showContent()}
         </div>
-      </div>
+      </div>,
+      document.getElementById("modal_root"),
     );
-	}
+  }
 }
-
-export default Modal;

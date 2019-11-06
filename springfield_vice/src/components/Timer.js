@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom'
 
 class Timer extends Component {
 	constructor(props) {
@@ -18,7 +19,6 @@ class Timer extends Component {
 			padding: "10px",
 			fontSize: "12pt",
 			fontFamily: 'Mansalva',
-
 		};
 
 		const pauseStyle = {
@@ -31,9 +31,13 @@ class Timer extends Component {
 		return (
 			<div>
 				<h3 style={timerStyle}>Timer: {this.props.seconds} seconds</h3>
-				<button style={pauseStyle} onPointerDown={() => {this.props.pauseGame(); this.props.showModal()}}>
-					PAUSE
-				</button>
+					<Link to={{ pathname: "/game", search: "?modal=true" }}>
+						<button style={pauseStyle} onPointerDown={() => {
+							this.props.pauseGame(); 
+						}}>
+							PAUSE
+						</button>
+					</Link>
 			</div>
 		);
 	}

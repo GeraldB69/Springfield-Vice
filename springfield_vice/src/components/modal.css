@@ -1,44 +1,44 @@
-.center {
-  margin: 0 auto;
-  text-align: center;
+#modal_root {
+  font-family: Mansalva, cursive;;
+}
+.modal {
+
 }
 
-.modal {
-  opacity: '0.9';
-  background: #fff;
-  background-color: #ddd;
-  border: 5px solid #ebdb34;
-  transition: all .8s;
-  width: 90vw;
-  margin-left: 5vw;
-  height: 75%;
-  font-family: 'Mansalva';
-  z-index: 9999;
-  position: absolute;
-  margin: 0 4%;
+.modal-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: center;
+  margin: 2em auto;
+  padding: 1.5em;
+  background: #263238;
+  color: #ebdb34;
+  min-width: 80%;
+  border-radius: 5px;
+  opacity: 0.8;
 }
 
 .modal-header h3 {
   font-size: 26pt;
-  padding: 50px 0 20px;
   margin: 0;
 }
 
-.modal-wrapper {
-  background: #263238;
-  height: 100%;
-  line-height: 40px;
-  text-align: center;
-  color: #ebdb34;
+#close {
+  position: absolute;
+  top: 4em;
+  right: 5em;
+  width: 3em;
 }
 
 .modal button {
+  z-index: 9999;
   border: none;
   color: white;
   cursor: pointer;
   font-weight: bold;
   outline: none;
   width: 110px;
-  font-size: 0.8em;
+  font-size: 0.7em;
   margin: 2px;
 }
