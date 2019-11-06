@@ -4,7 +4,7 @@ import donut from "./img/donut.png";
 
 function Donut(props) {
 	const items = props.donutPopped.map((obj) => {
-		const donutPickedStyle = obj.picked ? "none" : "block";
+		const donutPickedStyle = obj.status === "picked" || obj.status === "thrown" ? props.objDisplayNone : props.objDisplayBlock;
 		const donutZone = {
 			display: props.donutStyle,
 			backgroundColor: "transparent",
