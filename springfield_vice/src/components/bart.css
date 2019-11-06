@@ -4,10 +4,10 @@
     transform: scale(-1,1);
 	width: calc(300px / 6);
 	background: url(img/bartwalking.png);
-    animation: animate 0.7s steps(6) infinite reverse;
+    animation: animate2 0.7s steps(6) infinite reverse;
 }
 
-@keyframes animate {
+@keyframes animate2 {
 	from
 	{
 		background-position: 0;	
