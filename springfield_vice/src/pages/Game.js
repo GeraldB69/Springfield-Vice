@@ -16,6 +16,10 @@ const donutStatus = {
 	PICKED: "picked",
 	THROWN: "thrown",
 }
+
+const objDisplayBlock = "block";
+const objDisplayNone = "none";
+
 console.log(donutStatus)
 
 class Game extends Component {
@@ -32,7 +36,6 @@ class Game extends Component {
 			donutPosition: 0,
 			positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
 			catchDonut: false,
-			//donutCount: 0,
 			moving: false,
 			isThrowing: false,
 			donutPopped: [
@@ -43,6 +46,7 @@ class Game extends Component {
 					),
 					picked: false,
 					status: donutStatus.GROUND,
+					display: true,
 				},
 				{
 					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
@@ -51,6 +55,7 @@ class Game extends Component {
 					),
 					picked: false,
 					status: donutStatus.GROUND,
+					display: true,
 				},
 				{
 					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
@@ -59,6 +64,7 @@ class Game extends Component {
 					),
 					picked: false,
 					status: donutStatus.GROUND,
+					display: true,
 				},
 				{
 					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
@@ -67,6 +73,7 @@ class Game extends Component {
 					),
 					picked: false,
 					status: donutStatus.GROUND,
+					display: true,
 				}
 			],
 			relativePositionX: config.initialPosition.x,
@@ -170,7 +177,7 @@ class Game extends Component {
 			this.state.relativePositionX > item.positionDonutX - 30 &&
 			this.state.relativePositionX < item.positionDonutX + 30 &&
 			this.state.positionY < item.positionDonutY + 30 &&
-			this.state.positionY > item.positionDonutY - 30
+			this.state.positionY > item.positionDonutY - 30 && item.display === true
 		)
 			item.status = "picked";
 			
@@ -178,20 +185,20 @@ class Game extends Component {
 
 	donutCount = () => {
 		let donutCount = 0;
-		// this.state.donutPopped.map((item) => {
-		// 	if (item.picked && !item.isAlreadyThrown) {
-		// 		return donutCount = donutCount + 1
-		// 	}
-		// 	else if (item.picked && item.isAlreadyThrown) {
-		// 		return donutCount = donutCount -1
-		// 	}
-		// 	else {
-		// 		return donutCount = donutCount
-		// 	}
-		// }
-		this.state.donutPopped.map((item) => item.status === "picked" ? (donutCount = donutCount + 1) : (donutCount = donutCount)
+		this.state.donutPopped.map((item) => {
+			if (item.status === "picked" && item.display === true) {
+				return donutCount = donutCount + 1
+			}
+			if (item.status === "picked" && item.display === false) {
+				return donutCount = donutCount
+			}
+			// else {
+			// 	return donutCount = donutCount
+			// }
+		}
+		// this.state.donutPopped.map((item) => item.status === "picked" ? (donutCount = donutCount + 1) : (donutCount = donutCount)
 		);
-		//console.log("donutCount = ", donutCount);
+
 		return donutCount;
 	};
 
@@ -204,12 +211,13 @@ class Game extends Component {
 		const donutIndex = this.state.donutPopped.findIndex((item) => item.status === "picked")
 		const { donutPopped } = this.state;
 		donutPopped[donutIndex].status = donutStatus.THROWN;
+		donutPopped[donutIndex].display = false;
 		this.setState({ donutPopped })
 		// console.log("throw")
 	};
 
 	stopThrowingDonut = () => {
-		this.setState({ isThrowing: false });
+		this.setState({ isThrowing: false, displayDonut: false });
 		// console.log("stopthrow")
 	};
 
@@ -231,7 +239,7 @@ class Game extends Component {
 
 		return (
 			<div className="game" style={bgStyle}>
-				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.donutPosition} />
+				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.donutPosition} objDisplayBlock={objDisplayBlock} objDisplayNone={objDisplayNone}/>
 
 				<Homer
 					positionX={this.state.positionX}
