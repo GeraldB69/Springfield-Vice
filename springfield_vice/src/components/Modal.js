@@ -54,7 +54,6 @@ export default class Modal extends Component {
           </Link>
         </div>;
     } else {
-      console.log(this.props)
       this.content = 
         <div className='center'>
           <Link to="/">

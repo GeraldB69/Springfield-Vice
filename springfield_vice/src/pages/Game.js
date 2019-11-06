@@ -149,7 +149,7 @@ class Game extends Component {
 		this.pauseTimer();
 	};
 
-	collisionDetection = () => {
+	collisionDetection = (item) => {
 		if (
 			this.state.relativePositionX > item.positionDonutX - 30 &&
 			this.state.relativePositionX < item.positionDonutX + 30 &&

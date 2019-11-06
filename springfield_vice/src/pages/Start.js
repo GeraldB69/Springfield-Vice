@@ -24,7 +24,7 @@ class Start extends Component {
 
     return(
       <div id="init_div">
-      <div className="start_div" style={{display: this.state.firstScreen ? "block" : "none" }}>
+ 	     <div className="start_div" style={{display: this.state.firstScreen ? "block" : "none" }}>
         <img className="left_img" src="logo512.png" alt="Springfield Vice" />
         <img className="home_screen" src='bart-ass.png' alt='Bart Simpsons' />
         <Link to={{ pathname: "/", search: "?modal=true" }}>
@@ -41,28 +41,24 @@ class Start extends Component {
         </Link>
       </div>
 
-        {params.get("modal") && (
+      {params.get("modal") && (
         <Modal
           close={() => {this.props.history.push(this.props.location.pathname);}}
           modal={this.props.location.search}
           origin={"start"}
         />
       )}
+			{/* <audio
+					ref="audio_tag"
+					src="http://www.allard-jacquin.com/simpsons.mp3"
+					controls
+					autoPlay
+					type="audio/mp3"
+				/> */}
 
       </div>
     )
   }
-
-				{/* <audio
-						ref="audio_tag"
-						src="http://www.allard-jacquin.com/simpsons.mp3"
-						controls
-						autoPlay
-						type="audio/mp3"
-					/> */}
-			</div>
-		);
-	}
 }
 
 export default Start;
