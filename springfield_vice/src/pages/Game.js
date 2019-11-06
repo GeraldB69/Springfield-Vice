@@ -10,6 +10,7 @@ import BoutonA from "../components/BoutonA";
 import "./game.css";
 import Modal from "../components/Modal";
 import { getRandomArbitrary } from "../components/helpers";
+import Obstacle from "../components/Obstacle";
 
 class Game extends Component {
 	constructor(props) {
@@ -17,16 +18,18 @@ class Game extends Component {
 		this.state = {
 			positionX: config.initialPosition.x,
 			positionY: config.initialPosition.y,
-			positionObstacleY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
-			positionObstacleX: getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit),
+			//positionObstacleY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
+			//positionObstacleX: getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit),
 			showModal: false,
 			seconds: config.timer.seconds,
 			paused: false,
 			donutPosition: 0,
+			obstaclePosition: 0,
 			positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
 			catchDonut: false,
 			donutCount: 0,
 			moving: false,
+			isBlocked: false,
 			donutPopped: [
 				{
 					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
@@ -52,6 +55,22 @@ class Game extends Component {
 				{
 					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
 					positionDonutY: parseInt(
+						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+					),
+					picked: false
+				}
+			],
+			obstaclePopped: [
+				{
+					positionObstacleX: parseInt(getRandomArbitrary(config.limits.leftLimit + 100, 1000)),
+					positionObstacleY: parseInt(
+						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+					),
+					picked: false
+				},
+				{
+					positionObstacleX: parseInt(getRandomArbitrary(1000, 3000)),
+					positionObstacleY: parseInt(
 						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
 					),
 					picked: false
@@ -84,14 +103,13 @@ class Game extends Component {
 	};
 
 	move = () => {
-		const { positionX, positionY, positionDonutX, positionObstacleX } = this.state;
+		const { positionX, positionY } = this.state;
 
 		this.setState({
 			positionX: positionX + this.stepX,
 			positionY: positionY + this.stepY,
 			moving: true
 		});
-		console.log(this.stepX, this.stepY);
 
 		if (this.stepX < 0) {
 			this.setState({ isHomerRunningLeft: true });
@@ -103,8 +121,12 @@ class Game extends Component {
 
 		if (this.state.isRunning === false) this.stopRunning();
 
-		if (positionX !== config.limits.leftLimit)
+		if (positionX !== config.limits.leftLimit) {
 			this.setState({ donutPosition: this.state.donutPosition - this.stepX / config.background.defilement });
+			this.setState({
+				obstaclePosition: this.state.obstaclePosition - this.stepX / config.background.defilement
+			});
+		}
 		this.setState({ relativePositionX: this.state.positionX - this.state.donutPosition });
 	};
 
@@ -129,7 +151,10 @@ class Game extends Component {
 	};
 
 	componentDidMount = () => {
-		this.interval = setInterval(() => this.tick(), 1000);
+		this.interval = setInterval(() => {
+			this.tick();
+		}, 1000);
+		setInterval(() => this.gameLoop(), 100);
 	};
 
 	pauseTimer = () => {
@@ -163,6 +188,20 @@ class Game extends Component {
 			item.picked = true;
 	};
 
+	collisionDetectionObstacle = (item) => {
+		if (
+			this.state.relativePositionX > item.positionObstacleX - 5 &&
+			this.state.relativePositionX < item.positionObstacleX + 10 &&
+			this.state.positionY < item.positionObstacleY + 30 &&
+			this.state.positionY > item.positionObstacleY - 50
+		) {
+			this.setState({
+				isRunning: false,
+				isBlocked: true
+			});
+		}
+	};
+
 	donutCount = () => {
 		let donutCount = 0;
 		this.state.donutPopped.map((item) =>
@@ -172,26 +211,30 @@ class Game extends Component {
 		return donutCount;
 	};
 
-	throwingDonut = () => {
-		this.setState({ donutCount: this.state.donutCount - 1, catchDonut: false });
-	};
 	gameLoop = () => {
 		this.state.donutPopped.map((item) => this.collisionDetection(item));
+
+		this.state.obstaclePopped.map((item) => {
+			this.collisionDetectionObstacle(item);
+		});
+
 		this.testLimitsOfMap();
 	};
+
 	render() {
 		const bgStyle = {
 			backgroundPositionY: config.background.position,
 			backgroundPositionX: -this.state.positionX / config.background.defilement,
 			height: config.background.height
 		};
-		{
-			this.gameLoop();
-		}
 
 		return (
 			<div className="game" style={bgStyle}>
 				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.donutPosition} />
+				<Obstacle
+					obstaclePopped={this.state.obstaclePopped}
+					obstaclePosition={this.state.obstaclePosition}
+				/>
 				<Homer
 					positionX={this.state.positionX}
 					positionY={this.state.positionY}

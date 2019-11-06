@@ -22,9 +22,9 @@ class Homer extends Component {
 	};
 
 	// run = () => {
-	// 	if (this.props.isRunning === false) 
+	// 	if (this.props.isRunning === false)
 	// 		return 'homerStand';
-	// 	else if (this.props.isRunning === true) 
+	// 	else if (this.props.isRunning === true)
 	// 		return 'homerRun';
 	// 	if (this.props.isHomerRunningLeft === true)
 	// 		return 'homerRun2';
@@ -38,10 +38,9 @@ class Homer extends Component {
 		const displayRipchain = this.state.ripchain ? "block" : "none";
 		//console.log("coordonnées : ", this.props.positionX, " - ", this.props.positionY);
 
-		const isHomerRunningLeft = this.props.isHomerRunningLeft ? 'homerRun2' : 'homerRun';
-		const isRunning = this.props.isRunning ? isHomerRunningLeft : 'homerStand';
-		
-	
+		const isHomerRunningLeft = this.props.isHomerRunningLeft ? "homerRun2" : "homerRun";
+		const isRunning = this.props.isRunning ? isHomerRunningLeft : "homerStand";
+
 		const donutStyle = {
 			display: displayDonut,
 			width: config.donutSize.width,
@@ -61,24 +60,25 @@ class Homer extends Component {
 		const homerZone = {
 			width: "50px",
 			height: "50px",
-			backgroundColor: "yellow",
+			backgroundColor: "transparent",
 			left: `${this.props.positionX}px`,
 			top: `${this.props.positionY}px`,
 			transform: "scale(" + scaledPosY + ")",
 			position: "absolute",
-			borderRadius: "50%"
+			borderRadius: "50%",
+			zIndex: this.props.positionY - 10
 		};
 
 		const homerStyle = {
 			backgroundColor: "transparent",
 			paddingBottom: "30px",
-			height: config.homerSize.height,	
+			height: config.homerSize.height
 		};
 		return (
 			<div>
 				<div style={homerZone}>
 					<div style={homerStyle} className={isRunning}></div>
-					
+
 					<img src={ripchain} style={ripchainStyle} alt="ripchain" />
 				</div>
 			</div>
