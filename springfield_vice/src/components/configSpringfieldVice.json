@@ -36,8 +36,8 @@
     "item": {
         "scale": 0.003
     },
-    "obstacleF": {
-        "scale": 0.005
+    "obstacle": {
+        "scale": 0.008
     },
     "modal": {
         "music": true,
