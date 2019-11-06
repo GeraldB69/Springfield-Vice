@@ -1,14 +1,18 @@
 {
+  "homepage": "https://wildcodeschool.github.io/lyon-0919-react-p2-springfield-vice/",
   "name": "springfield_vice",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "react": "^16.10.2",
-    "react-dom": "^16.10.2",
+    "react-dom": "^16.11.0",
     "react-joystick": "^1.0.3",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -28,5 +32,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
   }
 }

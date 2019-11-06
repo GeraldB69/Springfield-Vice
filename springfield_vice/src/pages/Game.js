@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Homer from "../components/Homer";
-import ObstacleF from "../components/ObstacleF";
+//import ObstacleF from "../components/ObstacleF";
 import config from "../components/configSpringfieldVice.json";
 import JoyWrapper from "../components/Joystick";
 import Timer from "../components/Timer";
@@ -12,6 +12,15 @@ import Modal from "../components/Modal";
 import Health from "../components/Health";
 import { getRandomArbitrary } from "../components/helpers";
 
+const donutStatus = {
+	GROUND : "ground",
+	PICKED: "picked",
+	THROWN: "thrown",
+}
+
+const objDisplayBlock = "block";
+const objDisplayNone = "none";
+
 class Game extends Component {
 	constructor(props) {
 		super(props);
@@ -20,25 +29,60 @@ class Game extends Component {
 			positionY: config.initialPosition.y,
 			positionObstacleY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
 			positionObstacleX: getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit),
-			showModal: false,
 			seconds: config.timer.seconds,
 			paused: false,
-			positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit)),
-			// eslint-disable-next-line
+			donutPosition: 0,
 			positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
 			catchDonut: false,
-			donutCount: 0,
-			throwing: false,
 			moving: false,
+			isThrowing: false,
+			donutPopped: [
+				{
+					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
+					positionDonutY: parseInt(
+						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+					),
+					picked: false,
+					status: donutStatus.GROUND,
+					display: true,
+				},
+				{
+					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
+					positionDonutY: parseInt(
+						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+					),
+					picked: false,
+					status: donutStatus.GROUND,
+					display: true,
+				},
+				{
+					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
+					positionDonutY: parseInt(
+						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+					),
+					picked: false,
+					status: donutStatus.GROUND,
+					display: true,
+				},
+				{
+					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
+					positionDonutY: parseInt(
+						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+					),
+					picked: false,
+					status: donutStatus.GROUND,
+					display: true,
+				}
+			],
+			relativePositionX: config.initialPosition.x,
 			isRunning: false,
-			isHomerRunningLeft: false,
+			isHomerRunningLeft: false
 		};
-		
-		this.stepX = 0
-		this.stepY = 0
+
+		this.stepX = 0;
+		this.stepY = 0;
 		this.tick = this.tick.bind(this);
 		this.interval = undefined;
-		
 	}
 
 	testLimitsOfMap = () => {
@@ -52,51 +96,43 @@ class Game extends Component {
 	};
 
 	setStep = (stepX, stepY) => {
-		this.stepX = stepX
-		this.stepY = stepY
-	}
+		this.stepX = stepX;
+		this.stepY = stepY;
+	};
 
 	move = () => {
-		const { positionX, positionY, positionDonutX, positionObstacleX } = this.state;
+		const { positionX, positionY } = this.state;
 
 		this.setState({
 			positionX: positionX + this.stepX,
 			positionY: positionY + this.stepY,
 			moving: true
 		});
-		console.log(this.stepX, this.stepY)
-		
+		console.log(this.stepX, this.stepY);
+
 		if (this.stepX < 0) {
-			this.setState({ isHomerRunningLeft: true })
+			this.setState({ isHomerRunningLeft: true });
 		} else if (this.stepX > 0) {
-			this.setState({ isHomerRunningLeft: false })
+			this.setState({ isHomerRunningLeft: false });
 		}
 		// if (this.state.isRunning)
 		// 	this.timeOut = setTimeout(() => this.move(), 10);
-	
-		if (this.state.isRunning === false)
-			this.stopRunning();
-		
-		if (positionX !== config.limits.leftLimit)
-			this.setState({
-				positionDonutX: positionDonutX - this.stepX / config.background.defilement,
-				positionObstacleX: positionObstacleX - this.stepX / config.background.defilement
-			});
 
-		this.collisionDetection();
-		this.toCountDonuts();
-		
+		if (this.state.isRunning === false) this.stopRunning();
+
+		if (positionX !== config.limits.leftLimit)
+			this.setState({ donutPosition: this.state.donutPosition - this.stepX / config.background.defilement });
+		this.setState({ relativePositionX: this.state.positionX - this.state.donutPosition });
 	};
 
 	startRunning = () => {
 		this.setState({ isRunning: true });
 		this.state.intervalHomer = setInterval(() => this.move(), 50);
-	}
+	};
 	stopRunning = () => {
 		this.setState({ isRunning: false });
 		clearInterval(this.state.intervalHomer);
-	}
-
+	};
 
 	tick = () => {
 		let { seconds } = this.state;
@@ -115,7 +151,7 @@ class Game extends Component {
 
 	pauseTimer = () => {
 		if (this.state.paused === false) {
-			clearInterval(this.interval); 
+			clearInterval(this.interval);
 		} else {
 			this.componentDidMount();
 		}
@@ -126,63 +162,89 @@ class Game extends Component {
 		this.pauseTimer();
 	};
 
-	showModal = () => {
-		this.setState({ showModal: true });
-	};
-
-	hideModal = () => {
-		this.setState({ showModal: false });
-	};
-
-	collisionDetection = () => {
+	collisionDetection = (item) => {
 		if (
-			this.state.positionX > this.state.positionDonutX - 30 &&
-			this.state.positionX < this.state.positionDonutX + 30 &&
-			this.state.positionY < this.state.positionDonutY + 30 &&
-			this.state.positionY > this.state.positionDonutY - 30
+			this.state.relativePositionX > item.positionDonutX - 30 &&
+			this.state.relativePositionX < item.positionDonutX + 30 &&
+			this.state.positionY < item.positionDonutY + 30 &&
+			this.state.positionY > item.positionDonutY - 30 && item.status === "ground"
 		)
-			this.setState({ catchDonut: true });
+			item.status = "picked";
+			
 	};
-	toCountDonuts = () => {
-		if (this.state.catchDonut) this.setState({ donutCount: 1 });
+
+	donutCount = () => {
+		let donutCount = 0;
+		// this.state.donutPopped.map((item) => {
+		// 	if (item.status === "picked" && item.display === true) {
+		// 		return donutCount = donutCount + 1
+		// 		}
+		// 	if (item.status === "picked" && item.display === false) {
+		// 		return donutCount = donutCount
+		// 		}
+		// 	}
+		// );
+		this.state.donutPopped.map((item) => item.status === "picked" ? (donutCount = donutCount + 1) : (donutCount = donutCount));
+
+		return donutCount;
 	};
+
+
 	throwingDonut = () => {
-		this.setState({ throwing: !this.state.throwing });
-		this.setState({ donutCount: 0 });
-		this.setState({ catchDonut: false });
+		this.setState({
+			isThrowing: true,
+			// donutPopped: {...this.state.donutPopped, picked: false}
+		});
+		let donutIndex = this.state.donutPopped.findIndex((item) => item.status === "picked")
+		console.log(donutIndex)
+		if (donutIndex < 0) donutIndex = 0;
+		const { donutPopped } = this.state;
+		donutPopped[donutIndex].status = donutStatus.THROWN;
+		// donutPopped[donutIndex].display = false;
+		this.setState({ donutPopped })
+		// console.log("throw")
 	};
+
+	stopThrowingDonut = () => {
+		this.setState({ isThrowing: false, displayDonut: false });
+		// console.log("stopthrow")
+	};
+
+	gameLoop = () => {
+		this.state.donutPopped.map((item) => this.collisionDetection(item));
+		this.testLimitsOfMap();
+	};
+
 
 	render() {
+
+		// Modal
+		let params = new URLSearchParams(this.props.location.search);
+
 		const bgStyle = {
 			backgroundPositionY: config.background.position,
 			backgroundPositionX: -this.state.positionX / config.background.defilement,
 			height: config.background.height
 		};
-
-		const donutStyle = this.state.catchDonut ? "none" : "block";
+		{
+			this.gameLoop();
+		}
 
 		return (
 			<div className="game" style={bgStyle}>
-				{this.testLimitsOfMap()}
+				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.donutPosition} objDisplayBlock={objDisplayBlock} objDisplayNone={objDisplayNone}/>
 
-				<Donut
-					positionDonutX={this.state.positionDonutX}
-					positionDonutY={this.state.positionDonutY}
-					donutStyle={donutStyle}
-				/>
-
-				<ObstacleF
-					positionObstacleX={this.state.positionObstacleX}
-					positionObstacleY={this.state.positionObstacleY}
-				/>
 				<Homer
 					positionX={this.state.positionX}
 					positionY={this.state.positionY}
 					isRunning={this.state.isRunning}
 					isHomerRunningLeft={this.state.isHomerRunningLeft}
-					donut={this.state.catchDonut}/>
+					donutCount={this.donutCount()}
+					isThrowing={this.state.isThrowing}
+				/>
 
-				<DonutCounter donutCount={this.state.donutCount} />
+				<DonutCounter donutCount={this.donutCount()} />
+
 				<JoyWrapper
 					setStep={this.setStep}
 					startRunning={this.startRunning}
@@ -193,21 +255,19 @@ class Game extends Component {
 					toTheBottom={this.toTheBottom}
 					displayJoystick={this.state.paused}
 				/>
-				
-				<BoutonA
-					throwingDonut={this.throwingDonut}
-					displayButtonA={this.state.paused}
-				/>
 
-				<Timer pauseGame={this.pauseGame} showModal={this.showModal} seconds={this.state.seconds} />
-				<Modal
-					className="modal"
-					pauseGame={this.pauseGame}
-					show={this.state.showModal}
-					hideModal={this.hideModal}
-					showModal={this.showModal}
-				/>
-				<Health collisionBiere={true}/>
+				<BoutonA throwingDonut={this.throwingDonut} stopThrowingDonut={this.stopThrowingDonut} displayButtonA={this.state.paused} />
+
+				<Timer pauseGame={this.pauseGame} seconds={this.state.seconds} />
+
+				{params.get("modal") && (
+        <Modal
+          modal={this.props.location.search}
+					origin={null}
+					resume={() => this.pauseGame()}
+        />
+      )}
+
 			</div>
 		);
 	}
