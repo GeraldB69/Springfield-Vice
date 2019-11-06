@@ -19,7 +19,6 @@ class Game extends Component {
 			positionY: config.initialPosition.y,
 			positionObstacleY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
 			positionObstacleX: getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit),
-			showModal: false,
 			seconds: config.timer.seconds,
 			paused: false,
 			donutPosition: 0,
@@ -150,14 +149,6 @@ class Game extends Component {
 		this.pauseTimer();
 	};
 
-	showModal = () => {
-		this.setState({ showModal: true });
-	};
-
-	hideModal = () => {
-		this.setState({ showModal: false });
-	};
-
 	collisionDetection = (item) => {
 		if (
 			this.state.relativePositionX > item.positionDonutX - 30 &&
@@ -205,6 +196,10 @@ class Game extends Component {
 
 
 	render() {
+
+		// Modal
+		let params = new URLSearchParams(this.props.location.search);
+
 		const bgStyle = {
 			backgroundPositionY: config.background.position,
 			backgroundPositionX: -this.state.positionX / config.background.defilement,
@@ -242,15 +237,16 @@ class Game extends Component {
 
 				<BoutonA throwingDonut={this.throwingDonut} stopThrowingDonut={this.stopThrowingDonut} displayButtonA={this.state.paused} />
 
-				<Timer pauseGame={this.pauseGame} showModal={this.showModal} seconds={this.state.seconds} />
+				<Timer pauseGame={this.pauseGame} seconds={this.state.seconds} />
 
-				<Modal
-					className="modal"
-					pauseGame={this.pauseGame}
-					show={this.state.showModal}
-					hideModal={this.hideModal}
-					showModal={this.showModal}
-				/>
+				{params.get("modal") && (
+        <Modal
+          modal={this.props.location.search}
+					origin={null}
+					resume={() => this.pauseGame()}
+        />
+      )}
+
 			</div>
 		);
 	}

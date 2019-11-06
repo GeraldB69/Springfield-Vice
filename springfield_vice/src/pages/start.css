@@ -9,17 +9,6 @@
     linear-gradient(300deg, rgba(0,0,255,.8), rgba(0, 255, 42, 0) 70.71%);
 }
 
-.hide {
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s, opacity 3s linear ;
-}
-
-.show {
-  visibility: visible;
-  opacity: 1;
-}
-
 #start, .right_doh {
   border: 0px dotted #eee;
   background: transparent;
@@ -31,9 +20,11 @@
 .logo, .left_img, .right_doh, .right_button {
   position: absolute;
 }
+
 .left_img, .right_doh {
   top: 10px;
 }
+
 .logo, .right_doh {
   right: 20px;
 }
@@ -80,10 +71,10 @@
   margin-right: auto;
 }
 
-.game_div {
-  transition: opacity 3s ease;
-}
-
 .right_button, .left_img, .home_screen, .right_doh {
   filter: drop-shadow(0px 0px 5px white);
+}
+
+audio {
+  display: none;
 }

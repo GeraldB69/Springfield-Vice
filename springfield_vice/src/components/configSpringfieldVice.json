@@ -38,5 +38,9 @@
     },
     "obstacleF": {
         "scale": 0.005
+    },
+    "modal": {
+        "music": true,
+        "sounds": true
     }
 }
