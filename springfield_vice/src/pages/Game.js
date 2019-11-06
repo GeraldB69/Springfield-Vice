@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Homer from "../components/Homer";
-//import ObstacleF from "../components/ObstacleF";
 import config from "../components/configSpringfieldVice.json";
 import JoyWrapper from "../components/Joystick";
 import Timer from "../components/Timer";
-import Donut from "../components/Item";
+import { Donut } from "../components/Item";
+import { Biere } from "../components/Item";
 import DonutCounter from "../components/DonutCounter";
 import BoutonA from "../components/BoutonA";
 import "./game.css";
@@ -55,6 +55,36 @@ class Game extends Component {
 				{
 					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
 					positionDonutY: parseInt(
+						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+					),
+					picked: false
+				}
+			],
+			bierePopped: [
+				{
+					positionBiereX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
+					positionBiereY: parseInt(
+						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+					),
+					picked: false
+				},
+				{
+					positionBiereX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
+					positionBiereY: parseInt(
+						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+					),
+					picked: false
+				},
+				{
+					positionBiereX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
+					positionBiereY: parseInt(
+						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
+					),
+					picked: false
+				},
+				{
+					positionBiereX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
+					positionBiereY: parseInt(
 						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
 					),
 					picked: false
@@ -231,6 +261,7 @@ class Game extends Component {
 		return (
 			<div className="game" style={bgStyle}>
 				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.donutPosition} />
+				<Biere bierePopped={this.state.bierePopped} bierePosition={this.state.donutPosition} />
 				<Obstacle
 					obstaclePopped={this.state.obstaclePopped}
 					obstaclePosition={this.state.obstaclePosition}
