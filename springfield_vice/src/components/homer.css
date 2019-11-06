@@ -27,6 +27,37 @@ button {
 	background: url(img/homerspritestand.png);
 }
 
+.donutThrow {
+	/* display: block; */
+	width: 50px;
+	/* position: absolute;
+	left: 65%;
+	bottom: 60px; */
+	transform: translateX(1500px);
+	transition: 1.5s ease-out;
+	/* transition-delay: 0.2s; */
+}
+
+.donutHide {
+	/* display: none; */
+	width: 50px;
+	position: absolute;
+	left: 65%;
+	bottom: 60px
+}
+
+.homerThrow {
+	position: absolute;
+	top: -115px;
+	left: -18px;
+	width: 190%;
+	transform: translate(-50%,-50%);
+	transform: scale(1,1);
+	width: calc(590px / 9);
+	background: url(img/homerspritethrow1.png);
+	animation: animate1 0.2s steps(9) 2;
+}
+
 .homerRun {
 	position: absolute;
 	top: -115px;
@@ -39,7 +70,7 @@ button {
 	animation: animate 0.7s steps(9) infinite;
 }
 
-.homerRun2 {
+.homerRunLeft {
 	position: absolute;
 	top: -115px;
 	left: -18px;
@@ -59,5 +90,16 @@ button {
 	to
 	{
 		background-position: 925px;	
+	}
+}
+
+@keyframes animate1 {
+	from
+	{
+		background-position: 0;	
+	}
+	to
+	{
+		background-position: 756px;	
 	}
 }

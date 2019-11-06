@@ -5,7 +5,7 @@ import biere from "./img/biere.png";
 
 function Donut(props) {
 	const items = props.donutPopped.map((obj) => {
-		const donutPickedStyle = obj.picked ? "none" : "block";
+		const donutPickedStyle = obj.status === "picked" || obj.status === "thrown" ? "none" : "block";
 		const donutZone = {
 			display: props.donutStyle,
 			backgroundColor: "transparent",
@@ -37,7 +37,7 @@ function Donut(props) {
 
 function Biere(props) {
 	const items = props.bierePopped.map((obj) => {
-		const bierePickedStyle = obj.picked ? "none" : "block";
+		const bierePickedStyle = obj.status === "picked" || obj.status === "thrown" ? "none" : "block";
 		const biereZone = {
 			display: props.biereStyle,
 			backgroundColor: "transparent",
