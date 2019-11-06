@@ -261,12 +261,14 @@ class Game extends Component {
 				<Timer pauseGame={this.pauseGame} seconds={this.state.seconds} />
 
 				{params.get("modal") && (
-        <Modal
-          modal={this.props.location.search}
+					<Modal
+					modal={this.props.location.search}
 					origin={null}
 					resume={() => this.pauseGame()}
-        />
-      )}
+					/>
+				)}
+
+				<Health compteurBiere={4} compteurObst={2} />
 
 			</div>
 		);
