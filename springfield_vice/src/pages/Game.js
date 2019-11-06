@@ -14,7 +14,6 @@ import MovingObs from "../components/MovingObs";
 import { getRandomArbitrary } from "../components/helpers";
 import Obstacle from "../components/Obstacle";
 import Bart from "../components/Bart";
-import Health from "../components/Health";
 
 const donutStatus = {
 	GROUND: "ground",
@@ -455,15 +454,10 @@ class Game extends Component {
 				<Timer pauseGame={this.pauseGame} seconds={this.state.seconds} />
 
 				{params.get("modal") && (
-					<Modal
-					modal={this.props.location.search}
-					origin={null}
-					resume={() => this.pauseGame()}
-					/>
+					<Modal modal={this.props.location.search} origin={null} resume={() => this.pauseGame()} />
 				)}
 
 				<Health compteurBiere={4} compteurObst={2} />
-
 			</div>
 		);
 	}
