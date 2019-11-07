@@ -455,7 +455,7 @@ class Game extends Component {
 				/>
 
 				<DonutCounter donutCount={this.donutCount()} />
-				<Health compteurBiere={this.beerCount()} compteurObst={3} />
+				<Health beerCounter={this.beerCount()} obstCounter={3} />
 
 				<JoyWrapper
 					setStep={this.setStep}
@@ -486,7 +486,6 @@ class Game extends Component {
         />
       )}
 
-				<Health compteurBiere={4} compteurObst={2} />
 			</div>
 		);
 	}
