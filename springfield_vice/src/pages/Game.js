@@ -454,7 +454,7 @@ class Game extends Component {
 			height: config.background.height
 		};
 
-		let diff1 = 6 + this.beerCount() - this.obstacleCollisionCount();
+		let diff1 = 3 + this.beerCount() - this.obstacleCollisionCount();
 
 		return (
 			<div className="game" style={bgStyle}>
