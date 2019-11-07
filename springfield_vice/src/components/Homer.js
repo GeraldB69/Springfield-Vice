@@ -49,7 +49,7 @@ class Homer extends Component {
 		const homerZone = {
 			width: "50px",
 			height: "50px",
-			backgroundColor: "yellow",
+			backgroundColor: "",
 			left: `${this.props.positionX}px`,
 			top: `${this.props.positionY}px`,
 			transform: "scale(" + scaledPosY + ")",

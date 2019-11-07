@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Homer from "../components/Homer";
-//import ObstacleF from "../components/ObstacleF";
 import config from "../components/configSpringfieldVice.json";
 import JoyWrapper from "../components/Joystick";
 import Timer from "../components/Timer";
@@ -9,9 +8,10 @@ import DonutCounter from "../components/DonutCounter";
 import BoutonA from "../components/BoutonA";
 import "./game.css";
 import Modal from "../components/Modal";
-import MovingObs from "../components/MovingObs";
+import Selma from "../components/Selma";
 import { getRandomArbitrary } from "../components/helpers";
 import Bart from "../components/Bart";
+import Seymour from "../components/Seymour";
 
 const donutStatus = {
 	GROUND : "ground",
@@ -78,19 +78,20 @@ class Game extends Component {
 			relativePositionX: config.initialPosition.x,
 			isRunning: false,
 			isHomerRunningLeft: false,
-			opponentPos:
+			selmaPos:
 				{
-				positionMovingObsX: 300,
-				positionMovingObsY: 200,
-				movX: [350, 350, 400, 400, 500, 500, 550, 550, 600, 600, 550, 550, 500, 500, 450, 450, 400, 400],
-				movY: [250, 250, 250, 250, 300, 300, 300, 300, 250, 250, 300, 300, 250, 250, 200, 200, 230, 230],
+				positionSelmaX: 600,
+				positionSelmaY: 250,
+				SelmaMovX: [1420, 1420, 1400, 1350, 1350, 1300, 1280, 1280, 1250, 1250, 1220, 1220, 1200, 1200, 1250, 1250, 1280, 1300, 1320, 1350, 1380],
+				SelmaMovY: [150, 180, 180, 200, 230, 250, 250, 220, 200, 200, 180, 180, 150, 150, 140, 140, 130, 130, 130, 140, 140],
 				},
-				// {
-				// positionMovingObsX: 850,
-				// positionMovingObsY: 400,
-				// movX: [800, 800, 750, 750, 700, 700, 650, 650, 650, 650, 700, 700, 700, 700, 750, 750],
-				// movY: [350, 350, 400, 400, 350, 350, 350, 350, 300, 300, 250, 250, 200, 200, 300, 300],
-				// },
+			seymourPos:
+				{
+				positionSeymourX: 1400,
+				positionSeymourY: 130,
+				SeymourMovX: [600, 620, 620, 600, 580, 580, 550, 550, 530, 530, 520, 500, 500, 520, 550, 550, 580, 580, 580, 580],
+				SeymourMovY: [250, 250, 250, 250, 230, 230, 200, 200, 220, 220, 220, 220, 250, 250, 210, 210, 230, 230, 240, 240],
+				},
 			bartPos:
 				{
 				positionBartX: 6000,
@@ -105,6 +106,7 @@ class Game extends Component {
 		this.stepY = 0;
 		this.tick = this.tick.bind(this);
 		this.interval = undefined;
+		this.intObs = undefined;
 	}
 
 	testLimitsOfMap = () => {
@@ -123,7 +125,7 @@ class Game extends Component {
 	};
 
 	move = () => {
-		const { positionX, positionY, positionMovingObsX } = this.state;
+		const { positionX, positionY, positionSelmaX } = this.state;
 
 		this.setState({
 			positionX: positionX + this.stepX,
@@ -149,8 +151,8 @@ class Game extends Component {
 			this.setState({
 				donutPosition: this.state.donutPosition - this.stepX / config.background.defilement,
 				relativePositionX: this.state.positionX - this.state.donutPosition,
-				positionMovingObsX: positionMovingObsX - this.stepX / config.background.defilement
-			});
+				positionSelmaX: positionSelmaX - this.stepX / config.background.defilement
+		});
 
 		
 	};
@@ -164,14 +166,28 @@ class Game extends Component {
 		clearInterval(this.state.intervalHomer);
 	}
 
-	moveObs = () => {
+	moveSelma = () => {
 		let i=0;
-		setInterval(() => {
-			let newPosX = this.state.opponentPos.movX[i];
-			let newPosY = this.state.opponentPos.movY[i];
-			this.setState({ opponentPos: { ...this.state.opponentPos, positionMovingObsX: newPosX, positionMovingObsY: newPosY} });
+		this.intSelma = setInterval(() => {
+			let newPosX = this.state.selmaPos.SelmaMovX[i];
+			let newPosY = this.state.selmaPos.SelmaMovY[i];
+			this.setState({ selmaPos: { ...this.state.selmaPos, positionSelmaX: newPosX, positionSelmaY: newPosY} });
 			i++;
-			if(i>=this.state.opponentPos.movX.length){
+			if(i>=this.state.selmaPos.SelmaMovX.length){
+				i = 0;
+			}
+		}, 1000);
+	};
+
+	moveSeymour = () => {
+		let i=0;
+		this.intSeymour = setInterval(() => {
+			let newPosX = this.state.seymourPos.SeymourMovX[i];
+			let newPosY = this.state.seymourPos.SeymourMovY[i];
+			this.setState({ seymourPos: { ...this.state.seymourPos, positionSeymourX: newPosX, positionSeymourY: newPosY} });
+			i++;
+			if(i>=this.state.seymourPos.SeymourMovX.length){
+			
 				i = 0;
 			}
 		}, 1000);
@@ -179,7 +195,7 @@ class Game extends Component {
 
 	moveBart = () => {
 		let i=0;
-		setInterval(() => {
+		this.intBart = setInterval(() => {
 			let newPosX = this.state.bartPos.BartMovX[i];
 			let newPosY = this.state.bartPos.BartMovY[i];
 			this.setState({ bartPos: { ...this.state.bartPos, positionBartX: newPosX, positionBartY: newPosY} });
@@ -203,16 +219,20 @@ class Game extends Component {
 
 	componentDidMount = () => {
 		this.interval = setInterval(() => this.tick(), 1000);
-		this.moveObs();
+		this.moveSelma();
 		this.moveBart();
+		this.moveSeymour();
 	};
 
 	pauseTimer = () => {
 		if (this.state.paused === false) {
 			clearInterval(this.interval);
+			clearInterval(this.intSelma);
+			clearInterval(this.intBart);
+			clearInterval(this.intSeymour);
 		} else {
 			this.componentDidMount();
-		}
+		};
 	};
 
 	pauseGame = () => {
@@ -292,10 +312,15 @@ class Game extends Component {
 			<div className="game" style={bgStyle}>
 				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.donutPosition} objDisplayBlock={objDisplayBlock} objDisplayNone={objDisplayNone}/>
 
-				<MovingObs
-					positionMovingObsX={this.state.opponentPos.positionMovingObsX}
-					positionMovingObsY={this.state.opponentPos.positionMovingObsY}
-					opponentPos={this.state.opponentPos}
+				<Selma
+					positionSelmaX={this.state.selmaPos.positionSelmaX}
+					positionSelmaY={this.state.selmaPos.positionSelmaY}
+					selmaPos={this.state.selmaPos}
+				/>
+				<Seymour
+					positionSeymourX={this.state.seymourPos.positionSeymourX}
+					positionSeymourY={this.state.seymourPos.positionSeymourY}
+					seymourPos={this.state.seymourPos}
 				/>
 				<Bart 
 					positionBartX={this.state.bartPos.positionBartX}
@@ -328,13 +353,11 @@ class Game extends Component {
 				<Timer pauseGame={this.pauseGame} seconds={this.state.seconds} />
 
 				{params.get("modal") && (
-        <Modal
-          modal={this.props.location.search}
+				<Modal
+					modal={this.props.location.search}
 					origin={null}
 					resume={() => this.pauseGame()}
-        />
-      )}
-
+				/>)}
 			</div>
 		);
 	}

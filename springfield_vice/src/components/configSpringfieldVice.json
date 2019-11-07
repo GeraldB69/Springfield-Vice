@@ -43,10 +43,13 @@
         "music": true,
         "sounds": true
     },
-    "movingObs": {
-        "scale": 0.005
-    },
     "bart": {
         "scale": 0.005
+    },
+    "selma": {
+        "scale": 0.007
+    },
+    "seymour": {
+        "scale": 0.007
     }
 }
