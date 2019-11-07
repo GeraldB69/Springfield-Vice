@@ -63,7 +63,7 @@ class Homer extends Component {
 			height: config.homerSize.height
 		};
 		return (
-			<div>
+			<div id="homer_full">
 				<div style={homerZone}>
 					<div style={homerStyle} className={isThrowing}></div>
 					<img src={donut} style={donutStyle} className={this.state.animeClass} alt="donut" />
