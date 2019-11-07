@@ -20,7 +20,7 @@ class Selma extends Component {
 			transform: "scale(" + this.props.positionSelmaY * config.selma.scale + ")",
 			transition: '0.8s',
 		};
-		console.log(this.props.positionSelmaX, this.props.positionSelmaY)
+		//console.log(this.props.positionSelmaX, this.props.positionSelmaY)
 
 		const styleSelma = {
 			width: "50px",
