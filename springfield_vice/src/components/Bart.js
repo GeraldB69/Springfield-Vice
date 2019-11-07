@@ -11,7 +11,7 @@ class Bart extends Component {
 	}
 
 	render() {
-        const bartZone= {
+    const bartZone= {
 			width: "30px",
 			height: "30px",
 			backgroundColor: "white",

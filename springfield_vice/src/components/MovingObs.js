@@ -19,7 +19,7 @@ class MovingObs extends Component {
 			transform: "scale(" + this.props.positionMovingObsY * config.movingObs.scale + ")",
 			transition: '0.8s',
 		};
-		console.log(this.props.positionMovingObsX, this.props.positionMovingObsY)
+//		console.log(this.props.positionMovingObsX, this.props.positionMovingObsY)
 
 		const styleMovingObs = {
 			width: "80px",

@@ -38,7 +38,7 @@ class Game extends Component {
 			//positionObstacleX: getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit),
 			showModal: false,
 			seconds: config.timer.seconds,
-			//seconds: 5, // POUR LES TESTS
+//			seconds: 10, // POUR LES TESTS
 			paused: false,
 			donutPosition: 0,
 			obstaclePosition: 0,
@@ -273,7 +273,7 @@ class Game extends Component {
 	moveBart = () => {
 		let i = 0;
 		setInterval(() => {
-			let newPosX = this.state.bartPos.BartMovX[i];
+			let newPosX = this.state.bartPos.BartMovX[i]-5750;
 			let newPosY = this.state.bartPos.BartMovY[i];
 			this.setState({ bartPos: { ...this.state.bartPos, positionBartX: newPosX, positionBartY: newPosY } });
 			i++;
@@ -286,25 +286,39 @@ class Game extends Component {
 	tick = () => {
 		let { seconds } = this.state;
 		this.setState({ seconds: seconds - 1 });
-
 		// GAME_OVER
 		if (seconds === 0) { 
 			this.setState({ seconds: 0 });
-			this.props.history.push('game/?modal=true&go=true');
-// Condiiton à faire...
-			// Si gagnant :
-			this.setState({origin: "go_win"});
-			// Si perdant :
-			//this.setState({origin: "go_lost"});
-;
-
+			this.isGameOver();
 			clearInterval(this.interval);
 		}
 	};
 
+	isGameOver = () => {
+		console.log(this.state.bartPos.positionBartX);
+		if (this.state.seconds === 0) {
+			// Si perdant :
+			this.props.history.push('game/?modal=true&go=true');
+			this.setState({origin: "go_lost"});
+			this.stopRunning();
+			clearInterval(this.interval);
+			return;
+		}
+		if(this.beerCount() === 10) {
+			// Si gagnant :
+			this.props.history.push('game/?modal=true&go=true');
+			this.setState({origin: "go_win"});
+			this.stopRunning();
+			clearInterval(this.interval);
+			return;
+		} 
+
+	}
+
 	componentDidMount = () => {
 		this.interval = setInterval(() => {
 			this.tick();
+			this.isGameOver();
 		}, 1000);
 		setInterval(() => this.gameLoop(), 100);
 
@@ -320,10 +334,10 @@ class Game extends Component {
 		}
 	};
 
-	pauseGame = () => {
+	pauseGame = () => { 
 		this.setState({ paused: !this.state.paused });
 		this.pauseTimer();
-		document.getElementById("nipple_0_0").style.opacity = "0.7";
+		document.getElementById("joystick").style.opacity = "0.7";
 		document.getElementById("button_A").style.opacity = "1";
 		document.getElementById("obstacle_full").style.opacity = "1";
 		document.getElementById("homer_full").style.opacity = "1";
@@ -361,6 +375,22 @@ class Game extends Component {
 				isRunning: false,
 				isBlocked: true
 			});
+		}
+	};
+
+	collisionBart = (item) => {
+		console.log(item.positionBartX, this.state.relativePositionX, this.state.positionY)
+		if (
+			this.state.relativePositionX > item.positionBartX - 5 &&
+			this.state.relativePositionX < item.positionBartX + 10 &&
+			this.state.positionY < item.positionBartY + 30 &&
+			this.state.positionY > item.positionBartY - 50
+		) {
+			this.props.history.push('game/?modal=true&go=true');
+			this.setState({origin: "go_win"});
+			this.stopRunning();
+			clearInterval(this.interval);
+			return;
 		}
 	};
 
@@ -404,7 +434,7 @@ class Game extends Component {
 	gameLoop = () => {
 		this.state.donutPopped.map((item) => this.collisionDetection(item));
 		this.state.bierePopped.map((item) => this.collisionDetectionBiere(item));
-
+		this.collisionBart(this.state.bartPos);
 		this.state.obstaclePopped.map((item) => {
 			this.collisionDetectionObstacle(item);
 		});
@@ -414,10 +444,13 @@ class Game extends Component {
 
 	hideButtons = () => { // MODAL
 		clearInterval(this.interval);
-		document.getElementById("nipple_0_0").style.opacity = "0";
-		document.getElementById("button_A").style.opacity = "0";
-		document.getElementById("obstacle_full").style.opacity = "0.9";
-		document.getElementById("homer_full").style.opacity = "0.9";
+		const joystick_id = document.getElementById("joystick");
+		if (joystick_id !== null) {
+			joystick_id.style.opacity = "0";
+			document.getElementById("button_A").style.opacity = "0";
+			document.getElementById("obstacle_full").style.opacity = "0.9";
+			document.getElementById("homer_full").style.opacity = "0.9";
+		}
 	}
 	
 	render() {
@@ -482,7 +515,7 @@ class Game extends Component {
           modal = {this.props.location.search}
 					origin = {this.state.origin}
 					resume = {() => this.pauseGame()}
-					hide = {() =>this.hideButtons()}
+					hide = {() => this.hideButtons()}
         />
       )}
 
