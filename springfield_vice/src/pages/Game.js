@@ -38,6 +38,7 @@ class Game extends Component {
 			paused: false,
 			donutPosition: 0,
 			obstaclePosition: 0,
+			positionDecal: 0,
 			positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
 			catchDonut: false,
 			moving: false,
@@ -121,7 +122,7 @@ class Game extends Component {
 			opponentPos: {
 				positionMovingObsX: 300,
 				positionMovingObsY: 200,
-				movX: [350, 350, 400, 400, 500, 500, 550, 550, 600, 600, 550, 550, 500, 500, 450, 450, 400, 400],
+				movX: [650, 650, 700, 700, 800, 800, 850, 850, 900, 900, 850, 850, 800, 800, 750, 750, 700, 700],
 				movY: [250, 250, 250, 250, 300, 300, 300, 300, 250, 250, 300, 300, 250, 250, 200, 200, 230, 230]
 			},
 			// {
@@ -182,7 +183,8 @@ class Game extends Component {
 					180
 				]
 			},
-			globalPosition: 0
+			globalPosition: 0,
+			defilement: 0
 		};
 
 		this.stepX = 0;
@@ -207,7 +209,7 @@ class Game extends Component {
 	};
 
 	move = () => {
-		const { positionX, positionY, positionMovingObsX } = this.state;
+		const { positionX, positionY } = this.state;
 
 		this.setState({
 			positionX: positionX + this.stepX,
@@ -227,9 +229,8 @@ class Game extends Component {
 
 		if (positionX !== config.limits.leftLimit)
 			this.setState({
-				donutPosition: this.state.donutPosition - this.stepX / config.background.defilement,
-				relativePositionX: this.state.positionX - this.state.donutPosition,
-				positionDecal: this.state.relativePositionX
+				relativePositionX: this.state.positionX - this.state.defilement,
+				defilement: this.state.defilement - this.stepX / config.background.defilement
 			});
 	};
 
@@ -247,8 +248,13 @@ class Game extends Component {
 		setInterval(() => {
 			let newPosX = this.state.opponentPos.movX[i];
 			let newPosY = this.state.opponentPos.movY[i];
+
 			this.setState({
-				opponentPos: { ...this.state.opponentPos, positionMovingObsX: newPosX, positionMovingObsY: newPosY }
+				opponentPos: {
+					...this.state.opponentPos,
+					positionMovingObsX: newPosX,
+					positionMovingObsY: newPosY
+				}
 			});
 			i++;
 			if (i >= this.state.opponentPos.movX.length) {
@@ -285,7 +291,7 @@ class Game extends Component {
 		this.interval = setInterval(() => {
 			this.tick();
 		}, 1000);
-		setInterval(() => this.gameLoop(), 100);
+		setInterval(() => this.gameLoop(), 80);
 
 		this.moveObs();
 		this.moveBart();
@@ -399,16 +405,15 @@ class Game extends Component {
 
 		return (
 			<div className="game" style={bgStyle}>
-				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.donutPosition} />
-				<Beer beerPopped={this.state.beerPopped} beerPosition={this.state.donutPosition} />
-				<Obstacle obstaclePopped={this.state.obstaclePopped} obstaclePosition={this.state.donutPosition} />
+				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.defilement} />
+				<Beer beerPopped={this.state.beerPopped} beerPosition={this.state.defilement} />
+				<Obstacle obstaclePopped={this.state.obstaclePopped} obstaclePosition={this.state.defilement} />
 				<MovingObs
-					positionMovingObsX={this.state.opponentPos.positionMovingObsX}
+					positionMovingObsX={this.state.opponentPos.positionMovingObsX + this.state.defilement}
 					positionMovingObsY={this.state.opponentPos.positionMovingObsY}
-					positionDecal={this.state.positionDecal}
 				/>
 				<Bart
-					positionBartX={this.state.bartPos.positionBartX}
+					positionBartX={this.state.bartPos.positionBartX + this.state.defilement}
 					positionBartY={this.state.bartPos.positionBartY}
 				/>
 				<Homer
