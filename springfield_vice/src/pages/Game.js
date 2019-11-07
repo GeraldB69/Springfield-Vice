@@ -4,7 +4,7 @@ import config from "../components/configSpringfieldVice.json";
 import JoyWrapper from "../components/Joystick";
 import Timer from "../components/Timer";
 import { Donut } from "../components/Item";
-import { Biere } from "../components/Item";
+import { Beer } from "../components/Item";
 import DonutCounter from "../components/DonutCounter";
 import BoutonA from "../components/BoutonA";
 import "./game.css";
@@ -20,13 +20,14 @@ const donutStatus = {
 	PICKED: "picked",
 	THROWN: "thrown"
 };
-const biereStatus = {
+const beerStatus = {
 	GROUND: "ground",
 	PICKED: "picked"
 };
-
-const objDisplayBlock = "block";
-const objDisplayNone = "none";
+const obstacleStatus = {
+	GROUND: "ground",
+	PICKED: "picked"
+};
 
 class Game extends Component {
 	constructor(props) {
@@ -42,11 +43,13 @@ class Game extends Component {
 			paused: false,
 			donutPosition: 0,
 			obstaclePosition: 0,
+			positionDecal: 0,
 			positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
 			catchDonut: false,
 			moving: false,
 			isBlocked: false,
 			isThrowing: false,
+			homerCollisionHue: 0,
 			donutPopped: [
 				{
 					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
@@ -81,34 +84,26 @@ class Game extends Component {
 					display: true
 				}
 			],
-			bierePopped: [
+			beerPopped: [
 				{
-					positionBiereX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
-					positionBiereY: parseInt(
-						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
-					),
-					status: biereStatus.GROUND
+					positionBeerX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
+					positionBeerY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
+					status: beerStatus.GROUND
 				},
 				{
-					positionBiereX: parseInt(getRandomArbitrary(config.limits.leftLimit, 2000)),
-					positionBiereY: parseInt(
-						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
-					),
-					status: biereStatus.GROUND
+					positionBeerX: parseInt(getRandomArbitrary(config.limits.leftLimit, 2000)),
+					positionBeerY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
+					status: beerStatus.GROUND
 				},
 				{
-					positionBiereX: parseInt(getRandomArbitrary(config.limits.leftLimit, 3000)),
-					positionBiereY: parseInt(
-						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
-					),
-					status: biereStatus.GROUND
+					positionBeerX: parseInt(getRandomArbitrary(config.limits.leftLimit, 3000)),
+					positionBeerY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
+					status: beerStatus.GROUND
 				},
 				{
-					positionBiereX: parseInt(getRandomArbitrary(config.limits.leftLimit, 4000)),
-					positionBiereY: parseInt(
-						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
-					),
-					status: biereStatus.GROUND
+					positionBeerX: parseInt(getRandomArbitrary(config.limits.leftLimit, 4000)),
+					positionBeerY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
+					status: beerStatus.GROUND
 				}
 			],
 			obstaclePopped: [
@@ -117,14 +112,14 @@ class Game extends Component {
 					positionObstacleY: parseInt(
 						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
 					),
-					picked: false
+					status: obstacleStatus.GROUND
 				},
 				{
 					positionObstacleX: parseInt(getRandomArbitrary(1000, 3000)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
 					),
-					picked: false
+					status: obstacleStatus.GROUND
 				}
 			],
 			relativePositionX: config.initialPosition.x,
@@ -134,7 +129,7 @@ class Game extends Component {
 			opponentPos: {
 				positionMovingObsX: 300,
 				positionMovingObsY: 200,
-				movX: [350, 350, 400, 400, 500, 500, 550, 550, 600, 600, 550, 550, 500, 500, 450, 450, 400, 400],
+				movX: [650, 650, 700, 700, 800, 800, 850, 850, 900, 900, 850, 850, 800, 800, 750, 750, 700, 700],
 				movY: [250, 250, 250, 250, 300, 300, 300, 300, 250, 250, 300, 300, 250, 250, 200, 200, 230, 230]
 			},
 			// {
@@ -195,13 +190,15 @@ class Game extends Component {
 					180
 				]
 			},
-			globalPosition: 0
+			globalPosition: 0,
+			defilement: 0
 		};
 
 		this.stepX = 0;
 		this.stepY = 0;
 		this.tick = this.tick.bind(this);
 		this.interval = undefined;
+		this.displayBarrel = "none";
 	}
 
 	testLimitsOfMap = () => {
@@ -220,7 +217,7 @@ class Game extends Component {
 	};
 
 	move = () => {
-		const { positionX, positionY, positionMovingObsX } = this.state;
+		const { positionX, positionY } = this.state;
 
 		this.setState({
 			positionX: positionX + this.stepX,
@@ -240,9 +237,8 @@ class Game extends Component {
 
 		if (positionX !== config.limits.leftLimit)
 			this.setState({
-				donutPosition: this.state.donutPosition - this.stepX / config.background.defilement,
-				relativePositionX: this.state.positionX - this.state.donutPosition,
-				positionMovingObsX: positionMovingObsX - this.stepX / config.background.defilement
+				relativePositionX: this.state.positionX - this.state.defilement,
+				defilement: this.state.defilement - this.stepX / config.background.defilement
 			});
 	};
 
@@ -260,8 +256,13 @@ class Game extends Component {
 		setInterval(() => {
 			let newPosX = this.state.opponentPos.movX[i];
 			let newPosY = this.state.opponentPos.movY[i];
+
 			this.setState({
-				opponentPos: { ...this.state.opponentPos, positionMovingObsX: newPosX, positionMovingObsY: newPosY }
+				opponentPos: {
+					...this.state.opponentPos,
+					positionMovingObsX: newPosX,
+					positionMovingObsY: newPosY
+				}
 			});
 			i++;
 			if (i >= this.state.opponentPos.movX.length) {
@@ -288,16 +289,14 @@ class Game extends Component {
 		this.setState({ seconds: seconds - 1 });
 
 		// GAME_OVER
-		if (seconds === 0) { 
+		if (seconds === 0) {
 			this.setState({ seconds: 0 });
-			this.props.history.push('game/?modal=true&go=true');
-// Condiiton à faire...
+			this.props.history.push("game/?modal=true&go=true");
+			// Condiiton à faire...
 			// Si gagnant :
-			this.setState({origin: "go_win"});
+			this.setState({ origin: "go_win" });
 			// Si perdant :
 			//this.setState({origin: "go_lost"});
-;
-
 			clearInterval(this.interval);
 		}
 	};
@@ -306,7 +305,7 @@ class Game extends Component {
 		this.interval = setInterval(() => {
 			this.tick();
 		}, 1000);
-		setInterval(() => this.gameLoop(), 100);
+		setInterval(() => this.gameLoop(), 80);
 
 		this.moveObs();
 		this.moveBart();
@@ -339,28 +338,33 @@ class Game extends Component {
 		)
 			item.status = "picked";
 	};
-	collisionDetectionBiere = (item) => {
+	collisionDetectionBeer = (item) => {
 		if (
-			this.state.relativePositionX > item.positionBiereX - 30 &&
-			this.state.relativePositionX < item.positionBiereX + 30 &&
-			this.state.positionY < item.positionBiereY + 30 &&
-			this.state.positionY > item.positionBiereY - 30 &&
+			this.state.relativePositionX > item.positionBeerX - 30 &&
+			this.state.relativePositionX < item.positionBeerX + 30 &&
+			this.state.positionY < item.positionBeerY + 30 &&
+			this.state.positionY > item.positionBeerY - 30 &&
 			item.status === "ground"
-		)
+		) {
+			if (this.state.homerCollisionHue > 0)
+				this.setState({ homerCollisionHue: this.state.homerCollisionHue - 30 });
 			item.status = "picked";
+		}
 	};
 
 	collisionDetectionObstacle = (item) => {
 		if (
-			this.state.relativePositionX > item.positionObstacleX - 5 &&
+			this.state.relativePositionX > item.positionObstacleX - 10 &&
 			this.state.relativePositionX < item.positionObstacleX + 10 &&
 			this.state.positionY < item.positionObstacleY + 30 &&
-			this.state.positionY > item.positionObstacleY - 50
+			this.state.positionY > item.positionObstacleY - 30
 		) {
 			this.setState({
 				isRunning: false,
-				isBlocked: true
+				isBlocked: true,
+				homerCollisionHue: this.state.homerCollisionHue + 30
 			});
+			item.status = "picked";
 		}
 	};
 
@@ -374,11 +378,19 @@ class Game extends Component {
 	};
 	beerCount = () => {
 		let beerCount = 0;
-		this.state.bierePopped.map((item) =>
+		this.state.beerPopped.map((item) =>
 			item.status === "picked" ? (beerCount = beerCount + 1) : (beerCount = beerCount)
 		);
 
 		return beerCount;
+	};
+	obstacleCollisionCount = () => {
+		let obstacleCount = 0;
+		this.state.obstaclePopped.map((item) =>
+			item.status === "picked" ? (obstacleCount = obstacleCount + 1) : (obstacleCount = obstacleCount)
+		);
+
+		return obstacleCount;
 	};
 
 	throwingDonut = () => {
@@ -403,25 +415,24 @@ class Game extends Component {
 
 	gameLoop = () => {
 		this.state.donutPopped.map((item) => this.collisionDetection(item));
-		this.state.bierePopped.map((item) => this.collisionDetectionBiere(item));
+		this.state.beerPopped.map((item) => this.collisionDetectionBeer(item));
 
 		this.state.obstaclePopped.map((item) => {
 			this.collisionDetectionObstacle(item);
 		});
-
 		this.testLimitsOfMap();
 	};
 
-	hideButtons = () => { // MODAL
+	hideButtons = () => {
+		// MODAL
 		clearInterval(this.interval);
 		document.getElementById("nipple_0_0").style.opacity = "0";
 		document.getElementById("button_A").style.opacity = "0";
 		document.getElementById("obstacle_full").style.opacity = "0.9";
 		document.getElementById("homer_full").style.opacity = "0.9";
-	}
-	
+	};
+
 	render() {
-		
 		// Modal
 		let params = new URLSearchParams(this.props.location.search);
 
@@ -433,16 +444,16 @@ class Game extends Component {
 
 		return (
 			<div className="game" style={bgStyle}>
-				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.donutPosition} />
-				<Biere bierePopped={this.state.bierePopped} bierePosition={this.state.donutPosition} />
-				<Obstacle obstaclePopped={this.state.obstaclePopped} obstaclePosition={this.state.donutPosition} />
+				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.defilement} />
+				<Beer beerPopped={this.state.beerPopped} beerPosition={this.state.defilement} />
+				<Obstacle obstaclePopped={this.state.obstaclePopped} obstaclePosition={this.state.defilement} />
 				<MovingObs
 					positionMovingObsX={this.state.opponentPos.positionMovingObsX}
 					positionMovingObsY={this.state.opponentPos.positionMovingObsY}
-					opponentPos={this.state.opponentPos}
+					defilement={this.state.defilement}
 				/>
 				<Bart
-					positionBartX={this.state.bartPos.positionBartX}
+					positionBartX={this.state.bartPos.positionBartX + this.state.defilement}
 					positionBartY={this.state.bartPos.positionBartY}
 				/>
 				<Homer
@@ -452,10 +463,11 @@ class Game extends Component {
 					isHomerRunningLeft={this.state.isHomerRunningLeft}
 					donutCount={this.donutCount()}
 					isThrowing={this.state.isThrowing}
+					hue={this.state.homerCollisionHue}
 				/>
 
 				<DonutCounter donutCount={this.donutCount()} />
-				<Health beerCounter={this.beerCount()} obstCounter={3} />
+				<Health beerCounter={this.beerCount()} obstCounter={this.obstacleCollisionCount()} />
 
 				<JoyWrapper
 					setStep={this.setStep}
@@ -477,15 +489,16 @@ class Game extends Component {
 				<Timer pauseGame={this.pauseGame} seconds={this.state.seconds} />
 
 				{params.get("modal") && (
-        <Modal
-					close={() => {this.props.history.push(this.props.location.pathname);}}
-          modal = {this.props.location.search}
-					origin = {this.state.origin}
-					resume = {() => this.pauseGame()}
-					hide = {() =>this.hideButtons()}
-        />
-      )}
-
+					<Modal
+						close={() => {
+							this.props.history.push(this.props.location.pathname);
+						}}
+						modal={this.props.location.search}
+						origin={this.state.origin}
+						resume={() => this.pauseGame()}
+						hide={() => this.hideButtons()}
+					/>
+				)}
 			</div>
 		);
 	}

@@ -1,7 +1,7 @@
 import React from "react";
 import config from "./configSpringfieldVice.json";
 import donut from "./img/donut.png";
-import biere from "./img/biere.png";
+import beer from "./img/biere.png";
 
 function Donut(props) {
 	const items = props.donutPopped.map((obj) => {
@@ -35,30 +35,30 @@ function Donut(props) {
 	return <div>{items}</div>;
 }
 
-function Biere(props) {
-	const items = props.bierePopped.map((obj) => {
-		const bierePickedStyle = obj.status === "picked" || obj.status === "thrown" ? "none" : "block";
-		const biereZone = {
-			display: props.biereStyle,
+function Beer(props) {
+	const items = props.beerPopped.map((obj) => {
+		const beerPickedStyle = obj.status === "picked" || obj.status === "thrown" ? "none" : "block";
+		const beerZone = {
+			display: props.beerStyle,
 			backgroundColor: "transparent",
 			borderRadius: "50%",
-			width: "50px",
-			height: "50px",
+			width: "40px",
+			height: "40px",
 			position: "absolute",
-			top: obj.positionBiereY,
-			left: obj.positionBiereX + props.bierePosition,
-			transform: "scale(" + obj.positionBiereY * config.item.scale + ")"
+			top: obj.positionBeerY,
+			left: obj.positionBeerX + props.beerPosition,
+			transform: "scale(" + obj.positionBeerY * config.item.scale + ")"
 		};
-		const biereStyle = {
-			display: bierePickedStyle,
+		const beerStyle = {
+			display: beerPickedStyle,
 			position: "absolute",
 			width: "80%",
 			margin: "auto"
 		};
 		return (
 			<div>
-				<div style={biereZone}>
-					<img src={biere} style={biereStyle} alt="biere" />
+				<div style={beerZone}>
+					<img src={beer} style={beerStyle} alt="beer" />
 				</div>
 			</div>
 		);
@@ -66,4 +66,4 @@ function Biere(props) {
 
 	return <div>{items}</div>;
 }
-export { Biere, Donut };
+export { Beer, Donut };
