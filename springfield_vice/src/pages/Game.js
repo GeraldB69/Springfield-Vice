@@ -9,11 +9,12 @@ import DonutCounter from "../components/DonutCounter";
 import BoutonA from "../components/BoutonA";
 import "./game.css";
 import Modal from "../components/Modal";
+import Selma from "../components/Selma";
 import Health from "../components/Health";
-import MovingObs from "../components/MovingObs";
 import { getRandomArbitrary } from "../components/helpers";
 import Obstacle from "../components/Obstacle";
 import Bart from "../components/Bart";
+import Seymour from "../components/Seymour";
 
 const donutStatus = {
 	GROUND: "ground",
@@ -125,20 +126,22 @@ class Game extends Component {
 			relativePositionX: config.initialPosition.x,
 			isRunning: false,
 			isHomerRunningLeft: false,
-			origin: null, // modal
-			opponentPos: {
-				positionMovingObsX: 300,
-				positionMovingObsY: 200,
-				movX: [650, 650, 700, 700, 800, 800, 850, 850, 900, 900, 850, 850, 800, 800, 750, 750, 700, 700],
-				movY: [250, 250, 250, 250, 300, 300, 300, 300, 250, 250, 300, 300, 250, 250, 200, 200, 230, 230]
-			},
-			// {
-			// positionMovingObsX: 850,
-			// positionMovingObsY: 400,
-			// movX: [800, 800, 750, 750, 700, 700, 650, 650, 650, 650, 700, 700, 700, 700, 750, 750],
-			// movY: [350, 350, 400, 400, 350, 350, 350, 350, 300, 300, 250, 250, 200, 200, 300, 300],
-			// },
-			bartPos: {
+			selmaPos:
+				{
+				positionSelmaX: 1400,
+				positionSelmaY: 130,
+				SelmaMovX: [1420, 1420, 1400, 1350, 1350, 1300, 1280, 1280, 1250, 1250, 1220, 1220, 1200, 1200, 1250, 1250, 1280, 1300, 1320, 1350, 1380],
+				SelmaMovY: [150, 180, 180, 200, 230, 250, 250, 220, 200, 200, 180, 180, 150, 150, 140, 140, 130, 130, 130, 140, 140],
+				},
+			seymourPos:
+				{
+				positionSeymourX: 600,
+				positionSeymourY: 250,
+				SeymourMovX: [600, 620, 620, 600, 580, 580, 550, 550, 530, 530, 520, 500, 500, 520, 550, 550, 580, 580, 580, 580],
+				SeymourMovY: [250, 250, 250, 250, 230, 230, 200, 200, 220, 220, 220, 220, 250, 250, 210, 210, 230, 230, 240, 240],
+				},
+			bartPos:
+				{
 				positionBartX: 6000,
 				positionBartY: 200,
 				BartMovX: [
@@ -198,6 +201,7 @@ class Game extends Component {
 		this.stepY = 0;
 		this.tick = this.tick.bind(this);
 		this.interval = undefined;
+		this.intObs = undefined;
 		this.displayBarrel = "none";
 	}
 
@@ -217,7 +221,7 @@ class Game extends Component {
 	};
 
 	move = () => {
-		const { positionX, positionY } = this.state;
+		const { positionX, positionY, positionSelmaX } = this.state;
 
 		this.setState({
 			positionX: positionX + this.stepX,
@@ -251,29 +255,36 @@ class Game extends Component {
 		clearInterval(this.state.intervalHomer);
 	};
 
-	moveObs = () => {
-		let i = 0;
-		setInterval(() => {
-			let newPosX = this.state.opponentPos.movX[i];
-			let newPosY = this.state.opponentPos.movY[i];
-
-			this.setState({
-				opponentPos: {
-					...this.state.opponentPos,
-					positionMovingObsX: newPosX,
-					positionMovingObsY: newPosY
-				}
-			});
+	moveSelma = () => {
+		let i=0;
+		this.intSelma = setInterval(() => {
+			let newPosX = this.state.selmaPos.SelmaMovX[i];
+			let newPosY = this.state.selmaPos.SelmaMovY[i];
+			this.setState({ selmaPos: { ...this.state.selmaPos, positionSelmaX: newPosX, positionSelmaY: newPosY} });
 			i++;
-			if (i >= this.state.opponentPos.movX.length) {
+			if(i>=this.state.selmaPos.SelmaMovX.length){
+				i = 0;
+			}
+		}, 1000);
+	};
+
+	moveSeymour = () => {
+		let i=0;
+		this.intSeymour = setInterval(() => {
+			let newPosX = this.state.seymourPos.SeymourMovX[i];
+			let newPosY = this.state.seymourPos.SeymourMovY[i];
+			this.setState({ seymourPos: { ...this.state.seymourPos, positionSeymourX: newPosX, positionSeymourY: newPosY} });
+			i++;
+			if(i>=this.state.seymourPos.SeymourMovX.length){
+			
 				i = 0;
 			}
 		}, 1000);
 	};
 
 	moveBart = () => {
-		let i = 0;
-		setInterval(() => {
+		let i=0;
+		this.intBart = setInterval(() => {
 			let newPosX = this.state.bartPos.BartMovX[i];
 			let newPosY = this.state.bartPos.BartMovY[i];
 			this.setState({ bartPos: { ...this.state.bartPos, positionBartX: newPosX, positionBartY: newPosY } });
@@ -302,21 +313,22 @@ class Game extends Component {
 	};
 
 	componentDidMount = () => {
-		this.interval = setInterval(() => {
-			this.tick();
-		}, 1000);
+		this.interval = setInterval(() => this.tick(), 1000);
 		setInterval(() => this.gameLoop(), 80);
-
-		this.moveObs();
+		this.moveSelma();
 		this.moveBart();
+		this.moveSeymour();
 	};
 
 	pauseTimer = () => {
 		if (this.state.paused === false || this.state.seconds === 0) {
 			clearInterval(this.interval);
+			clearInterval(this.intSelma);
+			clearInterval(this.intBart);
+			clearInterval(this.intSeymour);
 		} else {
 			this.componentDidMount();
-		}
+		};
 	};
 
 	pauseGame = () => {
@@ -444,14 +456,19 @@ class Game extends Component {
 
 		return (
 			<div className="game" style={bgStyle}>
+				<Selma
+					positionSelmaX={this.state.selmaPos.positionSelmaX + this.state.defilement}
+					positionSelmaY={this.state.selmaPos.positionSelmaY}
+					selmaPos={this.state.selmaPos}
+				/>
+				<Seymour
+					positionSeymourX={this.state.seymourPos.positionSeymourX + this.state.defilement}
+					positionSeymourY={this.state.seymourPos.positionSeymourY}
+					seymourPos={this.state.seymourPos}
+				/>
 				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.defilement} />
 				<Beer beerPopped={this.state.beerPopped} beerPosition={this.state.defilement} />
 				<Obstacle obstaclePopped={this.state.obstaclePopped} obstaclePosition={this.state.defilement} />
-				<MovingObs
-					positionMovingObsX={this.state.opponentPos.positionMovingObsX}
-					positionMovingObsY={this.state.opponentPos.positionMovingObsY}
-					defilement={this.state.defilement}
-				/>
 				<Bart
 					positionBartX={this.state.bartPos.positionBartX + this.state.defilement}
 					positionBartY={this.state.bartPos.positionBartY}
