@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import poubelles from "./img/poubelles.png";
+import React from "react";
 import barrel from "./img/barrel.png";
 import config from "./configSpringfieldVice.json";
 

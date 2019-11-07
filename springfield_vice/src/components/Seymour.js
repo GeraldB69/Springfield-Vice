@@ -20,7 +20,7 @@ class Seymour extends Component {
 			transform: "scale(" + this.props.positionSeymourY * config.seymour.scale + ")",
 			transition: '0.8s',
 		};
-		console.log(this.props.positionSeymourX, this.props.positionSeymourY)
+		//console.log(this.props.positionSeymourX, this.props.positionSeymourY)
 
 		const styleSeymour = {
 			width: "40px",

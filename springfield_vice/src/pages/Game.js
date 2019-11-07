@@ -36,11 +36,8 @@ class Game extends Component {
 		this.state = {
 			positionX: config.initialPosition.x,
 			positionY: config.initialPosition.y,
-			//positionObstacleY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
-			//positionObstacleX: getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit),
 			showModal: false,
 			seconds: config.timer.seconds,
-			//seconds: 5, // POUR LES TESTS
 			paused: false,
 			donutPosition: 0,
 			obstaclePosition: 0,
@@ -471,7 +468,7 @@ class Game extends Component {
 	};
 
 	move = () => {
-		const { positionX, positionY, positionSelmaX } = this.state;
+		const { positionX, positionY } = this.state;
 
 		this.setState({
 			positionX: positionX + this.stepX,
@@ -636,7 +633,7 @@ class Game extends Component {
 	donutCount = () => {
 		let donutCount = 0;
 		this.state.donutPopped.map((item) =>
-			item.status === "picked" ? (donutCount = donutCount + 1) : (donutCount = donutCount)
+			item.status === "picked" ? (donutCount = donutCount + 1) : (donutCount = donutCount + 0)
 		);
 
 		return donutCount;
@@ -644,7 +641,7 @@ class Game extends Component {
 	beerCount = () => {
 		let beerCount = 0;
 		this.state.beerPopped.map((item) =>
-			item.status === "picked" ? (beerCount = beerCount + 1) : (beerCount = beerCount)
+			item.status === "picked" ? (beerCount = beerCount + 1) : (beerCount = beerCount + 0)
 		);
 
 		return beerCount;
@@ -652,7 +649,7 @@ class Game extends Component {
 	obstacleCollisionCount = () => {
 		let obstacleCount = 0;
 		this.state.obstaclePopped.map((item) =>
-			item.status === "picked" ? (obstacleCount = obstacleCount + 1) : (obstacleCount = obstacleCount)
+			item.status === "picked" ? (obstacleCount = obstacleCount + 1) : (obstacleCount = obstacleCount + 0)
 		);
 
 		return obstacleCount;
