@@ -431,6 +431,8 @@ class Game extends Component {
 			height: config.background.height
 		};
 
+		let diff1 = 6 + this.beerCount() - 3;
+
 		return (
 			<div className="game" style={bgStyle}>
 				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.donutPosition} />
@@ -452,6 +454,7 @@ class Game extends Component {
 					isHomerRunningLeft={this.state.isHomerRunningLeft}
 					donutCount={this.donutCount()}
 					isThrowing={this.state.isThrowing}
+					isDead={diff1}
 				/>
 
 				<DonutCounter donutCount={this.donutCount()} />

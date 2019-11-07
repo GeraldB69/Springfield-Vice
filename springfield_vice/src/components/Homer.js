@@ -55,17 +55,32 @@ class Homer extends Component {
 			transform: "scale(" + scaledPosY + ")",
 			position: "absolute",
 			borderRadius: "50%",
-			zIndex: this.props.positionY - 10
+			zIndex: this.props.positionY - 10,
 		};
-
+		
+		const homerZone2 = {
+			width: "50px",
+			height: "50px",
+			backgroundColor: "transparent",
+			left: `${this.props.positionX}px`,
+			top: `${this.props.positionY}px`,
+			transform: "scale(" + scaledPosY + ")",
+			position: "absolute",
+			borderRadius: "50%",
+			zIndex: this.props.positionY - 10,
+			animation: "blink 1s infinite",
+		};
+		
 		const homerStyle = {
 			backgroundColor: "transparent",
 			paddingBottom: "30px",
 			height: config.homerSize.height
 		};
+
+
 		return (
 			<div id="homer_full">
-				<div style={homerZone}>
+				<div style={this.props.isDead === 0 ? homerZone2 : homerZone} >
 					<div style={homerStyle} className={isThrowing} ></div>
 					<img src={donut} style={donutStyle} className={this.state.animeClass} alt="donut" />
 					<img src={ripchain} style={ripchainStyle} alt="ripchain" />
