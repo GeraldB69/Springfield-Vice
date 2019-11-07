@@ -14,7 +14,7 @@ class Bart extends Component {
         const bartZone= {
 			width: "30px",
 			height: "30px",
-			backgroundColor: "white",
+			backgroundColor: "",
 			borderRadius: "50%",
 			position: "absolute",
 			left: this.props.positionBartX,
