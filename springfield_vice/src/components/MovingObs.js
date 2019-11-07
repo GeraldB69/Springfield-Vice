@@ -7,14 +7,13 @@ class MovingObs extends Component {
 		this.state = {};
 	}
 	render() {
-
 		const movingObszone = {
 			width: "30px",
 			height: "30px",
 			backgroundColor: "white",
 			borderRadius: "50%",
 			position: "absolute",
-			left: this.props.positionMovingObsX,
+			left: this.props.positionMovingObsX + this.props.defilement,
 			top: this.props.positionMovingObsY,
 			transform: "scale(" + this.props.positionMovingObsY * config.movingObs.scale + ")",
 			transition: "0.8s"

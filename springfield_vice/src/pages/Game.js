@@ -24,6 +24,10 @@ const beerStatus = {
 	GROUND: "ground",
 	PICKED: "picked"
 };
+const obstacleStatus = {
+	GROUND: "ground",
+	PICKED: "picked"
+};
 
 class Game extends Component {
 	constructor(props) {
@@ -44,6 +48,7 @@ class Game extends Component {
 			moving: false,
 			isBlocked: false,
 			isThrowing: false,
+			homerCollisionHue: 0,
 			donutPopped: [
 				{
 					positionDonutX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
@@ -106,14 +111,14 @@ class Game extends Component {
 					positionObstacleY: parseInt(
 						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
 					),
-					picked: false
+					status: obstacleStatus.GROUND
 				},
 				{
 					positionObstacleX: parseInt(getRandomArbitrary(1000, 3000)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
 					),
-					picked: false
+					status: obstacleStatus.GROUND
 				}
 			],
 			relativePositionX: config.initialPosition.x,
@@ -191,6 +196,7 @@ class Game extends Component {
 		this.stepY = 0;
 		this.tick = this.tick.bind(this);
 		this.interval = undefined;
+		this.displayBarrel = "none";
 	}
 
 	testLimitsOfMap = () => {
@@ -327,8 +333,11 @@ class Game extends Component {
 			this.state.positionY < item.positionBeerY + 30 &&
 			this.state.positionY > item.positionBeerY - 30 &&
 			item.status === "ground"
-		)
+		) {
+			if (this.state.homerCollisionHue > 0)
+				this.setState({ homerCollisionHue: this.state.homerCollisionHue - 30 });
 			item.status = "picked";
+		}
 	};
 
 	collisionDetectionObstacle = (item) => {
@@ -340,8 +349,10 @@ class Game extends Component {
 		) {
 			this.setState({
 				isRunning: false,
-				isBlocked: true
+				isBlocked: true,
+				homerCollisionHue: this.state.homerCollisionHue + 30
 			});
+			item.status = "picked";
 		}
 	};
 
@@ -360,6 +371,14 @@ class Game extends Component {
 		);
 
 		return beerCount;
+	};
+	obstacleCollisionCount = () => {
+		let obstacleCount = 0;
+		this.state.obstaclePopped.map((item) =>
+			item.status === "picked" ? (obstacleCount = obstacleCount + 1) : (obstacleCount = obstacleCount)
+		);
+
+		return obstacleCount;
 	};
 
 	throwingDonut = () => {
@@ -389,7 +408,6 @@ class Game extends Component {
 		this.state.obstaclePopped.map((item) => {
 			this.collisionDetectionObstacle(item);
 		});
-
 		this.testLimitsOfMap();
 	};
 
@@ -409,8 +427,9 @@ class Game extends Component {
 				<Beer beerPopped={this.state.beerPopped} beerPosition={this.state.defilement} />
 				<Obstacle obstaclePopped={this.state.obstaclePopped} obstaclePosition={this.state.defilement} />
 				<MovingObs
-					positionMovingObsX={this.state.opponentPos.positionMovingObsX + this.state.defilement}
+					positionMovingObsX={this.state.opponentPos.positionMovingObsX}
 					positionMovingObsY={this.state.opponentPos.positionMovingObsY}
+					defilement={this.state.defilement}
 				/>
 				<Bart
 					positionBartX={this.state.bartPos.positionBartX + this.state.defilement}
@@ -423,10 +442,11 @@ class Game extends Component {
 					isHomerRunningLeft={this.state.isHomerRunningLeft}
 					donutCount={this.donutCount()}
 					isThrowing={this.state.isThrowing}
+					hue={this.state.homerCollisionHue}
 				/>
 
 				<DonutCounter donutCount={this.donutCount()} />
-				<Health beerCounter={this.beerCount()} obstCounter={3} />
+				<Health beerCounter={this.beerCount()} obstCounter={this.obstacleCollisionCount()} />
 
 				<JoyWrapper
 					setStep={this.setStep}
