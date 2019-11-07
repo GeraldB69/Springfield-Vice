@@ -1,10 +1,11 @@
 import React from "react";
 import config from "./configSpringfieldVice.json";
 import donut from "./img/donut.png";
+import beer from "./img/biere.png";
 
 function Donut(props) {
 	const items = props.donutPopped.map((obj) => {
-		const donutPickedStyle = obj.status === "picked" || obj.status === "thrown" ? props.objDisplayNone : props.objDisplayBlock;
+		const donutPickedStyle = obj.status === "picked" || obj.status === "thrown" ? "none" : "block";
 		const donutZone = {
 			display: props.donutStyle,
 			backgroundColor: "transparent",
@@ -33,4 +34,36 @@ function Donut(props) {
 
 	return <div>{items}</div>;
 }
-export default Donut;
+
+function Beer(props) {
+	const items = props.beerPopped.map((obj) => {
+		const beerPickedStyle = obj.status === "picked" || obj.status === "thrown" ? "none" : "block";
+		const beerZone = {
+			display: props.beerStyle,
+			backgroundColor: "transparent",
+			borderRadius: "50%",
+			width: "40px",
+			height: "40px",
+			position: "absolute",
+			top: obj.positionBeerY,
+			left: obj.positionBeerX + props.beerPosition,
+			transform: "scale(" + obj.positionBeerY * config.item.scale + ")"
+		};
+		const beerStyle = {
+			display: beerPickedStyle,
+			position: "absolute",
+			width: "80%",
+			margin: "auto"
+		};
+		return (
+			<div>
+				<div style={beerZone}>
+					<img src={beer} style={beerStyle} alt="beer" />
+				</div>
+			</div>
+		);
+	});
+
+	return <div>{items}</div>;
+}
+export { Beer, Donut };
