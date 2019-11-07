@@ -1,5 +1,9 @@
+#root {
+  z-index: 0;
+}
 div#modal_root {
   font-family: Mansalva, cursive;
+  z-index: 9999;
 }
 
 .modal-wrapper {

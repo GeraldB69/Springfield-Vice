@@ -53,7 +53,7 @@ export default class Modal extends Component {
             <button>SCORES</button>
             <Link to="/"><button>RESTART</button></Link>
           </>;
-        {this.props.hide()}
+        {this.props.hide(true)}
         break;
       case "go_lost": // FIN DE PARTIE + PERDANT
         content.header = "GAME OVER"
@@ -63,7 +63,7 @@ export default class Modal extends Component {
             <button>SCORES</button>
             <Link to="/"><button>RESTART</button></Link>
           </>;
-        {this.props.hide()}
+        {this.props.hide(true)}
         break;
       default: 
         content.header = "PAUSE";
@@ -77,6 +77,7 @@ export default class Modal extends Component {
               <button id="close" onClick={() => this.props.resume()}>X</button>
             </Link>
           </>;
+        {this.props.hide()}
     }
     return content;
   }

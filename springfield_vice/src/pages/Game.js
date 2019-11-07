@@ -130,7 +130,7 @@ class Game extends Component {
 			relativePositionX: config.initialPosition.x,
 			isRunning: false,
 			isHomerRunningLeft: false,
-			origin: null // modal
+			origin: null, // modal
 			opponentPos: {
 				positionMovingObsX: 300,
 				positionMovingObsY: 200,
@@ -323,6 +323,11 @@ class Game extends Component {
 	pauseGame = () => {
 		this.setState({ paused: !this.state.paused });
 		this.pauseTimer();
+		document.getElementById("nipple_0_0").style.opacity = "0.7";
+		document.getElementById("button_A").style.opacity = "1";
+		document.getElementById("obstacle_full").style.opacity = "1";
+		document.getElementById("homer_full").style.opacity = "1";
+
 	};
 
 	collisionDetection = (item) => {
@@ -412,6 +417,8 @@ class Game extends Component {
 		clearInterval(this.interval);
 		document.getElementById("nipple_0_0").style.opacity = "0";
 		document.getElementById("button_A").style.opacity = "0";
+		document.getElementById("obstacle_full").style.opacity = "0.9";
+		document.getElementById("homer_full").style.opacity = "0.9";
 	}
 	
 	render() {
