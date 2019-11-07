@@ -38,10 +38,6 @@ class Game extends Component {
 			positionY: config.initialPosition.y,
 			showModal: false,
 			seconds: config.timer.seconds,
-<<<<<<< HEAD
-//			seconds: 10, // POUR LES TESTS
-=======
->>>>>>> 6a3f1e4b206266f586f917d4bff671ee8cbd92e8
 			paused: false,
 			donutPosition: 0,
 			obstaclePosition: 0,
@@ -555,30 +551,30 @@ class Game extends Component {
 		// GAME_OVER
 		if (seconds === 0) {
 			this.setState({ seconds: 0 });
-//			this.isGameOver();
 			clearInterval(this.interval);
 		}
 	};
 
 	isGameOver = () => {
-//		console.log(this.state.bartPos.positionBartX);
-		if (this.state.seconds === 0) {
+		const health = this.beerCount() - this.obstacleCollisionCount();
+		if (this.state.seconds === 0 || health <= 0) {
 			// Si perdant :
-			this.props.history.push('game/?modal=true&go=true');
-			this.setState({origin: "go_lost"});
 			this.stopRunning();
 			clearInterval(this.interval);
-			return;
+			setTimeout(() => {
+				this.props.history.push('game/?modal=true&go=true');
+				this.setState({origin: "go_lost"});
+				return;
+			}, 3000)
 		}
-		if(this.beerCount() === 10) {
+		if(this.beerCount() === 100) {
 			// Si gagnant :
+			this.stopRunning();
+			clearInterval(this.interval);
 			this.props.history.push('game/?modal=true&go=true');
 			this.setState({origin: "go_win"});
-			this.stopRunning();
-			clearInterval(this.interval);
 			return;
 		} 
-
 	}
 
 	componentDidMount = () => {
@@ -655,10 +651,10 @@ class Game extends Component {
 	collisionBart = (item) => {
 //		console.log(item.positionBartX, this.state.relativePositionX + this.state.defilement)
 		if (
-			this.state.relativePositionX > item.positionBartX - 5 &&
-			this.state.relativePositionX < item.positionBartX + 10 &&
-			this.state.positionY < item.positionBartY + 30 &&
-			this.state.positionY > item.positionBartY - 50
+			this.state.relativePositionX > item.positionBartX - 15 &&
+			this.state.relativePositionX < item.positionBartX + 20 &&
+			this.state.positionY < item.positionBartY + 40 &&
+			this.state.positionY > item.positionBartY - 60
 		) {
 			this.props.history.push('game/?modal=true&go=true');
 			this.setState({origin: "go_win"});
@@ -677,7 +673,7 @@ class Game extends Component {
 		return donutCount;
 	};
 	beerCount = () => {
-		let beerCount = 0;
+		let beerCount = 3;
 		this.state.beerPopped.map((item) =>
 			item.status === "picked" ? (beerCount = beerCount + 1) : (beerCount = beerCount + 0)
 		);
