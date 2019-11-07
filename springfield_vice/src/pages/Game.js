@@ -327,7 +327,6 @@ class Game extends Component {
 		document.getElementById("button_A").style.opacity = "1";
 		document.getElementById("obstacle_full").style.opacity = "1";
 		document.getElementById("homer_full").style.opacity = "1";
-
 	};
 
 	collisionDetection = (item) => {
