@@ -5,16 +5,14 @@ import "./bart.css";
 class Bart extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			
-		};
+		this.state = {};
 	}
 
 	render() {
     const bartZone= {
 			width: "30px",
 			height: "30px",
-			backgroundColor: "white",
+			backgroundColor: "",
 			borderRadius: "50%",
 			position: "absolute",
 			left: this.props.positionBartX,
