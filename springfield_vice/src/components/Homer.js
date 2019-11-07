@@ -11,7 +11,7 @@ class Homer extends Component {
 		super(props);
 		this.state = {
 			ripchain: false,
-			animeClass: 'donutHide'
+			animeClass: 'donutWithHomer'
 		};
 	}
 
@@ -19,6 +19,16 @@ class Homer extends Component {
 		const scaledPosY = this.props.positionY * config.homerSize.scale;
 		
 		const displayDonut = this.props.donutCount > 0 ? "block" : "none";
+		
+		// const displayDonut = () => {
+		// 	if (this.props.donutCount > 0) {
+		// 		return "block"
+		// 	}
+		// 	else if (this.props.donutCount <= 0) {
+		// 		setTimeout(() => {return "none"}, 1000)
+		// 	}
+		// }
+		
 		const displayRipchain = this.state.ripchain ? "block" : "none";
 		
 		const isHomerRunningLeft = this.props.isHomerRunningLeft ? 'homerRunLeft' : 'homerRun';
@@ -26,9 +36,10 @@ class Homer extends Component {
 		const isThrowing = this.props.isThrowing ? 'homerThrow' : isRunning;
 		// const throwingDonut = this.props.isThrowing ? 'donutThrow' : 'donutHide';
 
-		if(this.props.isThrowing && this.state.animeClass === 'donutHide') {
+		if(this.props.isThrowing && this.state.animeClass === 'donutWithHomer') {
 			this.setState({animeClass:'donutThrow'})
-			setTimeout(() => this.setState({animeClass:'donutHide'}), 1000)
+			setTimeout(
+				() => this.setState({animeClass:'donutWithHomer'}), 1000)
 		}
 
 		

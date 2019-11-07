@@ -36,9 +36,10 @@ button {
 	transform: translateX(1500px);
 	transition: 1.5s ease-out;
 	/* transition-delay: 0.2s; */
+	/* animation: donut 1.5s 1 linear; */
 }
 
-.donutHide {
+.donutWithHomer {
 	/* display: none; */
 	width: 50px;
 	position: absolute;
@@ -81,6 +82,11 @@ button {
 	background: url(img/homersprite3.png);
 	animation: animate 0.7s steps(9) infinite;
 }
+
+/* @keyframes donut {
+	0% {display: block;}
+	100% {display: none;}
+} */
 
 @keyframes animate {
 	from
