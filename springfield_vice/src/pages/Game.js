@@ -4,7 +4,7 @@ import config from "../components/configSpringfieldVice.json";
 import JoyWrapper from "../components/Joystick";
 import Timer from "../components/Timer";
 import { Donut } from "../components/Item";
-import { Biere } from "../components/Item";
+import { Beer } from "../components/Item";
 import DonutCounter from "../components/DonutCounter";
 import BoutonA from "../components/BoutonA";
 import "./game.css";
@@ -20,13 +20,10 @@ const donutStatus = {
 	PICKED: "picked",
 	THROWN: "thrown"
 };
-const biereStatus = {
+const beerStatus = {
 	GROUND: "ground",
 	PICKED: "picked"
 };
-
-const objDisplayBlock = "block";
-const objDisplayNone = "none";
 
 class Game extends Component {
 	constructor(props) {
@@ -80,34 +77,26 @@ class Game extends Component {
 					display: true
 				}
 			],
-			bierePopped: [
+			beerPopped: [
 				{
-					positionBiereX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
-					positionBiereY: parseInt(
-						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
-					),
-					status: biereStatus.GROUND
+					positionBeerX: parseInt(getRandomArbitrary(config.limits.leftLimit, 1000)),
+					positionBeerY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
+					status: beerStatus.GROUND
 				},
 				{
-					positionBiereX: parseInt(getRandomArbitrary(config.limits.leftLimit, 2000)),
-					positionBiereY: parseInt(
-						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
-					),
-					status: biereStatus.GROUND
+					positionBeerX: parseInt(getRandomArbitrary(config.limits.leftLimit, 2000)),
+					positionBeerY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
+					status: beerStatus.GROUND
 				},
 				{
-					positionBiereX: parseInt(getRandomArbitrary(config.limits.leftLimit, 3000)),
-					positionBiereY: parseInt(
-						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
-					),
-					status: biereStatus.GROUND
+					positionBeerX: parseInt(getRandomArbitrary(config.limits.leftLimit, 3000)),
+					positionBeerY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
+					status: beerStatus.GROUND
 				},
 				{
-					positionBiereX: parseInt(getRandomArbitrary(config.limits.leftLimit, 4000)),
-					positionBiereY: parseInt(
-						getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)
-					),
-					status: biereStatus.GROUND
+					positionBeerX: parseInt(getRandomArbitrary(config.limits.leftLimit, 4000)),
+					positionBeerY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
+					status: beerStatus.GROUND
 				}
 			],
 			obstaclePopped: [
@@ -240,7 +229,7 @@ class Game extends Component {
 			this.setState({
 				donutPosition: this.state.donutPosition - this.stepX / config.background.defilement,
 				relativePositionX: this.state.positionX - this.state.donutPosition,
-				positionMovingObsX: positionMovingObsX - this.stepX / config.background.defilement
+				positionDecal: this.state.relativePositionX
 			});
 	};
 
@@ -325,12 +314,12 @@ class Game extends Component {
 		)
 			item.status = "picked";
 	};
-	collisionDetectionBiere = (item) => {
+	collisionDetectionBeer = (item) => {
 		if (
-			this.state.relativePositionX > item.positionBiereX - 30 &&
-			this.state.relativePositionX < item.positionBiereX + 30 &&
-			this.state.positionY < item.positionBiereY + 30 &&
-			this.state.positionY > item.positionBiereY - 30 &&
+			this.state.relativePositionX > item.positionBeerX - 30 &&
+			this.state.relativePositionX < item.positionBeerX + 30 &&
+			this.state.positionY < item.positionBeerY + 30 &&
+			this.state.positionY > item.positionBeerY - 30 &&
 			item.status === "ground"
 		)
 			item.status = "picked";
@@ -338,10 +327,10 @@ class Game extends Component {
 
 	collisionDetectionObstacle = (item) => {
 		if (
-			this.state.relativePositionX > item.positionObstacleX - 5 &&
+			this.state.relativePositionX > item.positionObstacleX - 10 &&
 			this.state.relativePositionX < item.positionObstacleX + 10 &&
 			this.state.positionY < item.positionObstacleY + 30 &&
-			this.state.positionY > item.positionObstacleY - 50
+			this.state.positionY > item.positionObstacleY - 30
 		) {
 			this.setState({
 				isRunning: false,
@@ -360,7 +349,7 @@ class Game extends Component {
 	};
 	beerCount = () => {
 		let beerCount = 0;
-		this.state.bierePopped.map((item) =>
+		this.state.beerPopped.map((item) =>
 			item.status === "picked" ? (beerCount = beerCount + 1) : (beerCount = beerCount)
 		);
 
@@ -389,7 +378,7 @@ class Game extends Component {
 
 	gameLoop = () => {
 		this.state.donutPopped.map((item) => this.collisionDetection(item));
-		this.state.bierePopped.map((item) => this.collisionDetectionBiere(item));
+		this.state.beerPopped.map((item) => this.collisionDetectionBeer(item));
 
 		this.state.obstaclePopped.map((item) => {
 			this.collisionDetectionObstacle(item);
@@ -411,12 +400,12 @@ class Game extends Component {
 		return (
 			<div className="game" style={bgStyle}>
 				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.donutPosition} />
-				<Biere bierePopped={this.state.bierePopped} bierePosition={this.state.donutPosition} />
+				<Beer beerPopped={this.state.beerPopped} beerPosition={this.state.donutPosition} />
 				<Obstacle obstaclePopped={this.state.obstaclePopped} obstaclePosition={this.state.donutPosition} />
 				<MovingObs
 					positionMovingObsX={this.state.opponentPos.positionMovingObsX}
 					positionMovingObsY={this.state.opponentPos.positionMovingObsY}
-					opponentPos={this.state.opponentPos}
+					positionDecal={this.state.positionDecal}
 				/>
 				<Bart
 					positionBartX={this.state.bartPos.positionBartX}
@@ -432,7 +421,7 @@ class Game extends Component {
 				/>
 
 				<DonutCounter donutCount={this.donutCount()} />
-				<Health compteurBiere={this.beerCount()} compteurObst={3} />
+				<Health beerCounter={this.beerCount()} obstCounter={3} />
 
 				<JoyWrapper
 					setStep={this.setStep}

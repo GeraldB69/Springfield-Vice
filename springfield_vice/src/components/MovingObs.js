@@ -6,20 +6,22 @@ class MovingObs extends Component {
 		super(props);
 		this.state = {};
 	}
-
 	render() {
+		console.log("positionDecal = ", this.props.positionDecal);
+		console.log("positionMovingObsX = ", this.props.positionMovingObsX);
+
 		const movingObszone = {
 			width: "30px",
 			height: "30px",
 			backgroundColor: "white",
 			borderRadius: "50%",
 			position: "absolute",
-			left: this.props.positionMovingObsX,
+			left: this.props.positionMovingObsX - this.props.positionDecal,
 			top: this.props.positionMovingObsY,
 			transform: "scale(" + this.props.positionMovingObsY * config.movingObs.scale + ")",
-			transition: '0.8s',
+			transition: "0.8s"
 		};
-		console.log(this.props.positionMovingObsX, this.props.positionMovingObsY)
+		//console.log(this.props.positionMovingObsX, this.props.positionMovingObsY);
 
 		const styleMovingObs = {
 			width: "80px",
@@ -28,9 +30,8 @@ class MovingObs extends Component {
 			left: "-20px",
 			top: "-20px",
 			margin: 0,
-			padding: 0,
-			
-        };
+			padding: 0
+		};
 
 		return (
 			<div>
