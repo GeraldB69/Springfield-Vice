@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 import React, { Component } from "react";
 import { Link } from 'react-router-dom'
 import config from "../components/configSpringfieldVice.json";
@@ -25,49 +26,59 @@ export default class Modal extends Component {
     };
   };
 
-  showHeader = () => {
-    if (this.props.origin === "start") {
-      this.header =
-        <div className="modal-header">
-          <h3>Settings</h3>
-        </div>;
+  showHeader() {
+    const other_buttons = 
+      <>
+        <button>SCORES</button>
+        <button onClick={() => this.toggleSounds()}>SOUNDS {!this.state.sounds ? 'ON' :  'OFF'}</button>
+        <button onClick={() => this.toggleMusic()}>MUSIC {!this.state.music ? 'ON' :  'OFF'}</button>
+      </>;
+    const content = [];
+    switch (this.props.origin) {
+      case "start":
+        {content.header = "Settings"};
+        {content.quote = "Trying is the first step towards failure."};
+        content.buttons = 
+          <>
+            {other_buttons}
+            <Link to="/game"><button>PLAY</button></Link>
+            <button id="close" onClick={() => this.props.close()}>X</button>
+          </>;
+        break;
+      case "go_win": // FIN DE PARTIE + GAGNANT
+        content.header = "GOOD JOB !"
+        content.quote = "Stupid risks make life worth living.";
+        content.buttons = 
+          <>
+            <button>SCORES</button>
+            <Link to="/"><button>RESTART</button></Link>
+          </>;
+        {this.props.hide()}
+        break;
+      case "go_lost": // FIN DE PARTIE + PERDANT
+        content.header = "GAME OVER"
+        content.quote = "You tried your best and you failed miserably !";
+        content.buttons = 
+          <>
+            <button>SCORES</button>
+            <Link to="/"><button>RESTART</button></Link>
+          </>;
+        {this.props.hide()}
+        break;
+      default: 
+        content.header = "PAUSE";
+        content.quote = "Do you need a break or are you giving up?";
+        content.buttons =
+          <>
+            <Link to="/"><button>RESTART</button></Link>
+            {other_buttons}
+            <Link to={{ pathname: "/game", search: "" }}>
+              <button onClick={() => this.props.resume()}>RESUME</button>
+              <button id="close" onClick={() => this.props.resume()}>X</button>
+            </Link>
+          </>;
     }
-    else {
-      this.header = 
-        <div className="modal-header">
-          <h3>PAUSE</h3>
-        </div>;
-    }
-    return this.header;
-  }
-
-  showContent = () => {
-    if (this.props.origin === "start") {
-      this.content = 
-        <div className='center'>
-          <button id="close" onClick={() => this.props.close()}>X</button>
-          <button>SCORES</button>
-          <button onClick={() => this.toggleSounds()}>SOUNDS {!this.state.sounds ? 'ON' :  'OFF'}</button>
-          <button onClick={() => this.toggleMusic()}>MUSIC {!this.state.music ? 'ON' :  'OFF'}</button>
-          <Link to="/game">
-          <button>PLAY</button>
-          </Link>
-        </div>;
-    } else {
-      this.content = 
-        <div className='center'>
-          <Link to="/">
-          <button>RESTART</button>
-          </Link>
-          <button>SCORES</button> 
-          <button onClick={() => this.toggleSounds()}>SOUNDS {!this.state.sounds ? 'ON' :  'OFF'}</button>
-          <button onClick={() => this.toggleMusic()}>MUSIC {!this.state.music ? 'ON' :  'OFF'}</button>
-          <Link to={{ pathname: "/game", search: "" }}>
-          <button onClick={() => this.props.resume()}>RESUME</button>
-          </Link>
-        </div>;
-    }
-    return this.content;
+    return content;
   }
 
   toggleMusic = () => {
@@ -93,16 +104,16 @@ export default class Modal extends Component {
   render() {
     return createPortal(
       <div style={modalStyle} className="modal" onClick={this.props.onClick}>
-        {this.props.children}
         <div className="modal-wrapper">
-          {this.showHeader()}
-          <div className="modal-body">
-            <p>
-              Do you need a break or are you giving up?
-              {this.props.children}
-            </p>
+          <div className="modal-header">
+            <h3>{this.showHeader().header}</h3>
           </div>
-              {this.showContent()}
+          <div className="modal-body">
+            <p>{this.showHeader().quote}</p>
+          </div>
+          <div>
+            {this.showHeader().buttons}
+          </div>
         </div>
       </div>,
       document.getElementById("modal_root"),

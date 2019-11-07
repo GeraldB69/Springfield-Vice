@@ -3,7 +3,7 @@ div#modal_root {
 }
 
 .modal-wrapper {
-  transform: rotate(-2deg);
+  /* transform: rotate(-2deg); */
   transition: all 3s;
   display: flex;
   flex-direction: column;

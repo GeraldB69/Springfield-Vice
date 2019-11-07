@@ -20,6 +20,7 @@ class Game extends Component {
 			positionObstacleY: getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit),
 			positionObstacleX: getRandomArbitrary(config.limits.leftLimit, config.limits.rightLimit),
 			seconds: config.timer.seconds,
+			//seconds: 5, // POUR LES TESTS
 			paused: false,
 			donutPosition: 0,
 			positionDonutY: parseInt(getRandomArbitrary(config.limits.topLimit, config.limits.bottomLimit)),
@@ -63,7 +64,8 @@ class Game extends Component {
 			],
 			relativePositionX: config.initialPosition.x,
 			isRunning: false,
-			isHomerRunningLeft: false
+			isHomerRunningLeft: false,
+			origin: null // modal
 		};
 
 		this.stepX = 0;
@@ -125,9 +127,17 @@ class Game extends Component {
 		let { seconds } = this.state;
 		this.setState({ seconds: seconds - 1 });
 
-		if (seconds === 0) {
+		// GAME_OVER
+		if (seconds === 0) { 
 			this.setState({ seconds: 0 });
-			alert("GAME OVER");
+			this.props.history.push('game/?modal=true&go=true');
+// Condiiton à faire...
+			// Si gagnant :
+			this.setState({origin: "go_win"});
+			// Si perdant :
+			//this.setState({origin: "go_lost"});
+;
+
 			clearInterval(this.interval);
 		}
 	};
@@ -137,7 +147,7 @@ class Game extends Component {
 	};
 
 	pauseTimer = () => {
-		if (this.state.paused === false) {
+		if (this.state.paused === false || this.state.seconds === 0) {
 			clearInterval(this.interval);
 		} else {
 			this.componentDidMount();
@@ -194,9 +204,14 @@ class Game extends Component {
 		this.testLimitsOfMap();
 	};
 
-
+	hideButtons = () => { // MODAL
+		clearInterval(this.interval);
+		document.getElementById("nipple_0_0").style.opacity = "0";
+		document.getElementById("button_A").style.opacity = "0";
+	}
+	
 	render() {
-
+		
 		// Modal
 		let params = new URLSearchParams(this.props.location.search);
 
@@ -241,9 +256,11 @@ class Game extends Component {
 
 				{params.get("modal") && (
         <Modal
-          modal={this.props.location.search}
-					origin={null}
-					resume={() => this.pauseGame()}
+					close={() => {this.props.history.push(this.props.location.pathname);}}
+          modal = {this.props.location.search}
+					origin = {this.state.origin}
+					resume = {() => this.pauseGame()}
+					hide = {() =>this.hideButtons()}
         />
       )}
 
