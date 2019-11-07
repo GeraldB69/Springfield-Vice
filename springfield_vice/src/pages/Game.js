@@ -707,6 +707,8 @@ class Game extends Component {
 			height: config.background.height
 		};
 
+		let diff1 = 3 + this.beerCount() - this.obstacleCollisionCount();
+
 		return (
 			<div className="game" style={bgStyle}>
 				<Selma
@@ -733,6 +735,7 @@ class Game extends Component {
 					isHomerRunningLeft={this.state.isHomerRunningLeft}
 					donutCount={this.donutCount()}
 					isThrowing={this.state.isThrowing}
+					isDead={diff1}
 					hue={this.state.homerCollisionHue}
 				/>
 
