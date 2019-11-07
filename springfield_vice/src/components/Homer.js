@@ -49,18 +49,19 @@ class Homer extends Component {
 		const homerZone = {
 			width: "50px",
 			height: "50px",
-			backgroundColor: "yellow",
+			backgroundColor: "transparent",
 			left: `${this.props.positionX}px`,
 			top: `${this.props.positionY}px`,
 			transform: "scale(" + scaledPosY + ")",
 			position: "absolute",
-			borderRadius: "50%"
+			borderRadius: "50%",
+			zIndex: this.props.positionY - 10
 		};
 
 		const homerStyle = {
 			backgroundColor: "transparent",
 			paddingBottom: "30px",
-			height: config.homerSize.height,	
+			height: config.homerSize.height
 		};
 		return (
 			<div>
