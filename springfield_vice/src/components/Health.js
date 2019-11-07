@@ -10,6 +10,8 @@ class Health extends Component {
 
 	counterHealth = () => {
 		let diff = 3 + this.props.beerCounter - this.props.obstCounter;
+		if (diff > 5) diff = 5;
+		if (diff < 0) diff = 0;
 
 		const styleDisplay = { width: "30px", height: "auto" };
 
