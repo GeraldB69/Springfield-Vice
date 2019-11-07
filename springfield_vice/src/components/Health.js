@@ -11,21 +11,17 @@ class Health extends Component {
     }
 
     counterHealth = () => {
-        let diff = 3 + this.props.beerCounter - this.props.obstCounter;
+        let diff = 6 + this.props.beerCounter - this.props.obstCounter;
 
         const styleDisplay = {  width : "30px",
                                 height : "auto",
-                                position: "absolute",
-                                left: "10px",
-                                top: "10px"};
+                                };
 
         const styleDisplayNone = {  
                                 display: "none",
                                 width : "30px",
                                 height : "auto",
-                                position: "absolute",
-                                left: "10px",
-                                top : "10px"};
+                                };
 
         const grappeBiereStyleDisplay = (<div>
                                             <img src={biere} alt="duff beer" style={styleDisplay} />
@@ -37,54 +33,68 @@ class Health extends Component {
                                             <img src={biere_no} alt="empty beer" style={styleDisplay} />
                                         </div>);
 
+        const styleDivPourFlexBieres= { display: "flex",
+                                        flexFlow: "row nowrap",
+                                        justifyContent: "center",
+                                        alignItems: "center"} 
+
+
+
         switch(diff){
             case 0 :
-                return (<div>   {grappeBiereStyleDisplayNone},
-                                {grappeBiereStyleDisplayNone},
-                                {grappeBiereStyleDisplayNone},
-                                {grappeBiereStyleDisplayNone},
+                return (<div style={styleDivPourFlexBieres }>
+                                {grappeBiereStyleDisplayNone}
+                                {grappeBiereStyleDisplayNone}
+                                {grappeBiereStyleDisplayNone}
+                                {grappeBiereStyleDisplayNone}
                                 {grappeBiereStyleDisplayNone}
                         </div>);
             case 1:
-                return (<div>   {grappeBiereStyleDisplay},
-                                {grappeBiereStyleDisplayNone},
-                                {grappeBiereStyleDisplayNone},
-                                {grappeBiereStyleDisplayNone},
+                return (<div style={styleDivPourFlexBieres }>   
+                                {grappeBiereStyleDisplay}
+                                {grappeBiereStyleDisplayNone}
+                                {grappeBiereStyleDisplayNone}
+                                {grappeBiereStyleDisplayNone}
                                 {grappeBiereStyleDisplayNone}
                         </div>);
             case 2:
-                return (<div>   {grappeBiereStyleDisplay},
-                                {grappeBiereStyleDisplay},
-                                {grappeBiereStyleDisplayNone},
-                                {grappeBiereStyleDisplayNone},
+                return (<div style={styleDivPourFlexBieres }>   
+                                {grappeBiereStyleDisplay}
+                                {grappeBiereStyleDisplay}
+                                {grappeBiereStyleDisplayNone}
+                                {grappeBiereStyleDisplayNone}
                                 {grappeBiereStyleDisplayNone}
                         </div>);
             case 3:
-                return (<div>   {grappeBiereStyleDisplay},
-                                {grappeBiereStyleDisplay},
-                                {grappeBiereStyleDisplay},
-                                {grappeBiereStyleDisplayNone},
+                return (<div style={styleDivPourFlexBieres }>   
+                                {grappeBiereStyleDisplay}
+                                {grappeBiereStyleDisplay}
+                                {grappeBiereStyleDisplay}
+                                {grappeBiereStyleDisplayNone}
                                 {grappeBiereStyleDisplayNone}
                         </div>);
             case 4:
-                return (<div>   {grappeBiereStyleDisplay},
-                                {grappeBiereStyleDisplay},
-                                {grappeBiereStyleDisplay},
-                                {grappeBiereStyleDisplay},
+                return (<div style={styleDivPourFlexBieres }>   
+                                {grappeBiereStyleDisplay}
+                                {grappeBiereStyleDisplay}
+                                {grappeBiereStyleDisplay}
+                                {grappeBiereStyleDisplay}
                                 {grappeBiereStyleDisplayNone}
                         </div>);
             case 5:
-                return (<div>   {grappeBiereStyleDisplay},
-                                {grappeBiereStyleDisplay},
-                                {grappeBiereStyleDisplay},
-                                {grappeBiereStyleDisplay},
+                return (<div style={styleDivPourFlexBieres }>   
+                                {grappeBiereStyleDisplay}
+                                {grappeBiereStyleDisplay}
+                                {grappeBiereStyleDisplay}
+                                {grappeBiereStyleDisplay}
                                 {grappeBiereStyleDisplay}
                         </div>);
             default :
-                return (<div>   {grappeBiereStyleDisplay},
-                                {grappeBiereStyleDisplay},
-                                {grappeBiereStyleDisplay},
-                                {grappeBiereStyleDisplay},
+                return (<div style={styleDivPourFlexBieres }>   
+                                {grappeBiereStyleDisplay}
+                                {grappeBiereStyleDisplay}
+                                {grappeBiereStyleDisplay}
+                                {grappeBiereStyleDisplay}
                                 {grappeBiereStyleDisplay}
                         </div>);
 
@@ -98,9 +108,12 @@ class Health extends Component {
         const styleDivParentBieres = {
             width: "200px",
             height: "auto",
-            borderRadius: "20px",
+            borderRadius: "10px",
             backgroundColor: "white",
-            opacity: ".7"
+            opacity: ".7",
+            position: "absolute",
+            left: "10px",
+            top : "0px"
         }
         return (
           <div id="divHealth" style={styleDivParentBieres}>{this.counterHealth()}</div>
