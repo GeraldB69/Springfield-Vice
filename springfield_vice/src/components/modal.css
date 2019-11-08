@@ -1,11 +1,14 @@
-#modal_root {
-  font-family: Mansalva, cursive;;
+#root {
+  z-index: 0;
 }
-.modal {
-
+div#modal_root {
+  font-family: Mansalva, cursive;
+  z-index: 9999;
 }
 
 .modal-wrapper {
+  /* transform: rotate(-2deg); */
+  transition: all 3s;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -26,9 +29,11 @@
 
 #close {
   position: absolute;
-  top: 4em;
-  right: 5em;
+  top: 2em;
+  right: 2em;
   width: 3em;
+  hieght: 3em;
+  border-radius: 50%;
 }
 
 .modal button {

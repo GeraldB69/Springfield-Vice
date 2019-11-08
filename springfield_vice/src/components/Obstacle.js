@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import poubelles from "./img/poubelles.png";
+import React from "react";
+import barrel from "./img/barrel.png";
 import config from "./configSpringfieldVice.json";
 
 function Obstacle(props) {
@@ -7,8 +7,8 @@ function Obstacle(props) {
 		const obstacleZone = {
 			backgroundColor: "transparent",
 			borderRadius: "50%",
-			width: "40px",
-			height: "40px",
+			width: "50px",
+			height: "50px",
 			position: "absolute",
 			top: obj.positionObstacleY,
 			left: obj.positionObstacleX + props.obstaclePosition,
@@ -17,14 +17,14 @@ function Obstacle(props) {
 		};
 		const obstacleStyle = {
 			position: "absolute",
-			width: "80%",
+			width: "100%",
 			margin: "auto"
 		};
 
 		return (
-			<div>
+			<div id="obstacle_full">
 				<div style={obstacleZone}>
-					<img src={poubelles} style={obstacleStyle} alt="Poubelle" />
+					<img src={barrel} style={obstacleStyle} alt="Poubelle" />
 				</div>
 			</div>
 		);

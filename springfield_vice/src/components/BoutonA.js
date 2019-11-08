@@ -19,7 +19,7 @@ function BoutonA(props) {
 	return (
 		//console.log(this.props.donutCount)
 		
-		<div style={buttonStyle}>
+		<div id="button_A" style={buttonStyle}>
 			<button style={boutonA} onPointerDown={props.throwingDonut} onPointerUp={props.stopThrowingDonut}>
 				A
 			</button>
