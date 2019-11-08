@@ -29,6 +29,14 @@ class Start extends Component {
 
     return(
       <div id="init_div">
+          <audio
+                ref="audio_tag"
+                src="http://www.allard-jacquin.com/simpsons.mp3"
+                controls
+                autoPlay
+                type="audio/mp3"
+				      />
+
           <div className="start_div" style={{display: this.state.firstScreen ? "block" : "none" }}>
 
               <img className="sprvicelogo" src={springfieldvice} alt='logo springfield vice' />
@@ -54,14 +62,8 @@ class Start extends Component {
                 <span>play</span>
               </div>
               </Link>
+
               
-              <audio
-                ref="audio_tag"
-                src="http://www.allard-jacquin.com/simpsons.mp3"
-                controls
-                autoPlay
-                type="audio/mp3"
-				      />
 
           </div>
 
