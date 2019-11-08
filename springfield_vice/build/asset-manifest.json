@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/lyon-0919-react-p2-springfield-vice/static/css/main.9b9eb3c9.chunk.css",
+    "main.js": "/lyon-0919-react-p2-springfield-vice/static/js/main.bde2f71d.chunk.js",
+    "main.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/main.bde2f71d.chunk.js.map",
+    "runtime-main.js": "/lyon-0919-react-p2-springfield-vice/static/js/runtime-main.5bb2186b.js",
+    "runtime-main.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/runtime-main.5bb2186b.js.map",
+    "static/js/2.414f4e7d.chunk.js": "/lyon-0919-react-p2-springfield-vice/static/js/2.414f4e7d.chunk.js",
+    "static/js/2.414f4e7d.chunk.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/2.414f4e7d.chunk.js.map",
+    "index.html": "/lyon-0919-react-p2-springfield-vice/index.html",
+    "precache-manifest.f19bc392063cd503ca234d8967d2308b.js": "/lyon-0919-react-p2-springfield-vice/precache-manifest.f19bc392063cd503ca234d8967d2308b.js",
+    "service-worker.js": "/lyon-0919-react-p2-springfield-vice/service-worker.js",
+    "static/css/main.9b9eb3c9.chunk.css.map": "/lyon-0919-react-p2-springfield-vice/static/css/main.9b9eb3c9.chunk.css.map",
+    "static/media/homer.css": "/lyon-0919-react-p2-springfield-vice/static/media/homerspritethrow1.d4cd0e92.png",
+    "static/media/start.css": "/lyon-0919-react-p2-springfield-vice/static/media/DcRi_FsUQAAL2Pm.d4a8a81d.jpg",
+    "static/media/game.css": "/lyon-0919-react-p2-springfield-vice/static/media/background_repeat.cc871a94.png",
+    "static/media/barrel.png": "/lyon-0919-react-p2-springfield-vice/static/media/barrel.a4d41654.png",
+    "static/media/bart2blur.png": "/lyon-0919-react-p2-springfield-vice/static/media/bart2blur.53da5cf3.png",
+    "static/media/bart.css": "/lyon-0919-react-p2-springfield-vice/static/media/bartwalking.d2c81f7f.png",
+    "static/media/biere.png": "/lyon-0919-react-p2-springfield-vice/static/media/biere.e59e6c67.png",
+    "static/media/biere_no.png": "/lyon-0919-react-p2-springfield-vice/static/media/biere_no.551db2a5.png",
+    "static/media/donut.png": "/lyon-0919-react-p2-springfield-vice/static/media/donut.f51f0b31.png",
+    "static/media/homerjumping.png": "/lyon-0919-react-p2-springfield-vice/static/media/homerjumping.2cd73442.png",
+    "static/media/ripchain.png": "/lyon-0919-react-p2-springfield-vice/static/media/ripchain.461f04be.png",
+    "static/media/selma.css": "/lyon-0919-react-p2-springfield-vice/static/media/selma.d0f481a9.png",
+    "static/media/seymour.css": "/lyon-0919-react-p2-springfield-vice/static/media/seymour.3360625e.png",
+    "static/media/springfieldvice.png": "/lyon-0919-react-p2-springfield-vice/static/media/springfieldvice.051846e2.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5bb2186b.js",
+    "static/js/2.414f4e7d.chunk.js",
+    "static/css/main.9b9eb3c9.chunk.css",
+    "static/js/main.bde2f71d.chunk.js"
+  ]
+}
