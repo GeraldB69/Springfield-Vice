@@ -1,18 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { HashRouter, BrowserRouter, Switch, Route } from "react-router-dom";
 import Start from "./pages/Start";
 import Game from "./pages/Game"
 import * as serviceWorker from "./serviceWorker";
 
 const routes = (
-  <BrowserRouter>
+  <HashRouter>
     <Switch>
       <Route exact path="/" component={Start} />
       <Route path="/game" component={Game} />
     </Switch>
-  </BrowserRouter>
+  </HashRouter>
 );
 
 ReactDOM.render(routes, document.getElementById("root"));
