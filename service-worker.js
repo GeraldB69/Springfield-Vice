@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/lyon-0919-react-p2-springfield-vice/precache-manifest.19a40ccd606633ad7969faf6cda19c49.js"
+  "/lyon-0919-react-p2-springfield-vice/precache-manifest.f19bc392063cd503ca234d8967d2308b.js"
 );
 
 self.addEventListener('message', (event) => {
