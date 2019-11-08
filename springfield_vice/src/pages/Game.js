@@ -708,6 +708,13 @@ class Game extends Component {
 
 		return (
 			<div className="game" style={bgStyle}>
+				<audio
+                ref="audio_tag"
+                src="http://www.allard-jacquin.com/simpsons2.mp3"
+                controls
+                autoPlay
+                type="audio/mp3"
+				      />
 				<Selma
 					positionSelmaX={this.state.selmaPos.positionSelmaX + this.state.defilement}
 					positionSelmaY={this.state.selmaPos.positionSelmaY}
