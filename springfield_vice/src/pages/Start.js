@@ -54,6 +54,14 @@ class Start extends Component {
                 <span>play</span>
               </div>
               </Link>
+              
+              <audio
+                ref="audio_tag"
+                src="http://www.allard-jacquin.com/simpsons.mp3"
+                controls
+                autoPlay
+                type="audio/mp3"
+				      />
 
           </div>
 
@@ -64,13 +72,7 @@ class Start extends Component {
           origin={"start"}
         />
       )}
-			{/* <audio
-					ref="audio_tag"
-					src="http://www.allard-jacquin.com/simpsons.mp3"
-					controls
-					autoPlay
-					type="audio/mp3"
-				/> */}
+			
 
       </div>
     )
