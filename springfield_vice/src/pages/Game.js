@@ -548,22 +548,40 @@ class Game extends Component {
 	tick = () => {
 		let { seconds } = this.state;
 		this.setState({ seconds: seconds - 1 });
-
 		// GAME_OVER
 		if (seconds === 0) {
 			this.setState({ seconds: 0 });
-			this.props.history.push("game/?modal=true&go=true");
-			// Condiiton à faire...
-			// Si gagnant :
-			this.setState({ origin: "go_win" });
-			// Si perdant :
-			//this.setState({origin: "go_lost"});
 			clearInterval(this.interval);
 		}
 	};
 
+	isGameOver = () => {
+		const health = this.beerCount() - this.obstacleCollisionCount();
+		if (this.state.seconds === 0 || health <= 0) {
+			// Si perdant :
+			this.stopRunning();
+			clearInterval(this.interval);
+			setTimeout(() => {
+				this.props.history.push('game/?modal=true&go=true');
+				this.setState({origin: "go_lost"});
+				return;
+			}, 3000)
+		}
+		if(this.beerCount() === 100) {
+			// Si gagnant :
+			this.stopRunning();
+			clearInterval(this.interval);
+			this.props.history.push('game/?modal=true&go=true');
+			this.setState({origin: "go_win"});
+			return;
+		} 
+	}
+
 	componentDidMount = () => {
-		this.interval = setInterval(() => this.tick(), 1000);
+		this.interval = setInterval(() => {
+			this.tick()
+			this.isGameOver()
+		},1000);
 		setInterval(() => this.gameLoop(), 80);
 		this.moveSelma();
 		this.moveBart();
@@ -581,10 +599,10 @@ class Game extends Component {
 		}
 	};
 
-	pauseGame = () => {
+	pauseGame = () => { 
 		this.setState({ paused: !this.state.paused });
 		this.pauseTimer();
-		document.getElementById("nipple_0_0").style.opacity = "0.7";
+		document.getElementById("joystick").style.opacity = "0.7";
 		document.getElementById("button_A").style.opacity = "1";
 		document.getElementById("obstacle_full").style.opacity = "1";
 		document.getElementById("homer_full").style.opacity = "1";
@@ -630,6 +648,22 @@ class Game extends Component {
 		}
 	};
 
+	collisionBart = (item) => {
+//		console.log(item.positionBartX, this.state.relativePositionX + this.state.defilement)
+		if (
+			this.state.relativePositionX > item.positionBartX - 15 &&
+			this.state.relativePositionX < item.positionBartX + 20 &&
+			this.state.positionY < item.positionBartY + 40 &&
+			this.state.positionY > item.positionBartY - 60
+		) {
+			this.props.history.push('game/?modal=true&go=true');
+			this.setState({origin: "go_win"});
+			this.stopRunning();
+			clearInterval(this.interval);
+			return;
+		}
+	};
+
 	donutCount = () => {
 		let donutCount = 0;
 		this.state.donutPopped.map((item) =>
@@ -639,7 +673,7 @@ class Game extends Component {
 		return donutCount;
 	};
 	beerCount = () => {
-		let beerCount = 0;
+		let beerCount = 3;
 		this.state.beerPopped.map((item) =>
 			item.status === "picked" ? (beerCount = beerCount + 1) : (beerCount = beerCount + 0)
 		);
@@ -678,7 +712,8 @@ class Game extends Component {
 	gameLoop = () => {
 		this.state.donutPopped.map((item) => this.collisionDetection(item));
 		this.state.beerPopped.map((item) => this.collisionDetectionBeer(item));
-
+		
+		this.collisionBart(this.state.bartPos);
 		this.state.obstaclePopped.map((item) => {
 			this.collisionDetectionObstacle(item);
 		});
@@ -688,12 +723,15 @@ class Game extends Component {
 	hideButtons = () => {
 		// MODAL
 		clearInterval(this.interval);
-		document.getElementById("nipple_0_0").style.opacity = "0";
-		document.getElementById("button_A").style.opacity = "0";
-		document.getElementById("obstacle_full").style.opacity = "0.9";
-		document.getElementById("homer_full").style.opacity = "0.9";
-	};
-
+		const joystick_id = document.getElementById("joystick");
+		if (joystick_id !== null) {
+			joystick_id.style.opacity = "0";
+			document.getElementById("button_A").style.opacity = "0";
+			document.getElementById("obstacle_full").style.opacity = "0.9";
+			document.getElementById("homer_full").style.opacity = "0.9";
+		}
+	}
+	
 	render() {
 		// Modal
 		let params = new URLSearchParams(this.props.location.search);
@@ -727,7 +765,9 @@ class Game extends Component {
 				/>
 				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.defilement} />
 				<Beer beerPopped={this.state.beerPopped} beerPosition={this.state.defilement} />
-				<Obstacle obstaclePopped={this.state.obstaclePopped} obstaclePosition={this.state.defilement} />
+				<div id="obstacle_full">
+					<Obstacle obstaclePopped={this.state.obstaclePopped} obstaclePosition={this.state.defilement} />
+				</div>
 				<Bart
 					positionBartX={this.state.bartPos.positionBartX + this.state.defilement}
 					positionBartY={this.state.bartPos.positionBartY}

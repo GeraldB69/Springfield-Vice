@@ -5,13 +5,11 @@ import "./bart.css";
 class Bart extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			
-		};
+		this.state = {};
 	}
 
 	render() {
-        const bartZone= {
+    const bartZone= {
 			width: "30px",
 			height: "30px",
 			backgroundColor: "",

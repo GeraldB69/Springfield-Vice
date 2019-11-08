@@ -22,7 +22,7 @@ function Obstacle(props) {
 		};
 
 		return (
-			<div id="obstacle_full">
+			<div>
 				<div style={obstacleZone}>
 					<img src={barrel} style={obstacleStyle} alt="Poubelle" />
 				</div>

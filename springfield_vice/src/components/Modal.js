@@ -57,7 +57,7 @@ export default class Modal extends Component {
         break;
       case "go_lost": // FIN DE PARTIE + PERDANT
         content.header = "GAME OVER"
-        content.quote = "You tried your best and you failed miserably !";
+        content.quote = "Kids, you tried your best, and you failed miserably. The lesson is: never try.";
         content.buttons = 
           <>
             <button>SCORES</button>
