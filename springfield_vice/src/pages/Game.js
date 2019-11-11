@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Homer from "../components/Homer";
+import Grid from "../components/Grid";
 import config from "../components/configSpringfieldVice.json";
 import JoyWrapper from "../components/Joystick";
 import Timer from "../components/Timer";
@@ -746,13 +747,19 @@ class Game extends Component {
 
 		return (
 			<div className="game" style={bgStyle}>
-				<audio
+				{/* <audio
                 ref="audio_tag"
                 src="http://www.allard-jacquin.com/simpsons2.mp3"
                 controls
                 autoPlay
                 type="audio/mp3"
-				      />
+					  /> */}
+					  
+				<Grid
+					isRunning={this.state.isRunning}
+					isHomerRunningLeft={this.state.isHomerRunningLeft}
+				/>
+
 				<Selma
 					positionSelmaX={this.state.selmaPos.positionSelmaX + this.state.defilement}
 					positionSelmaY={this.state.selmaPos.positionSelmaY}
