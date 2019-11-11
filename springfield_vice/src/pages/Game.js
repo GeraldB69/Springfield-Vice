@@ -221,7 +221,7 @@ class Game extends Component {
 	};
 
 	move = () => {
-		const { positionX, positionY, positionSelmaX } = this.state;
+		const { positionX, positionY} = this.state;
 
 		this.setState({
 			positionX: positionX + this.stepX,
