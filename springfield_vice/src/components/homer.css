@@ -24,7 +24,7 @@ button {
 	top: -115px;
 	left: -18px;
 	width: 190%;
-	background: url(img/homerspritestand.png);
+	background: url(img/homerspritestandGun.png);
 }
 
 .donutThrow {
@@ -53,9 +53,9 @@ button {
 	width: 190%;
 	transform: translate(-50%,-50%);
 	transform: scale(1,1);
-	width: calc(590px / 9);
-	background: url(img/homerspritethrow1.png);
-	animation: animate1 0.2s steps(9) 2;
+	width: calc(276px / 3);
+	background: url(img/homerspritethrowgun.png);
+	animation: animate1 0.2s steps(3) 1;
 }
 
 .homerRun {
@@ -66,7 +66,7 @@ button {
 	transform: translate(-50%,-50%);
 	transform: scale(1,1);
 	width: calc(880px / 9);
-	background: url(img/homersprite3.png);
+	background: url(img/homerspriteGun.png);
 	animation: animate 0.7s steps(9) infinite;
 }
 
@@ -78,7 +78,7 @@ button {
 	transform: translate(-50%,-50%);
 	transform: scale(-1,1);
 	width: calc(880px / 9);
-	background: url(img/homersprite3.png);
+	background: url(img/homerspriteGun.png);
 	animation: animate 0.7s steps(9) infinite;
 }
 
@@ -100,7 +100,7 @@ button {
 	}
 	to
 	{
-		background-position: 756px;	
+		background-position: 276px;	
 	}
 }
 

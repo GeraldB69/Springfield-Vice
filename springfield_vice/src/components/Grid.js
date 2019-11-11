@@ -23,10 +23,10 @@ class Grid extends Component {
 
         const wheelcontainer = {
             position: "relative",
-            top: "-650px",
+            top: "-1150px",
             height: "1000px",
             width: "1000px",
-            opacity: "0.3"
+            opacity: "0.3",
             // border: "3px solid yellow",
             // overflow: "hidden", 
         }
@@ -38,7 +38,6 @@ class Grid extends Component {
             width: "2000px",
             height: "1px",
             backgroundColor: "white",
-            overflow: "hidden",
         }
         
         const isHomerRunningLeft = this.props.isHomerRunningLeft ? "rotateLeft" : "rotateRight";
@@ -83,7 +82,7 @@ class Grid extends Component {
                     <div style={{...verticalstyle, transform: "rotate(360deg)"}} className="neon-effect"></div>
 
                 </div>
-                <div className="spr"></div>
+                {/* <div className="spr"></div> */}
                 
 				
 			</div>

@@ -16,6 +16,8 @@ import { getRandomArbitrary } from "../components/helpers";
 import Obstacle from "../components/Obstacle";
 import Bart from "../components/Bart";
 import Seymour from "../components/Seymour";
+import pink_ground from "../components/img/pink_ground.png"
+import springfield80s from "../components/img/background_80s_repeat.png"
 
 const donutStatus = {
 	GROUND: "ground",
@@ -738,6 +740,8 @@ class Game extends Component {
 		let params = new URLSearchParams(this.props.location.search);
 
 		const bgStyle = {
+			position: "relative",
+			top: "-1890px",
 			backgroundPositionY: config.background.position,
 			backgroundPositionX: -this.state.positionX / config.background.defilement,
 			height: config.background.height
@@ -745,20 +749,31 @@ class Game extends Component {
 
 		let diff1 = 3 + this.beerCount() - this.obstacleCollisionCount();
 
+		const pinkGroundStyle = {
+			position: "relative",
+			top: "-40px",
+			width: "100vw",
+
+		}
+
 		return (
-			<div className="game" style={bgStyle}>
-				{/* <audio
+			<div>
+				<audio
                 ref="audio_tag"
                 src="http://www.allard-jacquin.com/simpsons2.mp3"
                 controls
                 autoPlay
                 type="audio/mp3"
-					  /> */}
+					  />
+
+				<img src={pink_ground} style={pinkGroundStyle}></img>
 					  
 				<Grid
 					isRunning={this.state.isRunning}
 					isHomerRunningLeft={this.state.isHomerRunningLeft}
 				/>
+				
+				<img src={springfield80s} className="game" style={bgStyle}></img>
 
 				<Selma
 					positionSelmaX={this.state.selmaPos.positionSelmaX + this.state.defilement}

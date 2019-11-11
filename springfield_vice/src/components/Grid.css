@@ -9,9 +9,10 @@
     .1vw 0vw  10vw #e50b0b, .2vw 0vw  30vw #e50b0b, .4vw 0vw  10vw #e50b0b;
 } */
 
-.neon-effect {
-    box-shadow: turquoise;
-}
+/* .neon-effect {
+    filter: blur(1px);
+    box-shadow: 10px 5px 5px rgb(120, 174, 235);
+} */
 
 .wheel {
     background-repeat: no-repeat;

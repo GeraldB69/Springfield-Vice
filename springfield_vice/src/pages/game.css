@@ -1,8 +1,17 @@
-.game {
-	background-image: url("../components/img/background_80s.png");
+/* .game {
+	background-image: url("../components/img/springfield80s.png");
 	background-attachment: scroll;
 	background-size: inherit;
-	background-repeat: repeat;
-	height: 100vh;
-	width: 10680px;
-}
+	background-repeat: no-repeat;
+	height: 100vw;
+	
+} */
+
+/* .game {
+	
+	background-attachment: scroll;
+	background-size: inherit;
+	background-repeat: no-repeat;
+	
+	
+} */
