@@ -21,9 +21,18 @@ class Grid extends Component {
             opacity: "0.3"
         }
 
+        const style2 = {
+            position: "relative",
+            top: "175px",
+            width: "100vw",
+            // border: "2px solid yellow",
+            height: "1000px", 
+            overflow: "hidden",
+        }
+
         const wheelcontainer = {
             position: "relative",
-            top: "-1150px",
+            top: "-850px",
             height: "1000px",
             width: "1000px",
             opacity: "0.3",
@@ -39,6 +48,19 @@ class Grid extends Component {
             height: "1px",
             backgroundColor: "white",
         }
+        // const rotate = () => {
+        //     document.getElementById('divToRotate').style.animation = "rotatingRight 8s linear infinite"
+        // }
+
+        const rotateRight = {
+            transformOrigin: "50% 50%",
+            animationName: "rotatingRight",
+            animationDuration: "8s",
+            animationTimingFunction: "linear",
+            animationIterationCount: "infinite",
+        }
+
+        
         
         const isHomerRunningLeft = this.props.isHomerRunningLeft ? "rotateLeft" : "rotateRight";
 		const isRunning = this.props.isRunning ? isHomerRunningLeft : "";
@@ -50,37 +72,39 @@ class Grid extends Component {
                 {/* <div className="wheel"></div> */}
                 
                 
-                <div style={{...style, height: "0.5px",top:"190px"}} className="neon-effect"></div>
-                <div style={{...style, height: "0.5px", top:"240px"}} className="neon-effect"></div>
-                <div style={{...style, height: "0.5px", top:"290px"}} className="neon-effect"></div>
-                <div style={{...style, height: "0.5px", top:"340px"}} className="neon-effect"></div>
-                <div style={wheelcontainer} className={isRunning}>
-                    <div style={{...verticalstyle, transform: "rotate(0deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(15deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(30deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(45deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(60deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(75deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(90deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(105deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(120deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(135deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(150deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(165deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(180deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(195deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(210deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(225deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(240deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(255deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(270deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(285deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(300deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(315deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(330deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(345deg)"}} className="neon-effect"></div>
-                    <div style={{...verticalstyle, transform: "rotate(360deg)"}} className="neon-effect"></div>
+                <div style={{...style, height: "0.5px",top:"190px"}}></div>
+                <div style={{...style, height: "0.5px", top:"240px"}}></div>
+                <div style={{...style, height: "0.5px", top:"290px"}}></div>
+                <div style={{...style, height: "0.5px", top:"340px"}}></div>
+                <div style={style2}>
+                    <div id="divToRotate" style={wheelcontainer} className={isRunning}>
+                        <div style={{...verticalstyle, transform: "rotate(0deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(15deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(30deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(45deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(60deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(75deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(90deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(105deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(120deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(135deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(150deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(165deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(180deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(195deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(210deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(225deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(240deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(255deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(270deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(285deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(300deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(315deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(330deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(345deg)"}}></div>
+                        <div style={{...verticalstyle, transform: "rotate(360deg)"}}></div>
 
+                    </div>
                 </div>
                 {/* <div className="spr"></div> */}
                 

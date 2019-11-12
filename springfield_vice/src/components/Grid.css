@@ -28,12 +28,12 @@
 
 .rotateRight {
     transform-origin: 50% 50%;
-    animation: rotatingRight 15s linear infinite;
+    animation: rotatingRight 8s linear infinite;
 }
 
 .rotateLeft {
     transform-origin: 50% 50%;
-    animation: rotatingLeft 15s linear infinite;
+    animation: rotatingLeft 8s linear infinite;
 }
 
 @keyframes rotatingRight {

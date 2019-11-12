@@ -740,8 +740,6 @@ class Game extends Component {
 		let params = new URLSearchParams(this.props.location.search);
 
 		const bgStyle = {
-			position: "relative",
-			top: "-1890px",
 			backgroundPositionY: config.background.position,
 			backgroundPositionX: -this.state.positionX / config.background.defilement,
 			height: config.background.height
@@ -749,15 +747,8 @@ class Game extends Component {
 
 		let diff1 = 3 + this.beerCount() - this.obstacleCollisionCount();
 
-		const pinkGroundStyle = {
-			position: "relative",
-			top: "-40px",
-			width: "100vw",
-
-		}
-
 		return (
-			<div>
+			<div className="game" style={bgStyle}>
 				<audio
                 ref="audio_tag"
                 src="http://www.allard-jacquin.com/simpsons2.mp3"
@@ -765,15 +756,12 @@ class Game extends Component {
                 autoPlay
                 type="audio/mp3"
 					  />
-
-				<img src={pink_ground} style={pinkGroundStyle}></img>
 					  
 				<Grid
 					isRunning={this.state.isRunning}
 					isHomerRunningLeft={this.state.isHomerRunningLeft}
 				/>
 				
-				<img src={springfield80s} className="game" style={bgStyle}></img>
 
 				<Selma
 					positionSelmaX={this.state.selmaPos.positionSelmaX + this.state.defilement}
