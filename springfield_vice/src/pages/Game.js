@@ -296,6 +296,7 @@ class Game extends Component {
 			isRunning: false,
 			isHomerRunningLeft: false,
 			beer : false,
+			obst: false,
 
 
 
@@ -662,6 +663,10 @@ class Game extends Component {
 				homerCollisionHue: this.state.homerCollisionHue + 30
 			});
 			item.status = "picked";
+			this.setState({obst : true});
+			setTimeout(()=>{
+				this.setState({obst : false});
+			},2000)
 		}
 	};
 
@@ -841,6 +846,7 @@ class Game extends Component {
 					/>
 				)}
 				{this.state.beer === true ? <Sound beer /> : ""}
+				{this.state.obst === true ? <Sound obst /> : ""}
 			</div>
 		);
 	}

@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import hum from "./sounds/hum.mp3";
+import boire from "./sounds/boire.mp3";
+import noproblemo from "./sounds/noproblemo.wav";
 import ouverture_biere from "./sounds/ouverture_biere.mp3";
 
 class Sound extends Component {
@@ -11,18 +13,18 @@ class Sound extends Component {
     render(){
         return(
             <div>
-
-                {this.props.donuts ? <audio
+{/* 
+                {this.props.donut ? <audio
                     ref="audio_tag"
                     src={hum}
                     controls
                     autoPlay
                     type="audio/mp3"
-                /> : ""}
+                /> : ""} */}
 
                 {this.props.obst ? <audio
                     ref="audio_tag"
-                    src="http://www.allard-jacquin.com/simpsons.mp3"
+                    src={noproblemo}
                     controls
                     autoPlay
                     type="audio/mp3"
@@ -30,7 +32,7 @@ class Sound extends Component {
 
                 {this.props.beer ? <audio
                     ref="audio_tag"
-                    src={ouverture_biere}
+                    src={boire}
                     controls
                     autoPlay
                     type="audio/mp3"
