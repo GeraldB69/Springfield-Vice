@@ -18,6 +18,8 @@ import Bart from "../components/Bart";
 import Seymour from "../components/Seymour";
 import pink_ground from "../components/img/pink_ground.png"
 import springfield80s from "../components/img/background_80s_repeat.png"
+import Sound from "../components/Sound";
+
 
 const donutStatus = {
 	GROUND: "ground",
@@ -293,6 +295,12 @@ class Game extends Component {
 			relativePositionX: config.initialPosition.x,
 			isRunning: false,
 			isHomerRunningLeft: false,
+			beer : false,
+
+
+
+
+
 			selmaPos: {
 				positionSelmaX: 1400,
 				positionSelmaY: 130,
@@ -620,6 +628,7 @@ class Game extends Component {
 			item.status === "ground"
 		)
 			item.status = "picked";
+
 	};
 	collisionDetectionBeer = (item) => {
 		if (
@@ -632,6 +641,11 @@ class Game extends Component {
 			if (this.state.homerCollisionHue > 0)
 				this.setState({ homerCollisionHue: this.state.homerCollisionHue - 30 });
 			item.status = "picked";
+			this.setState({beer : true});
+			setTimeout(()=>{
+				this.setState({beer : false});
+			},2000)
+
 		}
 	};
 
@@ -826,6 +840,7 @@ class Game extends Component {
 						hide={() => this.hideButtons()}
 					/>
 				)}
+				{this.state.beer === true ? <Sound beer /> : ""}
 			</div>
 		);
 	}
