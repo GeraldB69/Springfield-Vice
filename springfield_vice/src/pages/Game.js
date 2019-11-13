@@ -16,6 +16,7 @@ import { getRandomArbitrary } from "../components/helpers";
 import Obstacle from "../components/Obstacle";
 import Bart from "../components/Bart";
 import Seymour from "../components/Seymour";
+import Milhouse from "../components/Milhouse";
 import pink_ground from "../components/img/pink_ground.png"
 import springfield80s from "../components/img/background_80s_repeat.png"
 
@@ -443,6 +444,54 @@ class Game extends Component {
 					180
 				]
 			},
+			milhousePos: {
+				positionMilhouseX: 300,
+				positionMilhouseY: 250,
+				MilhouseMovX: [
+					600,
+					620,
+					620,
+					600,
+					580,
+					580,
+					550,
+					550,
+					530,
+					530,
+					520,
+					500,
+					500,
+					520,
+					550,
+					550,
+					580,
+					580,
+					580,
+					580
+				],
+				MilhouseMovY: [
+					250,
+					250,
+					250,
+					250,
+					230,
+					230,
+					200,
+					200,
+					220,
+					220,
+					220,
+					220,
+					250,
+					250,
+					210,
+					210,
+					230,
+					230,
+					240,
+					240
+				]
+			},
 			globalPosition: 0,
 			defilement: 0,
 			bartSeBarreX: 400,
@@ -537,6 +586,21 @@ class Game extends Component {
 		}, 1000);
 	};
 
+	moveMilhouse = () => {
+		let i = 0;
+		this.intMilhouse = setInterval(() => {
+			let newPosX = this.state.milhousePos.MilhouseMovX[i];
+			let newPosY = this.state.milhousePos.MilhouseMovY[i];
+			this.setState({
+				milhousePos: { ...this.state.milhousePos, positionMilhouseX: newPosX, positionMihouseY: newPosY }
+			});
+			i++;
+			if (i >= this.state.milhousePos.MilhouseMovX.length) {
+				i = 0;
+			}
+		}, 1000);
+	};
+
 	moveBart = () => {
 		let i = 0;
 		this.intBart = setInterval(() => {
@@ -596,6 +660,7 @@ class Game extends Component {
 		this.moveSelma();
 		this.moveBart();
 		this.moveSeymour();
+		this.moveMilhouse();
 		this.bartSeBarre();
 	};
 
@@ -605,6 +670,7 @@ class Game extends Component {
 			clearInterval(this.intSelma);
 			clearInterval(this.intBart);
 			clearInterval(this.intSeymour);
+			clearInterval(this.intMilhouse);
 		} else {
 			this.componentDidMount();
 		}
@@ -780,6 +846,13 @@ class Game extends Component {
 					positionSeymourY={this.state.seymourPos.positionSeymourY}
 					seymourPos={this.state.seymourPos}
 				/>
+				<Milhouse
+					positionMilhouseX={this.state.milhousePos.positionMilhouseX + this.state.defilement}
+					positionMilhouseY={this.state.milhousePos.positionMilhouseY}
+					milhousePos={this.state.milhousePos}
+				/>
+
+
 				<Donut donutPopped={this.state.donutPopped} donutPosition={this.state.defilement} />
 				<Beer beerPopped={this.state.beerPopped} beerPosition={this.state.defilement} />
 				<div id="obstacle_full">
