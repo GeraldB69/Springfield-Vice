@@ -758,7 +758,7 @@ class Game extends Component {
 			this.props.history.push("game/?modal=true&go=true");
 			this.setState({ origin: "go_lost" });
 			return;
-		}, 3000);
+		}, 2000);
 		}
 		if (this.beerCount() === 100) {
 		// Si gagnant :
