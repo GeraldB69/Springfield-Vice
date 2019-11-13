@@ -51,5 +51,8 @@
     },
     "seymour": {
         "scale": 0.007
+    },
+    "milhouse": {
+        "scale": 0.007
     }
 }
