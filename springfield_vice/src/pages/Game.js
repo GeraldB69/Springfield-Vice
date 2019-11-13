@@ -444,7 +444,9 @@ class Game extends Component {
 				]
 			},
 			globalPosition: 0,
-			defilement: 0
+			defilement: 0,
+			bartSeBarreX: 400,
+			bartSeBarreY: 250,
 		};
 
 		this.stepX = 0;
@@ -548,6 +550,11 @@ class Game extends Component {
 		}, 1000);
 	};
 
+	bartSeBarre = () => {
+		setTimeout(() => {
+		this.setState({bartSeBarreX: 15000})}, 3000)
+	}
+
 	tick = () => {
 		let { seconds } = this.state;
 		this.setState({ seconds: seconds - 1 });
@@ -589,6 +596,7 @@ class Game extends Component {
 		this.moveSelma();
 		this.moveBart();
 		this.moveSeymour();
+		this.bartSeBarre();
 	};
 
 	pauseTimer = () => {
@@ -755,8 +763,7 @@ class Game extends Component {
                 controls
                 autoPlay
                 type="audio/mp3"
-					  />
-					  
+				/>
 				<Grid
 					isRunning={this.state.isRunning}
 					isHomerRunningLeft={this.state.isHomerRunningLeft}
@@ -781,6 +788,8 @@ class Game extends Component {
 				<Bart
 					positionBartX={this.state.bartPos.positionBartX + this.state.defilement}
 					positionBartY={this.state.bartPos.positionBartY}
+					bartSeBarreX={this.state.bartSeBarreX}
+					bartSeBarreY={this.state.bartSeBarreY}
 				/>
 				<Homer
 					positionX={this.state.positionX}
