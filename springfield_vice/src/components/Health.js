@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import biere from "./img/biere.png";
-import biere_no from "./img/biere_no.png";
+import biere from "./img/duffpix_glow_pink.png";
+import biere_no from "./img/duffpix_grayscale.png";
 
 class Health extends Component {
 	constructor(props) {
@@ -13,7 +13,10 @@ class Health extends Component {
 		if (diff > 5) diff = 5;
 		if (diff < 0) diff = 0;
 
-		const styleDisplay = { width: "30px", height: "auto" };
+		const styleDisplay = {
+			width: "35px",
+			height: "auto",
+		};
 
 		const styleDisplayNone = {
 			display: "none",
@@ -39,7 +42,7 @@ class Health extends Component {
 			display: "flex",
 			flexFlow: "row nowrap",
 			justifyContent: "center",
-			alignItems: "center"
+			alignItems: "center", 
 		};
 
 		switch (diff) {
@@ -120,11 +123,14 @@ class Health extends Component {
 		const styleDivParentBieres = {
 			width: "200px",
 			height: "auto",
-			borderRadius: "10px",
-			backgroundColor: "rgb(255,255,255,0.6)",
+			// border: "2px solid red",
+			// borderRadius: "10px",
+			
+			// backgroundColor: "rgb(255,255,255,0.6)",
+			backgroundColor: "transparent",
 			position: "absolute",
-			left: "10px",
-			top: "0px"
+			left: "5px",
+			top: "20px"
 		};
 		return (
 			<div id="divHealth" style={styleDivParentBieres}>

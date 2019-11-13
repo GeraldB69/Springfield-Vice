@@ -23,7 +23,7 @@ class Homer extends Component {
 
 		const isHomerRunningLeft = this.props.isHomerRunningLeft ? "homerRunLeft" : "homerRun";
 		const isRunning = this.props.isRunning ? isHomerRunningLeft : "homerStand";
-		const isThrowing = this.props.isThrowing ? "homerThrow" : isRunning;
+		const isThrowing = this.props.isThrowing ? "homerShoot" : isRunning;
 		// const throwingDonut = this.props.isThrowing ? 'donutThrow' : 'donutHide';
 
 		if (this.props.isThrowing && this.state.animeClass === "donutHide") {
@@ -36,7 +36,7 @@ class Homer extends Component {
 			width: config.donutSize.width, 
 			position: "absolute",
 			top: "-40px",
-			left: "60px"
+			left: "10px"
 		};
 
 		const ripchainStyle = {
@@ -76,7 +76,8 @@ class Homer extends Component {
 		const homerStyle = {
 			backgroundColor: "transparent",
 			paddingBottom: "30px",
-			height: config.homerSize.height
+			height: config.homerSize.height,
+			zIndex: this.props.positionY - 10,
 		};
 
 		return (
