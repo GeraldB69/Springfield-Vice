@@ -4,10 +4,10 @@
     transform: scale(-1,1);
 	width: calc(270px / 7);
 	background: url(img/milhouse.png);
-    animation: animate4 1s steps(7) infinite reverse;
+    animation: animate5 1s steps(7) infinite reverse;
 }
 
-@keyframes animate4 {
+@keyframes animate5 {
 	from
 	{
 		background-position: 0;	
