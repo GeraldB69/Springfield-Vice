@@ -23,7 +23,7 @@ class Homer extends Component {
 
 		const isHomerRunningLeft = this.props.isHomerRunningLeft ? "homerRunLeft" : "homerRun";
 		const isRunning = this.props.isRunning ? isHomerRunningLeft : "homerStand";
-		const isThrowing = this.props.isThrowing ? "homerThrow" : isRunning;
+		const isThrowing = this.props.isThrowing ? "homerShoot" : isRunning;
 		// const throwingDonut = this.props.isThrowing ? 'donutThrow' : 'donutHide';
 
 		if (this.props.isThrowing && this.state.animeClass === "donutHide") {

@@ -63,6 +63,7 @@ class JoyWrapper extends React.Component {
 		const displayJoystick = !this.props.displayJoystick ? "block" : "none";
 		const joystickStyle = {
 			display: displayJoystick,
+			zIndex: "501",
 		}
 
 		return (
