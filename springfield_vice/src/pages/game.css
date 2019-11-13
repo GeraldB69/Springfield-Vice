@@ -1,8 +1,17 @@
 .game {
-	background-image: url("../components/img/background_repeat.png");
+	background-image: url("../components/img/background_80s_repeat_2.png");
+	background-attachment: scroll;
+	background-size: inherit;
+	/* background-repeat: no-repeat; */
+	height: 700px;
+	width: 4000px;
+}
+
+/* .game {
+	
 	background-attachment: scroll;
 	background-size: inherit;
 	background-repeat: no-repeat;
-	height: 100vh;
-	width: 10680px;
-}
+	
+	
+} */

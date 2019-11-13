@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Homer from "../components/Homer";
+import Grid from "../components/Grid";
 import config from "../components/configSpringfieldVice.json";
 import JoyWrapper from "../components/Joystick";
 import Timer from "../components/Timer";
@@ -15,6 +16,8 @@ import { getRandomArbitrary } from "../components/helpers";
 import Obstacle from "../components/Obstacle";
 import Bart from "../components/Bart";
 import Seymour from "../components/Seymour";
+import pink_ground from "../components/img/pink_ground.png"
+import springfield80s from "../components/img/background_80s_repeat.png"
 
 const donutStatus = {
 	GROUND: "ground",
@@ -752,7 +755,14 @@ class Game extends Component {
                 controls
                 autoPlay
                 type="audio/mp3"
-				      />
+					  />
+					  
+				<Grid
+					isRunning={this.state.isRunning}
+					isHomerRunningLeft={this.state.isHomerRunningLeft}
+				/>
+				
+
 				<Selma
 					positionSelmaX={this.state.selmaPos.positionSelmaX + this.state.defilement}
 					positionSelmaY={this.state.selmaPos.positionSelmaY}
