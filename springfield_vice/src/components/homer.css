@@ -16,7 +16,7 @@ button {
 	border-radius: 15px;
 	color: white;
 	border: solid 2px #ebdb34;
-	font-family: 'Mansalva';
+	font-family: "VT323";
 }
 
 .homerStand {
@@ -28,7 +28,8 @@ button {
 }
 
 .donutThrow {
-	/* display: block; */
+	display: block;
+	position: absolute;
 	width: 50px;
 	/* position: absolute;
 	left: 65%;
@@ -39,14 +40,14 @@ button {
 }
 
 .donutHide {
-	/* display: none; */
+	display: none;
 	width: 50px;
 	position: absolute;
 	left: 65%;
 	bottom: 60px
 }
 
-.homerThrow {
+.homerShoot {
 	position: absolute;
 	top: -115px;
 	left: -18px;
