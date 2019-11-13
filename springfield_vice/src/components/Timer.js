@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import disquette from "./img/disquette_grayscale.png"
 
 class Timer extends Component {
 	constructor(props) {
@@ -10,32 +11,52 @@ class Timer extends Component {
 	render() {
 		const timerStyle = {
 			position: "absolute",
-			right: "20px",
-			top: "0px",
+			top: "-30px",
+			fontSize: "36px",
+			fontFamily: "VT323",
+			fontWeight: "bold",
 			color: "white",
-			backgroundColor: "black",
-			borderRadius: "15px",
-			border: "solid 2px #ebdb34",
-			padding: "10px",
-			fontSize: "12pt",
-			fontFamily: 'Mansalva',
+			textShadow: "2px 2px 3px #FF00E6",
 		};
 
 		const pauseStyle = {
 			position: "absolute",
+			width: "50px",
+			height: "50px",
 			right: "20px",
-			top: "70px",
-			fontFamily: 'Mansalva',
+			top: "5px",
+			fontFamily: "VT323",
+			fontSize: "25px",
+			border: "none",
+			borderRadius: "0px",
+			backgroundImage: `url(${disquette})`,
+			backgroundColor: "transparent",
+			backgroundSize: "cover",
+			outline: "none", 
+			boxShadow: "1px 1px 2px #000000 "
+		};
+
+		const timerContainer = {
+			position: "absolute",
+			// border: "2px solid red",
+			height: "50px",
+			width: "100vw",
+			top: "0px",
+			display: "flex",
+			justifyContent: "center",
 		};
 		
 		return (
 			<div>
-				<h3 style={timerStyle}>Timer: {this.props.seconds} seconds</h3>
+				<div style={timerContainer}>
+					<h3 style={timerStyle}>Time : {this.props.seconds}</h3>
+
+				</div>
 					<Link to={{ pathname: "/game", search: "?modal=true" }}>
-						<button style={pauseStyle} onPointerDown={() => {
+						<button style={pauseStyle}  onPointerDown={() => {
 							this.props.pauseGame(); 
 						}}>
-							PAUSE
+							
 						</button>
 					</Link>
 			</div>

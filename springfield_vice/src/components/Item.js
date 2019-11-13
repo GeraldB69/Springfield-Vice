@@ -1,7 +1,7 @@
 import React from "react";
 import config from "./configSpringfieldVice.json";
 import donut from "./img/donut.png";
-import beer from "./img/biere.png";
+import beer from "./img/duffpix.png";
 
 function Donut(props) {
 	const items = props.donutPopped.map((obj) => {
