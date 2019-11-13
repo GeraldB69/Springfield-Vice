@@ -17,6 +17,7 @@ import Obstacle from "../components/Obstacle";
 import Bart from "../components/Bart";
 import Seymour from "../components/Seymour";
 import Milhouse from "../components/Milhouse";
+import Grandpa from "../components/Grandpa";
 import pink_ground from "../components/img/pink_ground.png";
 import springfield80s from "../components/img/background_80s_repeat.png";
 import Sound from "../components/Sound";
@@ -549,6 +550,29 @@ class Game extends Component {
 				[5, 5, 5, 5, 5, 5, 5, -5, -5, -5, -5, -5, -5, -5],
 			]
 		},
+		grandpaPos: {
+			positionGrandpaX: 3000,
+			positionGrandpaY: 250,
+			GrandpaMovX: [
+				10,
+				10,
+				10,
+				10,
+				10,
+				10,
+				10,
+				10,
+				-10,
+				-10,
+				-10,
+				-10,
+				-10,
+				-10
+			],
+			GrandpaMovY: [
+				[5, 5, 5, 5, 5, 5, 5, -5, -5, -5, -5, -5, -5, -5],
+			]
+		},
 		globalPosition: 0,
 		defilement: 0,
 		bartSeBarreX: 400,
@@ -693,6 +717,21 @@ class Game extends Component {
 		}, 1000);
 	};
 
+	moveGrandpa = () => {
+		let i = 0;
+		this.intGrandpa = setInterval(() => {
+			let newPosX = this.state.grandpaPos.positionGrandpaX + this.state.grandpaPos.GrandpaMovX[i];
+			let newPosY = this.state.grandpaPos.positionGrandpaY + this.state.grandpaPos.GrandpaMovY[i];
+			this.setState({
+				grandpaPos: { ...this.state.grandpaPos, positionGrandpaX: newPosX, positionGrandpaY: newPosY }
+			});
+			i++;
+			if (i >= this.state.grandpaPos.GrandpaMovX.length) {
+				i = 0;
+			}
+		}, 1000);
+	};
+
 	bartSeBarre = () => {
 		setTimeout(() => {
 		this.setState({ bartSeBarreX: 15000 });
@@ -741,6 +780,7 @@ class Game extends Component {
 		this.moveBart();
 		this.moveSeymour();
 		this.moveMilhouse();
+		this.moveGrandpa();
 		this.bartSeBarre();
 	};
 
@@ -751,6 +791,7 @@ class Game extends Component {
 		clearInterval(this.intBart);
 		clearInterval(this.intSeymour);
 		clearInterval(this.intMilhouse);
+		clearInterval(this.intGrandpa);
 		} else {
 		this.componentDidMount();
 		}
@@ -964,6 +1005,11 @@ class Game extends Component {
 				positionMilhouseX={this.state.milhousePos.positionMilhouseX + this.state.defilement}
 				positionMilhouseY={this.state.milhousePos.positionMilhouseY}
 				milhousePos={this.state.milhousePos}
+			/>
+			<Grandpa
+				positionGrandpaX={this.state.grandpaPos.positionGrandpaX + this.state.defilement}
+				positionGrandpaY={this.state.grandpaPos.positionGrandpaY}
+				grandpaPos={this.state.grandpaPos}
 			/>
 			<Donut
 			donutPopped={this.state.donutPopped}
