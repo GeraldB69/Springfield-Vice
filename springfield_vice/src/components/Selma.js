@@ -6,17 +6,30 @@ class Selma extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.positionInitialeX = this.props.positionSelmaX;
+    this.positionInitialeY = this.props.positionSelmaY;
   }
 
   render() {
+    let rotation = "hue-rotate(0deg)";
+    let hueRotate = "rotate(0deg)";
+    let leftPosition = this.props.positionSelmaX + this.props.defilement;
+    let topPosition = this.props.positionSelmaY;
+
+    if (this.props.status === "killed") {
+      rotation = "rotate(90deg)";
+      hueRotate = "hue-rotate(90deg)";
+      leftPosition = this.positionInitialeX + this.props.defilement;
+      topPosition = this.positionInitialeY;
+    }
     const selmaZone = {
       width: "30px",
       height: "30px",
-      backgroundColor: "red",
+      backgroundColor: "transparent",
       borderRadius: "50%",
       position: "absolute",
-      left: this.props.positionSelmaX,
-      top: this.props.positionSelmaY,
+      left: leftPosition,
+      top: topPosition,
       transform:
         "scale(" + this.props.positionSelmaY * config.selma.scale + ")",
       zIndex: this.props.positionSelmaY
@@ -25,6 +38,8 @@ class Selma extends Component {
     //console.log(this.props.positionSelmaX, this.props.positionSelmaY)
 
     const styleSelma = {
+      transform: rotation,
+      filter: hueRotate,
       width: "50px",
       height: "70px",
       position: "absolute",

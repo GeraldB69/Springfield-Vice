@@ -6,12 +6,14 @@ function Seymour(props) {
   const seymourZone = {
     width: "30px",
     height: "30px",
-    backgroundColor: "red",
+    backgroundColor: "transparent",
     borderRadius: "50%",
     position: "absolute",
-    left: props.positionSeymourX + props.defilement,
+    left: props.positionSeymourX,
     top: props.positionSeymourY,
-    transform: "scale(" + props.positionSeymourY * config.seymour.scale + ")"
+    transform: "scale(" + props.positionSeymourY * config.seymour.scale + ")",
+    zIndex: props.positionSeymourY
+    //transition: '0.8s',
   };
   //console.log(this.props.positionSeymourX, this.props.positionSeymourY)
 
@@ -22,8 +24,7 @@ function Seymour(props) {
     left: "-5px",
     top: "-40px",
     margin: 0,
-    padding: 0,
-    transition: "0.8s"
+    padding: 0
   };
 
   return (
