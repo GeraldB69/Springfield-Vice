@@ -15,12 +15,16 @@ class Selma extends Component {
     let hueRotate = "rotate(0deg)";
     let leftPosition = this.props.positionSelmaX + this.props.defilement;
     let topPosition = this.props.positionSelmaY;
+    let transition = 0;
+    let classSelma = "selmaWalk";
 
     if (this.props.status === "killed") {
       rotation = "rotate(90deg)";
       hueRotate = "hue-rotate(90deg)";
       leftPosition = this.positionInitialeX + this.props.defilement;
       topPosition = this.positionInitialeY;
+      transition = "0.5s";
+      classSelma = "selmaDead";
     }
     const selmaZone = {
       width: "30px",
@@ -46,13 +50,14 @@ class Selma extends Component {
       left: "-10px",
       top: "-40px",
       margin: 0,
-      padding: 0
+      padding: 0,
+      transition: this.transitionDelay
     };
 
     return (
       <div>
         <div id="Selma" style={selmaZone}>
-          <div className="selmaWalk" style={styleSelma} />
+          <div className={classSelma} style={styleSelma} />
         </div>
       </div>
     );

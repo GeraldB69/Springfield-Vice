@@ -37,6 +37,10 @@ const selmaStatus = {
   KILLED: "killed",
   ALIVE: "alive"
 };
+const seymourStatus = {
+  KILLED: "killed",
+  ALIVE: "alive"
+};
 
 class Game extends Component {
   constructor(props) {
@@ -471,7 +475,8 @@ class Game extends Component {
           10,
           10
         ],
-        SeymourMovY: [5, 5, 5, 5, 5, 0, 0, -5, -5, -5, 0, 0, -5, -5]
+        SeymourMovY: [5, 5, 5, 5, 5, 0, 0, -5, -5, -5, 0, 0, -5, -5],
+        status: seymourStatus.ALIVE
       },
       bartPos: {
         positionBartX: 6000,
@@ -800,13 +805,18 @@ class Game extends Component {
       this.state.selmaPos.status === "alive"
     ) {
       this.state.selmaPos.status = "killed";
-    } else {
-      console.log("raté Selma");
+    }
+    if (
+      this.state.seymourPos.positionSeymourY < this.state.positionY + 35 &&
+      this.state.seymourPos.positionSeymourY > this.state.positionY - 5 &&
+      this.state.seymourPos.status === "alive"
+    ) {
+      this.state.seymourPos.status = "killed";
     }
   };
 
   donutCount = () => {
-    let donutCount = 0;
+    let donutCount = 20;
     this.state.donutPopped.map(item =>
       item.status === "picked"
         ? (donutCount = donutCount + 1)
@@ -849,7 +859,9 @@ class Game extends Component {
     donutPopped[donutIndex].status = donutStatus.THROWN;
     // donutPopped[donutIndex].display = false;
     this.setState({ donutPopped });
-    this.collisionDonutLauncher();
+    if (this.donutCount() > 0) {
+      this.collisionDonutLauncher();
+    }
     // console.log("throw")
   };
 
@@ -909,15 +921,15 @@ class Game extends Component {
 
         <Selma
           positionSelmaX={this.state.selmaPos.positionSelmaX}
-          defilement={this.state.defilement}
           positionSelmaY={this.state.selmaPos.positionSelmaY}
+          defilement={this.state.defilement}
           status={this.state.selmaPos.status}
         />
         <Seymour
-          positionSeymourX={
-            this.state.seymourPos.positionSeymourX + this.state.defilement
-          }
+          positionSeymourX={this.state.seymourPos.positionSeymourX}
           positionSeymourY={this.state.seymourPos.positionSeymourY}
+          defilement={this.state.defilement}
+          status={this.state.seymourPos.status}
         />
         <Donut
           donutPopped={this.state.donutPopped}

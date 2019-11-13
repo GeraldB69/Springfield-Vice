@@ -1,19 +1,23 @@
 .seymourWalk {
-    position: absolute;
-    transform: translate(50%,-50%);
-    transform: scale(-1,1);
-	width: calc(209px / 6);
-	background: url(img/seymour.png);
-    animation: animate4 1s steps(6) infinite reverse;
+  position: absolute;
+  transform: translate(50%, -50%);
+  transform: scale(-1, 1);
+  width: calc(209px / 6);
+  background: url(img/seymour.png);
+  animation: animate4 1s steps(6) infinite reverse;
+}
+
+.seymourDead {
+  position: absolute;
+  transform: scale(-1, 1);
+  background: url(img/seymour.png);
 }
 
 @keyframes animate4 {
-	from
-	{
-		background-position: 0;	
-	}
-	to
-	{
-		background-position: 209px;	
-	}
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: 209px;
+  }
 }

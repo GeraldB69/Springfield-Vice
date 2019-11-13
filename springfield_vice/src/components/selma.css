@@ -1,19 +1,24 @@
 .selmaWalk {
-    position: absolute;
-    transform: translate(50%,-50%);
-    transform: scale(-1,1);
-	width: calc(284px / 6);
-	background: url(img/selma.png);
-    animation: animate3 1s steps(6) infinite reverse;
+  position: absolute;
+  transform: translate(50%, -50%);
+  transform: scale(-1, 1);
+  width: calc(284px / 6);
+  background: url(img/selma.png);
+  animation: animate3 1s steps(6) infinite reverse;
+}
+
+.selmaDead {
+  position: absolute;
+  transform: scale(-1, 1);
+  width: calc(284px / 6);
+  background: url(img/selma.png);
 }
 
 @keyframes animate3 {
-	from
-	{
-		background-position: 0;	
-	}
-	to
-	{
-		background-position: 284px;	
-	}
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: 284px;
+  }
 }
