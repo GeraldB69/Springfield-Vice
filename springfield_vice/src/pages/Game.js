@@ -585,7 +585,7 @@ class Game extends Component {
 				this.props.history.push('game/?modal=true&go=true');
 				this.setState({origin: "go_lost"});
 				return;
-			}, 3000)
+			}, 2000)
 		}
 		if(this.beerCount() === 100) {
 			// Si gagnant :
@@ -684,7 +684,7 @@ class Game extends Component {
 	};
 
 	collisionBart = (item) => {
-//		console.log(item.positionBartX, this.state.relativePositionX + this.state.defilement)
+		// console.log(item.positionBartX, item.positionBartY, this.state.relativePositionX + this.state.defilement)
 		if (
 			this.state.relativePositionX > item.positionBartX - 15 &&
 			this.state.relativePositionX < item.positionBartX + 20 &&

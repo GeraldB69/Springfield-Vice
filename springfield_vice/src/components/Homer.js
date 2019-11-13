@@ -70,7 +70,7 @@ class Homer extends Component {
 			position: "absolute",
 			borderRadius: "50%",
 			zIndex: this.props.positionY - 10,
-			animation: "blink 1s infinite",
+			animation: "blink .5s infinite",
 		};
 		
 		const homerStyle = {
@@ -79,10 +79,9 @@ class Homer extends Component {
 			height: config.homerSize.height
 		};
 
-
 		return (
 			<div id="homer_full">
-				<div style={this.props.isDead === 0 ? homerZone2 : homerZone} >
+				<div style={this.props.isDead <= 3 ? homerZone2 : homerZone} >
 					<div style={homerStyle} className={isThrowing} ></div>
 					<img src={donut} style={donutStyle} className={this.state.animeClass} alt="donut" />
 					<img src={ripchain} style={ripchainStyle} alt="ripchain" />
