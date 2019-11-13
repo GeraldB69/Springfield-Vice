@@ -295,8 +295,9 @@ class Game extends Component {
 			relativePositionX: config.initialPosition.x,
 			isRunning: false,
 			isHomerRunningLeft: false,
-			beer : false,
-			obst: false,
+			beerSound: false,
+			obstSound: false,
+			donutSound: false,
 
 
 
@@ -627,9 +628,13 @@ class Game extends Component {
 			this.state.positionY < item.positionDonutY + 30 &&
 			this.state.positionY > item.positionDonutY - 30 &&
 			item.status === "ground"
-		)
+		){
 			item.status = "picked";
-
+			this.setState({donutSound : true});
+			setTimeout(()=>{
+				this.setState({donutSound : false});
+			},2000)
+		}
 	};
 	collisionDetectionBeer = (item) => {
 		if (
@@ -642,9 +647,9 @@ class Game extends Component {
 			if (this.state.homerCollisionHue > 0)
 				this.setState({ homerCollisionHue: this.state.homerCollisionHue - 30 });
 			item.status = "picked";
-			this.setState({beer : true});
+			this.setState({beerSound : true});
 			setTimeout(()=>{
-				this.setState({beer : false});
+				this.setState({beerSound : false});
 			},2000)
 
 		}
@@ -663,9 +668,9 @@ class Game extends Component {
 				homerCollisionHue: this.state.homerCollisionHue + 30
 			});
 			item.status = "picked";
-			this.setState({obst : true});
+			this.setState({obstSound : true});
 			setTimeout(()=>{
-				this.setState({obst : false});
+				this.setState({obstSound : false});
 			},2000)
 		}
 	};
@@ -845,10 +850,12 @@ class Game extends Component {
 						hide={() => this.hideButtons()}
 					/>
 				)}
-				{this.state.beer === true ? <Sound beer /> : ""}
-				{this.state.obst === true ? <Sound obst /> : ""}
+				{this.state.beerSound === true ? <Sound beerSound /> : ""}
+				{this.state.obstSound === true ? <Sound obstSound /> : ""}
+				{this.state.donutSound === true ? <Sound donutSound /> : ""}
 			</div>
 		);
 	}
 }
+
 export default Game;
