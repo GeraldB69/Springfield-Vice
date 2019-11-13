@@ -1,7 +1,7 @@
 .start_div {
   margin: 0 auto;
-  /* display: table-cell;
-  overflow: hidden; */
+  /* display: table-cell; */
+  overflow: hidden;
   position: relative;
   height: 100vh;
   /* vertical-align: middle; */

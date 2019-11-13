@@ -33,7 +33,10 @@ class Homer extends Component {
 
 		const donutStyle = {
 			display: displayDonut,
-			width: config.donutSize.width
+			width: config.donutSize.width, 
+			position: "absolute",
+			top: "-40px",
+			left: "60px"
 		};
 
 		const ripchainStyle = {

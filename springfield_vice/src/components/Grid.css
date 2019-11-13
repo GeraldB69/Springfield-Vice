@@ -1,0 +1,71 @@
+/* .neon-effect {
+    box-shadow: 
+    .1vw 0vw .25vw #ffd8d8, .2vw 0vw .25vw #ffd8d8, .4vw 0vw .25vw #ffd8d8, 
+    .1vw 0vw   0vw #f25757, .2vw 0vw   0vw #f25757, .4vw 0vw   0vw #f25757,
+    .1vw 0vw  .1vw #f25757, .2vw 0vw  .1vw #f25757, .4vw 0vw  .1vw #f25757,
+    .1vw 0vw   2vw #f25757, .2vw 0vw   2vw #f25757, .4vw 0vw   2vw #f25757, 
+    .1vw 0vw   1vw #e50b0b, .2vw 0vw   1vw #e50b0b, .4vw 0vw   5vw #e50b0b, 
+    .1vw 0vw   5vw #e50b0b, .2vw 0vw  20vw #e50b0b, .4vw 0vw  10vw #e50b0b,
+    .1vw 0vw  10vw #e50b0b, .2vw 0vw  30vw #e50b0b, .4vw 0vw  10vw #e50b0b;
+} */
+
+/* .neon-effect {
+    filter: blur(1px);
+    box-shadow: 10px 5px 5px rgb(120, 174, 235);
+} */
+
+.wheel {
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: -300px;
+    left: -60px;
+    width: 900px;
+    height: 900px;
+    transform-origin: 50% 50%;
+    animation: rotating 10s linear infinite;
+}
+
+.rotateRight {
+    transform-origin: 50% 50%;
+    animation: rotatingRight 8s linear infinite;
+}
+
+.rotateLeft {
+    transform-origin: 50% 50%;
+    animation: rotatingLeft 8s linear infinite;
+}
+
+@keyframes rotatingRight {
+    from{
+        
+        transform: rotate(0deg);
+    }
+    to{
+        
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotatingLeft {
+    from{
+        
+        transform: rotate(360deg);
+    }
+    to{
+        
+        transform: rotate(0deg);
+    }
+}
+
+.spr {
+    background-image: url(img/springfield80s.png);
+    background-repeat: no-repeat;
+    /* background-size: 200%; */
+    position: absolute;
+    top: -355px;
+    left: 0px;
+    width: 200vw;
+    height: 200vw;
+    
+}
