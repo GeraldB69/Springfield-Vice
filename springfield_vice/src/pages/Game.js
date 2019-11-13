@@ -18,6 +18,8 @@ import Bart from "../components/Bart";
 import Seymour from "../components/Seymour";
 import pink_ground from "../components/img/pink_ground.png"
 import springfield80s from "../components/img/background_80s_repeat.png"
+import Sound from "../components/Sound";
+
 
 const donutStatus = {
 	GROUND: "ground",
@@ -293,6 +295,14 @@ class Game extends Component {
 			relativePositionX: config.initialPosition.x,
 			isRunning: false,
 			isHomerRunningLeft: false,
+			beerSound: false,
+			obstSound: false,
+			donutSound: false,
+
+
+
+
+
 			selmaPos: {
 				positionSelmaX: 1400,
 				positionSelmaY: 130,
@@ -444,7 +454,9 @@ class Game extends Component {
 				]
 			},
 			globalPosition: 0,
-			defilement: 0
+			defilement: 0,
+			bartSeBarreX: 400,
+			bartSeBarreY: 250,
 		};
 
 		this.stepX = 0;
@@ -548,6 +560,11 @@ class Game extends Component {
 		}, 1000);
 	};
 
+	bartSeBarre = () => {
+		setTimeout(() => {
+		this.setState({bartSeBarreX: 15000})}, 3000)
+	}
+
 	tick = () => {
 		let { seconds } = this.state;
 		this.setState({ seconds: seconds - 1 });
@@ -589,6 +606,7 @@ class Game extends Component {
 		this.moveSelma();
 		this.moveBart();
 		this.moveSeymour();
+		this.bartSeBarre();
 	};
 
 	pauseTimer = () => {
@@ -618,8 +636,13 @@ class Game extends Component {
 			this.state.positionY < item.positionDonutY + 30 &&
 			this.state.positionY > item.positionDonutY - 30 &&
 			item.status === "ground"
-		)
+		){
 			item.status = "picked";
+			this.setState({donutSound : true});
+			setTimeout(()=>{
+				this.setState({donutSound : false});
+			},2000)
+		}
 	};
 	collisionDetectionBeer = (item) => {
 		if (
@@ -632,6 +655,11 @@ class Game extends Component {
 			if (this.state.homerCollisionHue > 0)
 				this.setState({ homerCollisionHue: this.state.homerCollisionHue - 30 });
 			item.status = "picked";
+			this.setState({beerSound : true});
+			setTimeout(()=>{
+				this.setState({beerSound : false});
+			},2000)
+
 		}
 	};
 
@@ -648,6 +676,10 @@ class Game extends Component {
 				homerCollisionHue: this.state.homerCollisionHue + 30
 			});
 			item.status = "picked";
+			this.setState({obstSound : true});
+			setTimeout(()=>{
+				this.setState({obstSound : false});
+			},2000)
 		}
 	};
 
@@ -755,8 +787,7 @@ class Game extends Component {
                 controls
                 autoPlay
                 type="audio/mp3"
-					  />
-					  
+				/>
 				<Grid
 					isRunning={this.state.isRunning}
 					isHomerRunningLeft={this.state.isHomerRunningLeft}
@@ -781,6 +812,8 @@ class Game extends Component {
 				<Bart
 					positionBartX={this.state.bartPos.positionBartX + this.state.defilement}
 					positionBartY={this.state.bartPos.positionBartY}
+					bartSeBarreX={this.state.bartSeBarreX}
+					bartSeBarreY={this.state.bartSeBarreY}
 				/>
 				<Homer
 					positionX={this.state.positionX}
@@ -826,8 +859,12 @@ class Game extends Component {
 						hide={() => this.hideButtons()}
 					/>
 				)}
+				{this.state.beerSound === true ? <Sound beerSound /> : ""}
+				{this.state.obstSound === true ? <Sound obstSound /> : ""}
+				{this.state.donutSound === true ? <Sound donutSound /> : ""}
 			</div>
 		);
 	}
 }
+
 export default Game;
