@@ -477,7 +477,9 @@ class Game extends Component {
 			10,
 			10
 			],
-			SeymourMovY: [5, 5, 5, 5, 5, 0, 0, -5, -5, -5, 0, 0, -5, -5]
+      SeymourMovY: [5, 5, 5, 5, 5, 0, 0, -5, -5, -5, 0, 0, -5, -5],
+      status: seymourStatus.ALIVE
+
 		},
 		bartPos: {
 			positionBartX: 6000,
@@ -900,12 +902,19 @@ class Game extends Component {
 		if (
 		this.state.selmaPos.positionSelmaY < this.state.positionY + 35 &&
 		this.state.selmaPos.positionSelmaY > this.state.positionY - 5 &&
-		this.state.selmaPos.status === "alive"
+    this.state.selmaPos.status === "alive" &&
+    this.donutCount() > 0
 		) {
 		this.state.selmaPos.status = "killed";
-		} else {
-		console.log("raté Selma");
-		}
+    } 
+    if (
+      this.state.seymourPos.positionSeymourY < this.state.positionY + 35 &&
+      this.state.seymourPos.positionSeymourY > this.state.positionY - 5 &&
+      this.state.seymourPos.status === "alive" &&
+      this.donutCount() > 0
+      ) {
+      this.state.seymourPos.status = "killed";
+      } 
 	};
 
 	donutCount = () => {
