@@ -9,7 +9,6 @@
 
 .selmaDead {
   position: absolute;
-  transform: scale(-1, 1);
   width: calc(284px / 6);
   background: url(img/selma.png);
 }

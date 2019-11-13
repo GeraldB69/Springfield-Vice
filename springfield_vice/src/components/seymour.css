@@ -9,7 +9,6 @@
 
 .seymourDead {
   position: absolute;
-  transform: scale(-1, 1);
   background: url(img/seymour.png);
 }
 
