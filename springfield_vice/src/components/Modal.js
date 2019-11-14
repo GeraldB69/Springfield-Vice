@@ -35,11 +35,15 @@ export default class Modal extends Component {
     };
   };
 
+  callbackSounds = () => {
+    this.props.toggleSounds(!this.props.getStateSounds);
+  }
+
   showHeader() {
     const other_buttons = 
       <>
         <button>SCORES</button>
-        <button onClick={() => this.toggleSounds()}>SOUNDS {!this.state.sounds ? 'ON' : 'OFF'}</button>
+        <button onClick={this.callbackSounds}>SOUNDS {!this.props.getStateSounds ? 'ON' : 'OFF'}</button>
         <button onClick={() => this.toggleMusic()}>MUSIC {!this.state.music ? 'ON' : 'OFF'}</button>
       </>;
     const content = [];
@@ -111,15 +115,6 @@ export default class Modal extends Component {
     }
   }
 
-  toggleSounds = () => {
-    this.setState({sounds: !this.state.sounds});
-    if (this.state.sounds) {
-      // couper les sons...
-    }
-    else {
-      // remettre les sons...
-    }
-  }
 
   render() {
     return createPortal(

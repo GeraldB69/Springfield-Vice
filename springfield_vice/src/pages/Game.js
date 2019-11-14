@@ -57,6 +57,7 @@ class Game extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			soundsPlay: true,
 			positionX: config.initialPosition.x,
 			positionY: config.initialPosition.y,
 			showModal: false,
@@ -1029,6 +1030,11 @@ class Game extends Component {
 		document.getElementById("root").className = "background_opacity";
 	};
 
+
+	toggleSounds = (stateSounds) => {
+		this.setState({soundsPlay : stateSounds});
+	}
+
 	render() {
 		// Modal
 		let params = new URLSearchParams(this.props.location.search);
@@ -1139,6 +1145,8 @@ class Game extends Component {
 
 				{params.get("modal") && (
 					<Modal
+						toggleSounds = {this.toggleSounds}
+					  	getStateSounds={this.state.soundsPlay}
 						close={() => {
 							this.props.history.push(this.props.location.pathname);
 						}}
@@ -1148,11 +1156,10 @@ class Game extends Component {
 						hide={() => this.hideButtons()}
 					/>
 				)}
-				{this.state.beerSound === true ? <Sound beerSound /> : ""}
-				{this.state.obstSound === true ? <Sound obstSound /> : ""}
-				{this.state.donutSound === true ? <Sound donutSound /> : ""}
-
-				{this.state.gunSound === true ? <Sound gunSound /> : ""}
+				{this.state.beerSound === true ? <Sound beerSound soundsPlay={this.state.soundsPlay} /> : ""}
+				{this.state.obstSound === true ? <Sound obstSound soundsPlay={this.state.soundsPlay} /> : ""}
+				{this.state.donutSound === true ? <Sound donutSound soundsPlay={this.state.soundsPlay} /> : ""}
+				{this.state.gunSound === true ? <Sound gunSound soundsPlay={this.state.soundsPlay}/> : ""}
 			</div>
 		);
 	}

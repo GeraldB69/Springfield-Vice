@@ -14,7 +14,7 @@ class Sound extends Component {
     render(){
         return(
             <div>
-                {this.props.donutSound ? <audio
+                {this.props.donutSound === true && this.props.soundsPlay === true ? <audio
                     ref="audio_tag"
                     src={hum}
                     controls
@@ -22,7 +22,7 @@ class Sound extends Component {
                     type="audio/mp3"
                 /> : ""} 
 
-                {this.props.obstSound ? <audio
+                {this.props.obstSound === true && this.props.soundsPlay === true ? <audio
                     ref="audio_tag"
                     src={noproblemo}
                     controls
@@ -30,7 +30,7 @@ class Sound extends Component {
                     type="audio/mp3"
                 /> : ""}
 
-                {this.props.beerSound ? <audio
+                {this.props.beerSound === true && this.props.soundsPlay === true ? <audio
                     ref="audio_tag"
                     src={boire}
                     controls
@@ -38,7 +38,7 @@ class Sound extends Component {
                     type="audio/mp3"
                 /> : ""}
 
-                {this.props.gunSound ? <audio
+                {this.props.gunSound === true && this.props.soundsPlay === true ? <audio
                     ref="audio_tag"
                     src={gunSound}
                     controls
