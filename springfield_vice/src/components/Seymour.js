@@ -6,22 +6,24 @@ class Seymour extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.positionInitialeX = this.props.positionSeymourX;
-    this.positionInitialeY = this.props.positionSeymourY;
   }
 
   render() {
     let rotation = "hue-rotate(0deg)";
-    let hueRotate = "rotate(0deg)";
+    let blinking = "";
+    let display = "block";
+    let transition = "0s"
     let leftPosition = this.props.positionSeymourX + this.props.defilement;
     let topPosition = this.props.positionSeymourY;
     let classSeymour = "seymourWalk";
 
     if (this.props.status === "killed") {
       rotation = "rotate(90deg)";
-      hueRotate = "hue-rotate(90deg)";
-      leftPosition = this.positionInitialeX + this.props.defilement;
-      topPosition = this.positionInitialeY;
+      blinking = "blink .5s infinite";
+      transition = "0.5s";
+      leftPosition = this.props.positionSeymourX + this.props.defilement;
+      topPosition = this.props.positionSeymourY;
+      setTimeout(() => {document.getElementById("Seymour").setAttribute("style", "display:none")}, 3000);
       classSeymour = "seymourDead";
     }
     const seymourZone = {
@@ -40,15 +42,20 @@ class Seymour extends Component {
     //console.log(this.props.positionSeymourX, this.props.positionSeymourY)
 
     const styleSeymour = {
+      display: display,
       transform: rotation,
-      filter: hueRotate,
       width: "40px",
       height: "70px",
       position: "absolute",
       left: "-10px",
       top: "-40px",
       margin: 0,
-      padding: 0
+      padding: 0,
+      animation: blinking,
+      animationDelay: transition,
+      transitionDelay: transition,
+      transitionProperty: "all",
+      transition: this.transitionDelay
     };
 
     return (
