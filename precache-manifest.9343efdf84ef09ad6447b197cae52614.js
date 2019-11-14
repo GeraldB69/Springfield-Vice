@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d6bc3579b78ace584b57c7b9e8a3b430",
+    "revision": "f312a62b901970c746ed040ee9cadc10",
     "url": "/lyon-0919-react-p2-springfield-vice/index.html"
   },
   {
-    "revision": "13c235540a533bedf773",
+    "revision": "fa22a3ca421462fd9163",
     "url": "/lyon-0919-react-p2-springfield-vice/static/css/main.72832af7.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/lyon-0919-react-p2-springfield-vice/static/js/2.48b00b38.chunk.js"
   },
   {
-    "revision": "13c235540a533bedf773",
-    "url": "/lyon-0919-react-p2-springfield-vice/static/js/main.8810d381.chunk.js"
+    "revision": "fa22a3ca421462fd9163",
+    "url": "/lyon-0919-react-p2-springfield-vice/static/js/main.e249318c.chunk.js"
   },
   {
     "revision": "631aab3211d7b089809e",
