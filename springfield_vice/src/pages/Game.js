@@ -83,6 +83,71 @@ class Game extends Component {
 							config.limits.bottomLimit
 						)
 					),
+					status: donutStatus.PICKED,
+					display: true
+				},
+				{
+					positionDonutX: parseInt(
+						getRandomArbitrary(config.limits.leftLimit, 1000)
+					),
+					positionDonutY: parseInt(
+						getRandomArbitrary(
+							config.limits.topLimit,
+							config.limits.bottomLimit
+						)
+					),
+					status: donutStatus.PICKED,
+					display: true
+				},
+				{
+					positionDonutX: parseInt(
+						getRandomArbitrary(config.limits.leftLimit, 1000)
+					),
+					positionDonutY: parseInt(
+						getRandomArbitrary(
+							config.limits.topLimit,
+							config.limits.bottomLimit
+						)
+					),
+					status: donutStatus.PICKED,
+					display: true
+				},
+				{
+					positionDonutX: parseInt(
+						getRandomArbitrary(config.limits.leftLimit, 1000)
+					),
+					positionDonutY: parseInt(
+						getRandomArbitrary(
+							config.limits.topLimit,
+							config.limits.bottomLimit
+						)
+					),
+					status: donutStatus.PICKED,
+					display: true
+				},
+				{
+					positionDonutX: parseInt(
+						getRandomArbitrary(config.limits.leftLimit, 1000)
+					),
+					positionDonutY: parseInt(
+						getRandomArbitrary(
+							config.limits.topLimit,
+							config.limits.bottomLimit
+						)
+					),
+					status: donutStatus.PICKED,
+					display: true
+				},
+				{
+					positionDonutX: parseInt(
+						getRandomArbitrary(config.limits.leftLimit, 1000)
+					),
+					positionDonutY: parseInt(
+						getRandomArbitrary(
+							config.limits.topLimit,
+							config.limits.bottomLimit
+						)
+					),
 					status: donutStatus.GROUND,
 					display: true
 				},
@@ -952,7 +1017,7 @@ class Game extends Component {
 	};
 
 	donutCount = () => {
-		let donutCount = 10;
+		let donutCount = 0;
 		this.state.donutPopped.map(item =>
 			item.status === "picked"
 				? (donutCount = donutCount + 1)
@@ -1051,10 +1116,19 @@ class Game extends Component {
 			height: config.background.height
 		};
 
+		const topDivStyle = {
+			position: "absolute",
+			width: "100vw",
+			height: "100px",
+			background: "linear-gradient(rgba(0,0,0,0.7), transparent)",
+			// background: "rgba(56,42,125,0.9)"
+		}
+		
 		let diff1 = 3 + this.beerCount(this.state.beerCountOrigin) - this.obstacleCollisionCount();
 		return (
 			<div className="game" style={bgStyle}>
-				
+			
+				<div style={topDivStyle}></div>
 				<Grid
 					isRunning={this.state.isRunning}
 					isHomerRunningLeft={this.state.isHomerRunningLeft}
