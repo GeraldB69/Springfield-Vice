@@ -7,6 +7,10 @@
 	width: 4000px;
 }
 
+.background_opacity{
+	opacity: 0.8;
+}
+
 /* .game {
 	
 	background-attachment: scroll;

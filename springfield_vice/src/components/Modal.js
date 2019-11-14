@@ -39,8 +39,8 @@ export default class Modal extends Component {
     const other_buttons = 
       <>
         <button>SCORES</button>
-        <button onClick={() => this.toggleSounds()}>SOUNDS {!this.state.sounds ? 'ON' :  'OFF'}</button>
-        <button onClick={() => this.toggleMusic()}>MUSIC {!this.state.music ? 'ON' :  'OFF'}</button>
+        <button onClick={() => this.toggleSounds()}>SOUNDS {!this.state.sounds ? 'ON' : 'OFF'}</button>
+        <button onClick={() => this.toggleMusic()}>MUSIC {!this.state.music ? 'ON' : 'OFF'}</button>
       </>;
     const content = [];
     content.image = imgStyle
@@ -52,7 +52,7 @@ export default class Modal extends Component {
         content.buttons = 
           <>
             {other_buttons}
-            <Link to="/game"><button>PLAY</button></Link>
+            <Link to="/game/"><button>PLAY</button></Link>
             <button id="close" onClick={() => this.props.close()}>X</button>
           </>;
         break;
@@ -69,7 +69,7 @@ export default class Modal extends Component {
         {this.props.hide(true)}
         break;
       case "go_lost": // FIN DE PARTIE + PERDANT
-        content.image = {...content.background,
+        content.image = {...content.image,
           backgroundPosition: "right 10% center",
           backgroundRepeat: "no-repeat", 
           backgroundSize: "30%",
