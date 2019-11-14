@@ -15,6 +15,7 @@ class Selma extends Component {
     let transition = "0s"
     let leftPosition = this.props.positionSelmaX + this.props.defilement;
     let topPosition = this.props.positionSelmaY;
+    let classSelma = "selmaWalk";
 
     if (this.props.status === "killed") {
       rotation = "rotate(90deg)";
@@ -23,6 +24,7 @@ class Selma extends Component {
       leftPosition = this.props.positionSelmaX + this.props.defilement;
       topPosition = this.props.positionSelmaY;
       setTimeout(() => {document.getElementById("Selma").setAttribute("style", "display:none")}, 3000);
+      classSelma = "selmaDead";
     }
 
     const selmaZone = {
@@ -54,12 +56,13 @@ class Selma extends Component {
       animationDelay: transition,
       transitionDelay: transition,
       transitionProperty: "all",
+      transition: this.transitionDelay
     };
 
     return (
       <div>
         <div id="Selma" style={selmaZone}>
-          <div className="selmaWalk" style={styleSelma} />
+          <div className={classSelma} style={styleSelma} />
         </div>
       </div>
     );
