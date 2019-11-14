@@ -979,11 +979,11 @@ class Game extends Component {
 			this.state.positionY > item.positionDonutY - 30 &&
 			item.status === "ground"
 		) {
-			item.status = "picked";
-			this.setState({ donutSound: true });
-			setTimeout(() => {
-				this.setState({ donutSound: false });
-			}, 2000);
+		item.status = "picked";
+		this.setState({ donutSound: true });
+		setTimeout(() => {
+			this.setState({ donutSound: false });
+		}, 500);
 		}
 	};
 	collisionDetectionBeer = item => {
@@ -994,13 +994,13 @@ class Game extends Component {
 			this.state.positionY > item.positionBeerY - 30 &&
 			item.status === "ground"
 		) {
-			if (this.state.homerCollisionHue > 0)
-				this.setState({ homerCollisionHue: this.state.homerCollisionHue - 30 });
-			item.status = "picked";
-			this.setState({ beerSound: true });
-			setTimeout(() => {
-				this.setState({ beerSound: false });
-			}, 2000);
+		if (this.state.homerCollisionHue > 0)
+			this.setState({ homerCollisionHue: this.state.homerCollisionHue - 30 });
+		item.status = "picked";
+		this.setState({ beerSound: true });
+		setTimeout(() => {
+			this.setState({ beerSound: false });
+		}, 800);
 		}
 	};
 
@@ -1120,7 +1120,7 @@ class Game extends Component {
 		this.setState({ gunSound: true });
 		setTimeout(() => {
 			this.setState({ gunSound: false });
-		}, 1000);
+		}, 500);
 		this.setState({
 			isThrowing: true
 			// donutPopped: {...this.state.donutPopped, picked: false}
