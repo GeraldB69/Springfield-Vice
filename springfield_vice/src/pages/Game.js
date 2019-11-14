@@ -58,6 +58,7 @@ class Game extends Component {
 		super(props);
 		this.state = {
 			soundsPlay: true,
+			musicPlay: true,
 			positionX: config.initialPosition.x,
 			positionY: config.initialPosition.y,
 			showModal: false,
@@ -1032,6 +1033,10 @@ class Game extends Component {
 		this.setState({soundsPlay : stateSounds});
 	}
 
+	toggleMusic = (stateMusic) => {
+		this.setState({musicPlay : stateMusic});
+	}
+
 	render() {
 		// Modal
 		let params = new URLSearchParams(this.props.location.search);
@@ -1043,16 +1048,9 @@ class Game extends Component {
 		};
 
 		let diff1 = 3 + this.beerCount(this.state.beerCountOrigin) - this.obstacleCollisionCount();
-
 		return (
 			<div className="game" style={bgStyle}>
-				<audio
-					ref="audio_tag"
-					src="http://www.allard-jacquin.com/simpsons2.mp3"
-					controls
-					autoPlay
-					type="audio/mp3"
-				/>
+				
 				<Grid
 					isRunning={this.state.isRunning}
 					isHomerRunningLeft={this.state.isHomerRunningLeft}
@@ -1142,6 +1140,8 @@ class Game extends Component {
 
 				{params.get("modal") && (
 					<Modal
+						toggleMusic = {this.toggleMusic}
+						getStateMusic={this.state.musicPlay}
 						toggleSounds = {this.toggleSounds}
 					  	getStateSounds={this.state.soundsPlay}
 						close={() => {
@@ -1156,8 +1156,10 @@ class Game extends Component {
 				{this.state.beerSound === true ? <Sound beerSound soundsPlay={this.state.soundsPlay} /> : ""}
 				{this.state.obstSound === true ? <Sound obstSound soundsPlay={this.state.soundsPlay} /> : ""}
 				{this.state.donutSound === true ? <Sound donutSound soundsPlay={this.state.soundsPlay} /> : ""}
-				{this.state.opponentSound === true ? <Sound opponentSound soundsPlay={this.state.soundsPlay}/> : ""}
-				{this.state.gunSound === true ? <Sound gunSound soundsPlay={this.state.soundsPlay}/> : ""}
+				{this.state.opponentSound === true ? <Sound opponentSound soundsPlay={this.state.soundsPlay} /> : ""}
+				{this.state.gunSound === true ? <Sound gunSound soundsPlay={this.state.soundsPlay} /> : ""}
+				{this.state.musicPlay === true ? <Sound  musicPlay={this.state.musicPlay} /> : ""}
+					
 			</div>
 		);
 	}
