@@ -815,7 +815,7 @@ class Game extends Component {
 		this.setState({ donutSound: true });
 		setTimeout(() => {
 			this.setState({ donutSound: false });
-		}, 2000);
+		}, 500);
 		}
 	};
 	collisionDetectionBeer = item => {
@@ -832,7 +832,7 @@ class Game extends Component {
 		this.setState({ beerSound: true });
 		setTimeout(() => {
 			this.setState({ beerSound: false });
-		}, 2000);
+		}, 800);
 		}
 	};
 
@@ -919,7 +919,7 @@ class Game extends Component {
 		this.setState({ gunSound: true });
 		setTimeout(() => {
 			this.setState({ gunSound: false });
-		}, 1000);
+		}, 500);
 		this.setState({
 		isThrowing: true
 		// donutPopped: {...this.state.donutPopped, picked: false}
