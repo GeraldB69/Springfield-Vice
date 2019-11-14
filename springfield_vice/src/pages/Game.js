@@ -924,7 +924,7 @@ class Game extends Component {
 			this.stopRunning();
 			clearInterval(this.interval);
 			setTimeout(() => {
-				this.props.history.push("game/?modal=true&go=true");
+				this.props.history.push("?modal=true&go=true");
 				this.setState({ origin: "go_lost" });
 				return;
 			}, 2000);
@@ -933,7 +933,7 @@ class Game extends Component {
 			// Si gagnant :
 			this.stopRunning();
 			clearInterval(this.interval);
-			this.props.history.push("game/?modal=true&go=true");
+			this.props.history.push("?modal=true&go=true");
 			this.setState({ origin: "go_win" });
 			return;
 		}
@@ -1046,12 +1046,13 @@ class Game extends Component {
 	collisionBart = item => {
 		//		console.log(item.positionBartX, this.state.relativePositionX + this.state.defilement)
 		if (
-			this.state.relativePositionX > item.positionBartX - 15 &&
-			this.state.relativePositionX < item.positionBartX + 20 &&
-			this.state.positionY < item.positionBartY + 40 &&
-			this.state.positionY > item.positionBartY - 60
+			this.state.relativePositionX > item.positionBartX - 10 &&
+			this.state.relativePositionX < item.positionBartX + 10 &&
+			this.state.positionY < item.positionBartY + 30 &&
+			this.state.positionY > item.positionBartY - 30
 		) {
-			this.props.history.push("game/?modal=true&go=true");
+			console.log("GOOD JOB!")
+			this.props.history.push("?modal=true&go=true");
 			this.setState({ origin: "go_win" });
 			this.stopRunning();
 			clearInterval(this.interval);
