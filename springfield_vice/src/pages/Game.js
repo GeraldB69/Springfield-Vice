@@ -49,7 +49,7 @@ class Game extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			soundsPlay: false,
+			soundsPlay: true,
 			positionX: config.initialPosition.x,
 			positionY: config.initialPosition.y,
 			showModal: false,
@@ -1160,6 +1160,11 @@ class Game extends Component {
 		document.getElementById("root").className = "background_opacity";
 	};
 
+
+	toggleSounds = (stateSounds) => {
+		this.setState({soundsPlay : stateSounds});
+	}
+
 	render() {
 		// Modal
 		let params = new URLSearchParams(this.props.location.search);
@@ -1268,6 +1273,8 @@ class Game extends Component {
 
 				{params.get("modal") && (
 					<Modal
+						toggleSounds = {this.toggleSounds}
+					  	getStateSounds={this.state.soundsPlay}
 						close={() => {
 							this.props.history.push(this.props.location.pathname);
 						}}
