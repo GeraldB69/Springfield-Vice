@@ -30,7 +30,7 @@ function Obstacle(props) {
 		};
 
 		return (
-			<div>
+			<div key={Math.random()}>
 				<div style={obstacleZone}>
 					<img src={image} style={obstacleStyle} alt="Barrel" />
 				</div>

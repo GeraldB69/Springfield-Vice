@@ -25,7 +25,7 @@ function Donut(props) {
       margin: "auto"
     };
     return (
-      <div>
+      <div key={Math.random()}>
         <div style={donutZone}>
           <img src={donut} style={donutStyle} alt="donut" />
         </div>
@@ -58,7 +58,7 @@ function Beer(props) {
       margin: "auto"
     };
     return (
-      <div>
+      <div key={Math.random()}>
         <div style={beerZone}>
           <img src={beer} style={beerStyle} alt="beer" />
         </div>
