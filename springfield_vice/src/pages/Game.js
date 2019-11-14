@@ -541,6 +541,7 @@ class Game extends Component {
 			beerSound: false,
 			obstSound: false,
 			donutSound: false,
+			opponentSound: false,
 			globalPosition: 0,
 			defilement: 0,
 			bartSeBarreX: 400,
@@ -832,11 +833,11 @@ class Game extends Component {
 			this.state.positionY > item.positionY - 30 &&
 			item.status === "alive"
 		) {
-
+/*ici*/
 			item.status = "killed";
-			this.setState({ beerSound: true, beerCountOrigin: this.state.beerCountOrigin - 1 });
+			this.setState({ opponentSound: true, beerCountOrigin: this.state.beerCountOrigin - 1 });
 			setTimeout(() => {
-				this.setState({ beerSound: false });
+				this.setState({ opponentSound: false });
 			}, 2000);
 		}
 	};
@@ -1159,6 +1160,7 @@ class Game extends Component {
 				{this.state.beerSound === true ? <Sound beerSound soundsPlay={this.state.soundsPlay} /> : ""}
 				{this.state.obstSound === true ? <Sound obstSound soundsPlay={this.state.soundsPlay} /> : ""}
 				{this.state.donutSound === true ? <Sound donutSound soundsPlay={this.state.soundsPlay} /> : ""}
+				{this.state.opponentSound === true ? <Sound opponentSound soundsPlay={this.state.soundsPlay}/> : ""}
 				{this.state.gunSound === true ? <Sound gunSound soundsPlay={this.state.soundsPlay}/> : ""}
 			</div>
 		);

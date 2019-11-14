@@ -3,6 +3,8 @@ import hum from "./sounds/hum.mp3";
 import boire from "./sounds/boire.mp3";
 import noproblemo from "./sounds/noproblemo.wav";
 import gunSound from "./sounds/gunSound.mp3";
+import doh from "./sounds/doh.mp3";
+
 
 
 class Sound extends Component {
@@ -45,6 +47,14 @@ class Sound extends Component {
                     autoPlay
                     type="audio/mp3"
                 /> : ""}
+
+                {this.props.opponentSound === true && this.props.soundsPlay === true ? <audio
+                    ref="audio_tag"
+                    src={doh}
+                    controls
+                    autoPlay
+                    type="audio/mp3"
+                /> : ""} 
                 
             </div>
         )
