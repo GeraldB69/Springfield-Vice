@@ -10,7 +10,7 @@ function DonutCounter(props) {
 	const donutCounterContainer = {
 		backgroundColor: "rgb(255,255,255,0.0)",
 		position: "absolute",
-		top: "75px",
+		top: "-2px",
 		left: "12px",
 		// right: "50%",
 		borderRadius: "10px",

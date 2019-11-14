@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import disquette from "./img/disquette_grayscale.png"
+import disquette from "./img/disquette.png"
 
 class Timer extends Component {
 	constructor(props) {
@@ -24,7 +24,7 @@ class Timer extends Component {
 			width: "50px",
 			height: "50px",
 			right: "10px",
-			top: "15px",
+			top: "0px",
 			fontFamily: "VT323",
 			fontSize: "25px",
 			border: "none",
@@ -33,7 +33,7 @@ class Timer extends Component {
 			backgroundColor: "transparent",
 			backgroundSize: "cover",
 			outline: "none", 
-			boxShadow: "1px 1px 2px #000000 "
+			boxShadow: "1px 1px 5px #000000 "
 		};
 
 		const timerContainer = {
@@ -42,8 +42,9 @@ class Timer extends Component {
 			height: "50px",
 			width: "100vw",
 			top: "0px",
+			right: "100px",
 			display: "flex",
-			justifyContent: "center",
+			justifyContent: "flex-end",
 		};
 		
 		return (

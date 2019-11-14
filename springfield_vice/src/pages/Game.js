@@ -1029,6 +1029,14 @@ class Game extends Component {
 		height: config.background.height
 		};
 
+		const topDivStyle = {
+			position: "absolute",
+			width: "100vw",
+			height: "100px",
+			background: "linear-gradient(rgba(0,0,0,0.7), transparent)",
+			// background: "rgba(56,42,125,0.9)"
+		}
+
 		let diff1 = 3 + this.beerCount() - this.obstacleCollisionCount();
 
 		return (
@@ -1040,6 +1048,7 @@ class Game extends Component {
 			autoPlay
 			type="audio/mp3"
 			/>
+			<div style={topDivStyle}></div>
 			<Grid
 			isRunning={this.state.isRunning}
 			isHomerRunningLeft={this.state.isHomerRunningLeft}

@@ -129,8 +129,8 @@ class Health extends Component {
 			// backgroundColor: "rgb(255,255,255,0.6)",
 			backgroundColor: "transparent",
 			position: "absolute",
-			left: "5px",
-			top: "20px"
+			left: "110px",
+			top: "5px"
 		};
 		return (
 			<div id="divHealth" style={styleDivParentBieres}>

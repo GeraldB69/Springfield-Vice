@@ -19,13 +19,15 @@ const modalStyle = {
   backgroundColor: "rgba(0,0,0,0.7)",
   color: "#FFF",
   fontSize: "20px",
+  justifyContent: "center",
 };
 const imgStyle = {
-  backgroundColor: "rgba(56,42,125,0.9)",
+  backgroundColor: "rgba(56,42,125,0.7)",
   backgroundPosition: "center center",
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
   textShadow: "2px 2px 2px rgba(255,0,230,1)",
+  
 }
 
 export default class Modal extends Component {
@@ -47,9 +49,12 @@ export default class Modal extends Component {
     const content = [];
     content.image = imgStyle
 
-    
+    // this.props.origin
     switch (this.props.origin) {
       case "start":
+        content.image = {...content.image,
+            backgroundColor: "rgba(56,42,125,0.9)",
+            }
         {content.header = "Settings"};
         {content.quote = `"Trying is the first step towards failure."`};
         content.buttons = 
@@ -60,7 +65,7 @@ export default class Modal extends Component {
           </>;
         break;
       case "go_win": // FIN DE PARTIE + GAGNANT
-        content.image = {...content.image, backgroundImage: `url(${img_winner})`, backgroundSize: "100%",
+        content.image2 = { backgroundImage: `url(${img_winner})`, backgroundSize: "70%", position: "absolute", width: "710px", height: "295px", backgroundRepeat: "no-repeat", zIndex: "-1", justifyContent: "center",
         }
         content.header = "GOOD JOB !"
         // content.quote = `"Stupid risks make life worth living."`;
@@ -76,7 +81,8 @@ export default class Modal extends Component {
           backgroundPosition: "right 10% center",
           backgroundRepeat: "no-repeat", 
           backgroundSize: "30%",
-          backgroundImage: `url(${img_looser})`
+          backgroundImage: `url(${img_looser})`,
+          backgroundColor: "rgba(56,42,125,0.9)",
           }
         content.header = "GAME OVER"
         content.quote = `"Kid, you tried your best, and you failed miserably.`;
@@ -89,6 +95,9 @@ export default class Modal extends Component {
         {this.props.hide(true)}
         break;
       default: 
+        content.image = {...content.image,
+          backgroundColor: "rgba(56,42,125,0.9)",
+        }
         content.header = "PAUSE";
         content.quote = `"Do you need a break or are you giving up?"`;
         content.buttons =
@@ -126,8 +135,22 @@ export default class Modal extends Component {
   }
 
   render() {
+
+    const containerWrapStyle ={
+      position: "absolute",
+      display: "block",
+      justifyContent: "center",
+      width: "498px",
+      top: "40px",
+      height: "100vh",
+      zIndex: "-1"
+      
+    }
     return createPortal(
       <div style={modalStyle} className="modal" onClick={this.props.onClick}>
+          <div style={containerWrapStyle}>
+              <div style={this.showHeader().image2}></div>
+          </div>
         <div className="modal-wrapper" style={this.showHeader().image}>
           <div className="modal-header">
             <h3>{this.showHeader().header}</h3>
