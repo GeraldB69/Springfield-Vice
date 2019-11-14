@@ -10,7 +10,8 @@
 	position: absolute;
 	width: calc(340px / 6);
 	background: url(img/grandpa.png);
-      }
+	}
+	
 @keyframes animate6 {
 	from
 	{
