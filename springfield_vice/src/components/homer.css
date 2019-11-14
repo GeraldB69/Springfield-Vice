@@ -83,6 +83,30 @@ button {
 	animation: animate 0.7s steps(9) infinite;
 }
 
+.stranglingBart {
+	position: absolute;
+	/* top: -115px;
+	left: -18px; */
+	width: 137px;
+	height: 155px;
+	transform: translate(-50%,-50%);
+	transform: scale(1,1);
+	width: calc(386px / 3);
+	background: url(img/stranglingBartSprite.png);
+	animation: animate10 0.5s steps(3) infinite;
+}
+
+@keyframes animate10 {
+	from
+	{
+		background-position: 0;	
+	}
+	to
+	{
+		background-position: 386px;	
+	}
+}
+
 @keyframes animate {
 	from
 	{

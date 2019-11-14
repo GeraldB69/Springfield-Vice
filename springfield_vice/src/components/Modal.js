@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import config from "../components/configSpringfieldVice.json";
 import { createPortal } from "react-dom";
 import "./modal.css";
+import "./homer.css";
 import img_winner from './img/homer_bart.gif';
 import img_looser from './img/bart_gameover.png';
 
@@ -20,9 +21,10 @@ const modalStyle = {
   color: "#FFF",
   fontSize: "20px",
   justifyContent: "center",
+  verticalAlign: "middle",
 };
 const imgStyle = {
-  backgroundColor: "rgba(56,42,125,0.7)",
+  backgroundColor: "rgba(56,42,125,0.9)",
   backgroundPosition: "center center",
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
@@ -50,7 +52,7 @@ export default class Modal extends Component {
     content.image = imgStyle
 
     // this.props.origin
-    switch (this.props.origin) {
+    switch ("go_win") {
       case "start":
         content.image = {...content.image,
             backgroundColor: "rgba(56,42,125,0.9)",
@@ -65,10 +67,10 @@ export default class Modal extends Component {
           </>;
         break;
       case "go_win": // FIN DE PARTIE + GAGNANT
-        content.image2 = { backgroundImage: `url(${img_winner})`, backgroundSize: "70%", position: "absolute", width: "710px", height: "295px", backgroundRepeat: "no-repeat", zIndex: "-1", justifyContent: "center",
+        content.image2 = { backgroundImage: `url(${img_winner})`, backgroundSize: "70%", position: "absolute", width: "710px", height: "77.5vh", backgroundRepeat: "no-repeat", zIndex: "-1", justifyContent: "center",
         }
         content.header = "GOOD JOB !"
-        // content.quote = `"Stupid risks make life worth living."`;
+        content.quote = `"Stupid risks make life worth living."`;
         content.buttons = 
           <>
             <button>SCORES</button>
@@ -136,25 +138,27 @@ export default class Modal extends Component {
 
   render() {
 
-    const containerWrapStyle ={
-      position: "absolute",
-      display: "block",
-      justifyContent: "center",
-      width: "498px",
-      top: "40px",
-      height: "100vh",
-      zIndex: "-1"
+    // const containerWrapStyle ={
+    //   position: "absolute",
+    //   display: "block",
+    //   justifyContent: "center",
+    //   width: "498px",
+    //   height: "100vh",
+    //   top: "11%",
+    //   zIndex: "-1"
       
-    }
+    // }
+
     return createPortal(
       <div style={modalStyle} className="modal" onClick={this.props.onClick}>
-          <div style={containerWrapStyle}>
+          {/* <div style={containerWrapStyle}>
               <div style={this.showHeader().image2}></div>
-          </div>
+          </div> */}
         <div className="modal-wrapper" style={this.showHeader().image}>
           <div className="modal-header">
             <h3>{this.showHeader().header}</h3>
           </div>
+          <div className="stranglingBart"></div>
           <div className="modal-body">
             <p>{this.showHeader().quote}</p>
             <p>{this.showHeader().quote2}</p>
