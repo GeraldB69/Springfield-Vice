@@ -847,7 +847,7 @@ class Game extends Component {
 	};
 
 	donutCount = () => {
-		let donutCount = 0;
+		let donutCount = 10;
 		this.state.donutPopped.map(item =>
 		item.status === "picked"
 			? (donutCount = donutCount + 1)

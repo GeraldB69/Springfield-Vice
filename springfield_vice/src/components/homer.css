@@ -34,8 +34,8 @@ button {
 	/* position: absolute;
 	left: 65%;
 	bottom: 60px; */
-	transform: translateX(1500px);
-	transition: 1.5s ease-out;
+	transform: translateX(500px);
+	transition: 0.4s linear;
 	/* transition-delay: 0.2s; */
 }
 
