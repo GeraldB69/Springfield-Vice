@@ -56,6 +56,16 @@ class Sound extends Component {
                     type="audio/mp3"
                 /> : ""} 
                 
+                {this.props.musicPlay === true && this.props.musicPlay === true ? <audio
+                    ref="audio_tag"
+					src="http://www.allard-jacquin.com/simpsons2.mp3"
+					controls
+					autoPlay
+					type="audio/mp3"
+				/> : ""}
+
+
+
             </div>
         )
     }
