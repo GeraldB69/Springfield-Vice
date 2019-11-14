@@ -879,13 +879,14 @@ class Game extends Component {
 		this.state.selmaPos.status === "alive"
 		) {
 		this.state.selmaPos.status = "killed";
+		clearInterval(this.intSelma);
 		} else {
 		console.log("raté Selma");
 		}
 	};
 
 	donutCount = () => {
-		let donutCount = 0;
+		let donutCount = 20;
 		this.state.donutPopped.map(item =>
 		item.status === "picked"
 			? (donutCount = donutCount + 1)
