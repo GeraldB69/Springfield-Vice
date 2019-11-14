@@ -579,7 +579,160 @@ class Game extends Component {
 			globalPosition: 0,
 			defilement: 0,
 			bartSeBarreX: 400,
-			bartSeBarreY: 250
+			bartSeBarreY: 250,
+		
+		relativePositionX: config.initialPosition.x,
+		isRunning: false,
+		isHomerRunningLeft: false,
+		beerSound: false,
+		obstSound: false,
+		donutSound: false,
+		gunSound: false,
+		selmaPos: {
+			positionSelmaX: 610,
+			positionSelmaY: 180,
+			SelmaMovX: [
+			10,
+			10,
+			10,
+			10,
+			10,
+			10,
+			10,
+			10,
+			-10,
+			-10,
+			-10,
+			-10,
+			-10,
+			-10
+			],
+			SelmaMovY: [5, 5, 5, 5, 5, 5, 5, -5, -5, -5, -5, -5, -5, -5],
+			status: selmaStatus.ALIVE
+		},
+		seymourPos: {
+			positionSeymourX: 400,
+			positionSeymourY: 250,
+			SeymourMovX: [
+			-10,
+			-10,
+			-10,
+			-10,
+			-10,
+			-10,
+			-10,
+			-10,
+			10,
+			10,
+			10,
+			10,
+			10,
+			10
+			],
+			SeymourMovY: [5, 5, 5, 5, 5, 0, 0, -5, -5, -5, 0, 0, -5, -5]
+		},
+		bartPos: {
+			positionBartX: 6000,
+			positionBartY: 200,
+			BartMovX: [
+			6000,
+			6000,
+			6000,
+			6020,
+			6020,
+			6050,
+			6050,
+			6100,
+			6100,
+			6150,
+			6150,
+			6200,
+			6250,
+			6250,
+			6300,
+			6300,
+			6250,
+			6250,
+			6200,
+			6200,
+			6100,
+			6050
+			],
+			BartMovY: [
+			200,
+			250,
+			250,
+			250,
+			300,
+			300,
+			300,
+			300,
+			250,
+			250,
+			300,
+			300,
+			250,
+			250,
+			200,
+			200,
+			230,
+			230,
+			200,
+			200,
+			180,
+			180
+			]
+		},
+		milhousePos: {
+			positionMilhouseX: 2000,
+			positionMilhouseY: 250,
+			MilhouseMovX: [
+				10,
+				10,
+				10,
+				10,
+				10,
+				10,
+				10,
+				10,
+				-10,
+				-10,
+				-10,
+				-10,
+				-10,
+				-10
+			],
+			MilhouseMovY: [
+				[5, 5, 5, 5, 5, 5, 5, -5, -5, -5, -5, -5, -5, -5],
+			]
+		},
+		grandpaPos: {
+			positionGrandpaX: 3000,
+			positionGrandpaY: 250,
+			GrandpaMovX: [
+				10,
+				10,
+				10,
+				10,
+				10,
+				10,
+				10,
+				10,
+				-10,
+				-10,
+				-10,
+				-10,
+				-10,
+				-10
+			],
+			GrandpaMovY: [
+				[5, 5, 5, 5, 5, 5, 5, -5, -5, -5, -5, -5, -5, -5],
+			]
+		},
+		globalPosition: 0,
+		defilement: 0,
+		bartSeBarreX: 400,
+		bartSeBarreY: 250
 		};
 
 		this.stepX = 0;
@@ -771,14 +924,14 @@ class Game extends Component {
 	isGameOver = () => {
 		const health = this.beerCount() - this.obstacleCollisionCount();
 		if (this.state.seconds === 0 || health <= 0) {
-			// Si perdant :
-			this.stopRunning();
-			clearInterval(this.interval);
-			setTimeout(() => {
-				this.props.history.push("game/?modal=true&go=true");
-				this.setState({ origin: "go_lost" });
-				return;
-			}, 3000);
+		// Si perdant :
+		this.stopRunning();
+		clearInterval(this.interval);
+		setTimeout(() => {
+			this.props.history.push("game/?modal=true&go=true");
+			this.setState({ origin: "go_lost" });
+			return;
+		}, 2000);
 		}
 		if (this.beerCount() === 100) {
 			// Si gagnant :
@@ -820,10 +973,7 @@ class Game extends Component {
 	pauseGame = () => {
 		this.setState({ paused: !this.state.paused });
 		this.pauseTimer();
-		document.getElementById("joystick").style.opacity = "0.7";
-		document.getElementById("button_A").style.opacity = "1";
-		document.getElementById("obstacle_full").style.opacity = "1";
-		document.getElementById("homer_full").style.opacity = "1";
+		document.getElementById("root").classList.remove("background_opacity")
 	};
 
 	collisionDetection = item => {
@@ -969,6 +1119,10 @@ class Game extends Component {
 	};
 
 	throwingDonut = () => {
+		this.setState({ gunSound: true });
+		setTimeout(() => {
+			this.setState({ gunSound: false });
+		}, 1000);
 		this.setState({
 			isThrowing: true
 			// donutPopped: {...this.state.donutPopped, picked: false}
@@ -1004,13 +1158,7 @@ class Game extends Component {
 	hideButtons = () => {
 		// MODAL
 		clearInterval(this.interval);
-		const joystick_id = document.getElementById("joystick");
-		if (joystick_id !== null) {
-			joystick_id.style.opacity = "0";
-			document.getElementById("button_A").style.opacity = "0";
-			document.getElementById("obstacle_full").style.opacity = "0.9";
-			document.getElementById("homer_full").style.opacity = "0.9";
-		}
+		document.getElementById("root").className = "background_opacity";
 	};
 
 	render() {

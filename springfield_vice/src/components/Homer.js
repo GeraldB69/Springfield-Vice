@@ -49,54 +49,49 @@ class Homer extends Component {
       bottom: "0"
     };
 
-    const homerZone = {
-      width: "50px",
-      height: "50px",
-      backgroundColor: "transparent",
-      left: `${this.props.positionX}px`,
-      top: `${this.props.positionY}px`,
-      transform: "scale(" + scaledPosY + ")",
-      position: "absolute",
-      borderRadius: "50%",
-      zIndex: this.props.positionY - 10,
-      filter: `hue-rotate(${this.props.hue}deg)`
-    };
+		const homerZone = {
+			width: "50px",
+			height: "50px",
+			backgroundColor: "transparent",
+			left: `${this.props.positionX}px`,
+			top: `${this.props.positionY}px`,
+			transform: "scale(" + scaledPosY + ")",
+			position: "absolute",
+			borderRadius: "50%",
+			zIndex: this.props.positionY - 10,
+			filter: `hue-rotate(${this.props.hue}deg)`
+		};
+		
+		const homerZone2 = {
+			width: "50px",
+			height: "50px",
+			backgroundColor: "transparent",
+			left: `${this.props.positionX}px`,
+			top: `${this.props.positionY}px`,
+			transform: "scale(" + scaledPosY + ")",
+			position: "absolute",
+			borderRadius: "50%",
+			zIndex: this.props.positionY - 10,
+			animation: "blink .5s infinite",
+		};
+		
+		const homerStyle = {
+			backgroundColor: "transparent",
+			paddingBottom: "30px",
+			height: config.homerSize.height,
+			zIndex: this.props.positionY - 10,
+		};
 
-    const homerZone2 = {
-      width: "50px",
-      height: "50px",
-      backgroundColor: "transparent",
-      left: `${this.props.positionX}px`,
-      top: `${this.props.positionY}px`,
-      transform: "scale(" + scaledPosY + ")",
-      position: "absolute",
-      borderRadius: "50%",
-      zIndex: this.props.positionY - 10,
-      animation: "blink 1s infinite"
-    };
-
-    const homerStyle = {
-      backgroundColor: "transparent",
-      paddingBottom: "30px",
-      height: config.homerSize.height,
-      zIndex: this.props.positionY - 10
-    };
-
-    return (
-      <div id="homer_full">
-        <div style={this.props.isDead === 0 ? homerZone2 : homerZone}>
-          <div style={homerStyle} className={isThrowing}></div>
-          <img
-            src={donut}
-            style={donutStyle}
-            className={this.state.animeClass}
-            alt="donut"
-          />
-          <img src={ripchain} style={ripchainStyle} alt="ripchain" />
-        </div>
-      </div>
-    );
-  }
+		return (
+			<div id="homer_full">
+				<div style={this.props.isDead <= 3 ? homerZone2 : homerZone} >
+					<div style={homerStyle} className={isThrowing} ></div>
+					<img src={donut} style={donutStyle} className={this.state.animeClass} alt="donut" />
+					<img src={ripchain} style={ripchainStyle} alt="ripchain" />
+				</div>
+			</div>
+		);
+	}
 }
 
 export default Homer;

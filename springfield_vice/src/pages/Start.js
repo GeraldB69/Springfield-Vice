@@ -26,6 +26,7 @@ class Start extends Component {
   render() {
     // Modal
     let params = new URLSearchParams(this.props.location.search);
+    document.getElementById("root").classList.remove("background_opacity")
 
     return(
       <div id="init_div">
