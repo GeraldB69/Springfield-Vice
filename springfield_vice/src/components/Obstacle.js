@@ -1,5 +1,5 @@
 import React from "react";
-import barrel from "./img/barrel.png";
+import barrel from "./img/barrel_green_pixelized_posterized.png";
 import config from "./configSpringfieldVice.json";
 
 function Obstacle(props) {
