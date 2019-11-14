@@ -1,0 +1,25 @@
+.milhouseWalk {
+    position: absolute;
+    transform: translate(50%,-50%);
+    transform: scale(-1,1);
+	width: calc(270px / 7);
+	background: url(img/milhouse.png);
+	animation: animate5 1s steps(7) infinite reverse;
+}
+
+.milhouseDead {
+	position: absolute;
+	width: calc(284px / 6);
+	background: url(img/milhouse.png);
+  }
+
+@keyframes animate5 {
+	from
+	{
+		background-position: 0;	
+	}
+	to
+	{
+		background-position: 270px;	
+	}
+}

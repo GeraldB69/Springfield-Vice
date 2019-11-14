@@ -1,0 +1,7 @@
+.App {
+}
+@media screen and (orientation: portrait) {
+	.App {
+		display: none;
+	}
+}

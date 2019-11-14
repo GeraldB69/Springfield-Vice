@@ -1,0 +1,61 @@
+{
+    "background": {
+        "position": "-170px",
+        "height": "100vh",
+        "defilement": 0.05
+    },
+    "limits": {
+        "topLimit": 150,
+        "rightLimit": 480,
+        "bottomLimit": 300,
+        "leftLimit": 200
+    },
+    "joystick": {
+        "vitesseX": 60,
+        "vitesseY": 10,
+        "positionX": "80px",
+        "positionY": "80px"
+    },
+    "initialPosition": {
+        "x": 80,
+        "y": 150
+    },
+    "homerSize": {
+        "scale": 0.003,
+        "height": "150px"
+    },
+    "donutSize": {
+        "width": "25px"
+    },
+    "timer": {
+        "seconds": 200
+    },
+    "start": {
+        "firstScreen": true
+    },
+    "item": {
+        "scale": 0.003
+    },
+    "obstacle": {
+        "scale": 0.008
+    },
+    "modal": {
+        "music": true,
+        "sounds": true
+    },
+    "bart": {
+        "scale": 0.005
+    },
+    "selma": {
+        "scale": 0.007
+    },
+    "seymour": {
+        "scale": 0.007
+    },
+    "milhouse": {
+        "scale": 0.007
+    },
+    "grandpa": {
+        "scale": 0.007
+    }
+}

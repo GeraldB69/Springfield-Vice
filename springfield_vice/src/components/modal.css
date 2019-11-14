@@ -1,0 +1,46 @@
+div#modal_root {
+  font-family: Mansalva, cursive;
+  z-index: 9999;
+}
+
+.modal-wrapper {
+  /* transform: rotate(-2deg); */
+  transition: all 3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: center;
+  margin: 2em auto;
+  padding: 1.5em;
+  background: #263238;
+  color: #ebdb34;
+  min-width: 80%;
+  border-radius: 5px;
+  opacity: 0.8;
+}
+
+.modal-header h3 {
+  font-size: 26pt;
+  margin: 0;
+}
+
+#close {
+  position: absolute;
+  top: 2em;
+  right: 2em;
+  width: 3em;
+  hieght: 3em;
+  border-radius: 50%;
+}
+
+.modal button {
+  z-index: 9999;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  outline: none;
+  width: 110px;
+  font-size: 0.7em;
+  margin: 2px;
+}
