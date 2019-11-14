@@ -62,7 +62,7 @@ class Grandpa extends Component {
 
     return (
       <div>
-        <div id="Selma" style={grandpaZone}>
+        <div id="Grandpa" style={grandpaZone}>
           <div className={classGrandpa} style={styleGrandpa} />
         </div>
       </div>
