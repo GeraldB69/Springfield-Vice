@@ -801,10 +801,6 @@ class Game extends Component {
 		this.setState({ paused: !this.state.paused });
 		this.pauseTimer();
 		document.getElementById("root").classList.remove("background_opacity")
-		document.getElementById("joystick").style.opacity = "0.7";
-		// document.getElementById("button_A").style.opacity = "1";
-//		document.getElementById("obstacle_full").style.opacity = "1";
-		// document.getElementById("homer_full").style.opacity = "1";
 	};
 
 	collisionDetection = item => {
@@ -955,11 +951,7 @@ class Game extends Component {
 	hideButtons = () => {
 		// MODAL
 		clearInterval(this.interval);
-		const joystick_id = document.getElementById("joystick");
-		if (joystick_id !== null) {
-		joystick_id.style.opacity = "0";
 		document.getElementById("root").className = "background_opacity"
-		}
 	};
 
 	render() {
