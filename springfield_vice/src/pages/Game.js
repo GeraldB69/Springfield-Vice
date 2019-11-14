@@ -431,7 +431,7 @@ class Game extends Component {
 		beerSound: false,
 		obstSound: false,
 		donutSound: false,
-
+		gunSound: false,
 		selmaPos: {
 			positionSelmaX: 610,
 			positionSelmaY: 180,
@@ -916,6 +916,10 @@ class Game extends Component {
 	};
 
 	throwingDonut = () => {
+		this.setState({ gunSound: true });
+		setTimeout(() => {
+			this.setState({ gunSound: false });
+		}, 1000);
 		this.setState({
 		isThrowing: true
 		// donutPopped: {...this.state.donutPopped, picked: false}
@@ -1074,6 +1078,7 @@ class Game extends Component {
 			{this.state.beerSound === true ? <Sound beerSound /> : ""}
 			{this.state.obstSound === true ? <Sound obstSound /> : ""}
 			{this.state.donutSound === true ? <Sound donutSound /> : ""}
+			{this.state.gunSound === true ? <Sound gunSound /> : ""}
 		</div>
 		);
 	}
