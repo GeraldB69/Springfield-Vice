@@ -30,16 +30,20 @@ export default class Modal extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      music: config.modal.music,
-      sounds: config.modal.sounds,
+      isPlaySounds: true,
     };
   };
+
+  forCallbacktoGame = () => {
+    this.props.toggleSounds(!this.state.isPlaySounds);
+    this.setState({isPlaySounds: false});
+  }
 
   showHeader() {
     const other_buttons = 
       <>
         <button>SCORES</button>
-        <button onClick={() => this.toggleSounds()}>SOUNDS {!this.state.sounds ? 'ON' : 'OFF'}</button>
+        <button onClick={this.forCallbacktoGame}>SOUNDS {!this.state.sounds ? 'ON' : 'OFF'}</button>
         <button onClick={() => this.toggleMusic()}>MUSIC {!this.state.music ? 'ON' : 'OFF'}</button>
       </>;
     const content = [];
@@ -111,15 +115,6 @@ export default class Modal extends Component {
     }
   }
 
-  toggleSounds = () => {
-    this.setState({sounds: !this.state.sounds});
-    if (this.state.sounds) {
-      // couper les sons...
-    }
-    else {
-      // remettre les sons...
-    }
-  }
 
   render() {
     return createPortal(
