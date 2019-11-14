@@ -17,7 +17,7 @@ import Obstacle from "../components/Obstacle";
 import Bart from "../components/Bart";
 import Seymour from "../components/Seymour";
 import Milhouse from "../components/Milhouse";
-import Grandpa from "../components/Grandpa2";
+import Grandpa from "../components/Grandpa";
 import pink_ground from "../components/img/pink_ground.png";
 import springfield80s from "../components/img/background_80s_repeat.png";
 import Sound from "../components/Sound";
@@ -529,9 +529,9 @@ class Game extends Component {
 					-10,
 					-10
 				],
-				GrandpaMovY: [
-					[5, 5, 5, 5, 5, 5, 5, -5, -5, -5, -5, -5, -5, -5],
-				],
+				GrandpaMovY: 
+					[5, 5, 5, 5, 5, 5, 5, -5, -5, -5, -5, -5],
+				
 				status: grandpaStatus.ALIVE
 
 			},
@@ -937,7 +937,7 @@ class Game extends Component {
 			if (
 				item.positionObstacleY < this.state.positionY + 15 &&
 				item.positionObstacleY > this.state.positionY - 50 &&
-				item.positionObstacleX < this.state.relativePositionX + 1000 &&
+				item.positionObstacleX < this.state.relativePositionX + 500 &&
 				item.positionObstacleX > this.state.relativePositionX &&
 				item.status === "ground" &&
 				this.donutCount() > 0
@@ -1077,13 +1077,13 @@ class Game extends Component {
 					positionMilhouseX={this.state.milhousePos.positionX}
 					positionMilhouseY={this.state.milhousePos.positionY}
 					defilement={this.state.defilement}
-					milhousePos={this.state.milhousePos}
+					status={this.state.milhousePos.status}
 				/>
 				<Grandpa
 					positionGrandpaX={this.state.grandpaPos.positionX}
 					positionGrandpaY={this.state.grandpaPos.positionY}
 					defilement={this.state.defilement}
-					grandpaPos={this.state.grandpaPos}
+					status={this.state.grandpaPos.status}
 				/>
 				<Donut
 					donutPopped={this.state.donutPopped}
