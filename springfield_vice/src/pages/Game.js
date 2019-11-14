@@ -958,7 +958,7 @@ class Game extends Component {
 
 	toggleSounds = (stateSoundsfromModal) => {
 		console.log("ici 1 :", stateSoundsfromModal);
-		this.setState({soundsPlay:stateSoundsfromModal});
+		this.setState({soundsPlay : stateSoundsfromModal});
 	}
 
 
