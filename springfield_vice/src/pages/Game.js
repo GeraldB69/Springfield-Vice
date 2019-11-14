@@ -57,6 +57,7 @@ class Game extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			soundsPlay: true,
 			positionX: config.initialPosition.x,
 			positionY: config.initialPosition.y,
 			showModal: false,
@@ -528,9 +529,9 @@ class Game extends Component {
 					-10,
 					-10
 				],
-				GrandpaMovY: [
-					[5, 5, 5, 5, 5, 5, 5, -5, -5, -5, -5, -5, -5, -5],
-				],
+				GrandpaMovY: 
+					[5, 5, 5, 5, 5, 5, 5, -5, -5, -5, -5, -5],
+				
 				status: grandpaStatus.ALIVE
 
 			},
@@ -540,6 +541,7 @@ class Game extends Component {
 			beerSound: false,
 			obstSound: false,
 			donutSound: false,
+			opponentSound: false,
 			globalPosition: 0,
 			defilement: 0,
 			bartSeBarreX: 400,
@@ -829,11 +831,11 @@ class Game extends Component {
 			this.state.positionY > item.positionY - 30 &&
 			item.status === "alive"
 		) {
-
+/*ici*/
 			item.status = "killed";
-			this.setState({ beerSound: true, beerCountOrigin: this.state.beerCountOrigin - 1 });
+			this.setState({ opponentSound: true, beerCountOrigin: this.state.beerCountOrigin - 1 });
 			setTimeout(() => {
-				this.setState({ beerSound: false });
+				this.setState({ opponentSound: false });
 			}, 2000);
 		}
 	};
@@ -935,7 +937,7 @@ class Game extends Component {
 			if (
 				item.positionObstacleY < this.state.positionY + 15 &&
 				item.positionObstacleY > this.state.positionY - 50 &&
-				item.positionObstacleX < this.state.relativePositionX + 1000 &&
+				item.positionObstacleX < this.state.relativePositionX + 500 &&
 				item.positionObstacleX > this.state.relativePositionX &&
 				item.status === "ground" &&
 				this.donutCount() > 0
@@ -1028,6 +1030,11 @@ class Game extends Component {
 		document.getElementById("root").className = "background_opacity";
 	};
 
+
+	toggleSounds = (stateSounds) => {
+		this.setState({soundsPlay : stateSounds});
+	}
+
 	render() {
 		// Modal
 		let params = new URLSearchParams(this.props.location.search);
@@ -1070,13 +1077,13 @@ class Game extends Component {
 					positionMilhouseX={this.state.milhousePos.positionX}
 					positionMilhouseY={this.state.milhousePos.positionY}
 					defilement={this.state.defilement}
-					milhousePos={this.state.milhousePos}
+					status={this.state.milhousePos.status}
 				/>
 				<Grandpa
 					positionGrandpaX={this.state.grandpaPos.positionX}
 					positionGrandpaY={this.state.grandpaPos.positionY}
 					defilement={this.state.defilement}
-					grandpaPos={this.state.grandpaPos}
+					status={this.state.grandpaPos.status}
 				/>
 				<Donut
 					donutPopped={this.state.donutPopped}
@@ -1138,6 +1145,8 @@ class Game extends Component {
 
 				{params.get("modal") && (
 					<Modal
+						toggleSounds = {this.toggleSounds}
+					  	getStateSounds={this.state.soundsPlay}
 						close={() => {
 							this.props.history.push(this.props.location.pathname);
 						}}
@@ -1147,11 +1156,11 @@ class Game extends Component {
 						hide={() => this.hideButtons()}
 					/>
 				)}
-				{this.state.beerSound === true ? <Sound beerSound /> : ""}
-				{this.state.obstSound === true ? <Sound obstSound /> : ""}
-				{this.state.donutSound === true ? <Sound donutSound /> : ""}
-
-				{this.state.gunSound === true ? <Sound gunSound /> : ""}
+				{this.state.beerSound === true ? <Sound beerSound soundsPlay={this.state.soundsPlay} /> : ""}
+				{this.state.obstSound === true ? <Sound obstSound soundsPlay={this.state.soundsPlay} /> : ""}
+				{this.state.donutSound === true ? <Sound donutSound soundsPlay={this.state.soundsPlay} /> : ""}
+				{this.state.opponentSound === true ? <Sound opponentSound soundsPlay={this.state.soundsPlay}/> : ""}
+				{this.state.gunSound === true ? <Sound gunSound soundsPlay={this.state.soundsPlay}/> : ""}
 			</div>
 		);
 	}
