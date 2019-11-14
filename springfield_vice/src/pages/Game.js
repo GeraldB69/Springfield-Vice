@@ -758,7 +758,7 @@ class Game extends Component {
 			this.props.history.push("game/?modal=true&go=true");
 			this.setState({ origin: "go_lost" });
 			return;
-		}, 3000);
+		}, 2000);
 		}
 		if (this.beerCount() === 100) {
 		// Si gagnant :
@@ -800,10 +800,11 @@ class Game extends Component {
 	pauseGame = () => {
 		this.setState({ paused: !this.state.paused });
 		this.pauseTimer();
+		document.getElementById("root").classList.remove("background_opacity")
 		document.getElementById("joystick").style.opacity = "0.7";
-		document.getElementById("button_A").style.opacity = "1";
-		document.getElementById("obstacle_full").style.opacity = "1";
-		document.getElementById("homer_full").style.opacity = "1";
+		// document.getElementById("button_A").style.opacity = "1";
+//		document.getElementById("obstacle_full").style.opacity = "1";
+		// document.getElementById("homer_full").style.opacity = "1";
 	};
 
 	collisionDetection = item => {
@@ -957,9 +958,7 @@ class Game extends Component {
 		const joystick_id = document.getElementById("joystick");
 		if (joystick_id !== null) {
 		joystick_id.style.opacity = "0";
-		document.getElementById("button_A").style.opacity = "0";
-		document.getElementById("obstacle_full").style.opacity = "0.9";
-		document.getElementById("homer_full").style.opacity = "0.9";
+		document.getElementById("root").className = "background_opacity"
 		}
 	};
 
