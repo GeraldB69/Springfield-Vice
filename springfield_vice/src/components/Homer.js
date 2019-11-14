@@ -28,7 +28,7 @@ class Homer extends Component {
 
 		if (this.props.isThrowing && this.state.animeClass === "donutHide") {
 			this.setState({ animeClass: "donutThrow" });
-			setTimeout(() => this.setState({ animeClass: "donutHide" }), 1000);
+			setTimeout(() => this.setState({ animeClass: "donutHide" }), 200);
 		}
 
 		const donutStyle = {

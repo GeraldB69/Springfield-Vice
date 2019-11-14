@@ -71,6 +71,71 @@ class Game extends Component {
 				config.limits.bottomLimit
 				)
 			),
+			status: donutStatus.PICKED,
+			display: true
+			},
+			{
+			positionDonutX: parseInt(
+				getRandomArbitrary(config.limits.leftLimit, 1000)
+			),
+			positionDonutY: parseInt(
+				getRandomArbitrary(
+				config.limits.topLimit,
+				config.limits.bottomLimit
+				)
+			),
+			status: donutStatus.PICKED,
+			display: true
+			},
+			{
+			positionDonutX: parseInt(
+				getRandomArbitrary(config.limits.leftLimit, 1000)
+			),
+			positionDonutY: parseInt(
+				getRandomArbitrary(
+				config.limits.topLimit,
+				config.limits.bottomLimit
+				)
+			),
+			status: donutStatus.PICKED,
+			display: true
+			},
+			{
+			positionDonutX: parseInt(
+				getRandomArbitrary(config.limits.leftLimit, 1000)
+			),
+			positionDonutY: parseInt(
+				getRandomArbitrary(
+				config.limits.topLimit,
+				config.limits.bottomLimit
+				)
+			),
+			status: donutStatus.PICKED,
+			display: true
+			},
+			{
+			positionDonutX: parseInt(
+				getRandomArbitrary(config.limits.leftLimit, 1000)
+			),
+			positionDonutY: parseInt(
+				getRandomArbitrary(
+				config.limits.topLimit,
+				config.limits.bottomLimit
+				)
+			),
+			status: donutStatus.PICKED,
+			display: true
+			},
+			{
+			positionDonutX: parseInt(
+				getRandomArbitrary(config.limits.leftLimit, 1000)
+			),
+			positionDonutY: parseInt(
+				getRandomArbitrary(
+				config.limits.topLimit,
+				config.limits.bottomLimit
+				)
+			),
 			status: donutStatus.GROUND,
 			display: true
 			},
@@ -885,7 +950,7 @@ class Game extends Component {
 	};
 
 	donutCount = () => {
-		let donutCount = 10;
+		let donutCount = 0;
 		this.state.donutPopped.map(item =>
 		item.status === "picked"
 			? (donutCount = donutCount + 1)
