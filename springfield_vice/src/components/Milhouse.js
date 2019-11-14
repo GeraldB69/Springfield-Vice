@@ -19,7 +19,7 @@ function Milhouse (props) {
 
     const styleMilhouse = {
         width: "35px",
-        height: "70px",
+        height: "60px",
         position: "absolute",
         left: "-5px",
         top: "-40px",

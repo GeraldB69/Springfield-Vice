@@ -7,45 +7,47 @@ import donut from "./img/donut.png";
 import ripchain from "./img/ripchain.png";
 
 class Homer extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			ripchain: false,
-			animeClass: "donutHide"
-		};
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      ripchain: false,
+      animeClass: "donutHide"
+    };
+  }
 
-	render() {
-		const scaledPosY = this.props.positionY * config.homerSize.scale;
+  render() {
+    const scaledPosY = this.props.positionY * config.homerSize.scale;
 
-		const displayDonut = this.props.donutCount > 0 ? "block" : "none";
-		const displayRipchain = this.state.ripchain ? "block" : "none";
+    const displayDonut = this.props.donutCount > 0 ? "block" : "none";
+    const displayRipchain = this.state.ripchain ? "block" : "none";
 
-		const isHomerRunningLeft = this.props.isHomerRunningLeft ? "homerRunLeft" : "homerRun";
-		const isRunning = this.props.isRunning ? isHomerRunningLeft : "homerStand";
-		const isThrowing = this.props.isThrowing ? "homerShoot" : isRunning;
-		// const throwingDonut = this.props.isThrowing ? 'donutThrow' : 'donutHide';
+    const isHomerRunningLeft = this.props.isHomerRunningLeft
+      ? "homerRunLeft"
+      : "homerRun";
+    const isRunning = this.props.isRunning ? isHomerRunningLeft : "homerStand";
+    const isThrowing = this.props.isThrowing ? "homerShoot" : isRunning;
+    // const throwingDonut = this.props.isThrowing ? 'donutThrow' : 'donutHide';
 
-		if (this.props.isThrowing && this.state.animeClass === "donutHide") {
-			this.setState({ animeClass: "donutThrow" });
-			setTimeout(() => this.setState({ animeClass: "donutHide" }), 1000);
-		}
+    if (this.props.isThrowing && this.state.animeClass === "donutHide") {
+      this.setState({ animeClass: "donutThrow" });
+      setTimeout(() => this.setState({ animeClass: "donutHide" }), 1000);
+    }
 
-		const donutStyle = {
-			display: displayDonut,
-			width: config.donutSize.width, 
-			position: "absolute",
-			top: "-40px",
-			left: "10px"
-		};
+    const donutStyle = {
+      display: displayDonut,
+      width: config.donutSize.width,
+      position: "absolute",
+      top: "-40px",
+      left: "10px"
+    };
 
-		const ripchainStyle = {
-			display: displayRipchain,
-			width: "60px",
-			position: "absolute",
-			left: "50%",
-			bottom: "0"
-		};
+    const ripchainStyle = {
+      display: displayRipchain,
+      width: "60px",
+      position: "absolute",
+      left: "50%",
+      bottom: "0"
+    };
 
 		const homerZone = {
 			width: "50px",
