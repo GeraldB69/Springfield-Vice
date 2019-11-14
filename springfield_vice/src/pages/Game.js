@@ -438,8 +438,8 @@ class Game extends Component {
 			donutSound: false,
 
 			selmaPos: {
-				positionSelmaX: 610,
-				positionSelmaY: 180,
+				positionX: 610,
+				positionY: 180,
 				SelmaMovX: [
 					10,
 					10,
@@ -460,8 +460,8 @@ class Game extends Component {
 				status: selmaStatus.ALIVE
 			},
 			seymourPos: {
-				positionSeymourX: 400,
-				positionSeymourY: 250,
+				positionX: 400,
+				positionY: 250,
 				SeymourMovX: [
 					-10,
 					-10,
@@ -531,8 +531,8 @@ class Game extends Component {
 				]
 			},
 			milhousePos: {
-				positionMilhouseX: 2000,
-				positionMilhouseY: 250,
+				positionX: 2000,
+				positionY: 250,
 				MilhouseMovX: [
 					10,
 					10,
@@ -552,8 +552,8 @@ class Game extends Component {
 				]
 			},
 			grandpaPos: {
-				positionGrandpaX: 3000,
-				positionGrandpaY: 250,
+				positionX: 3000,
+				positionY: 250,
 				GrandpaMovX: [
 					10,
 					10,
@@ -585,8 +585,8 @@ class Game extends Component {
 			donutSound: false,
 			gunSound: false,
 			selmaPos: {
-				positionSelmaX: 610,
-				positionSelmaY: 180,
+				positionX: 610,
+				positionY: 180,
 				SelmaMovX: [
 					10,
 					10,
@@ -605,8 +605,8 @@ class Game extends Component {
 				status: selmaStatus.ALIVE
 			},
 			seymourPos: {
-				positionSeymourX: 400,
-				positionSeymourY: 250,
+				positionX: 400,
+				positionY: 250,
 				SeymourMovX: [
 					-10,
 					-10,
@@ -679,8 +679,8 @@ class Game extends Component {
 				]
 			},
 			milhousePos: {
-				positionMilhouseX: 2000,
-				positionMilhouseY: 250,
+				positionX: 2000,
+				positionY: 250,
 				MilhouseMovX: [
 					10,
 					10,
@@ -702,8 +702,8 @@ class Game extends Component {
 				]
 			},
 			grandpaPos: {
-				positionGrandpaX: 3000,
-				positionGrandpaY: 250,
+				positionX: 3000,
+				positionY: 250,
 				GrandpaMovX: [
 					10,
 					10,
@@ -727,7 +727,8 @@ class Game extends Component {
 			globalPosition: 0,
 			defilement: 0,
 			bartSeBarreX: 400,
-			bartSeBarreY: 250
+			bartSeBarreY: 250,
+			beerCountOrigin: 3
 		};
 
 		this.stepX = 0;
@@ -810,14 +811,14 @@ class Game extends Component {
 		let i = 0;
 		this.intSelma = setInterval(() => {
 			let newPosX =
-				this.state.selmaPos.positionSelmaX + this.state.selmaPos.SelmaMovX[i];
+				this.state.selmaPos.positionX + this.state.selmaPos.SelmaMovX[i];
 			let newPosY =
-				this.state.selmaPos.positionSelmaY + this.state.selmaPos.SelmaMovY[i];
+				this.state.selmaPos.positionY + this.state.selmaPos.SelmaMovY[i];
 			this.setState({
 				selmaPos: {
 					...this.state.selmaPos,
-					positionSelmaX: newPosX,
-					positionSelmaY: newPosY
+					positionX: newPosX,
+					positionY: newPosY
 				}
 			});
 			i++;
@@ -831,16 +832,16 @@ class Game extends Component {
 		let i = 0;
 		this.intSeymour = setInterval(() => {
 			let newPosX =
-				this.state.seymourPos.positionSeymourX +
+				this.state.seymourPos.positionX +
 				this.state.seymourPos.SeymourMovX[i];
 			let newPosY =
-				this.state.seymourPos.positionSeymourY +
+				this.state.seymourPos.positionY +
 				this.state.seymourPos.SeymourMovY[i];
 			this.setState({
 				seymourPos: {
 					...this.state.seymourPos,
-					positionSeymourX: newPosX,
-					positionSeymourY: newPosY
+					positionX: newPosX,
+					positionY: newPosY
 				}
 			});
 			i++;
@@ -873,10 +874,10 @@ class Game extends Component {
 	moveMilhouse = () => {
 		let i = 0;
 		this.intMilhouse = setInterval(() => {
-			let newPosX = this.state.milhousePos.positionMilhouseX + this.state.milhousePos.MilhouseMovX[i];
-			let newPosY = this.state.milhousePos.positionMilhouseY + this.state.milhousePos.MilhouseMovY[i];
+			let newPosX = this.state.milhousePos.positionX + this.state.milhousePos.MilhouseMovX[i];
+			let newPosY = this.state.milhousePos.positionY + this.state.milhousePos.MilhouseMovY[i];
 			this.setState({
-				milhousePos: { ...this.state.milhousePos, positionMilhouseX: newPosX, positionMihouseY: newPosY }
+				milhousePos: { ...this.state.milhousePos, positionX: newPosX, positionMihouseY: newPosY }
 			});
 			i++;
 			if (i >= this.state.milhousePos.MilhouseMovX.length) {
@@ -888,10 +889,10 @@ class Game extends Component {
 	moveGrandpa = () => {
 		let i = 0;
 		this.intGrandpa = setInterval(() => {
-			let newPosX = this.state.grandpaPos.positionGrandpaX + this.state.grandpaPos.GrandpaMovX[i];
-			let newPosY = this.state.grandpaPos.positionGrandpaY + this.state.grandpaPos.GrandpaMovY[i];
+			let newPosX = this.state.grandpaPos.positionX + this.state.grandpaPos.GrandpaMovX[i];
+			let newPosY = this.state.grandpaPos.positionY + this.state.grandpaPos.GrandpaMovY[i];
 			this.setState({
-				grandpaPos: { ...this.state.grandpaPos, positionGrandpaX: newPosX, positionGrandpaY: newPosY }
+				grandpaPos: { ...this.state.grandpaPos, positionX: newPosX, positionY: newPosY }
 			});
 			i++;
 			if (i >= this.state.grandpaPos.GrandpaMovX.length) {
@@ -917,7 +918,7 @@ class Game extends Component {
 	};
 
 	isGameOver = () => {
-		const health = this.beerCount() - this.obstacleCollisionCount();
+		const health = this.beerCount(this.state.beerCountOrigin) - this.obstacleCollisionCount();
 		if (this.state.seconds === 0 || health <= 0) {
 			// Si perdant :
 			this.stopRunning();
@@ -928,7 +929,7 @@ class Game extends Component {
 				return;
 			}, 2000);
 		}
-		if (this.beerCount() === 100) {
+		if (this.beerCount(this.state.beerCountOrigin) === 100) {
 			// Si gagnant :
 			this.stopRunning();
 			clearInterval(this.interval);
@@ -1003,6 +1004,23 @@ class Game extends Component {
 		}, 800);
 		}
 	};
+	collisionDetectionOpponent = item => {
+		if (
+			this.state.relativePositionX > item.positionX - 30 &&
+			this.state.relativePositionX < item.positionX + 30 &&
+			this.state.positionY < item.positionY + 30 &&
+			this.state.positionY > item.positionY - 30 &&
+			item.status === "alive"
+		) {
+
+			item.status = "killed";
+			this.setState({ beerSound: true, beerCountOrigin: this.state.beerCountOrigin - 1 });
+			setTimeout(() => {
+				this.setState({ beerSound: false });
+			}, 2000);
+		}
+	};
+
 
 	collisionDetectionObstacle = item => {
 		if (
@@ -1043,23 +1061,23 @@ class Game extends Component {
 
 	collisionDonutLauncher = () => {
 		if (
-			this.state.selmaPos.positionSelmaY < this.state.positionY + 20 &&
-			this.state.selmaPos.positionSelmaY > this.state.positionY - 50 &&
-			this.state.selmaPos.positionSelmaX < this.state.relativePositionX + 500 &&
-			this.state.selmaPos.positionSelmaX > this.state.relativePositionX &&
+			this.state.selmaPos.positionY < this.state.positionY + 20 &&
+			this.state.selmaPos.positionY > this.state.positionY - 50 &&
+			this.state.selmaPos.positionX < this.state.relativePositionX + 500 &&
+			this.state.selmaPos.positionX > this.state.relativePositionX &&
 			this.state.selmaPos.status === "alive" &&
 			this.donutCount() > 0
 		) {
-		this.state.selmaPos.status = "killed";
-		clearInterval(this.intSelma);
-		console.log('Kill Selma')
+			this.state.selmaPos.status = "killed";
+			clearInterval(this.intSelma);
+			console.log('Kill Selma')
 		}
-		
+
 		if (
-			this.state.seymourPos.positionSeymourY < this.state.positionY + 20 &&
-			this.state.seymourPos.positionSeymourY > this.state.positionY - 50 &&
-			this.state.seymourPos.positionSeymourX < this.state.relativePositionX + 500 &&
-			this.state.seymourPos.positionSeymourX > this.state.relativePositionX &&
+			this.state.seymourPos.positionY < this.state.positionY + 20 &&
+			this.state.seymourPos.positionY > this.state.positionY - 50 &&
+			this.state.seymourPos.positionX < this.state.relativePositionX + 500 &&
+			this.state.seymourPos.positionX > this.state.relativePositionX &&
 			this.state.seymourPos.status === "alive" &&
 			this.donutCount() > 0
 		) {
@@ -1095,8 +1113,8 @@ class Game extends Component {
 
 		return donutCount;
 	};
-	beerCount = () => {
-		let beerCount = 3;
+	beerCount = (beerCountOrigin) => {
+		let beerCount = beerCountOrigin;
 		this.state.beerPopped.map(item =>
 			item.status === "picked"
 				? (beerCount = beerCount + 1)
@@ -1112,6 +1130,7 @@ class Game extends Component {
 				? (obstacleCount = obstacleCount + 1)
 				: (obstacleCount = obstacleCount + 0)
 		);
+
 
 		return obstacleCount;
 	};
@@ -1150,6 +1169,8 @@ class Game extends Component {
 		this.state.obstaclePopped.map(item => {
 			this.collisionDetectionObstacle(item);
 		});
+		this.collisionDetectionOpponent(this.state.selmaPos)
+		this.collisionDetectionOpponent(this.state.seymourPos)
 		this.testLimitsOfMap();
 	};
 
@@ -1169,7 +1190,7 @@ class Game extends Component {
 			height: config.background.height
 		};
 
-		let diff1 = 3 + this.beerCount() - this.obstacleCollisionCount();
+		let diff1 = 3 + this.beerCount(this.state.beerCountOrigin) - this.obstacleCollisionCount();
 
 		return (
 			<div className="game" style={bgStyle}>
@@ -1186,25 +1207,25 @@ class Game extends Component {
 				/>
 
 				<Selma
-					positionSelmaX={this.state.selmaPos.positionSelmaX}
-					positionSelmaY={this.state.selmaPos.positionSelmaY}
+					positionSelmaX={this.state.selmaPos.positionX}
+					positionSelmaY={this.state.selmaPos.positionY}
 					defilement={this.state.defilement}
 					status={this.state.selmaPos.status}
 				/>
 				<Seymour
-					positionSeymourX={this.state.seymourPos.positionSeymourX}
-					positionSeymourY={this.state.seymourPos.positionSeymourY}
+					positionSeymourX={this.state.seymourPos.positionX}
+					positionSeymourY={this.state.seymourPos.positionY}
 					defilement={this.state.defilement}
 					status={this.state.seymourPos.status}
 				/>
 				<Milhouse
-					positionMilhouseX={this.state.milhousePos.positionMilhouseX + this.state.defilement}
-					positionMilhouseY={this.state.milhousePos.positionMilhouseY}
+					positionMilhouseX={this.state.milhousePos.positionX + this.state.defilement}
+					positionMilhouseY={this.state.milhousePos.positionY}
 					milhousePos={this.state.milhousePos}
 				/>
 				<Grandpa
-					positionGrandpaX={this.state.grandpaPos.positionGrandpaX + this.state.defilement}
-					positionGrandpaY={this.state.grandpaPos.positionGrandpaY}
+					positionGrandpaX={this.state.grandpaPos.positionX + this.state.defilement}
+					positionGrandpaY={this.state.grandpaPos.positionY}
 					grandpaPos={this.state.grandpaPos}
 				/>
 				<Donut
@@ -1242,7 +1263,7 @@ class Game extends Component {
 
 				<DonutCounter donutCount={this.donutCount()} />
 				<Health
-					beerCounter={this.beerCount()}
+					beerCounter={this.beerCount(this.state.beerCountOrigin)}
 					obstCounter={this.obstacleCollisionCount()}
 				/>
 
