@@ -1068,11 +1068,11 @@ class Game extends Component {
 			this.state.selmaPos.status === "alive" &&
 			this.donutCount() > 0
 		) {
-		this.state.selmaPos.status = "killed";
-		clearInterval(this.intSelma);
-		console.log('Kill Selma')
+			this.state.selmaPos.status = "killed";
+			clearInterval(this.intSelma);
+			console.log('Kill Selma')
 		}
-		
+
 		if (
 			this.state.seymourPos.positionY < this.state.positionY + 20 &&
 			this.state.seymourPos.positionY > this.state.positionY - 50 &&
