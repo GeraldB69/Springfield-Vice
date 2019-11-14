@@ -52,11 +52,8 @@ export default class Modal extends Component {
     content.image = imgStyle
 
     // this.props.origin
-    switch ("go_win") {
+    switch (this.props.origin) {
       case "start":
-        content.image = {...content.image,
-            backgroundColor: "rgba(56,42,125,0.9)",
-            }
         {content.header = "Settings"};
         {content.quote = `"Trying is the first step towards failure."`};
         content.buttons = 
@@ -67,8 +64,7 @@ export default class Modal extends Component {
           </>;
         break;
       case "go_win": // FIN DE PARTIE + GAGNANT
-        content.image2 = { backgroundImage: `url(${img_winner})`, backgroundSize: "70%", position: "absolute", width: "710px", height: "77.5vh", backgroundRepeat: "no-repeat", zIndex: "-1", justifyContent: "center",
-        }
+        content.image2 = { position: "absolute", left: "10%", top: "25%"}
         content.header = "GOOD JOB !"
         content.quote = `"Stupid risks make life worth living."`;
         content.buttons = 
@@ -84,7 +80,6 @@ export default class Modal extends Component {
           backgroundRepeat: "no-repeat", 
           backgroundSize: "30%",
           backgroundImage: `url(${img_looser})`,
-          backgroundColor: "rgba(56,42,125,0.9)",
           }
         content.header = "GAME OVER"
         content.quote = `"Kid, you tried your best, and you failed miserably.`;
@@ -96,10 +91,7 @@ export default class Modal extends Component {
           </>;
         {this.props.hide(true)}
         break;
-      default: 
-        content.image = {...content.image,
-          backgroundColor: "rgba(56,42,125,0.9)",
-        }
+      default:
         content.header = "PAUSE";
         content.quote = `"Do you need a break or are you giving up?"`;
         content.buttons =
@@ -138,27 +130,18 @@ export default class Modal extends Component {
 
   render() {
 
-    // const containerWrapStyle ={
-    //   position: "absolute",
-    //   display: "block",
-    //   justifyContent: "center",
-    //   width: "498px",
-    //   height: "100vh",
-    //   top: "11%",
-    //   zIndex: "-1"
-      
-    // }
+    
 
     return createPortal(
       <div style={modalStyle} className="modal" onClick={this.props.onClick}>
-          {/* <div style={containerWrapStyle}>
-              <div style={this.showHeader().image2}></div>
-          </div> */}
+          
         <div className="modal-wrapper" style={this.showHeader().image}>
           <div className="modal-header">
             <h3>{this.showHeader().header}</h3>
           </div>
-          <div className="stranglingBart"></div>
+
+          {this.props.origin === "go_win" ? <div style={this.showHeader().image2} className="stranglingBart"></div> : ""}
+          
           <div className="modal-body">
             <p>{this.showHeader().quote}</p>
             <p>{this.showHeader().quote2}</p>
