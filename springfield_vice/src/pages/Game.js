@@ -18,8 +18,8 @@ import Bart from "../components/Bart";
 import Seymour from "../components/Seymour";
 import Milhouse from "../components/Milhouse";
 import Grandpa from "../components/Grandpa2";
-//import pink_ground from "../components/img/pink_ground.png";
-//import springfield80s from "../components/img/background_80s_repeat.png";
+// import pink_ground from "../components/img/pink_ground.png";
+// import springfield80s from "../components/img/background_80s_repeat.png";
 import Sound from "../components/Sound";
 
 const donutStatus = {
