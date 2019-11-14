@@ -6,7 +6,12 @@
 	background: url(img/grandpa.png);
     animation: animate6 1s steps(6) infinite reverse;
 }
-
+.grandpaDead {
+	position: absolute;
+	width: calc(340px / 6);
+	background: url(img/grandpa.png);
+	}
+	
 @keyframes animate6 {
 	from
 	{
@@ -17,3 +22,7 @@
 		background-position: 340px;	
 	}
 }
+
+
+
+

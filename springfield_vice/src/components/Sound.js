@@ -1,8 +1,11 @@
 import React, {Component} from "react";
-import doubidoudou from "./sounds/doubidoudou.mp3";
+import hum from "./sounds/hum.mp3";
 import boire from "./sounds/boire.mp3";
 import noproblemo from "./sounds/noproblemo.wav";
-import ouverture_biere from "./sounds/ouverture_biere.mp3";
+import gunSound from "./sounds/gunSound.mp3";
+import doh from "./sounds/doh.mp3";
+
+
 
 class Sound extends Component {
     constructor(props){
@@ -13,15 +16,15 @@ class Sound extends Component {
     render(){
         return(
             <div>
-                {this.props.donutSound ? <audio
+                {this.props.donutSound === true && this.props.soundsPlay === true ? <audio
                     ref="audio_tag"
-                    src={doubidoudou}
+                    src={hum}
                     controls
                     autoPlay
                     type="audio/mp3"
                 /> : ""} 
 
-                {this.props.obstSound ? <audio
+                {this.props.obstSound === true && this.props.soundsPlay === true ? <audio
                     ref="audio_tag"
                     src={noproblemo}
                     controls
@@ -29,14 +32,40 @@ class Sound extends Component {
                     type="audio/mp3"
                 /> : ""}
 
-                {this.props.beerSound ? <audio
+                {this.props.beerSound === true && this.props.soundsPlay === true ? <audio
                     ref="audio_tag"
                     src={boire}
                     controls
                     autoPlay
                     type="audio/mp3"
                 /> : ""}
+
+                {this.props.gunSound === true && this.props.soundsPlay === true ? <audio
+                    ref="audio_tag"
+                    src={gunSound}
+                    controls
+                    autoPlay
+                    type="audio/mp3"
+                /> : ""}
+
+                {this.props.opponentSound === true && this.props.soundsPlay === true ? <audio
+                    ref="audio_tag"
+                    src={doh}
+                    controls
+                    autoPlay
+                    type="audio/mp3"
+                /> : ""} 
                 
+                {this.props.musicPlay === true && this.props.musicPlay === true ? <audio
+                    ref="audio_tag"
+					src="http://www.allard-jacquin.com/simpsons2.mp3"
+					controls
+					autoPlay
+					type="audio/mp3"
+				/> : ""}
+
+
+
             </div>
         )
     }
