@@ -742,11 +742,8 @@ class Game extends Component {
 			// Si perdant :
 			this.stopRunning();
 			clearInterval(this.interval);
-			setTimeout(() => {
-				this.props.history.push("?modal=true&go=true");
-				this.setState({ origin: "go_lost" });
-				return;
-			}, 2000);
+			this.props.history.push("?modal=true&go=true");
+			this.setState({ origin: "go_lost" });
 		}
 		if (this.beerCount(this.state.beerCountOrigin) === 100) {
 			// Si gagnant :
