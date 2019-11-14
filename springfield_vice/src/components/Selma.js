@@ -23,7 +23,8 @@ class Selma extends Component {
       transition = "0.5s";
       leftPosition = this.props.positionSelmaX + this.props.defilement;
       topPosition = this.props.positionSelmaY;
-      setTimeout(() => {document.getElementById("Selma").setAttribute("style", "display:none")}, 3000);
+      setTimeout(() => { document.getElementById("Selma").setAttribute("style", "display:none") }, 3000);
+
       classSelma = "selmaDead";
     }
 
