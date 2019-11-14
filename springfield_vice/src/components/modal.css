@@ -1,5 +1,6 @@
 div#modal_root {
-  font-family: Mansalva, cursive;
+  /* font-family: Mansalva, cursive; */
+  font-family: VT323;
   z-index: 9999;
 }
 
@@ -13,23 +14,28 @@ div#modal_root {
   margin: 2em auto;
   padding: 1.5em;
   background: #263238;
-  color: #ebdb34;
+  color: white;
+  /* text-shadow: 5px 5px 10px #FF00E6; */
   min-width: 80%;
   border-radius: 5px;
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .modal-header h3 {
-  font-size: 26pt;
+  font-size: 60px;
+  margin: 0;
+}
+.modal-body p {
+  font-size: 25px;
   margin: 0;
 }
 
 #close {
   position: absolute;
-  top: 2em;
-  right: 2em;
+  top: 1em;
+  right: 1em;
   width: 3em;
-  hieght: 3em;
+  height: 3em;
   border-radius: 50%;
 }
 
@@ -41,6 +47,6 @@ div#modal_root {
   font-weight: bold;
   outline: none;
   width: 110px;
-  font-size: 0.7em;
+  font-size: 1em;
   margin: 2px;
 }

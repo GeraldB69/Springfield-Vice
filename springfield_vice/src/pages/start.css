@@ -26,7 +26,7 @@
   height: 100px;
   text-align: center;
   color: white;
-  top: 320px;
+  bottom: -30px;
   opacity: 0;
   animation: showhomervsbart 1s ease-in-out 3s 1 forwards;
   /* line-height: 1.3em; */

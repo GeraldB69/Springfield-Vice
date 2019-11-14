@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom'
 import config from "../components/configSpringfieldVice.json";
 import { createPortal } from "react-dom";
 import "./modal.css";
+import "./homer.css";
 import img_winner from './img/homer_bart.gif';
 import img_looser from './img/bart_gameover.png';
+
 
 const modalStyle = {
   display: "flex",
@@ -14,16 +16,20 @@ const modalStyle = {
   top: 0,
   bottom: 0,
   right: 0,
-  backgroundColor: "rgba(0,0,0,.5)",
+  // backgroundColor: "rgba(255,0,230,1)",
+  backgroundColor: "rgba(0,0,0,0.7)",
   color: "#FFF",
   fontSize: "20px",
+  justifyContent: "center",
+  verticalAlign: "middle",
 };
 const imgStyle = {
-  backgroundColor: " rgba(0,0,0,.5)",
+  backgroundColor: "rgba(56,42,125,0.9)",
   backgroundPosition: "center center",
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
-  textShadow: "2px 2px 2px rgba(0,0,0, 0.9)",
+  textShadow: "2px 2px 2px rgba(255,0,230,1)",
+  
 }
 
 export default class Modal extends Component {
@@ -53,10 +59,11 @@ export default class Modal extends Component {
     const content = [];
     content.image = imgStyle
 
+    // this.props.origin
     switch (this.props.origin) {
       case "start":
         {content.header = "Settings"};
-        {content.quote = "Trying is the first step towards failure."};
+        {content.quote = `"Trying is the first step towards failure."`};
         content.buttons = 
           <>
             {other_buttons}
@@ -65,10 +72,9 @@ export default class Modal extends Component {
           </>;
         break;
       case "go_win": // FIN DE PARTIE + GAGNANT
-        content.image = {...content.image, backgroundImage: `url(${img_winner})`
-        }
+        content.image2 = { position: "absolute", left: "10%", top: "25%"}
         content.header = "GOOD JOB !"
-        content.quote = "Stupid risks make life worth living.";
+        content.quote = `"Stupid risks make life worth living."`;
         content.buttons = 
           <>
             <button>SCORES</button>
@@ -81,10 +87,11 @@ export default class Modal extends Component {
           backgroundPosition: "right 10% center",
           backgroundRepeat: "no-repeat", 
           backgroundSize: "30%",
-          backgroundImage: `url(${img_looser})`
+          backgroundImage: `url(${img_looser})`,
           }
         content.header = "GAME OVER"
-        content.quote = "Kids, you tried your best, and you failed miserably. The lesson is: never try.";
+        content.quote = `"Kid, you tried your best, and you failed miserably.`;
+        content.quote2 = `The lesson is: never try."`;
         content.buttons = 
           <>
             <button>SCORES</button>
@@ -92,9 +99,9 @@ export default class Modal extends Component {
           </>;
         {this.props.hide(true)}
         break;
-      default: 
+      default:
         content.header = "PAUSE";
-        content.quote = "Do you need a break or are you giving up?";
+        content.quote = `"Do you need a break or are you giving up?"`;
         content.buttons =
           <>
             <Link to="/"><button>RESTART</button></Link>
@@ -112,14 +119,22 @@ export default class Modal extends Component {
 
 
   render() {
+
+    
+
     return createPortal(
       <div style={modalStyle} className="modal" onClick={this.props.onClick}>
+          
         <div className="modal-wrapper" style={this.showHeader().image}>
           <div className="modal-header">
             <h3>{this.showHeader().header}</h3>
           </div>
+
+          {this.props.origin === "go_win" ? <div style={this.showHeader().image2} className="stranglingBart"></div> : ""}
+          
           <div className="modal-body">
             <p>{this.showHeader().quote}</p>
+            <p>{this.showHeader().quote2}</p>
           </div>
           <div>
             
