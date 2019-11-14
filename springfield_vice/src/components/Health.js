@@ -7,11 +7,13 @@ class Health extends Component {
 		super(props);
 		this.state = {};
 	}
-
 	counterHealth = () => {
+
 		let diff = this.props.beerCounter - this.props.obstCounter;
-		if (diff > 5) diff = 5;
+
+		//if (diff > 5) diff = 5;
 		if (diff < 0) diff = 0;
+
 
 		const styleDisplay = {
 			width: "35px",
@@ -42,7 +44,7 @@ class Health extends Component {
 			display: "flex",
 			flexFlow: "row nowrap",
 			justifyContent: "center",
-			alignItems: "center", 
+			alignItems: "center",
 		};
 
 		switch (diff) {
@@ -125,7 +127,7 @@ class Health extends Component {
 			height: "auto",
 			// border: "2px solid red",
 			// borderRadius: "10px",
-			
+
 			// backgroundColor: "rgb(255,255,255,0.6)",
 			backgroundColor: "transparent",
 			position: "absolute",
