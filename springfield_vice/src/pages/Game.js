@@ -49,6 +49,7 @@ class Game extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			soundsPlay: false,
 			positionX: config.initialPosition.x,
 			positionY: config.initialPosition.y,
 			showModal: false,
@@ -1276,11 +1277,10 @@ class Game extends Component {
 						hide={() => this.hideButtons()}
 					/>
 				)}
-				{this.state.beerSound === true ? <Sound beerSound /> : ""}
-				{this.state.obstSound === true ? <Sound obstSound /> : ""}
-				{this.state.donutSound === true ? <Sound donutSound /> : ""}
-
-				{this.state.gunSound === true ? <Sound gunSound /> : ""}
+				{this.state.beerSound === true ? <Sound beerSound soundsPlay={this.state.soundsPlay} /> : ""}
+				{this.state.obstSound === true ? <Sound obstSound soundsPlay={this.state.soundsPlay} /> : ""}
+				{this.state.donutSound === true ? <Sound donutSound soundsPlay={this.state.soundsPlay} /> : ""}
+				{this.state.gunSound === true ? <Sound gunSound soundsPlay={this.state.soundsPlay}/> : ""}
 			</div>
 		);
 	}
