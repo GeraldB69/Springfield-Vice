@@ -15,10 +15,9 @@ class Bart extends Component {
       backgroundColor: "",
       borderRadius: "50%",
       position: "absolute",
-      left: this.props.positionBartX,
+      left: this.props.positionBartX + this.props.defilement,
       top: this.props.positionBartY,
       transform: "scale(" + this.props.positionBartY * config.bart.scale + ")",
-      transition: "0.8s"
     };
 
     const styleBart = {
@@ -48,7 +47,7 @@ class Bart extends Component {
         <div id="Bart" style={bartZone}>
           <div className="bartRun" style={styleBart} />
         </div>
-        <div id="Bart" style={bartSeBarreZone}>
+        <div id="Bart2" style={bartSeBarreZone}>
           <div className="bartSeBarre" style={styleBart} />
         </div>
       </div>

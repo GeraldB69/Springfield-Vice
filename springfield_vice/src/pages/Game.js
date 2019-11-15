@@ -362,7 +362,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(2000, 3000)),
+					positionObstacleX: parseInt(getRandomArbitrary(2000, 2500)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -372,7 +372,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(3000, 4000)),
+					positionObstacleX: parseInt(getRandomArbitrary(3000, 3500)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -382,7 +382,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(3000, 4000)),
+					positionObstacleX: parseInt(getRandomArbitrary(3000, 3500)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -392,7 +392,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(3000, 4000)),
+					positionObstacleX: parseInt(getRandomArbitrary(3500, 4000)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -402,7 +402,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(3000, 4000)),
+					positionObstacleX: parseInt(getRandomArbitrary(3500, 4000)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -412,7 +412,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(4000, 5000)),
+					positionObstacleX: parseInt(getRandomArbitrary(4000, 4500)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -422,7 +422,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(4000, 5000)),
+					positionObstacleX: parseInt(getRandomArbitrary(4000, 4500)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -432,7 +432,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(5000, 5500)),
+					positionObstacleX: parseInt(getRandomArbitrary(4500, 5000)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -442,7 +442,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(5000, 5500)),
+					positionObstacleX: parseInt(getRandomArbitrary(4500, 5000)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -452,7 +452,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(5000, 5500)),
+					positionObstacleX: parseInt(getRandomArbitrary(4500, 5000)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -464,14 +464,14 @@ class Game extends Component {
 			],
 
 			selmaPos: {
-				positionX: 1510,
+				positionX: 2000,
 				positionY: 180,
 				SelmaMovX: moveConfig.selma.MovX,
 				SelmaMovY: moveConfig.selma.MovY,
 				status: selmaStatus.ALIVE
 			},
 			seymourPos: {
-				positionX: 400,
+				positionX: 700,
 				positionY: 250,
 				SeymourMovX: moveConfig.seymour.MovX,
 				SeymourMovY: moveConfig.seymour.MovY,
@@ -479,13 +479,13 @@ class Game extends Component {
 
 			},
 			bartPos: {
-				positionBartX: 6000,
-				positionBartY: 200,
+				positionX: 5500,
+				positionY: 200,
 				BartMovX: moveConfig.bart.MovX,
 				BartMovY: moveConfig.bart.MovY
 			},
 			milhousePos: {
-				positionX: 2000,
+				positionX: 3000,
 				positionY: 250,
 				MilhouseMovX: moveConfig.milhouse.MovX,
 				MilhouseMovY: moveConfig.milhouse.MovY,
@@ -493,8 +493,8 @@ class Game extends Component {
 
 			},
 			grandpaPos: {
-				positionX: 3000,
-				positionY: 250,
+				positionX: 4000,
+				positionY: 200,
 				GrandpaMovX: moveConfig.grandpa.MovX,
 				GrandpaMovY: moveConfig.grandpa.MovY,
 				status: grandpaStatus.ALIVE
@@ -640,20 +640,20 @@ class Game extends Component {
 	moveBart = () => {
 		let i = 0;
 		this.intBart = setInterval(() => {
-			let newPosX = this.state.bartPos.BartMovX[i];
-			let newPosY = this.state.bartPos.BartMovY[i];
+			let newPosX = this.state.bartPos.positionX + this.state.bartPos.BartMovX[i];
+			let newPosY = this.state.bartPos.positionY + this.state.bartPos.BartMovY[i];
 			this.setState({
 				bartPos: {
 					...this.state.bartPos,
-					positionBartX: newPosX,
-					positionBartY: newPosY
+					positionX: newPosX,
+					positionY: newPosY
 				}
 			});
 			i++;
 			if (i >= this.state.bartPos.BartMovX.length) {
 				i = 0;
 			}
-		}, 1000);
+		}, 300);
 	};
 
 	moveMilhouse = () => {
@@ -662,7 +662,7 @@ class Game extends Component {
 			let newPosX = this.state.milhousePos.positionX + this.state.milhousePos.MilhouseMovX[i];
 			let newPosY = this.state.milhousePos.positionY + this.state.milhousePos.MilhouseMovY[i];
 			this.setState({
-				milhousePos: { ...this.state.milhousePos, positionX: newPosX, positionMihouseY: newPosY }
+				milhousePos: { ...this.state.milhousePos, positionX: newPosX, positionY: newPosY }
 			});
 			i++;
 			if (i >= this.state.milhousePos.MilhouseMovX.length) {
@@ -1071,10 +1071,9 @@ class Game extends Component {
 					/>
 				</div>
 				<Bart
-					positionBartX={
-						this.state.bartPos.positionBartX + this.state.defilement
-					}
-					positionBartY={this.state.bartPos.positionBartY}
+					positionBartX={this.state.bartPos.positionX}
+					positionBartY={this.state.bartPos.positionY}
+					defilement={this.state.defilement}
 					bartSeBarreX={this.state.bartSeBarreX}
 					bartSeBarreY={this.state.bartSeBarreY}
 				/>
