@@ -506,8 +506,8 @@ class Game extends Component {
 			obstSound: false,
 			donutSound: false,
 			opponentSound: false,
-//			globalPosition: 0,
-//			defilement: 0,
+			//			globalPosition: 0,
+			//			defilement: 0,
 			bartSeBarreX: 400,
 			bartSeBarreY: 250,
 			gunSound: false,
@@ -949,10 +949,13 @@ class Game extends Component {
 	};
 
 	throwingDonut = () => {
-		this.setState({ gunSound: true });
-		setTimeout(() => {
-			this.setState({ gunSound: false });
-		}, 500);
+		if (this.donutCount() > 0) {
+
+			this.setState({ gunSound: true });
+			setTimeout(() => {
+				this.setState({ gunSound: false });
+			}, 500);
+		}
 		this.setState({
 			isThrowing: true
 			// donutPopped: {...this.state.donutPopped, picked: false}
