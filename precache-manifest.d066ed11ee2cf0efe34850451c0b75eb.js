@@ -1,18 +1,18 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2700ed4e424b3de7fa84bc3cbdab37c4",
+    "revision": "dae5c7b6f1e9f2bb49db12b72b41dbd1",
     "url": "/lyon-0919-react-p2-springfield-vice/index.html"
   },
   {
-    "revision": "6fddd21aa123714e370d",
-    "url": "/lyon-0919-react-p2-springfield-vice/static/css/main.e98f1d38.chunk.css"
+    "revision": "e5ef515e5840612cf619",
+    "url": "/lyon-0919-react-p2-springfield-vice/static/css/main.13e3b468.chunk.css"
   },
   {
     "revision": "1c21dfd3be152705016f",
     "url": "/lyon-0919-react-p2-springfield-vice/static/js/2.5abbef55.chunk.js"
   },
   {
-    "revision": "6fddd21aa123714e370d",
+    "revision": "e5ef515e5840612cf619",
     "url": "/lyon-0919-react-p2-springfield-vice/static/js/main.bced2c5f.chunk.js"
   },
   {
@@ -44,8 +44,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/lyon-0919-react-p2-springfield-vice/static/media/bart_gameover.4ac90b24.png"
   },
   {
-    "revision": "14f5c2938d953fc21a0a1b9fbbcb10aa",
-    "url": "/lyon-0919-react-p2-springfield-vice/static/media/bartwalking.14f5c293.png"
+    "revision": "c5eb5b5e797290680793a98328b569f4",
+    "url": "/lyon-0919-react-p2-springfield-vice/static/media/bartwalking.c5eb5b5e.png"
   },
   {
     "revision": "1d64a9da11065bab66e7ef050ff7dddd",
@@ -84,8 +84,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/lyon-0919-react-p2-springfield-vice/static/media/fire.6a364d8d.gif"
   },
   {
-    "revision": "611321c8748364c7e4937a392d6a6a1f",
-    "url": "/lyon-0919-react-p2-springfield-vice/static/media/grandpa.611321c8.png"
+    "revision": "a31d30a59700cfbd25e6aebf173a725c",
+    "url": "/lyon-0919-react-p2-springfield-vice/static/media/grandpa.a31d30a5.png"
   },
   {
     "revision": "304476ef6fc003add958ff7d4058790f",
@@ -104,8 +104,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/lyon-0919-react-p2-springfield-vice/static/media/hum.0838f930.mp3"
   },
   {
-    "revision": "670003f65e4cb16fc9de11cf9309d197",
-    "url": "/lyon-0919-react-p2-springfield-vice/static/media/milhouse.670003f6.png"
+    "revision": "7954a63a135a8ec2f4385ece563950a7",
+    "url": "/lyon-0919-react-p2-springfield-vice/static/media/milhouse.7954a63a.png"
   },
   {
     "revision": "897143eec141785e4b503886ef330fbd",
@@ -116,12 +116,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/lyon-0919-react-p2-springfield-vice/static/media/ripchain.461f04be.png"
   },
   {
-    "revision": "499a5587948ab0ba1c2dc3545975f66f",
-    "url": "/lyon-0919-react-p2-springfield-vice/static/media/selma.499a5587.png"
+    "revision": "2f856d65da0d2f401578793691476f25",
+    "url": "/lyon-0919-react-p2-springfield-vice/static/media/selma.2f856d65.png"
   },
   {
-    "revision": "3360625e93a212900d0c7bcc25b7586e",
-    "url": "/lyon-0919-react-p2-springfield-vice/static/media/seymour.3360625e.png"
+    "revision": "4b3227992e0c0fba526379058ef6bfa4",
+    "url": "/lyon-0919-react-p2-springfield-vice/static/media/seymour.4b322799.png"
   },
   {
     "revision": "161378b6f36027b01092e8cdd37e30b5",
