@@ -6,7 +6,7 @@ import "./start.css";
 import springfieldvice from "../components/img/springfieldvice.png"
 import bart from "../components/img/bart2blur.png"
 import homer from "../components/img/homerjumping.png"
-import triangle_icon from "../components/img/triangle_icon.png"
+// import triangle_icon from "../components/img/triangle_icon.png"
 
 
 class Start extends Component {
@@ -80,6 +80,7 @@ class Start extends Component {
       <div id="Seymour" />
       <div id="Milhouse" />
       <div id="Grandpa" />
+      <div id="Sherri" />
       </div>
     )
   }

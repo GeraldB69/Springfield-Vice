@@ -60,7 +60,7 @@ function Beer(props) {
     return (
       <div>
         <div style={beerZone}>
-          <img src={beer} style={beerStyle} alt="beer" />
+          <img src={beer} style={beerStyle} alt="beer"  key={Math.random()}/>
         </div>
       </div>
     );

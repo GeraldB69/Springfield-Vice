@@ -28,7 +28,7 @@
         "width": "25px"
     },
     "timer": {
-        "seconds": 200
+        "seconds": 120
     },
     "start": {
         "firstScreen": true
@@ -60,5 +60,8 @@
     },
     "stranglingBart": {
         "scale": 0.003
+    },
+    "sherri": {
+        "scale": 0.006
     }
 }
