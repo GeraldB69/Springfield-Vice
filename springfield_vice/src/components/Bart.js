@@ -16,10 +16,9 @@ class Bart extends Component {
       backgroundColor: "",
       borderRadius: "50%",
       position: "absolute",
-      left: this.props.positionBartX,
+      left: this.props.positionBartX + this.props.defilement,
       top: this.props.positionBartY,
       transform: "scale(" + this.props.positionBartY * config.bart.scale + ")",
-      // transition: "0.8s"
     };
 
     const styleBart = {

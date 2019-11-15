@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Homer from "../components/Homer";
 import Grid from "../components/Grid";
 import config from "../components/configSpringfieldVice.json";
+import moveConfig from "../components/moveOpponents.json";
 import JoyWrapper from "../components/Joystick";
 import Timer from "../components/Timer";
 import { Donut } from "../components/Item";
@@ -370,7 +371,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(2000, 3000)),
+					positionObstacleX: parseInt(getRandomArbitrary(2000, 2500)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -380,7 +381,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(3000, 4000)),
+					positionObstacleX: parseInt(getRandomArbitrary(3000, 3500)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -390,7 +391,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(3000, 4000)),
+					positionObstacleX: parseInt(getRandomArbitrary(3000, 3500)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -400,7 +401,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(3000, 4000)),
+					positionObstacleX: parseInt(getRandomArbitrary(3500, 4000)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -410,7 +411,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(3000, 4000)),
+					positionObstacleX: parseInt(getRandomArbitrary(3500, 4000)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -420,7 +421,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(4000, 5000)),
+					positionObstacleX: parseInt(getRandomArbitrary(4000, 4500)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -430,7 +431,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(4000, 5000)),
+					positionObstacleX: parseInt(getRandomArbitrary(4000, 4500)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -440,7 +441,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(5000, 5500)),
+					positionObstacleX: parseInt(getRandomArbitrary(4500, 5000)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -450,7 +451,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(5000, 5500)),
+					positionObstacleX: parseInt(getRandomArbitrary(4500, 5000)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -460,7 +461,7 @@ class Game extends Component {
 					status: obstacleStatus.GROUND
 				},
 				{
-					positionObstacleX: parseInt(getRandomArbitrary(5000, 5500)),
+					positionObstacleX: parseInt(getRandomArbitrary(4500, 5000)),
 					positionObstacleY: parseInt(
 						getRandomArbitrary(
 							config.limits.topLimit,
@@ -472,144 +473,41 @@ class Game extends Component {
 			],
 
 			selmaPos: {
-				positionX: 1510,
+				positionX: 2000,
 				positionY: 180,
-				SelmaMovX: [
-					10,
-					10,
-					10,
-					10,
-					10,
-					10,
-					10,
-					10,
-					-10,
-					-10,
-					-10,
-					-10,
-					-10,
-					-10
-				],
-				SelmaMovY: [5, 5, 5, 5, 5, 5, 5, -5, -5, -5, -5, -5, -5, -5],
+				SelmaMovX: moveConfig.selma.MovX,
+				SelmaMovY: moveConfig.selma.MovY,
 				status: selmaStatus.ALIVE
 			},
 			seymourPos: {
-				positionX: 400,
+				positionX: 700,
 				positionY: 250,
-				SeymourMovX: [
-					-10,
-					-10,
-					-10,
-					-10,
-					-10,
-					10,
-					10,
-					10,
-					10,
-					10,
-				],
-				SeymourMovY: [5, 5, 5, 5, 5, -5, -5, -5, -5, -5],
+				SeymourMovX: moveConfig.seymour.MovX,
+				SeymourMovY: moveConfig.seymour.MovY,
 				status: seymourStatus.ALIVE
 
 			},
 			bartPos: {
-				positionBartX: 6000,
-				positionBartY: 200,
+				positionX: 5500,
+				positionY: 200,
+				BartMovX: moveConfig.bart.MovX,
+				BartMovY: moveConfig.bart.MovY,
 				status: bartStatus.ALIVE,
-				BartMovX: [
-					6000,
-					6000,
-					6000,
-					6020,
-					6020,
-					6050,
-					6050,
-					6100,
-					6100,
-					6150,
-					6150,
-					6200,
-					6250,
-					6250,
-					6300,
-					6300,
-					6250,
-					6250,
-					6200,
-					6200,
-					6100,
-					6050
-				],
-				BartMovY: [
-					200,
-					250,
-					250,
-					250,
-					300,
-					300,
-					300,
-					300,
-					250,
-					250,
-					300,
-					300,
-					250,
-					250,
-					200,
-					200,
-					230,
-					230,
-					200,
-					200,
-					180,
-					180
-				]
 			},
 			milhousePos: {
-				positionX: 2000,
+				positionX: 3000,
 				positionY: 250,
-				MilhouseMovX: [
-					10,
-					10,
-					10,
-					10,
-					10,
-					10,
-					-10,
-					-10,
-					-10,
-					-10,
-					-10,
-					-10
-				],
-				MilhouseMovY: [
-					[5, 5, 5, 5, 5, 5, -5, -5, -5, -5, -5, -5],
-				],
+				MilhouseMovX: moveConfig.milhouse.MovX,
+				MilhouseMovY: moveConfig.milhouse.MovY,
 				status: milhouseStatus.ALIVE
 
 			},
 			grandpaPos: {
-				positionX: 3000,
-				positionY: 250,
-				GrandpaMovX: [
-					10,
-					10,
-					10,
-					10,
-					10,
-					10,
-					-10,
-					-10,
-					-10,
-					-10,
-					-10,
-					-10
-				],
-				GrandpaMovY: 
-					[5, 5, 5, 5, 5, 5, 5, -5, -5, -5, -5, -5],
-				
+				positionX: 4000,
+				positionY: 200,
+				GrandpaMovX: moveConfig.grandpa.MovX,
+				GrandpaMovY: moveConfig.grandpa.MovY,
 				status: grandpaStatus.ALIVE
-
 			},
 			relativePositionX: config.initialPosition.x,
 			isRunning: false,
@@ -752,20 +650,20 @@ class Game extends Component {
 	moveBart = () => {
 		let i = 0;
 		this.intBart = setInterval(() => {
-			let newPosX = this.state.bartPos.BartMovX[i];
-			let newPosY = this.state.bartPos.BartMovY[i];
+			let newPosX = this.state.bartPos.positionX + this.state.bartPos.BartMovX[i];
+			let newPosY = this.state.bartPos.positionY + this.state.bartPos.BartMovY[i];
 			this.setState({
 				bartPos: {
 					...this.state.bartPos,
-					positionBartX: newPosX,
-					positionBartY: newPosY
+					positionX: newPosX,
+					positionY: newPosY
 				}
 			});
 			i++;
 			if (i >= this.state.bartPos.BartMovX.length) {
 				i = 0;
 			}
-		}, 1000);
+		}, 300);
 	};
 
 	moveMilhouse = () => {
@@ -774,7 +672,7 @@ class Game extends Component {
 			let newPosX = this.state.milhousePos.positionX + this.state.milhousePos.MilhouseMovX[i];
 			let newPosY = this.state.milhousePos.positionY + this.state.milhousePos.MilhouseMovY[i];
 			this.setState({
-				milhousePos: { ...this.state.milhousePos, positionX: newPosX, positionMihouseY: newPosY }
+				milhousePos: { ...this.state.milhousePos, positionX: newPosX, positionY: newPosY }
 			});
 			i++;
 			if (i >= this.state.milhousePos.MilhouseMovX.length) {
@@ -909,7 +807,7 @@ class Game extends Component {
 			this.state.positionY > item.positionY - 30 &&
 			item.status === "alive"
 		) {
-/*ici*/
+			/*ici*/
 			item.status = "killed";
 			this.setState({ opponentSound: true, beerCountOrigin: this.state.beerCountOrigin - 1 });
 			setTimeout(() => {
@@ -1160,11 +1058,11 @@ class Game extends Component {
 
 
 	toggleSounds = (stateSounds) => {
-		this.setState({soundsPlay : stateSounds});
+		this.setState({ soundsPlay: stateSounds });
 	}
 
 	toggleMusic = (stateMusic) => {
-		this.setState({musicPlay : stateMusic});
+		this.setState({ musicPlay: stateMusic });
 	}
 
 	render() {
@@ -1184,11 +1082,11 @@ class Game extends Component {
 			background: "linear-gradient(rgba(0,0,0,0.7), transparent)",
 			// background: "rgba(56,42,125,0.9)"
 		}
-		
+
 		let diff1 = 3 + this.beerCount(this.state.beerCountOrigin) - this.obstacleCollisionCount();
 		return (
 			<div className="game" style={bgStyle}>
-			
+
 				<div style={topDivStyle}></div>
 				<Grid
 					isRunning={this.state.isRunning}
@@ -1234,10 +1132,9 @@ class Game extends Component {
 					/>
 				</div>
 				<Bart
-					positionBartX={
-						this.state.bartPos.positionBartX + this.state.defilement
-					}
-					positionBartY={this.state.bartPos.positionBartY}
+					positionBartX={this.state.bartPos.positionX}
+					positionBartY={this.state.bartPos.positionY}
+					defilement={this.state.defilement}
 					bartSeBarreX={this.state.bartSeBarreX}
 					bartSeBarreY={this.state.bartSeBarreY}
 					status={this.state.bartPos.status}
@@ -1281,10 +1178,10 @@ class Game extends Component {
 
 				{params.get("modal") && (
 					<Modal
-						toggleMusic = {this.toggleMusic}
+						toggleMusic={this.toggleMusic}
 						getStateMusic={this.state.musicPlay}
-						toggleSounds = {this.toggleSounds}
-					  	getStateSounds={this.state.soundsPlay}
+						toggleSounds={this.toggleSounds}
+						getStateSounds={this.state.soundsPlay}
 						close={() => {
 							this.props.history.push(this.props.location.pathname);
 						}}
@@ -1299,8 +1196,8 @@ class Game extends Component {
 				{this.state.donutSound === true ? <Sound donutSound soundsPlay={this.state.soundsPlay} /> : ""}
 				{this.state.opponentSound === true ? <Sound opponentSound soundsPlay={this.state.soundsPlay} /> : ""}
 				{this.state.gunSound === true ? <Sound gunSound soundsPlay={this.state.soundsPlay} /> : ""}
-				{this.state.musicPlay === true ? <Sound  musicPlay={this.state.musicPlay} /> : ""}
-					
+				{this.state.musicPlay === true ? <Sound musicPlay={this.state.musicPlay} /> : ""}
+
 			</div>
 		);
 	}
