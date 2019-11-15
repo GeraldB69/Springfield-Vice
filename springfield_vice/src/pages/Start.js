@@ -76,7 +76,10 @@ class Start extends Component {
         />
       )}
 			
-
+      <div id="Selma" />
+      <div id="Seymour" />
+      <div id="Milhouse" />
+      <div id="Grandpa" />
       </div>
     )
   }

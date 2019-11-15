@@ -16,9 +16,8 @@ class Grandpa extends Component {
     let leftPosition = this.props.positionGrandpaX + this.props.defilement;
     let topPosition = this.props.positionGrandpaY;
     let classGrandpa = "grandpaWalk";
-    console.log(this.props.status)
+
     if (this.props.status === "killed") {
-      console.log("coucou")
       rotation = "rotate(90deg)";
       blinking = "blink .5s infinite";
       transition = "0.5s";
