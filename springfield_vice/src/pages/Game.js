@@ -19,8 +19,8 @@ import Bart from "../components/Bart";
 import Seymour from "../components/Seymour";
 import Milhouse from "../components/Milhouse";
 import Grandpa from "../components/Grandpa";
-import pink_ground from "../components/img/pink_ground.png";
-import springfield80s from "../components/img/background_80s_repeat.png";
+// import pink_ground from "../components/img/pink_ground.png";
+// import springfield80s from "../components/img/background_80s_repeat.png";
 import Sound from "../components/Sound";
 
 const donutStatus = {
@@ -506,8 +506,8 @@ class Game extends Component {
 			obstSound: false,
 			donutSound: false,
 			opponentSound: false,
-			globalPosition: 0,
-			defilement: 0,
+//			globalPosition: 0,
+//			defilement: 0,
 			bartSeBarreX: 400,
 			bartSeBarreY: 250,
 			gunSound: false,

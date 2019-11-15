@@ -41,7 +41,7 @@ function BoutonA(props) {
 		
 		<div id="button_A" style={buttonStyle}>
 			<button style={boutonA} onPointerDown={props.throwingDonut} onPointerUp={props.stopThrowingDonut}>
-				<img src={donut} style={donutstyle}/>
+				<img src={donut} style={donutstyle} alt="button A" />
 				{/* <p style={pstyle}>shoot</p> */}
 			</button>
 		</div>

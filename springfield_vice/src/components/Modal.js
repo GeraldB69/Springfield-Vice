@@ -5,7 +5,6 @@ import config from "../components/configSpringfieldVice.json";
 import { createPortal } from "react-dom";
 import "./modal.css";
 import "./homer.css";
-import img_winner from './img/homer_bart.gif';
 import img_looser from './img/bart_gameover.png';
 
 
