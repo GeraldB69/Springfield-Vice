@@ -496,7 +496,7 @@ class Game extends Component {
 
 			},
 			bartPos: {
-				positionX: 500,
+				positionX: 5500,
 				positionY: 200,
 				BartMovX: moveConfig.bart.MovX,
 				BartMovY: moveConfig.bart.MovY,
