@@ -3,7 +3,7 @@
   "short_name": "Springfield Vice",
   "theme_color": "#2196f3",
   "background_color": "#8700ff",
-  "display": "browser",
+  "display": "fullscreen",
   "orientation": "landscape",
   "Scope": "/",
   "start_url": "/lyon-0919-react-p2-springfield-vice/#/",
