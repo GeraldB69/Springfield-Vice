@@ -28,7 +28,7 @@
         "width": "25px"
     },
     "timer": {
-        "seconds": 200
+        "seconds": 120
     },
     "start": {
         "firstScreen": true
@@ -56,6 +56,9 @@
         "scale": 0.006
     },
     "grandpa": {
+        "scale": 0.006
+    },
+    "sherri": {
         "scale": 0.006
     }
 }

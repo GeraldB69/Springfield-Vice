@@ -19,6 +19,7 @@ import Bart from "../components/Bart";
 import Seymour from "../components/Seymour";
 import Milhouse from "../components/Milhouse";
 import Grandpa from "../components/Grandpa";
+import Sherri from "../components/Sherri";
 // import pink_ground from "../components/img/pink_ground.png";
 // import springfield80s from "../components/img/background_80s_repeat.png";
 import Sound from "../components/Sound";
@@ -50,6 +51,10 @@ const milhouseStatus = {
 	ALIVE: "alive"
 };
 const grandpaStatus = {
+	KILLED: "killed",
+	ALIVE: "alive"
+};
+const sherriStatus = {
 	KILLED: "killed",
 	ALIVE: "alive"
 };
@@ -464,7 +469,7 @@ class Game extends Component {
 			],
 
 			selmaPos: {
-				positionX: 2000,
+				positionX: 1500,
 				positionY: 180,
 				SelmaMovX: moveConfig.selma.MovX,
 				SelmaMovY: moveConfig.selma.MovY,
@@ -485,7 +490,7 @@ class Game extends Component {
 				BartMovY: moveConfig.bart.MovY
 			},
 			milhousePos: {
-				positionX: 3000,
+				positionX: 2500,
 				positionY: 250,
 				MilhouseMovX: moveConfig.milhouse.MovX,
 				MilhouseMovY: moveConfig.milhouse.MovY,
@@ -493,11 +498,18 @@ class Game extends Component {
 
 			},
 			grandpaPos: {
-				positionX: 4000,
+				positionX: 3500,
 				positionY: 200,
 				GrandpaMovX: moveConfig.grandpa.MovX,
 				GrandpaMovY: moveConfig.grandpa.MovY,
 				status: grandpaStatus.ALIVE
+			},
+			sherriPos: {
+				positionX: 4500,
+				positionY: 180,
+				SherriMovX: moveConfig.sherri.MovX,
+				SherriMovY: moveConfig.sherri.MovY,
+				status: sherriStatus.ALIVE
 			},
 			relativePositionX: config.initialPosition.x,
 			isRunning: false,
@@ -686,6 +698,27 @@ class Game extends Component {
 		}, 1000);
 	};
 
+	moveSherri = () => {
+		let i = 0;
+		this.intSherri = setInterval(() => {
+			let newPosX =
+				this.state.sherriPos.positionX + this.state.sherriPos.SherriMovX[i];
+			let newPosY =
+				this.state.sherriPos.positionY + this.state.sherriPos.SherriMovY[i];
+			this.setState({
+				sherriPos: {
+					...this.state.sherriPos,
+					positionX: newPosX,
+					positionY: newPosY
+				}
+			});
+			i++;
+			if (i >= this.state.sherriPos.SherriMovX.length) {
+				i = 0;
+			}
+		}, 300);
+	};
+
 	bartSeBarre = () => {
 		setTimeout(() => {
 			this.setState({ bartSeBarreX: 15000 });
@@ -735,6 +768,7 @@ class Game extends Component {
 		this.moveSeymour();
 		this.moveMilhouse();
 		this.moveGrandpa();
+		this.moveSherri();
 		this.bartSeBarre();
 	};
 
@@ -746,6 +780,7 @@ class Game extends Component {
 			clearInterval(this.intSeymour);
 			clearInterval(this.intMilhouse);
 			clearInterval(this.intGrandpa);
+			clearInterval(this.intSherri);
 		} else {
 			this.componentDidMount();
 		}
@@ -895,7 +930,19 @@ class Game extends Component {
 			this.state.milhousePos.status = "killed";
 			clearInterval(this.intMilhouse);
 			console.log('Kill Milhouse')
+		}
 
+		if (
+			this.state.sherriPos.positionY < this.state.positionY + 20 &&
+			this.state.sherriPos.positionY > this.state.positionY - 50 &&
+			this.state.sherriPos.positionX < this.state.relativePositionX + 500 &&
+			this.state.sherriPos.positionX > this.state.relativePositionX &&
+			this.state.sherriPos.status === "alive" &&
+			this.donutCount() > 0
+		) {
+			this.state.sherriPos.status = "killed";
+			clearInterval(this.intSherri);
+			console.log('Kill Sherri')
 		}
 		this.state.obstaclePopped.map(item => {
 			//console.log(item.positionObstacleX)
@@ -989,6 +1036,7 @@ class Game extends Component {
 		this.collisionDetectionOpponent(this.state.seymourPos)
 		this.collisionDetectionOpponent(this.state.milhousePos)
 		this.collisionDetectionOpponent(this.state.grandpaPos)
+		this.collisionDetectionOpponent(this.state.sherriPos)
 		this.testLimitsOfMap();
 	};
 
@@ -1058,6 +1106,12 @@ class Game extends Component {
 					positionGrandpaY={this.state.grandpaPos.positionY}
 					defilement={this.state.defilement}
 					status={this.state.grandpaPos.status}
+				/>
+				<Sherri
+					positionSherriX={this.state.sherriPos.positionX}
+					positionSherriY={this.state.sherriPos.positionY}
+					defilement={this.state.defilement}
+					status={this.state.sherriPos.status}
 				/>
 				<Donut
 					donutPopped={this.state.donutPopped}
