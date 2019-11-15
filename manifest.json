@@ -3,7 +3,7 @@
   "short_name": "Springfield Vice",
   "theme_color": "#2196f3",
   "background_color": "#8700ff",
-  "display": "fullscreen",
+  "display": "browser",
   "orientation": "landscape",
   "Scope": "/",
   "start_url": "/",
