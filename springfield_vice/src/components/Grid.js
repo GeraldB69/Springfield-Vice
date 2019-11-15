@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Grid.css";
-import config from "./configSpringfieldVice.json";
-import wheel from "./img/wheel.png"
+// import config from "./configSpringfieldVice.json";
+// import wheel from "./img/wheel.png"
 
 
 class Grid extends Component {
@@ -52,13 +52,13 @@ class Grid extends Component {
         //     document.getElementById('divToRotate').style.animation = "rotatingRight 8s linear infinite"
         // }
 
-        const rotateRight = {
-            transformOrigin: "50% 50%",
-            animationName: "rotatingRight",
-            animationDuration: "8s",
-            animationTimingFunction: "linear",
-            animationIterationCount: "infinite",
-        }
+        // const rotateRight = {
+        //     transformOrigin: "50% 50%",
+        //     animationName: "rotatingRight",
+        //     animationDuration: "8s",
+        //     animationTimingFunction: "linear",
+        //     animationIterationCount: "infinite",
+        // }
 
         
         

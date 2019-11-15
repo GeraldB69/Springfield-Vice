@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { HashRouter, BrowserRouter, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Route } from "react-router-dom";
 import Start from "./pages/Start";
 import Game from "./pages/Game"
 import * as serviceWorker from "./serviceWorker";

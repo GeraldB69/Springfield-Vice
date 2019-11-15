@@ -5,6 +5,7 @@
 	/* background-repeat: no-repeat; */
 	height: 700px;
 	width: 4000px;
+	overflow: hidden;
 }
 
 .background_opacity{
