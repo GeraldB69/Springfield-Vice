@@ -58,7 +58,9 @@ const bartStatus = {
 	KILLED: "killed",
 	ALIVE: "alive", 
 	HIT1: "hit1",
+	HIT1BIS: "hit1bis",
 	HIT2: "hit2",
+	HIT2BIS: "hit2bis",
 	GROUND: "ground",
 	STRANGLED: "strangled",
 };
@@ -488,7 +490,7 @@ class Game extends Component {
 
 			},
 			bartPos: {
-				positionX: 5500,
+				positionX: 500,
 				positionY: 200,
 				BartMovX: moveConfig.bart.MovX,
 				BartMovY: moveConfig.bart.MovY,
@@ -865,6 +867,9 @@ class Game extends Component {
 			this.donutCount() > 0
 		) {
 			this.state.bartPos.status = "hit1";
+			setTimeout(() => {
+				this.state.bartPos.status = "hit1bis"
+				}, 700);
 			// clearInterval(this.intBart);
 			console.log('hit 1 bart', this.state.bartPos.status)
 		}
@@ -873,10 +878,13 @@ class Game extends Component {
 			this.state.bartPos.positionY > this.state.positionY - 50 &&
 			this.state.bartPos.positionX < this.state.relativePositionX + 500 &&
 			this.state.bartPos.positionX > this.state.relativePositionX &&
-			this.state.bartPos.status === "hit1" &&
+			this.state.bartPos.status === "hit1bis" &&
 			this.donutCount() > 0
 		) {
 			this.state.bartPos.status = "hit2";
+			setTimeout(() => {
+				this.state.bartPos.status = "hit2bis"
+				}, 700);
 			// clearInterval(this.intBart);
 			console.log('hit 2 bart')
 		}
@@ -885,7 +893,7 @@ class Game extends Component {
 			this.state.bartPos.positionY > this.state.positionY - 50 &&
 			this.state.bartPos.positionX < this.state.relativePositionX + 500 &&
 			this.state.bartPos.positionX > this.state.relativePositionX &&
-			this.state.bartPos.status === "hit2" &&
+			this.state.bartPos.status === "hit2bis" &&
 			this.donutCount() > 0
 		) {
 			this.state.bartPos.status = "ground";
@@ -1174,7 +1182,7 @@ class Game extends Component {
 					displayButtonA={this.state.paused}
 				/>
 
-				{/* <Timer pauseGame={this.pauseGame} seconds={this.state.seconds} /> */}
+				<Timer pauseGame={this.pauseGame} seconds={this.state.seconds} />
 
 				{params.get("modal") && (
 					<Modal

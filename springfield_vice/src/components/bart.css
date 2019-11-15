@@ -4,7 +4,20 @@
     transform: scale(-1,1);
 	width: calc(373px / 6);
 	background: url(img/bartwalking.png);
-    animation: animate2 0.7s steps(6) infinite reverse;
+	animation: animate2 0.7s steps(6) infinite reverse;
+	/* border: 2px solid red; */
+}
+
+.bartstand {
+	position: absolute;
+	/* border: 2px solid red; */
+    /* transform: translate(50%,-50%);
+    transform: scale(-1,1);
+	width: calc(373px / 6); */
+	background: url(img/bartstand.png);
+	background-size: 65%;
+	background-repeat: no-repeat;
+    /* animation: animate2 0.7s steps(6) infinite reverse; */
 }
 
 .bartSeBarre {
