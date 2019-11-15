@@ -5,8 +5,8 @@
   "background_color": "#8700ff",
   "display": "browser",
   "orientation": "landscape",
-  "Scope": "/",
-  "start_url": "/",
+  "Scope": "lyon-0919-react-p2-springfield-vice/#/",
+  "start_url": "lyon-0919-react-p2-springfield-vice/#/",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
