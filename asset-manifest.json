@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/lyon-0919-react-p2-springfield-vice/static/css/main.ec53aa2f.chunk.css",
-    "main.js": "/lyon-0919-react-p2-springfield-vice/static/js/main.bd78dbc9.chunk.js",
-    "main.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/main.bd78dbc9.chunk.js.map",
+    "main.css": "/lyon-0919-react-p2-springfield-vice/static/css/main.e98f1d38.chunk.css",
+    "main.js": "/lyon-0919-react-p2-springfield-vice/static/js/main.bced2c5f.chunk.js",
+    "main.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/main.bced2c5f.chunk.js.map",
     "runtime-main.js": "/lyon-0919-react-p2-springfield-vice/static/js/runtime-main.5bb2186b.js",
     "runtime-main.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/runtime-main.5bb2186b.js.map",
     "static/js/2.5abbef55.chunk.js": "/lyon-0919-react-p2-springfield-vice/static/js/2.5abbef55.chunk.js",
     "static/js/2.5abbef55.chunk.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/2.5abbef55.chunk.js.map",
     "index.html": "/lyon-0919-react-p2-springfield-vice/index.html",
-    "precache-manifest.46cc30c4616da065eaa981b81e365bea.js": "/lyon-0919-react-p2-springfield-vice/precache-manifest.46cc30c4616da065eaa981b81e365bea.js",
+    "precache-manifest.c8645c2b01d36f52b0c20959c2ae131e.js": "/lyon-0919-react-p2-springfield-vice/precache-manifest.c8645c2b01d36f52b0c20959c2ae131e.js",
     "service-worker.js": "/lyon-0919-react-p2-springfield-vice/service-worker.js",
-    "static/css/main.ec53aa2f.chunk.css.map": "/lyon-0919-react-p2-springfield-vice/static/css/main.ec53aa2f.chunk.css.map",
+    "static/css/main.e98f1d38.chunk.css.map": "/lyon-0919-react-p2-springfield-vice/static/css/main.e98f1d38.chunk.css.map",
     "static/media/homer.css": "/lyon-0919-react-p2-springfield-vice/static/media/stranglingBartSprite.553b7ae2.png",
     "static/media/start.css": "/lyon-0919-react-p2-springfield-vice/static/media/DcRi_FsUQAAL2Pm.d4a8a81d.jpg",
     "static/media/game.css": "/lyon-0919-react-p2-springfield-vice/static/media/background_80s_repeat_2.197201c4.png",
@@ -42,7 +42,7 @@
   "entrypoints": [
     "static/js/runtime-main.5bb2186b.js",
     "static/js/2.5abbef55.chunk.js",
-    "static/css/main.ec53aa2f.chunk.css",
-    "static/js/main.bd78dbc9.chunk.js"
+    "static/css/main.e98f1d38.chunk.css",
+    "static/js/main.bced2c5f.chunk.js"
   ]
 }
