@@ -83,12 +83,14 @@ class Homer extends Component {
 		};
 
 		return (
-			<div id="homer_full">
-				<div style={this.props.isDead <= 3 ? homerZone2 : homerZone} >
-					<div style={homerStyle} className={isThrowing} ></div>
-					<img src={donut} style={donutStyle} className={this.state.animeClass} alt="donut" />
-					<img src={ripchain} style={ripchainStyle} alt="ripchain" />
-				</div>
+			<div>
+				{(this.props.strangling) ? <div></div> : <div id="homer_full">
+					<div style={this.props.isDead <= 3 ? homerZone2 : homerZone} >
+						<div style={homerStyle} className={isThrowing} ></div>
+						<img src={donut} style={donutStyle} className={this.state.animeClass} alt="donut" />
+						<img src={ripchain} style={ripchainStyle} alt="ripchain" />
+					</div>
+				</div> }
 			</div>
 		);
 	}

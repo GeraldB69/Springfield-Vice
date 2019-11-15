@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import config from "./configSpringfieldVice.json";
 import "./bart.css";
+import "./homer.css";
 
 class Bart extends Component {
   constructor(props) {
@@ -78,7 +79,7 @@ class Bart extends Component {
       // classBart = "";
       // setTimeout(() => { document.getElementById("Grandpa").setAttribute("style", "display:none") }, 3000);
     }
-    
+
     const bartZone = {
       width: widthDivBart,
       height: heightDivBart,
@@ -119,10 +120,17 @@ class Bart extends Component {
       transition: "10s"
     };
 
+    const styleStrangling = {
+      backgroundColor: "transparent",
+      position:"absolute",
+      transform:
+        "scale(" + this.props.positionBartY * config.stranglingBart.scale + ")",
+    }
+
     return (
       <div>
         <div id="Bart" style={bartZone}>
-          <div className={this.state.animeBart} style={styleBart} />
+          {(this.props.strangling) ? <div style={styleStrangling} className="stranglingBart2"></div> : <div className={this.state.animeBart} style={styleBart} />}
         </div>
         <div id="Bart2" style={bartSeBarreZone}>
           <div className="bartSeBarre" style={styleBart} />

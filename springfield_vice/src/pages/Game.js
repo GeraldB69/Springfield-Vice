@@ -19,8 +19,6 @@ import Bart from "../components/Bart";
 import Seymour from "../components/Seymour";
 import Milhouse from "../components/Milhouse";
 import Grandpa from "../components/Grandpa";
-import pink_ground from "../components/img/pink_ground.png";
-import springfield80s from "../components/img/background_80s_repeat.png";
 import Sound from "../components/Sound";
 
 const donutStatus = {
@@ -84,6 +82,7 @@ class Game extends Component {
 			isBlocked: false,
 			isThrowing: false,
 			homerCollisionHue: 0,
+			strangling: false,
 			donutPopped: [
 				{
 					positionDonutX: parseInt(
@@ -818,6 +817,25 @@ class Game extends Component {
 		}
 	};
 
+	collisionDetectionBart = item => {
+		if (
+			this.state.relativePositionX > item.positionX - 30 &&
+			this.state.relativePositionX < item.positionX + 30 &&
+			this.state.positionY < item.positionY + 30 &&
+			this.state.positionY > item.positionY - 30 &&
+			item.status === "ground"
+		) {
+			/*ici*/
+			item.status = "killed";
+			
+			this.setState({ strangling: true, opponentSound: true, beerCountOrigin: this.state.beerCountOrigin - 1});
+			setTimeout(() => {
+				this.props.history.push("?modal=true&go=true");
+				this.setState({ origin: "go_win", opponentSound: false });
+			}, 2000);
+		}
+	};
+
 
 	collisionDetectionObstacle = item => {
 		if (
@@ -840,27 +858,30 @@ class Game extends Component {
 		}
 	};
 
-	collisionBart = item => {
-		//		console.log(item.positionBartX, this.state.relativePositionX + this.state.defilement)
-		if (
-			this.state.relativePositionX > item.positionBartX - 15 &&
-			this.state.relativePositionX < item.positionBartX + 20 &&
-			this.state.positionY < item.positionBartY + 40 &&
-			this.state.positionY > item.positionBartY - 60
-		) {
-			// this.props.history.push("?modal=true&go=true");
-			// this.setState({ origin: "go_win" });
-			this.stopRunning();
-			clearInterval(this.interval);
-			return;
-		}
-	};
+	// collisionBart = item => {
+	// 	//		console.log(item.positionBartX, this.state.relativePositionX + this.state.defilement)
+	// 	if (
+	// 		this.state.relativePositionX > item.positionBartX - 15 &&
+	// 		this.state.relativePositionX < item.positionBartX + 20 &&
+	// 		this.state.positionY < item.positionBartY + 40 &&
+	// 		this.state.positionY > item.positionBartY - 60
+	// 	) {
+	// 		console.log("collision bart")
+	// 		this.setState({strangling: true});
+			
+	// 		// this.props.history.push("?modal=true&go=true");
+	// 		// this.setState({ origin: "go_win" });
+	// 		this.stopRunning();
+	// 		clearInterval(this.interval);
+	// 		return;
+	// 	}
+	// };
 
 	collisionDonutLauncher = () => {
 		console.log("status bart =", this.state.bartPos.status)
 		if (
-			this.state.bartPos.positionY < this.state.positionY +200 &&
-			this.state.bartPos.positionY > this.state.positionY - 500 &&
+			this.state.bartPos.positionY < this.state.positionY +20 &&
+			this.state.bartPos.positionY > this.state.positionY - 50 &&
 			this.state.bartPos.positionX < this.state.relativePositionX + 500 &&
 			this.state.bartPos.positionX > this.state.relativePositionX &&
 			this.state.bartPos.status === "alive" &&
@@ -984,7 +1005,7 @@ class Game extends Component {
 	};
 
 	donutCount = () => {
-		let donutCount = 30;
+		let donutCount = 0;
 		this.state.donutPopped.map(item =>
 			item.status === "picked"
 				? (donutCount = donutCount + 1)
@@ -1047,7 +1068,7 @@ class Game extends Component {
 		this.state.donutPopped.map(item => this.collisionDetection(item));
 		this.state.beerPopped.map(item => this.collisionDetectionBeer(item));
 
-		this.collisionBart(this.state.bartPos);
+		// this.collisionBart(this.state.bartPos);
 		this.state.obstaclePopped.map(item => {
 			this.collisionDetectionObstacle(item);
 		});
@@ -1055,6 +1076,7 @@ class Game extends Component {
 		this.collisionDetectionOpponent(this.state.seymourPos)
 		this.collisionDetectionOpponent(this.state.milhousePos)
 		this.collisionDetectionOpponent(this.state.grandpaPos)
+		this.collisionDetectionBart(this.state.bartPos)
 		this.testLimitsOfMap();
 	};
 
@@ -1146,6 +1168,9 @@ class Game extends Component {
 					bartSeBarreX={this.state.bartSeBarreX}
 					bartSeBarreY={this.state.bartSeBarreY}
 					status={this.state.bartPos.status}
+					strangling={this.state.strangling}
+					positionStranglingX={this.state.positionX}
+					positionStranglingY={this.state.positionY}
 				/>
 
 				<Homer
@@ -1157,6 +1182,7 @@ class Game extends Component {
 					isThrowing={this.state.isThrowing}
 					isDead={diff1}
 					hue={this.state.homerCollisionHue}
+					strangling={this.state.strangling}
 				/>
 
 				<DonutCounter donutCount={this.donutCount()} />
