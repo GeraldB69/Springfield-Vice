@@ -9,6 +9,7 @@ class Bart extends Component {
   }
 
   render() {
+    // console.log(this.props.status)
     const bartZone = {
       width: "30px",
       height: "30px",
@@ -18,7 +19,7 @@ class Bart extends Component {
       left: this.props.positionBartX,
       top: this.props.positionBartY,
       transform: "scale(" + this.props.positionBartY * config.bart.scale + ")",
-      transition: "0.8s"
+      // transition: "0.8s"
     };
 
     const styleBart = {
@@ -48,7 +49,7 @@ class Bart extends Component {
         <div id="Bart" style={bartZone}>
           <div className="bartRun" style={styleBart} />
         </div>
-        <div id="Bart" style={bartSeBarreZone}>
+        <div id="Bart2" style={bartSeBarreZone}>
           <div className="bartSeBarre" style={styleBart} />
         </div>
       </div>
