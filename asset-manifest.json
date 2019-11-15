@@ -1,19 +1,18 @@
 {
   "files": {
-    "main.css": "/lyon-0919-react-p2-springfield-vice/static/css/main.d752bfff.chunk.css",
-    "main.js": "/lyon-0919-react-p2-springfield-vice/static/js/main.0cc9ed5a.chunk.js",
-    "main.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/main.0cc9ed5a.chunk.js.map",
+    "main.css": "/lyon-0919-react-p2-springfield-vice/static/css/main.ec53aa2f.chunk.css",
+    "main.js": "/lyon-0919-react-p2-springfield-vice/static/js/main.bd78dbc9.chunk.js",
+    "main.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/main.bd78dbc9.chunk.js.map",
     "runtime-main.js": "/lyon-0919-react-p2-springfield-vice/static/js/runtime-main.5bb2186b.js",
     "runtime-main.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/runtime-main.5bb2186b.js.map",
-    "static/js/2.75bfb2f7.chunk.js": "/lyon-0919-react-p2-springfield-vice/static/js/2.75bfb2f7.chunk.js",
-    "static/js/2.75bfb2f7.chunk.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/2.75bfb2f7.chunk.js.map",
+    "static/js/2.5abbef55.chunk.js": "/lyon-0919-react-p2-springfield-vice/static/js/2.5abbef55.chunk.js",
+    "static/js/2.5abbef55.chunk.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/2.5abbef55.chunk.js.map",
     "index.html": "/lyon-0919-react-p2-springfield-vice/index.html",
-    "precache-manifest.cac9962680f81b0b48a129d55d0ff230.js": "/lyon-0919-react-p2-springfield-vice/precache-manifest.cac9962680f81b0b48a129d55d0ff230.js",
+    "precache-manifest.46cc30c4616da065eaa981b81e365bea.js": "/lyon-0919-react-p2-springfield-vice/precache-manifest.46cc30c4616da065eaa981b81e365bea.js",
     "service-worker.js": "/lyon-0919-react-p2-springfield-vice/service-worker.js",
-    "static/css/main.d752bfff.chunk.css.map": "/lyon-0919-react-p2-springfield-vice/static/css/main.d752bfff.chunk.css.map",
+    "static/css/main.ec53aa2f.chunk.css.map": "/lyon-0919-react-p2-springfield-vice/static/css/main.ec53aa2f.chunk.css.map",
     "static/media/homer.css": "/lyon-0919-react-p2-springfield-vice/static/media/stranglingBartSprite.553b7ae2.png",
     "static/media/start.css": "/lyon-0919-react-p2-springfield-vice/static/media/DcRi_FsUQAAL2Pm.d4a8a81d.jpg",
-    "static/media/background_80s_repeat.png": "/lyon-0919-react-p2-springfield-vice/static/media/background_80s_repeat.a8f4388c.png",
     "static/media/game.css": "/lyon-0919-react-p2-springfield-vice/static/media/background_80s_repeat_2.197201c4.png",
     "static/media/barrel_green_pixelized_posterized.png": "/lyon-0919-react-p2-springfield-vice/static/media/barrel_green_pixelized_posterized.ab73af31.png",
     "static/media/bart2blur.png": "/lyon-0919-react-p2-springfield-vice/static/media/bart2blur.53da5cf3.png",
@@ -30,23 +29,20 @@
     "static/media/fire.gif": "/lyon-0919-react-p2-springfield-vice/static/media/fire.6a364d8d.gif",
     "static/media/grandpa.css": "/lyon-0919-react-p2-springfield-vice/static/media/grandpa.611321c8.png",
     "static/media/gunSound.mp3": "/lyon-0919-react-p2-springfield-vice/static/media/gunSound.304476ef.mp3",
-    "static/media/homer_bart.gif": "/lyon-0919-react-p2-springfield-vice/static/media/homer_bart.3657ef7d.gif",
     "static/media/homerjumping.png": "/lyon-0919-react-p2-springfield-vice/static/media/homerjumping.2cd73442.png",
     "static/media/hum.mp3": "/lyon-0919-react-p2-springfield-vice/static/media/hum.0838f930.mp3",
     "static/media/milhouse.css": "/lyon-0919-react-p2-springfield-vice/static/media/milhouse.670003f6.png",
     "static/media/noproblemo.wav": "/lyon-0919-react-p2-springfield-vice/static/media/noproblemo.897143ee.wav",
-    "static/media/pink_ground.png": "/lyon-0919-react-p2-springfield-vice/static/media/pink_ground.c2a27090.png",
     "static/media/ripchain.png": "/lyon-0919-react-p2-springfield-vice/static/media/ripchain.461f04be.png",
     "static/media/selma.css": "/lyon-0919-react-p2-springfield-vice/static/media/selma.499a5587.png",
     "static/media/seymour.css": "/lyon-0919-react-p2-springfield-vice/static/media/seymour.3360625e.png",
     "static/media/Grid.css": "/lyon-0919-react-p2-springfield-vice/static/media/springfield80s.161378b6.png",
-    "static/media/springfieldvice.png": "/lyon-0919-react-p2-springfield-vice/static/media/springfieldvice.051846e2.png",
-    "static/media/wheel.png": "/lyon-0919-react-p2-springfield-vice/static/media/wheel.c6347f03.png"
+    "static/media/springfieldvice.png": "/lyon-0919-react-p2-springfield-vice/static/media/springfieldvice.051846e2.png"
   },
   "entrypoints": [
     "static/js/runtime-main.5bb2186b.js",
-    "static/js/2.75bfb2f7.chunk.js",
-    "static/css/main.d752bfff.chunk.css",
-    "static/js/main.0cc9ed5a.chunk.js"
+    "static/js/2.5abbef55.chunk.js",
+    "static/css/main.ec53aa2f.chunk.css",
+    "static/js/main.bd78dbc9.chunk.js"
   ]
 }

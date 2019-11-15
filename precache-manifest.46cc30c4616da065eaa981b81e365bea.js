@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4d5c0a897e063ce2e9f3822e7a2501df",
+    "revision": "8a537c9d2fe008ac9ff9099badc254f9",
     "url": "/lyon-0919-react-p2-springfield-vice/index.html"
   },
   {
-    "revision": "7aa049a06872c7bb3ef1",
-    "url": "/lyon-0919-react-p2-springfield-vice/static/css/main.d752bfff.chunk.css"
+    "revision": "1f58bc509cb869d6622f",
+    "url": "/lyon-0919-react-p2-springfield-vice/static/css/main.ec53aa2f.chunk.css"
   },
   {
-    "revision": "5514542b77ce1a4125b7",
-    "url": "/lyon-0919-react-p2-springfield-vice/static/js/2.75bfb2f7.chunk.js"
+    "revision": "1c21dfd3be152705016f",
+    "url": "/lyon-0919-react-p2-springfield-vice/static/js/2.5abbef55.chunk.js"
   },
   {
-    "revision": "7aa049a06872c7bb3ef1",
-    "url": "/lyon-0919-react-p2-springfield-vice/static/js/main.0cc9ed5a.chunk.js"
+    "revision": "1f58bc509cb869d6622f",
+    "url": "/lyon-0919-react-p2-springfield-vice/static/js/main.bd78dbc9.chunk.js"
   },
   {
     "revision": "631aab3211d7b089809e",
@@ -26,10 +26,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "d4a8a81d31ee77bf8f1661f481cbd885",
     "url": "/lyon-0919-react-p2-springfield-vice/static/media/DcRi_FsUQAAL2Pm.d4a8a81d.jpg"
-  },
-  {
-    "revision": "a8f4388c34240819f2c26c0fce5ebc70",
-    "url": "/lyon-0919-react-p2-springfield-vice/static/media/background_80s_repeat.a8f4388c.png"
   },
   {
     "revision": "197201c44eca618e072b825437b32af1",
@@ -96,10 +92,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/lyon-0919-react-p2-springfield-vice/static/media/gunSound.304476ef.mp3"
   },
   {
-    "revision": "3657ef7d3c5be6c5b6f556f35906e4f5",
-    "url": "/lyon-0919-react-p2-springfield-vice/static/media/homer_bart.3657ef7d.gif"
-  },
-  {
     "revision": "2cd73442d8d70f6cba20cb305dbe491a",
     "url": "/lyon-0919-react-p2-springfield-vice/static/media/homerjumping.2cd73442.png"
   },
@@ -118,10 +110,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "897143eec141785e4b503886ef330fbd",
     "url": "/lyon-0919-react-p2-springfield-vice/static/media/noproblemo.897143ee.wav"
-  },
-  {
-    "revision": "c2a270904aece8a5d4d2cd80d62f1948",
-    "url": "/lyon-0919-react-p2-springfield-vice/static/media/pink_ground.c2a27090.png"
   },
   {
     "revision": "461f04be64627a380824fd32ec6eb200",
@@ -146,9 +134,5 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "553b7ae28489259f1cda2b55e5560bad",
     "url": "/lyon-0919-react-p2-springfield-vice/static/media/stranglingBartSprite.553b7ae2.png"
-  },
-  {
-    "revision": "c6347f03de84112636179da5b9f15a35",
-    "url": "/lyon-0919-react-p2-springfield-vice/static/media/wheel.c6347f03.png"
   }
 ]);
