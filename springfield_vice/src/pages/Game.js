@@ -59,6 +59,17 @@ const sherriStatus = {
 	ALIVE: "alive"
 };
 
+const bartStatus = {
+	KILLED: "killed",
+	ALIVE: "alive", 
+	HIT1: "hit1",
+	HIT1BIS: "hit1bis",
+	HIT2: "hit2",
+	HIT2BIS: "hit2bis",
+	GROUND: "ground",
+	STRANGLED: "strangled",
+};
+
 class Game extends Component {
 	constructor(props) {
 		super(props);
@@ -78,6 +89,7 @@ class Game extends Component {
 			isBlocked: false,
 			isThrowing: false,
 			homerCollisionHue: 0,
+			strangling: false,
 			donutPopped: [
 				{
 					positionDonutX: parseInt(
@@ -484,10 +496,11 @@ class Game extends Component {
 
 			},
 			bartPos: {
-				positionX: 5500,
+				positionX: 500,
 				positionY: 200,
 				BartMovX: moveConfig.bart.MovX,
-				BartMovY: moveConfig.bart.MovY
+				BartMovY: moveConfig.bart.MovY,
+				status: bartStatus.ALIVE,
 			},
 			milhousePos: {
 				positionX: 2500,
@@ -742,7 +755,7 @@ class Game extends Component {
 			this.stopRunning();
 			clearInterval(this.interval);
 			setTimeout(() => {
-				this.props.history.push("game/?modal=true&go=true");
+				this.props.history.push("?modal=true&go=true");
 				this.setState({ origin: "go_lost" });
 				return;
 			}, 2000);
@@ -751,7 +764,7 @@ class Game extends Component {
 			// Si gagnant :
 			this.stopRunning();
 			clearInterval(this.interval);
-			this.props.history.push("game/?modal=true&go=true");
+			this.props.history.push("?modal=true&go=true");
 			this.setState({ origin: "go_win" });
 			return;
 		}
@@ -841,6 +854,25 @@ class Game extends Component {
 		}
 	};
 
+	collisionDetectionBart = item => {
+		if (
+			this.state.relativePositionX > item.positionX - 30 &&
+			this.state.relativePositionX < item.positionX + 30 &&
+			this.state.positionY < item.positionY + 30 &&
+			this.state.positionY > item.positionY - 30 &&
+			item.status === "ground"
+		) {
+			/*ici*/
+			item.status = "killed";
+			
+			this.setState({ strangling: true, opponentSound: true, beerCountOrigin: this.state.beerCountOrigin - 1});
+			setTimeout(() => {
+				this.props.history.push("?modal=true&go=true");
+				this.setState({ origin: "go_win", opponentSound: false });
+			}, 2000);
+		}
+	};
+
 
 	collisionDetectionObstacle = item => {
 		if (
@@ -863,23 +895,83 @@ class Game extends Component {
 		}
 	};
 
-	collisionBart = item => {
-		//		console.log(item.positionBartX, this.state.relativePositionX + this.state.defilement)
-		if (
-			this.state.relativePositionX > item.positionBartX - 15 &&
-			this.state.relativePositionX < item.positionBartX + 20 &&
-			this.state.positionY < item.positionBartY + 40 &&
-			this.state.positionY > item.positionBartY - 60
-		) {
-			this.props.history.push("game/?modal=true&go=true");
-			this.setState({ origin: "go_win" });
-			this.stopRunning();
-			clearInterval(this.interval);
-			return;
-		}
-	};
+	// collisionBart = item => {
+	// 	//		console.log(item.positionBartX, this.state.relativePositionX + this.state.defilement)
+	// 	if (
+	// 		this.state.relativePositionX > item.positionBartX - 15 &&
+	// 		this.state.relativePositionX < item.positionBartX + 20 &&
+	// 		this.state.positionY < item.positionBartY + 40 &&
+	// 		this.state.positionY > item.positionBartY - 60
+	// 	) {
+	// 		console.log("collision bart")
+	// 		this.setState({strangling: true});
+			
+	// 		// this.props.history.push("?modal=true&go=true");
+	// 		// this.setState({ origin: "go_win" });
+	// 		this.stopRunning();
+	// 		clearInterval(this.interval);
+	// 		return;
+	// 	}
+	// };
 
 	collisionDonutLauncher = () => {
+		console.log("status bart =", this.state.bartPos.status)
+		if (
+			this.state.bartPos.positionY < this.state.positionY +20 &&
+			this.state.bartPos.positionY > this.state.positionY - 50 &&
+			this.state.bartPos.positionX < this.state.relativePositionX + 500 &&
+			this.state.bartPos.positionX > this.state.relativePositionX &&
+			this.state.bartPos.status === "alive" &&
+			this.donutCount() > 0
+		) {
+			this.state.bartPos.status = "hit1";
+			setTimeout(() => {
+				this.state.bartPos.status = "hit1bis"
+				}, 700);
+			// clearInterval(this.intBart);
+			console.log('hit 1 bart', this.state.bartPos.status)
+		}
+		else if (
+			this.state.bartPos.positionY < this.state.positionY + 20 &&
+			this.state.bartPos.positionY > this.state.positionY - 50 &&
+			this.state.bartPos.positionX < this.state.relativePositionX + 500 &&
+			this.state.bartPos.positionX > this.state.relativePositionX &&
+			this.state.bartPos.status === "hit1bis" &&
+			this.donutCount() > 0
+		) {
+			this.state.bartPos.status = "hit2";
+			setTimeout(() => {
+				this.state.bartPos.status = "hit2bis"
+				}, 700);
+			// clearInterval(this.intBart);
+			console.log('hit 2 bart')
+		}
+		else if (
+			this.state.bartPos.positionY < this.state.positionY + 20 &&
+			this.state.bartPos.positionY > this.state.positionY - 50 &&
+			this.state.bartPos.positionX < this.state.relativePositionX + 500 &&
+			this.state.bartPos.positionX > this.state.relativePositionX &&
+			this.state.bartPos.status === "hit2bis" &&
+			this.donutCount() > 0
+		) {
+			this.state.bartPos.status = "ground";
+			clearInterval(this.intBart);
+			console.log('bart on the ground')
+		}
+
+		// else if (
+		// 	this.state.bartPos.positionY < this.state.positionY + 20 &&
+		// 	this.state.bartPos.positionY > this.state.positionY - 50 &&
+		// 	this.state.bartPos.positionX < this.state.relativePositionX + 500 &&
+		// 	this.state.bartPos.positionX > this.state.relativePositionX &&
+		// 	this.state.bartPos.status === "ground" &&
+		// 	this.donutCount() > 0
+		// ) {
+		// 	this.state.bartPos.status = "strangled";
+		// 	clearInterval(this.intBart);
+		// 	console.log('strangling')
+		// }
+
 		if (
 			this.state.selmaPos.positionY < this.state.positionY + 20 &&
 			this.state.selmaPos.positionY > this.state.positionY - 50 &&
@@ -1028,7 +1120,7 @@ class Game extends Component {
 		this.state.donutPopped.map(item => this.collisionDetection(item));
 		this.state.beerPopped.map(item => this.collisionDetectionBeer(item));
 
-		this.collisionBart(this.state.bartPos);
+		// this.collisionBart(this.state.bartPos);
 		this.state.obstaclePopped.map(item => {
 			this.collisionDetectionObstacle(item);
 		});
@@ -1036,6 +1128,7 @@ class Game extends Component {
 		this.collisionDetectionOpponent(this.state.seymourPos)
 		this.collisionDetectionOpponent(this.state.milhousePos)
 		this.collisionDetectionOpponent(this.state.grandpaPos)
+		this.collisionDetectionBart(this.state.bartPos)
 		this.collisionDetectionOpponent(this.state.sherriPos)
 		this.testLimitsOfMap();
 	};
@@ -1133,7 +1226,12 @@ class Game extends Component {
 					defilement={this.state.defilement}
 					bartSeBarreX={this.state.bartSeBarreX}
 					bartSeBarreY={this.state.bartSeBarreY}
+					status={this.state.bartPos.status}
+					strangling={this.state.strangling}
+					positionStranglingX={this.state.positionX}
+					positionStranglingY={this.state.positionY}
 				/>
+
 				<Homer
 					positionX={this.state.positionX}
 					positionY={this.state.positionY}
@@ -1143,6 +1241,7 @@ class Game extends Component {
 					isThrowing={this.state.isThrowing}
 					isDead={diff1}
 					hue={this.state.homerCollisionHue}
+					strangling={this.state.strangling}
 				/>
 
 				<DonutCounter donutCount={this.donutCount()} />

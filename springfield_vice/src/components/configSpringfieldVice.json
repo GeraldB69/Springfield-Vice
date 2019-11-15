@@ -58,6 +58,9 @@
     "grandpa": {
         "scale": 0.006
     },
+    "stranglingBart": {
+        "scale": 0.003
+    },
     "sherri": {
         "scale": 0.006
     }
