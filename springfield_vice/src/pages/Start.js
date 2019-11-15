@@ -80,6 +80,7 @@ class Start extends Component {
       <div id="Seymour" />
       <div id="Milhouse" />
       <div id="Grandpa" />
+      <div id="Sherri" />
       </div>
     )
   }

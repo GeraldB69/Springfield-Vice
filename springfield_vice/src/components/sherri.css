@@ -1,0 +1,23 @@
+.sherriWalk {
+  position: absolute;
+  transform: translate(50%, -50%);
+  transform: scale(-1, 1);
+  width: calc(110px / 4);
+  background: url(img/sherri.png);
+  animation: animate12 1s steps(4) infinite reverse;
+}
+
+.sherriDead {
+  position: absolute;
+  width: calc(110px / 4);
+  background: url(img/sherri.png);
+}
+
+@keyframes animate12 {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: 110px;
+  }
+}
