@@ -533,6 +533,7 @@ class Game extends Component {
 			opponentSound: false,
 			//			globalPosition: 0,
 			//			defilement: 0,
+			bartSound: false,
 			bartSeBarreX: 400,
 			bartSeBarreY: 250,
 			gunSound: false,
@@ -733,6 +734,10 @@ class Game extends Component {
 	};
 
 	bartSeBarre = () => {
+		this.setState({ bartSound: true });
+		setTimeout(() => {
+			this.setState({ bartSound: false });
+		}, 3000);
 		setTimeout(() => {
 			this.setState({ bartSeBarreX: 15000 });
 		}, 3000);
@@ -1290,7 +1295,9 @@ class Game extends Component {
 				{this.state.opponentSound === true ? <Sound opponentSound soundsPlay={this.state.soundsPlay} /> : ""}
 				{this.state.gunSound === true ? <Sound gunSound soundsPlay={this.state.soundsPlay} /> : ""}
 				{this.state.musicPlay === true ? <Sound musicPlay={this.state.musicPlay} /> : ""}
-
+				{this.state.bartSound === true ? <Sound bartSound soundsPlay={this.state.soundsPlay} /> : ""}
+				{this.state.strangling === true ? <Sound soundsPlayStrangling={this.state.strangling} /> : ""}
+				{this.state.bartPos.status === "bartStatus.HIT1BIS" ? <Sound soundsSuspens ={true} /> : ""}
 			</div>
 		);
 	}
