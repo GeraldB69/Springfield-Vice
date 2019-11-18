@@ -2,6 +2,9 @@ import React, {Component} from "react";
 import hum from "./sounds/hum.mp3";
 import boire from "./sounds/boire.mp3";
 import noproblemo from "./sounds/noproblemo.wav";
+import etranglement from "./sounds/etranglement.mp3";
+import suspens from "./sounds/suspens.mp3";
+import rireBart from "./sounds/rireBart.wav";
 import gunSound from "./sounds/gunSound.mp3";
 import doh from "./sounds/doh.mp3";
 
@@ -63,8 +66,27 @@ class Sound extends Component {
 					autoPlay
 					type="audio/mp3"
 				/> : ""}
-
-
+                {this.props.bartSound === true && this.props.bartSound === true ? <audio
+                    ref="audio_tag"
+					src={rireBart}
+					controls
+					autoPlay
+					type="audio/mp3"
+				/> : ""}    
+                {this.props.soundsPlayStrangling ? <audio
+                    ref="audio_tag"
+					src={etranglement}
+					controls
+					autoPlay
+					type="audio/mp3"
+				/> : ""}
+                {this.props.soundsSuspens ? <audio
+                    ref="audio_tag"
+					src={suspens}
+					controls
+					autoPlay
+					type="audio/mp3"
+				/> : ""}  
 
             </div>
         )
