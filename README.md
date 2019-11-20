@@ -11,14 +11,14 @@
 
 ## PROJET 2 - REACT
 
-Réalisation d'une application (jeu) full React sur le theme des Simpson.
+Réalisation d'une application (jeu) full React sur le thême des Simpsons.
 
 
 ### <a href="http://www.responsinator.com/?url=https%3A%2F%2Fwildcodeschool.github.io%2Flyon-0919-react-p2-springfield-vice%2F%23%2F&device=iphone-x&orientation=landscape">Tester le jeu dans votre navigateur </a>
 
 
 ### Ou sur mobile :
-préferez utiliser Chrome et ajoutez la page à votre écran d'accueil pour profitez pleinement du jeu.
+préférez utiliser Chrome et ajoutez la page à votre écran d'accueil pour profiter pleinement du jeu.
 
 
 <p align="center"><img src="https://github.com/Olivier9925/Springfield-Vice/blob/master/QRcode.png?raw=true" /></p>
