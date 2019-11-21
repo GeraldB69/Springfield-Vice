@@ -709,7 +709,7 @@ class Game extends Component {
 			this.stopRunning();
 			clearInterval(this.interval);
 			setTimeout(() => {
-				this.props.history.push("game/?modal=true&go=true");
+				this.props.history.push("?modal=true&go=true");
 				this.setState({ origin: "go_lost" });
 				return;
 			}, 2000);
@@ -718,7 +718,7 @@ class Game extends Component {
 			// Si gagnant :
 			this.stopRunning();
 			clearInterval(this.interval);
-			this.props.history.push("game/?modal=true&go=true");
+			this.props.history.push("?modal=true&go=true");
 			this.setState({ origin: "go_win" });
 			return;
 		}

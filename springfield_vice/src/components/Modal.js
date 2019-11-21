@@ -27,8 +27,7 @@ const imgStyle = {
   backgroundPosition: "center center",
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
-  textShadow: "2px 2px 2px rgba(255,0,230,1)",
-  
+  textShadow: "2px 2px 2px rgba(255,0,230,1)",  
 }
 
 export default class Modal extends Component {
@@ -36,7 +35,7 @@ export default class Modal extends Component {
     super(props)
     this.state = {
       music: config.modal.music,
-      sounds: config.modal.sounds,
+      sounds: config.modal.sounds
     };
   };
 
@@ -48,10 +47,19 @@ export default class Modal extends Component {
     this.props.toggleMusic(!this.props.getStateMusic);
   }
 
+  showScores = () => {
+    document.getElementById("modal_id").style.opacity = "0"
+    document.getElementById("score_id").style.opacity = "1"
+  }
+  hideScores = () => {
+    document.getElementById("score_id").style.opacity = "0"
+    document.getElementById("modal_id").style.opacity = "1"
+  }
+
   showHeader() {
     const other_buttons = 
       <>
-        <button>SCORES</button>
+        <button onClick={()=>this.showScores()}>SCORES</button>
         <button onClick={this.callbackSounds}>SOUNDS {!this.props.getStateSounds ? 'ON' : 'OFF'}</button>
         <button onClick={this.callbackMusic}>MUSIC {!this.props.getStateMusic ? 'ON' : 'OFF'}</button>
       </>;
@@ -123,8 +131,26 @@ export default class Modal extends Component {
 
     return createPortal(
       <div style={modalStyle} className="modal" onClick={this.props.onClick}>
-          
-        <div className="modal-wrapper" style={this.showHeader().image}>
+
+
+        <div id="score_id" className="modal-wrapper" style={this.showHeader().image}>
+        <div className="modal-header">
+            <h3>SCORES</h3>
+          </div>
+          <div className="modal-body">
+            <ul>
+              <li>TOTO</li>
+              <li>TATA</li>
+              <li>GROS</li>
+            </ul>
+          </div>
+          <div>
+            <button id="close" onClick={()=>this.hideScores()}>X</button>
+          </div>
+        </div>
+
+
+        <div id="modal_id" className="modal-wrapper" style={this.showHeader().image}>
           <div className="modal-header">
             <h3>{this.showHeader().header}</h3>
           </div>

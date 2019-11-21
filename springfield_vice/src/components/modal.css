@@ -6,7 +6,7 @@ div#modal_root {
 
 .modal-wrapper {
   /* transform: rotate(-2deg); */
-  transition: all 3s;
+  transition: all 0.3s;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -49,4 +49,11 @@ div#modal_root {
   width: 110px;
   font-size: 1em;
   margin: 2px;
+}
+
+#score_id {
+  position: absolute;
+}
+#modal_id {
+
 }
