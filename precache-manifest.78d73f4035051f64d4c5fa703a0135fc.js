@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ae5cd0f3e937bcf89f76654414d49175",
+    "revision": "7ad0e570a271b227944d2ff8ca17f193",
     "url": "/lyon-0919-react-p2-springfield-vice/index.html"
   },
   {
-    "revision": "2f6fcf12ec0e3adba047",
+    "revision": "30cb252a2cfb663659c6",
     "url": "/lyon-0919-react-p2-springfield-vice/static/css/main.e07106bd.chunk.css"
   },
   {
-    "revision": "bf3f0f2e348ecc8ad3a9",
-    "url": "/lyon-0919-react-p2-springfield-vice/static/js/2.6e47005e.chunk.js"
+    "revision": "84ec64af14e177847bdf",
+    "url": "/lyon-0919-react-p2-springfield-vice/static/js/2.3a937369.chunk.js"
   },
   {
-    "revision": "2f6fcf12ec0e3adba047",
-    "url": "/lyon-0919-react-p2-springfield-vice/static/js/main.3a03ef9b.chunk.js"
+    "revision": "30cb252a2cfb663659c6",
+    "url": "/lyon-0919-react-p2-springfield-vice/static/js/main.2efd0a09.chunk.js"
   },
   {
     "revision": "631aab3211d7b089809e",
@@ -80,6 +80,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/lyon-0919-react-p2-springfield-vice/static/media/duffpix_grayscale.da8bc20a.png"
   },
   {
+    "revision": "2e739b706c4bbda0eba77a4fdd5b7948",
+    "url": "/lyon-0919-react-p2-springfield-vice/static/media/etranglement.2e739b70.mp3"
+  },
+  {
     "revision": "6a364d8dea51b5947f15f89d284ad05a",
     "url": "/lyon-0919-react-p2-springfield-vice/static/media/fire.6a364d8d.gif"
   },
@@ -116,6 +120,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/lyon-0919-react-p2-springfield-vice/static/media/ripchain.461f04be.png"
   },
   {
+    "revision": "3d5f6e6385975a657d655fcb5b48b8e1",
+    "url": "/lyon-0919-react-p2-springfield-vice/static/media/rireBart.3d5f6e63.wav"
+  },
+  {
     "revision": "2f856d65da0d2f401578793691476f25",
     "url": "/lyon-0919-react-p2-springfield-vice/static/media/selma.2f856d65.png"
   },
@@ -134,5 +142,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "553b7ae28489259f1cda2b55e5560bad",
     "url": "/lyon-0919-react-p2-springfield-vice/static/media/stranglingBartSprite.553b7ae2.png"
+  },
+  {
+    "revision": "c9b9649bccffdc96873f244ee3ab4867",
+    "url": "/lyon-0919-react-p2-springfield-vice/static/media/suspens.c9b9649b.mp3"
   }
 ]);

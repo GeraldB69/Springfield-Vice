@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/lyon-0919-react-p2-springfield-vice/static/css/main.e07106bd.chunk.css",
-    "main.js": "/lyon-0919-react-p2-springfield-vice/static/js/main.3a03ef9b.chunk.js",
-    "main.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/main.3a03ef9b.chunk.js.map",
+    "main.js": "/lyon-0919-react-p2-springfield-vice/static/js/main.2efd0a09.chunk.js",
+    "main.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/main.2efd0a09.chunk.js.map",
     "runtime-main.js": "/lyon-0919-react-p2-springfield-vice/static/js/runtime-main.5bb2186b.js",
     "runtime-main.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/runtime-main.5bb2186b.js.map",
-    "static/js/2.6e47005e.chunk.js": "/lyon-0919-react-p2-springfield-vice/static/js/2.6e47005e.chunk.js",
-    "static/js/2.6e47005e.chunk.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/2.6e47005e.chunk.js.map",
+    "static/js/2.3a937369.chunk.js": "/lyon-0919-react-p2-springfield-vice/static/js/2.3a937369.chunk.js",
+    "static/js/2.3a937369.chunk.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/2.3a937369.chunk.js.map",
     "index.html": "/lyon-0919-react-p2-springfield-vice/index.html",
-    "precache-manifest.d5482eda014e7f48775f2e03aa63f0e4.js": "/lyon-0919-react-p2-springfield-vice/precache-manifest.d5482eda014e7f48775f2e03aa63f0e4.js",
+    "precache-manifest.78d73f4035051f64d4c5fa703a0135fc.js": "/lyon-0919-react-p2-springfield-vice/precache-manifest.78d73f4035051f64d4c5fa703a0135fc.js",
     "service-worker.js": "/lyon-0919-react-p2-springfield-vice/service-worker.js",
     "static/css/main.e07106bd.chunk.css.map": "/lyon-0919-react-p2-springfield-vice/static/css/main.e07106bd.chunk.css.map",
     "static/media/homer.css": "/lyon-0919-react-p2-springfield-vice/static/media/stranglingBartSprite.553b7ae2.png",
@@ -26,6 +26,7 @@
     "static/media/duffpix.png": "/lyon-0919-react-p2-springfield-vice/static/media/duffpix.b542b515.png",
     "static/media/duffpix_glow_pink.png": "/lyon-0919-react-p2-springfield-vice/static/media/duffpix_glow_pink.c723146c.png",
     "static/media/duffpix_grayscale.png": "/lyon-0919-react-p2-springfield-vice/static/media/duffpix_grayscale.da8bc20a.png",
+    "static/media/etranglement.mp3": "/lyon-0919-react-p2-springfield-vice/static/media/etranglement.2e739b70.mp3",
     "static/media/fire.gif": "/lyon-0919-react-p2-springfield-vice/static/media/fire.6a364d8d.gif",
     "static/media/grandpa.css": "/lyon-0919-react-p2-springfield-vice/static/media/grandpa.a31d30a5.png",
     "static/media/gunSound.mp3": "/lyon-0919-react-p2-springfield-vice/static/media/gunSound.304476ef.mp3",
@@ -34,15 +35,17 @@
     "static/media/milhouse.css": "/lyon-0919-react-p2-springfield-vice/static/media/milhouse.7954a63a.png",
     "static/media/noproblemo.wav": "/lyon-0919-react-p2-springfield-vice/static/media/noproblemo.897143ee.wav",
     "static/media/ripchain.png": "/lyon-0919-react-p2-springfield-vice/static/media/ripchain.461f04be.png",
+    "static/media/rireBart.wav": "/lyon-0919-react-p2-springfield-vice/static/media/rireBart.3d5f6e63.wav",
     "static/media/selma.css": "/lyon-0919-react-p2-springfield-vice/static/media/selma.2f856d65.png",
     "static/media/seymour.css": "/lyon-0919-react-p2-springfield-vice/static/media/seymour.4b322799.png",
     "static/media/Grid.css": "/lyon-0919-react-p2-springfield-vice/static/media/springfield80s.161378b6.png",
-    "static/media/springfieldvice.png": "/lyon-0919-react-p2-springfield-vice/static/media/springfieldvice.051846e2.png"
+    "static/media/springfieldvice.png": "/lyon-0919-react-p2-springfield-vice/static/media/springfieldvice.051846e2.png",
+    "static/media/suspens.mp3": "/lyon-0919-react-p2-springfield-vice/static/media/suspens.c9b9649b.mp3"
   },
   "entrypoints": [
     "static/js/runtime-main.5bb2186b.js",
-    "static/js/2.6e47005e.chunk.js",
+    "static/js/2.3a937369.chunk.js",
     "static/css/main.e07106bd.chunk.css",
-    "static/js/main.3a03ef9b.chunk.js"
+    "static/js/main.2efd0a09.chunk.js"
   ]
 }
