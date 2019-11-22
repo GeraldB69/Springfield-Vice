@@ -51,7 +51,6 @@ export default class Modal extends Component {
   showHeader() {
     const other_buttons = 
       <>
-        <button>SCORES</button>
         <button onClick={this.callbackSounds}>SOUNDS {!this.props.getStateSounds ? 'ON' : 'OFF'}</button>
         <button onClick={this.callbackMusic}>MUSIC {!this.props.getStateMusic ? 'ON' : 'OFF'}</button>
       </>;
