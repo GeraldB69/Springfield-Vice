@@ -75,7 +75,6 @@ export default class Modal extends Component {
         content.quote = `"Stupid risks make life worth living."`;
         content.buttons = 
           <>
-            <button>SCORES</button>
             <Link to="/"><button>RESTART</button></Link>
           </>;
         {this.props.hide(true)}
@@ -92,7 +91,6 @@ export default class Modal extends Component {
         content.quote2 = `The lesson is: never try."`;
         content.buttons = 
           <>
-            <button>SCORES</button>
             <Link to="/"><button>RESTART</button></Link>
           </>;
         {this.props.hide(true)}
