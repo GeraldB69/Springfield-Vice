@@ -1,16 +1,17 @@
 {
   "files": {
     "main.css": "/lyon-0919-react-p2-springfield-vice/static/css/main.e07106bd.chunk.css",
-    "main.js": "/lyon-0919-react-p2-springfield-vice/static/js/main.7f6e1b3a.chunk.js",
-    "main.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/main.7f6e1b3a.chunk.js.map",
-    "runtime-main.js": "/lyon-0919-react-p2-springfield-vice/static/js/runtime-main.5bb2186b.js",
-    "runtime-main.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/runtime-main.5bb2186b.js.map",
-    "static/js/2.3a937369.chunk.js": "/lyon-0919-react-p2-springfield-vice/static/js/2.3a937369.chunk.js",
-    "static/js/2.3a937369.chunk.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/2.3a937369.chunk.js.map",
+    "main.js": "/lyon-0919-react-p2-springfield-vice/static/js/main.d16f93a1.chunk.js",
+    "main.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/main.d16f93a1.chunk.js.map",
+    "runtime-main.js": "/lyon-0919-react-p2-springfield-vice/static/js/runtime-main.e31ac364.js",
+    "runtime-main.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/runtime-main.e31ac364.js.map",
+    "static/js/2.62eab111.chunk.js": "/lyon-0919-react-p2-springfield-vice/static/js/2.62eab111.chunk.js",
+    "static/js/2.62eab111.chunk.js.map": "/lyon-0919-react-p2-springfield-vice/static/js/2.62eab111.chunk.js.map",
     "index.html": "/lyon-0919-react-p2-springfield-vice/index.html",
-    "precache-manifest.d7130a9bdcb33fe39d9aabc72b4519a8.js": "/lyon-0919-react-p2-springfield-vice/precache-manifest.d7130a9bdcb33fe39d9aabc72b4519a8.js",
+    "precache-manifest.eb513db2460db30186d779a22137541f.js": "/lyon-0919-react-p2-springfield-vice/precache-manifest.eb513db2460db30186d779a22137541f.js",
     "service-worker.js": "/lyon-0919-react-p2-springfield-vice/service-worker.js",
     "static/css/main.e07106bd.chunk.css.map": "/lyon-0919-react-p2-springfield-vice/static/css/main.e07106bd.chunk.css.map",
+    "static/js/2.62eab111.chunk.js.LICENSE": "/lyon-0919-react-p2-springfield-vice/static/js/2.62eab111.chunk.js.LICENSE",
     "static/media/homer.css": "/lyon-0919-react-p2-springfield-vice/static/media/stranglingBartSprite.553b7ae2.png",
     "static/media/start.css": "/lyon-0919-react-p2-springfield-vice/static/media/DcRi_FsUQAAL2Pm.d4a8a81d.jpg",
     "static/media/game.css": "/lyon-0919-react-p2-springfield-vice/static/media/background_80s_repeat_2.197201c4.png",
@@ -43,9 +44,9 @@
     "static/media/suspens.mp3": "/lyon-0919-react-p2-springfield-vice/static/media/suspens.c9b9649b.mp3"
   },
   "entrypoints": [
-    "static/js/runtime-main.5bb2186b.js",
-    "static/js/2.3a937369.chunk.js",
+    "static/js/runtime-main.e31ac364.js",
+    "static/js/2.62eab111.chunk.js",
     "static/css/main.e07106bd.chunk.css",
-    "static/js/main.7f6e1b3a.chunk.js"
+    "static/js/main.d16f93a1.chunk.js"
   ]
 }
